@@ -1,0 +1,90 @@
+@use "font";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-synthesis: none;
+  font-family: "Lato", sans-serif;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  overflow: hidden;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+  user-select: none;
+}
+
+:root {
+  // ? red
+  --red: #fd305b;
+  --red-10: #ffebef;
+  --red-dark: #c22848;
+
+  // ? yellow
+  --yellow-dark: #c1d420;
+  --yellow-100: #cee222;
+  --yellow-10: #fbfde9;
+
+  // ? blue
+  --dark-blue: #000e41;
+  --main-blue: #224f97;
+  --main-blue-10: #e9eef5;
+  --main-blue-5: #f4f6fa;
+  --main-blue-3: #f8f9fb;
+  --main-blue-2: #fbfcfd;
+  --main-blue-dark: #1f4686;
+  --light-blue: #0080ff;
+
+  // ? gray
+  --gray: #7689a1;
+  --gray-30: #d6dce3;
+  --gray-10: #f2f4f6;
+
+  --stroke: #d3dae5;
+  --stroke2: #bcc2cc;
+  --white: #ffffff;
+  --background: #f0f3f7;
+  --text-back: #f6f8fb;
+  --user-back: #f2f6ff;
+
+  // ? green
+  --green: #46be62;
+  --green-10: #e9f8ec;
+
+  // ? orange
+  --orange: #f18a00;
+  --orange-10: #fef4e6;
+
+  // ? book
+  --book-title: #4c852d;
+  --book: #c3ebad;
+
+  // ? match
+  --match-title: #8c8727;
+  --match: #f1eda4;
+
+  // ? holiday
+  --holiday-title: #787878;
+  --holiday: #dedfe3;
+
+  // ? training
+  --training-title: #2d6085;
+  --training: #add1eb;
+
+  // ? tournament
+  --tournament-title: #8c6627;
+  --tournament: #f1d3a4;
+
+  // ? disable
+  --disable-font: #878787;
+  --disable-badge: #b5b5b5;
+  --disable-back: #ececec;
+}

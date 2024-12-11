@@ -1,0 +1,88 @@
+.container {
+  flex-direction: column;
+  @include mixins.flex-start-start;
+
+  .label {
+    color: var(--gray);
+    margin-bottom: 12px;
+    display: inline-block;
+    @include mixins.transition;
+    @include mixins.text-14-regular;
+  }
+
+  .inputContainer {
+    gap: 8px;
+    width: 100%;
+    flex: 1 1 0%;
+    padding-right: 12px;
+    color: var(--dark-blue);
+    border: 1px solid var(--stroke2);
+    background-color: var(--text-back);
+    @include mixins.radius-8;
+    @include mixins.transition;
+    @include mixins.text-14-regular;
+    @include mixins.flex-start-center;
+
+    .input {
+      width: 100%;
+      flex: 1 1 0%;
+      height: 40px;
+      border: none;
+      outline: none;
+      padding-left: 12px;
+      background-color: transparent;
+
+      &::placeholder {
+        color: var(--dark-blue);
+        @include mixins.text-14-regular;
+      }
+    }
+
+    .endContent {
+      cursor: pointer;
+      @include mixins.centering;
+    }
+  }
+
+  &[data-error="true"] {
+    .label {
+      color: var(--red);
+    }
+
+    .inputContainer {
+      border: 1px solid var(--red);
+    }
+  }
+
+  &[data-error="false"] {
+    .inputContainer {
+      &:hover {
+        border: 1px solid var(--gray);
+        background-color: var(--background);
+      }
+
+      &:has(.input:focus) {
+        border: 1px solid var(--gray);
+        background-color: var(--white);
+      }
+    }
+  }
+
+  &[data-disabled="true"] {
+    .inputContainer {
+      cursor: not-allowed;
+      border: 1px solid var(--stroke);
+
+      .endContent {
+        color: var(--gray);
+      }
+    }
+  }
+
+  .error {
+    margin-top: 8px;
+    color: var(--red);
+    display: inline-block;
+    @include mixins.text-10-regular;
+  }
+}

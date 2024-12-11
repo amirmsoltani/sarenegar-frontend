@@ -1,0 +1,42 @@
+before_script:
+  - docker login -u $REGISTRY_USER -p $REGISTRY_PASS reg.cilab.tech
+
+stages:    
+  - build-dev
+  - deploy-dev
+
+build-dev:      
+  stage: build-dev
+  only:
+    - dev
+  tags:
+    - shell-executor
+  script:
+   - echo "Building on dev branch"
+   - docker build -t reg.cilab.tech/$CI_PROJECT_NAME:$CI_COMMIT_REF_NAME-latest -f Dockerfile.$CI_COMMIT_REF_NAME . --network host
+   - docker push reg.cilab.tech/$CI_PROJECT_NAME:$CI_COMMIT_REF_NAME-latest
+
+
+deploy-dev:
+  stage: deploy-dev
+  only:
+    - dev
+  tags:
+    - shell-executor
+  before_script:
+    - chmod 400 $SSH_PRIVATE_KEY_SMART_PADEL_DEV
+    - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )' 
+    - eval $(ssh-agent -s)
+    - cat "$SSH_PRIVATE_KEY_SMART_PADEL_DEV" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan -p 4974 $SERVER_IP_SMART_PADEL_DEV >> ~/.ssh/known_hosts # || exit 1; 
+    - chmod 644 ~/.ssh/known_hosts
+
+  script:
+    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY_SMART_PADEL_DEV $SSH_USER@$SERVER_IP_SMART_PADEL_DEV -p 4974 -vvvv "
+        docker rm -f scoreboard-adminpanel-dev;  
+        docker rmi reg.cilab.tech/scoreboard-admin-panel:dev-latest;
+        cd /home/amin/smart-padel/;
+        docker compose up -d"
+

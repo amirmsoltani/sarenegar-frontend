@@ -1,0 +1,53 @@
+.container {
+  inset: 0;
+  z-index: 100;
+  position: fixed;
+  overflow: hidden;
+  max-height: 100svh;
+  @include mixins.centering;
+
+  &::before {
+    content: "";
+    inset: 0;
+    opacity: 20%;
+    position: absolute;
+    background-color: var(--dark-blue);
+  }
+
+  &[data-open="true"] {
+    @include mixins.fade-in-animation;
+  }
+
+  &[data-open="false"] {
+    @include mixins.fade-out-animation;
+  }
+
+  .wrapper {
+    width: 100%;
+    z-index: 100;
+    padding: 16px;
+    max-width: 411px;
+    background-color: var(--white);
+    @include mixins.radius-12;
+
+    .header {
+      color: var(--dark-blue);
+      @include mixins.text-16-bold;
+      @include mixins.flex-between-center;
+    }
+
+    .description {
+      margin-top: 8px;
+      line-height: 141%;
+      margin-bottom: 40px;
+      display: inline-block;
+      color: var(--dark-blue);
+      @include mixins.text-14-regular;
+    }
+
+    .footer {
+      gap: 8px;
+      @include mixins.flex-end-center;
+    }
+  }
+}

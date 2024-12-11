@@ -1,0 +1,19 @@
+
+.wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
+  background-color: #224F970D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: #224F97;
+
+    & :first-child {
+      stroke: white;
+      color: white !important;
+    }
+  }
+}

@@ -1,0 +1,63 @@
+.container {
+  gap: 8px;
+  @include mixins.flex-start-center;
+
+  .checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    position: relative;
+    border: 0.5px solid var(--stroke);
+    background-color: var(--text-back);
+    @include mixins.radius-4;
+    @include mixins.centering;
+    @include mixins.transition;
+
+    .tick {
+      width: 9px;
+      height: 5px;
+      margin-bottom: 2px;
+      transform-origin: center;
+      border-left: 1px solid var(--white);
+      border-bottom: 1px solid var(--white);
+      @include mixins.transition;
+    }
+
+    &[data-checked="false"] {
+      &:hover {
+        border: 0.5px solid var(--stroke2);
+      }
+
+      .tick {
+        transform: rotate(-45deg) scale(0%);
+        -webkit-transform: rotate(-45deg) scale(0%);
+        -moz-transform: rotate(-45deg) scale(0%);
+        -ms-transform: rotate(-45deg) scale(0%);
+        -o-transform: rotate(-45deg) scale(0%);
+      }
+    }
+
+    &[data-checked="true"] {
+      border: 0.5px solid var(--main-blue);
+      background-color: var(--main-blue);
+
+      .tick {
+        transform: rotate(-45deg) scale(100%);
+        -webkit-transform: rotate(-45deg) scale(100%);
+        -moz-transform: rotate(-45deg) scale(100%);
+        -ms-transform: rotate(-45deg) scale(100%);
+        -o-transform: rotate(-45deg) scale(100%);
+      }
+    }
+  }
+
+  .label {
+    cursor: pointer;
+    color: var(--dark-blue);
+    @include mixins.text-14-regular;
+  }
+
+  .input {
+    display: none;
+  }
+}

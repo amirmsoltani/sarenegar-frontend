@@ -1,0 +1,164 @@
+.container {
+  flex-direction: column;
+  @include mixins.flex-start-start;
+
+  --height: 40px;
+
+  .label {
+    color: var(--gray);
+    margin-bottom: 12px;
+    display: inline-block;
+    @include mixins.transition;
+    @include mixins.text-14-regular;
+  }
+
+  .wrapper {
+    width: 100%;
+    flex: 1 1 0%;
+    height: 100%;
+    color: var(--dark-blue);
+    min-height: var(--height);
+    border: 1px solid var(--stroke2);
+    background-color: var(--text-back);
+    @include mixins.flex-start-center;
+    @include mixins.radius-8;
+    @include mixins.transition;
+    @include mixins.text-14-regular;
+
+    .dateInput {
+      width: 100%;
+      flex: 1 1 0%;
+      border: none;
+      outline: none;
+      padding-inline: 12px;
+      height: var(--height);
+      background-color: transparent;
+
+      &::placeholder {
+        color: var(--dark-blue);
+        @include mixins.text-14-regular;
+      }
+    }
+
+    .divider {
+      height: var(--height);
+      display: block;
+      border-left: 0.5px solid var(--stroke);
+    }
+
+    .timePickerContainer {
+      gap: 8px;
+      width: 124px;
+      cursor: pointer;
+      padding-right: 8px;
+      position: relative;
+      @include mixins.flex-start-center;
+
+      .timeInputInput {
+        width: 100%;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding-left: 8px;
+        height: var(--height);
+        background-color: transparent;
+      }
+
+      .icon {
+        cursor: pointer;
+        @include mixins.centering;
+        @include mixins.transition;
+      }
+
+      .list {
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        z-index: 10;
+        max-height: 192px;
+        visibility: hidden;
+        position: absolute;
+        top: calc(100% + 8px);
+        overflow: hidden auto;
+        color: var(--dark-blue);
+        background-color: var(--white);
+        @include mixins.radius-8;
+        @include mixins.transition;
+        @include mixins.shadow-modal1;
+
+        .option {
+          gap: 8px;
+          height: 32px;
+          cursor: pointer;
+          user-select: none;
+          padding-inline: 12px;
+          @include mixins.transition;
+          @include mixins.text-14-regular;
+          @include mixins.flex-start-center;
+
+          &[data-size="md"] {
+            height: 42px;
+          }
+
+          &:hover {
+            background-color: var(--main-blue-5);
+          }
+        }
+      }
+
+      &:has(input:focus) {
+        .icon {
+          transform: rotate(180deg);
+          -webkit-transform: rotate(180deg);
+          -moz-transform: rotate(180deg);
+          -ms-transform: rotate(180deg);
+          -o-transform: rotate(180deg);
+        }
+
+        .list {
+          opacity: 100%;
+          visibility: visible;
+        }
+      }
+    }
+  }
+
+  &[data-error="true"] {
+    .label {
+      color: var(--red);
+    }
+
+    .wrapper {
+      border: 1px solid var(--red);
+
+      &:hover {
+        background-color: var(--background);
+      }
+
+      &:has(input:focus) {
+        background-color: var(--white);
+      }
+    }
+  }
+
+  &[data-error="false"] {
+    .wrapper {
+      &:hover {
+        border: 1px solid var(--gray);
+        background-color: var(--background);
+      }
+
+      &:has(input:focus) {
+        border: 1px solid var(--gray);
+        background-color: var(--white);
+      }
+    }
+  }
+
+  .error {
+    color: var(--red);
+    margin-top: 8px;
+    display: inline-block;
+    @include mixins.text-10-regular;
+  }
+}

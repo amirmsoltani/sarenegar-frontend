@@ -1,0 +1,136 @@
+.container {
+  flex-direction: column;
+  @include mixins.flex-start-start;
+
+  .label {
+    color: var(--gray);
+    margin-bottom: 12px;
+    display: inline-block;
+    @include mixins.transition;
+    @include mixins.text-14-regular;
+  }
+
+  .wrapper {
+    gap: 8px;
+    width: 100%;
+    flex: 1 1 0%;
+    cursor: pointer;
+    min-height: 40px;
+    position: relative;
+    color: var(--dark-blue);
+    padding: 0px 8px 0px 12px;
+    border: 1px solid var(--stroke2);
+    background-color: var(--text-back);
+    @include mixins.radius-8;
+    @include mixins.transition;
+    @include mixins.text-14-regular;
+    @include mixins.flex-start-center;
+
+    .input {
+      display: none;
+    }
+
+    .preview {
+      width: 100%;
+      flex: 1 1 0%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .icon {
+      max-width: 24px;
+      max-height: 24px;
+      overflow: hidden;
+      margin-left: auto;
+      @include mixins.transition;
+    }
+  }
+
+  &[data-error="true"] {
+    .label {
+      color: var(--red);
+    }
+
+    .wrapper {
+      border: 1px solid var(--red);
+    }
+  }
+
+  &[data-toggle="true"] {
+    .wrapper {
+      border: 1px solid var(--gray);
+      background-color: var(--white);
+
+      .icon {
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+      }
+    }
+  }
+
+  &[data-toggle="false"]:hover {
+    .wrapper {
+      border: 1px solid var(--gray);
+      background-color: var(--background);
+    }
+  }
+
+  &[data-disabled="true"] {
+    .wrapper {
+      cursor: not-allowed;
+      border: 1px solid var(--stroke);
+
+      .endContent {
+        color: var(--gray);
+      }
+    }
+  }
+
+  .error {
+    margin-top: 8px;
+    color: var(--red);
+    display: inline-block;
+    @include mixins.text-10-regular;
+  }
+}
+
+.list {
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  max-height: 192px;
+  position: absolute;
+  top: calc(100% + 8px);
+  overflow: hidden auto;
+  color: var(--dark-blue);
+  background-color: var(--white);
+  @include mixins.radius-8;
+  @include mixins.shadow-modal1;
+  @include mixins.fade-in-animation;
+
+  .option {
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+    padding-inline: 12px;
+    @include mixins.transition;
+    @include mixins.text-14-regular;
+    @include mixins.flex-start-center;
+
+    &[data-size="sm"] {
+      height: 32px;
+    }
+
+    &[data-size="md"] {
+      height: 42px;
+    }
+
+    &:hover {
+      background-color: var(--main-blue-5);
+    }
+  }
+}

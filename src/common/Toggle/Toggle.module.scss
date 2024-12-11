@@ -1,0 +1,51 @@
+.container {
+  .label {
+    color: var(--gray);
+    margin-bottom: 12px;
+    display: inline-block;
+    @include mixins.transition;
+    @include mixins.text-14-regular;
+  }
+
+  .input {
+    display: none;
+  }
+
+  .toggle {
+    gap: 5px;
+    width: 100%;
+    flex: 1 1 0%;
+    min-height: 40px;
+    padding-inline: 5px;
+    border: 0.5px solid var(--stroke);
+    background-color: var(--text-back);
+    @include mixins.radius-8;
+    @include mixins.flex-start-center;
+
+    .option {
+      flex: 1 1 0%;
+      height: 30px;
+      cursor: pointer;
+      @include mixins.radius-6;
+      @include mixins.centering;
+      @include mixins.transition;
+      @include mixins.text-14-bold;
+
+      &[data-active="true"] {
+        color: var(--white);
+        background-color: var(--main-blue);
+      }
+
+      &[data-active="false"]:hover {
+        background-color: var(--main-blue-10);
+      }
+    }
+  }
+
+  .error {
+    margin-top: 8px;
+    color: var(--red);
+    display: inline-block;
+    @include mixins.text-10-regular;
+  }
+}
