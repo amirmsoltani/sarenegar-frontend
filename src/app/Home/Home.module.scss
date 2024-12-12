@@ -1,0 +1,225 @@
+.wrapper {
+  direction: rtl;
+  background: #1D2742;
+  height: 100vh;
+
+  .header {
+    height: 184px;
+    width: 100%;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+    padding-bottom: 24px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+
+    .shadow {
+      width: 238px;
+      height: 93px;
+      position: absolute;
+      z-index: 0;
+      background: rgba(255, 255, 255, 0.10);
+      filter: blur(44px);
+    }
+
+    .topHeader {
+      padding: 8px 16px;
+      box-sizing: border-box;
+      height: 56px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .welcome {
+        display: flex;
+        align-items: center;
+        column-gap: 8px;
+
+        .textBox {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          row-gap: 12px;
+
+          .text {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 100%;
+          }
+
+          .date {
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 100%;
+            opacity: 0.5;
+          }
+        }
+
+        .iconBox {
+          flex-shrink: 0;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: #ffffff;
+          border-radius: 100%;
+
+          .icon {
+            width: 24px;
+            height: 24px;
+            color: #000;
+          }
+        }
+      }
+
+      .notificationBox {
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        background: rgba(255, 255, 255, 0.10);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        .counter {
+          position: absolute;
+          top: 4px;
+          right: 5px;
+          border-radius: 100%;
+          background: #DF6A6A;
+          width: 16px;
+          height: 16px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 12px;
+          font-weight: 600;
+          line-height: 100%;
+
+        }
+
+
+      }
+    }
+
+    .week {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 80px;
+      padding: 0 16px;
+      column-gap: 2px;
+
+      .day, .daySelect {
+        height: 80px;
+        width: 35px;
+        display: flex;
+        padding: 8px 6px 12px 6px;
+        box-sizing: border-box;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        flex: 1;
+        align-self: stretch;
+
+        .number {
+          font-size: 18px;
+          font-weight: 700;
+          line-height: 100%;
+
+        }
+
+        .text {
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 100%;
+          letter-spacing: 1px;
+        }
+
+        &Select {
+          background: #DF6A6A;
+          border-radius: 100px;
+        }
+      }
+    }
+  }
+
+  .content {
+
+
+    .main {
+      width: 100vw;
+      height: 100vh;
+      background: #ffffff;
+      border-radius: 32px 32px 0 0;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      color: #ffffff;
+
+
+
+      .topCard {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+      }
+
+      .section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        column-gap: 16px;
+        >div{
+          padding: 16px;
+          border-radius: 20px;
+        }
+
+
+
+        .event {
+          background: #DF6A6A;
+
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: flex-end;
+          align-self: stretch;
+          flex-basis: 50%;
+
+        }
+
+        .reports {
+          background: #DFA56A;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: flex-end;
+          align-self: stretch;
+          flex-basis: 50%;
+        }
+      }
+
+
+      .reminder {
+        background: #00C9AF;
+
+      }
+
+      .knowledge {
+        background: #25BFF7;
+
+      }
+
+    }
+  }
+}
