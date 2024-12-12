@@ -1,0 +1,101 @@
+.wrapper {
+  background: #1D2742;
+  width: 100vw;
+  height: 100vh;
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    padding: 48px 0;
+    position: relative;
+
+    .logo {
+      width: 79px;
+      z-index: 10;
+    }
+
+    .shadow {
+      width: 238px;
+      height: 93px;
+      position: absolute;
+      z-index: 0;
+      background: rgba(255, 255, 255, 0.10);
+      filter: blur(44px);
+    }
+  }
+
+  .main {
+    padding: 56px 16px 0 16px;
+    background: #ffffff;
+    height: 100vh;
+    border-radius: 32px 32px 0 0;
+    box-sizing: border-box;
+
+    .titleBox {
+      text-align: center;
+
+      .title {
+        color: #1D2742;
+        font-size: 20px;
+        font-weight: 800;
+        line-height: 100%;
+      }
+
+      .description {
+        margin-top: 16px;
+        color: #1D2742;
+        font-size: 14px;
+        line-height: 150%;
+      }
+
+
+    }
+
+    .mobileBox {
+      margin-top: 72px;
+
+      .label {
+        color: #61687B;
+        font-size: 14px;
+        line-height: 100%;
+
+      }
+
+      .input {
+        margin-top: 16px;
+        height: 48px;
+        width: 100%;
+        padding: 0 12px;
+        color: #1D2742;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 100%;
+
+        &::placeholder {
+          color: #1D2742;
+        }
+      }
+
+      .btnBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 40px;
+        height: 48px;
+        color: #ffffff;
+        background: #674188;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 16px;
+        text-decoration: none;
+      }
+    }
+  }
+}
