@@ -153,7 +153,6 @@
 
   .content {
 
-
     .main {
       width: 100vw;
       height: 100vh;
@@ -165,13 +164,48 @@
       gap: 16px;
       color: #ffffff;
 
-
-
       .topCard {
         width: 100%;
         display: flex;
         justify-content: space-between;
+        align-items: center;
 
+        .title{
+          color: #FFF;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 100%;
+        }
+
+        .icon{
+          width: 32px;
+          height: 32px;
+          z-index: 5;
+        }
+
+        .shadowBox{
+          direction: ltr;
+          background: linear-gradient(184deg, rgba(255, 255, 255, 0.00) -5.44%, rgba(255, 255, 255, 0.20) 96.47%);
+          width: 185px;
+          height: 185px;
+          position: absolute;
+          transform: rotate(90deg);
+          left: -80px;
+          top: -105px;
+          border-radius:100%;
+
+          .shadowInner{
+            width: 115px;
+            height: 115px;
+            background: linear-gradient(179deg, rgba(255, 255, 255, 0.00) 17.02%, rgba(255, 255, 255, 0.20) 99.23%);
+            border-radius: 100%;
+            transform: rotate(315deg);
+            position: absolute;
+            right: 20px;
+            top: 45px;
+          }
+        }
       }
 
       .section {
@@ -179,47 +213,164 @@
         justify-content: space-between;
         align-items: center;
         column-gap: 16px;
-        >div{
-          padding: 16px;
-          border-radius: 20px;
-        }
+
 
 
 
         .event {
           background: #DF6A6A;
-
+          height: 22vh;
+          padding: 16px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           align-items: flex-end;
           align-self: stretch;
           flex-basis: 50%;
+          border-radius: 20px;
+          position: relative;
+          overflow: hidden;
+
+          .linkIcon{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            .icon {
+
+            }
+          }
 
         }
 
         .reports {
           background: #DFA56A;
+          padding: 16px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           align-items: flex-end;
           align-self: stretch;
           flex-basis: 50%;
+          border-radius: 20px;
+          position: relative;
+          overflow: hidden;
+
+          .bottomCard{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+
+            .text{
+              text-align: center;
+              font-size: 14px;
+              font-weight: 600;
+              line-height: 100%;
+            }
+            .description{
+              width: 130px;
+              margin-top: 8px;
+              color: rgba(255, 255, 255, 0.70);
+              text-align: center;
+              font-size: 12px;
+              font-style: normal;
+              font-weight: 300;
+              line-height: 150%;
+            }
+          }
+
+
         }
       }
 
 
       .reminder {
         background: #00C9AF;
+        position: relative;
+        height: 24vh;
+        border-radius: 20px;
+        padding: 16px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+        align-self: stretch;
+
+        .bottomCard {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
 
       }
 
       .knowledge {
         background: #25BFF7;
+        position: relative;
+        height: 11vh;
+        border-radius: 20px;
+        padding: 16px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .bottomCard{
+          display: flex;
+          align-items: center;
+          column-gap: 2px;
+          .arrow{
+            width: 16px;
+            height: 16px;
+          }
+        }
+
 
       }
 
+    }
+
+    .navbar{
+      align-self: center;
+      border-radius: 100px;
+      background: #1D2742;
+      box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.05);
+      height: 64px;
+      width: 240px;
+      padding: 8px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+
+      .item,.itemSelected{
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+        .icon{
+          width: 24px;
+          height: 24px;
+        }
+
+        &Selected{
+          border-radius: 100%;
+          background: #fff;
+          .icon{
+            fill: #DF6A6A;
+
+          }
+
+
+
+        }
+      }
     }
   }
 }

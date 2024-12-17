@@ -18,6 +18,7 @@ import { DeleteModal } from "@/app/Home/_components/Modals/DeleteModal";
 import { PrimaryLayout } from "@/layouts/PrimaryLayout/PrimaryLayout.tsx";
 //helpers
 import { RedirectAfterLogin } from "./components/RedirectAfterLogin/RedirectAfterLogin.tsx";
+import {AddEvent} from "@/app/Event/AddEvent/AddEvent.tsx";
 
 
 const AppRouter = () => {
@@ -33,6 +34,7 @@ const AppRouter = () => {
 
         <Route path='login' Component={Login} />
         <Route path='activation' Component={Activation} />
+        <Route path='addEvent' Component={AddEvent} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,7 +1,14 @@
 import styles from './Home.module.scss';
-import {Profile, Note} from 'iconsax-react';
+import {Profile, Note, Book1, ArrowLeft2, CalendarTick} from 'iconsax-react';
 import Notification from '@/assets/svg/notification-bing.svg'
 import Share from '@/assets/svg/share.svg';
+import Event from '@/assets/image/event.png';
+import Pill from '@/assets/svg/pill.svg';
+import AddPill from '@/assets/image/addPill.png';
+import HomeIcon from '@/assets/svg/home-2.svg';
+import Clipboard from '@/assets/svg/clipboard-text.svg';
+import PillMenu from '@/assets/svg/PillMenu.svg';
+import {Link} from "react-router-dom";
 
 export const Home = () => {
     return (
@@ -61,29 +68,75 @@ export const Home = () => {
 
                 <div className={styles.main}>
                     <div className={styles.section}>
-                            <div className={styles.event}>
-                                <div className={styles.topCard}>
-                                    <div>رخداد صرع</div>
-                                    <Share />
+                        <div className={styles.event}>
+                            <div className={styles.topCard}>
+                                <div className={styles.title}>رخداد صرع</div>
+                                <Share className={styles.icon}/>
+                                <div className={styles.shadowBox}>
+                                    <div className={styles.shadowInner}/>
                                 </div>
                             </div>
-
+                            <Link to='addEvent' className={styles.linkIcon} >
+                                <img src={Event} alt='' className={styles.icon}/>
+                            </Link>
+                        </div>
                         <div className={styles.reports}>
                             <div className={styles.topCard}>
-                                <div>گزارشات</div>
-                                <Note/>
+                                <div className={styles.title}>گزارشات</div>
+                                <Note className={styles.icon} variant="Bold"/>
+                                <div className={styles.shadowBox}>
+                                    <div className={styles.shadowInner}/>
+                                </div>
+                            </div>
+                            <div className={styles.bottomCard}>
+                                <div className={styles.text}>گزارشی وجود ندارد</div>
+                                <div className={styles.description}>با ثبت اولین رخداد صرع قابل نمایش خواهد بود</div>
+
                             </div>
                         </div>
                     </div>
 
                     <div className={styles.reminder}>
-                        <div>یادآور دارو</div>
+                        <div className={styles.topCard}>
+                            <div className={styles.title}>یادآور دارو</div>
+                            <Pill className={styles.icon} variant="Bold"/>
+                            <div className={styles.shadowBox}>
+                                <div className={styles.shadowInner}/>
+                            </div>
+                        </div>
+                        <div className={styles.bottomCard}>
+                            <img src={AddPill} alt='' className={styles}/>
+
+                        </div>
                     </div>
 
                     <div className={styles.knowledge}>
-                        <div>دانش روز</div>
+                        <div className={styles.topCard}>
+                            <div className={styles.title}>دانش روز</div>
+                            <Book1 className={styles.icon} variant="Bold"/>
+                            <div className={styles.shadowBox}>
+                                <div className={styles.shadowInner}/>
+                            </div>
+                        </div>
+                        <div className={styles.bottomCard}>
+                            <div>صرع و راه های مواجه با آن در گذر زمان</div>
+                            <ArrowLeft2 className={styles.arrow}/>
+                        </div>
                     </div>
-
+                    <div className={styles.navbar}>
+                        <div className={styles.itemSelected}>
+                            <HomeIcon className={styles.icon}/>
+                        </div>
+                        <div className={styles.item}>
+                            <PillMenu className={styles.icon}/>
+                        </div>
+                        <div className={styles.item}>
+                            <CalendarTick className={styles.icon}/>
+                        </div>
+                        <div className={styles.item}>
+                            <Clipboard className={styles.icon}/>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
