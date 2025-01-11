@@ -1,0 +1,50 @@
+.inputSection {
+
+  .title {
+    color: #61687B;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 100%;
+  }
+
+  .radioContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 100px;
+    border: 0.5px solid var(--Strok, #D9DCE0);
+    background: #FFF;
+    margin-top: 16px;
+    padding: 4px;
+    box-sizing: border-box;
+
+
+    .radioLabel {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #61687B;
+      font-weight: 400;
+      line-height: 100%;
+      text-align: center;
+      padding: 9px 0;
+
+
+      &:has(input:checked) {
+        border-radius: 100px;
+        border: 0.5px solid #9D79BE;
+        background: #F1ECF6;
+        color: #1D2742;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 100%;
+      }
+    }
+
+    input {
+      display: none;
+    }
+  }
+}

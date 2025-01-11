@@ -1,0 +1,127 @@
+.wrapper{
+  position: absolute;
+  width: 100svw;
+  height: 100svh;
+  z-index: 50;
+  background: linear-gradient(0deg, rgba(103, 65, 136, 0.10) 0%, rgba(103, 65, 136, 0.10) 100%), rgba(0, 0, 0, 0.40);
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+
+  .modal {
+    width: 100%;
+    height: 340px;
+    background: #FFFFFF;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0px -4px 16px 0px rgba(0, 0, 0, 0.10);
+
+    .header {
+      width: 100%;
+      height: 56.5px;
+      background: #fff;
+      border-radius: 24px 24px 0 0;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 0.5px solid #D9DCE0;
+      box-sizing: border-box;
+
+
+      .title {
+        color: #1D2742;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 100%;
+        letter-spacing: -0.28px;
+      }
+
+      .link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .icon {
+          rotate: 45deg;
+          width: 24px;
+          height: 24px;
+          color: #1D2742;
+        }
+      }
+    }
+
+    .dateTable{
+      margin-top: 16px;
+      .row{
+        display: flex;
+        align-items: center;
+        opacity: 0.5;
+
+
+        .col{
+          flex: 2;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          color: #172B4D;
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 100%;
+          letter-spacing: -0.32px;
+        }
+
+        .colon {
+          width: 20px;
+        }
+
+        &:first-child{
+          opacity: 1;
+        }
+
+        &:nth-child(3){
+          background: #FDF7F7;
+          opacity: 1;
+          height: 59px;
+          .col{
+            flex: 2;
+            color: #DF6A6A;
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 100%;
+            letter-spacing: -0.48px;
+          }
+          .colon{
+
+            color: #DF6A6A;
+            text-align: center;
+            font-size: 58px;
+            font-weight: 300;
+            line-height: 100%;
+          }
+        }
+      }
+
+
+    }
+
+    .btnBox{
+      margin-top: 24px;
+      padding:0 16px;
+
+      .btn{
+        width: 100%;
+        height: 48px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100px;
+        background: #674188;
+        color: #FFFFFF;
+      }
+    }
+
+  }
+}

@@ -1,0 +1,112 @@
+.wrapper {
+  width: 100svw;
+  height: 100svh;
+  background: #FAF9FB;
+  direction: rtl;
+  color: #1D2742;
+  position: relative;
+
+
+  .header {
+    width: 100%;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    padding: 0 16px;
+    background: #FFFFFF;
+    position: fixed;
+    top: 0;
+    z-index: 50;
+
+    border-bottom: 0.5px solid #D9DCE0;
+    box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.05);
+
+    .title {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 100%;
+    }
+
+    .btnBack {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .icon {
+        color: #1D2742;
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+
+  }
+
+  .main {
+    width: 100%;
+    height: 100%;
+    padding:56px 16px 16px 16px;
+    overflow-y: scroll;
+
+    .title {
+      color: #61687B;
+      font-size: 14px;
+      line-height: 100%;
+      margin-top: 24px;
+    }
+
+    .card , .cardSelected {
+      width: 100%;
+      margin-top: 16px;
+      padding: 16px 12px;
+      background: #FFFFFF;
+      border-radius: 8px;
+      border: 0.5px solid #D9DCE0;
+      box-sizing: border-box;
+
+      .topCard {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .title{
+          color: #1D2742;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 100%;
+          margin-top: 0;
+        }
+
+        .icon, .iconSupport{
+          color: #61687B;
+          width: 24px;
+          height: 24px;
+
+          &Support{
+            color: #1D2742;
+          }
+        }
+      }
+
+      .text {
+        display: none;
+        margin-top: 8px;
+        color: #61687B;
+        font-size: 14px;
+        line-height: 150%;
+      }
+
+
+      &Selected{
+        .iconSelected{
+          rotate: 270deg;
+        }
+        .text{
+          display: block;
+        }
+      }
+
+    }
+  }
+}

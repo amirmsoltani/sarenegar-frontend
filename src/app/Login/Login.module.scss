@@ -1,7 +1,7 @@
 .wrapper {
   background: #1D2742;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   direction: rtl;
   display: flex;
   flex-direction: column;
@@ -12,12 +12,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 200px;
+    height: 35%;
     padding: 48px 0;
     position: relative;
 
     .logo {
-      width: 79px;
+      width: 85px;
       z-index: 10;
     }
 
@@ -34,7 +34,7 @@
   .main {
     padding: 56px 16px 0 16px;
     background: #ffffff;
-    height: 100vh;
+    height: 65%;
     border-radius: 32px 32px 0 0;
     box-sizing: border-box;
 
@@ -44,7 +44,7 @@
       .title {
         color: #1D2742;
         font-size: 20px;
-        font-weight: 800;
+        font-weight: 700;
         line-height: 100%;
       }
 
@@ -75,8 +75,12 @@
         padding: 0 12px;
         color: #1D2742;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 500;
         line-height: 100%;
+        border-radius: 8px;
+        border: 0.5px solid #D9DCE0;
+        background: #FFF;
+        outline: none;
 
         &::placeholder {
           color: #1D2742;
@@ -92,7 +96,7 @@
         color: #ffffff;
         background: #674188;
         border-radius: 8px;
-        font-weight: 600;
+        font-weight: 500;
         font-size: 16px;
         text-decoration: none;
       }

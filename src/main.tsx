@@ -7,14 +7,12 @@ import { appStore } from "@/store/store";
 import { Provider } from "react-redux";
 // routes
 import AppRouter from "@/routes/AppRouter";
-// components
-import { Toaster } from "@/common/Toaster/Toaster";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={appStore}>
       <AppRouter />
-      <Toaster />
+      {/*<Toaster />*/}
     </Provider>
   </StrictMode>,
 );

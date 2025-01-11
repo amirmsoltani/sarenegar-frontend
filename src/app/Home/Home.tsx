@@ -1,67 +1,41 @@
 import styles from './Home.module.scss';
-import {Profile, Note, Book1, ArrowLeft2, CalendarTick} from 'iconsax-react';
+import {Profile, Book1, ArrowLeft2, Note1} from 'iconsax-react';
 import Notification from '@/assets/svg/notification-bing.svg'
 import Share from '@/assets/svg/share.svg';
 import Event from '@/assets/image/event.png';
 import Pill from '@/assets/svg/pill.svg';
-import AddPill from '@/assets/image/addPill.png';
-import HomeIcon from '@/assets/svg/home-2.svg';
-import Clipboard from '@/assets/svg/clipboard-text.svg';
-import PillMenu from '@/assets/svg/PillMenu.svg';
-import {Link} from "react-router-dom";
+import {Link, Outlet} from "react-router-dom";
+import {Navbar} from "@/app/_common/Navbar/Navbar.tsx";
+import {MedicineCard} from '@/app/_common/MedicineCard/MedicineCard.tsx';
+import {CalenderShow} from "@/app/_common/CalenderShow/CalenderShow.tsx";
+
 
 export const Home = () => {
     return (
         <div className={styles.wrapper}>
+            <Outlet/>
             <div className={styles.header}>
                 <div className={styles.shadow}/>
                 <div className={styles.topHeader}>
                     <div className={styles.welcome}>
-                        <div className={styles.iconBox}>
+                        <Link to='profile' className={styles.iconBox}>
                             <Profile className={styles.icon}/>
-                        </div>
+                        </Link>
                         <div className={styles.textBox}>
-                            <div className={styles.text}>کاربر عزیز خوش آمدید!</div>
+                            <div className={styles.text}>
+                                <div className={styles.name}>کاربر عزیز</div>
+                                <div>خوش آمدید!</div>
+                            </div>
                             <div className={styles.date}>اردیبهشت ۱۴۰۳</div>
                         </div>
                     </div>
-                    <div className={styles.notificationBox}>
+                    <Link to='notification' className={styles.notificationBox}>
                         <Notification className={styles.icon}/>
                         <div className={styles.counter}>۵</div>
-                    </div>
+                    </Link>
                 </div>
 
-                <div className={styles.week}>
-                    <div className={styles.day}>
-                        <div className={styles.number}>۱۱</div>
-                        <div className={styles.text}>شنبه</div>
-                    </div>
-                    <div className={styles.day}>
-                        <div className={styles.number}>۱۲</div>
-                        <div className={styles.text}>۱شنبه</div>
-                    </div>
-                    <div className={styles.day}>
-                        <div className={styles.number}>۱۳</div>
-                        <div className={styles.text}>۲شنبه</div>
-                    </div>
-                    <div className={styles.daySelect}>
-                        <div className={styles.number}>۱۴</div>
-                        <div className={styles.text}>۳شنبه</div>
-                    </div>
-                    <div className={styles.day}>
-                        <div className={styles.number}>۱۵</div>
-                        <div className={styles.text}>۴شنبه</div>
-                    </div>
-                    <div className={styles.day}>
-                        <div className={styles.number}>۱۶</div>
-                        <div className={styles.text}>۵شنبه</div>
-                    </div>
-                    <div className={styles.day}>
-                        <div className={styles.number}>۱۷</div>
-                        <div className={styles.text}>جمعه</div>
-                    </div>
-
-                </div>
+                <CalenderShow />
             </div>
 
             <div className={styles.content}>
@@ -70,28 +44,76 @@ export const Home = () => {
                     <div className={styles.section}>
                         <div className={styles.event}>
                             <div className={styles.topCard}>
-                                <div className={styles.title}>رخداد صرع</div>
+                                <div className={styles.title}>
+                                    <Link to='event' className={styles.link}>رخداد صرع</Link>
+                                    <div className={styles.numberBox}>
+                                        <div>2</div>
+                                        <div>مورد</div>
+                                    </div>
+                                </div>
                                 <Share className={styles.icon}/>
                                 <div className={styles.shadowBox}>
                                     <div className={styles.shadowInner}/>
                                 </div>
                             </div>
-                            <Link to='addEvent' className={styles.linkIcon} >
+                            <Link to='addEvent' className={styles.linkIcon}>
                                 <img src={Event} alt='' className={styles.icon}/>
                             </Link>
                         </div>
                         <div className={styles.reports}>
                             <div className={styles.topCard}>
-                                <div className={styles.title}>گزارشات</div>
-                                <Note className={styles.icon} variant="Bold"/>
+                                <div className={styles.title}>
+                                    <div>گزارشات</div>
+                                    <div className={styles.numberBox}>
+                                        <div className={styles.text}>ماهانه:</div>
+                                        <div>۱۲</div>
+                                        <div>مورد</div>
+                                    </div>
+                                </div>
+                                <Note1 className={styles.icon} variant="Bold"/>
                                 <div className={styles.shadowBox}>
                                     <div className={styles.shadowInner}/>
                                 </div>
                             </div>
                             <div className={styles.bottomCard}>
-                                <div className={styles.text}>گزارشی وجود ندارد</div>
-                                <div className={styles.description}>با ثبت اولین رخداد صرع قابل نمایش خواهد بود</div>
+                                <div className={styles.chartBody}>
+                                    <div className={styles.chartBox}>
+                                        <div className={styles.lineBox}>
+                                            <div className={styles.line} />
+                                            <div className={styles.line} />
+                                            <div className={styles.line} />
+                                            <div className={styles.line} />
+                                            <div className={styles.line} />
+                                        </div>
 
+                                        <div className={styles.chart}>
+                                            <div className={styles.barBox5}>
+                                                <div className={styles.number}>۵</div>
+                                                <div className={styles.bar}/>
+                                            </div>
+                                            <div className={styles.barBox3}>
+                                                <div className={styles.number}>۳</div>
+                                                <div className={styles.bar}/>
+                                            </div>
+                                            <div className={styles.barBox4}>
+                                                <div className={styles.number}>۴</div>
+                                                <div className={styles.bar}/>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div className={styles.numberBox}>
+                                        <div>۶</div>
+                                        <div>۳</div>
+                                        <div>۱</div>
+                                    </div>
+                                </div>
+                                <div className={styles.status}>
+                                    <div>شدید</div>
+                                    <div>متوسط</div>
+                                    <div>خفیف</div>
+                                    <div />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -104,9 +126,14 @@ export const Home = () => {
                                 <div className={styles.shadowInner}/>
                             </div>
                         </div>
-                        <div className={styles.bottomCard}>
-                            <img src={AddPill} alt='' className={styles}/>
 
+                        <div className={styles.slider}>
+                            <MedicineCard nameEn='Carbamazepine' nameFa='کاربامازپین' amount='۱/۲ قرص' when='بعد از غذا' srcImg='Carbamazepine.png' link='' status={false} time='۰۷:۰۰'  />
+                        </div>
+                        <div className={styles.pagination}>
+                            <div className={styles.itemSelected} />
+                            <div className={styles.item} />
+                            <div className={styles.item} />
                         </div>
                     </div>
 
@@ -119,26 +146,15 @@ export const Home = () => {
                             </div>
                         </div>
                         <div className={styles.bottomCard}>
-                            <div>صرع و راه های مواجه با آن در گذر زمان</div>
+                            <div>تشنج و راه های مواجه با آن در گذر زمان</div>
                             <ArrowLeft2 className={styles.arrow}/>
                         </div>
                     </div>
-                    <div className={styles.navbar}>
-                        <div className={styles.itemSelected}>
-                            <HomeIcon className={styles.icon}/>
-                        </div>
-                        <div className={styles.item}>
-                            <PillMenu className={styles.icon}/>
-                        </div>
-                        <div className={styles.item}>
-                            <CalendarTick className={styles.icon}/>
-                        </div>
-                        <div className={styles.item}>
-                            <Clipboard className={styles.icon}/>
-                        </div>
-                    </div>
+                    <Navbar/>
                 </div>
             </div>
+
+
         </div>
     );
 };

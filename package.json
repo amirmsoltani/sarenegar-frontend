@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "NODE_ENV=development && vite",
     "dev-win": "set NODE_ENV=development && vite --port 5173 --host 0.0.0.0",
-    "build": "NODE_ENV=production && tsc -b && vite build",
+    "build": "set NODE_ENV=production && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "dev-server": "NODE_ENV=development && vite --port 3000 --host 0.0.0.0 --strictPort"

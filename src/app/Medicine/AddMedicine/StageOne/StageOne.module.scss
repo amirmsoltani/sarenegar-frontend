@@ -1,0 +1,26 @@
+.wrapper{
+  margin-top: 56px;
+  padding: 24px 16px;
+
+  .title{
+    color: #1D2742;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 100%;
+  }
+
+  .underline{
+    width: 24px;
+    height: 3px;
+    background: #DF6A6A;
+    margin-top: 12px;
+    border-radius: 100px;
+  }
+
+  .inputBox{
+    display: flex;
+    flex-direction: column;
+    row-gap: 32px;
+    margin-top: 24px;
+  }
+}

@@ -1,0 +1,100 @@
+.card ,.cardGreen{
+  width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  background: rgba(0, 0, 0, 0.20);
+  border-radius: 16px;
+  padding: 12px;
+  text-decoration: none;
+  color: #FFFFFF;
+  direction: rtl;
+  box-sizing: border-box;
+  &Green{
+    background: #00C9AF;
+  }
+
+  .top{
+    height: 56px;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+
+    .section{
+      height: 100%;
+      display: flex;
+      align-items: start;
+      column-gap: 12px;
+
+      .imgBox{
+        width: 56px;
+        height: 56px;
+        border-radius: 6px;
+        overflow: hidden;
+
+        .img{
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .fa{
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 100%;
+        margin-bottom: 12px;
+      }
+
+      .en{
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 100%;
+      }
+    }
+
+    .tick{
+      width: 28px;
+      height: 28px;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      border: 0.5px solid #FFFFFFCF;
+    }
+    .tickChecked{
+      width: 28px;
+      height: 28px;
+      background: #DF6A6A;
+      border-radius: 50%;
+      border: 0.9px solid #FFFFFFCF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+    }
+
+  }
+
+  .bottom{
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .details{
+      display: flex;
+      align-items: center;
+      column-gap: 4px;
+      color: #FFF;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 100%;
+
+      .partition{
+        width: 1px;
+        height: 14px;
+        background: #FFFFFF;
+      }
+    }
+
+  }
+}
