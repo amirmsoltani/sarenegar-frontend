@@ -101,7 +101,7 @@ export const EmptyHome = () => {
                     <div className={styles.reminder}>
                         <div className={styles.topCard}>
                             <div className={styles.title}>یادآور دارو</div>
-                            <Pill className={styles.icon} variant="Bold"/>
+                            <Pill className={styles.icon} />
                             <div className={styles.shadowBox}>
                                 <div className={styles.shadowInner}/>
                             </div>

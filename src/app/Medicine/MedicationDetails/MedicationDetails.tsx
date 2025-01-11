@@ -35,7 +35,7 @@ export const MedicationDetails = () => {
                         </div>
                     </div>
 
-                    <Pill className={styles.icon} variant="Bold"/>
+                    <Pill className={styles.icon} />
                     <div className={styles.shadowBox}>
                         <div className={styles.shadowInner}/>
                     </div>
