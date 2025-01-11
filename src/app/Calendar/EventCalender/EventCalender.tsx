@@ -152,7 +152,9 @@ export const EventCalender = () => {
                 </div>
             </div>
 
-            <Outlet />
+
+            <Outlet/>
+
         </div>
     );
 };
