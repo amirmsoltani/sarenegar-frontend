@@ -1,5 +1,4 @@
 import { resolve } from "node:path";
-// vite
 import svgr from "vite-plugin-svgr";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
@@ -20,8 +19,9 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
+        style: "compressed",
         api: "modern-compiler",
-        additionalData: `@use "@/styles/mixins.scss";`,
+        additionalData: `@use "@/styles/mixins.scss" as *;`,
       },
     },
   },

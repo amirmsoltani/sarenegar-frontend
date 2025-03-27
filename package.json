@@ -1,11 +1,12 @@
 {
-  "name": "score-board-admin-panel",
+  "name": "sarnegar-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "orval": "orval",
     "dev": "NODE_ENV=development && vite",
-    "dev-win": "set NODE_ENV=development && vite --port 5173 --host 0.0.0.0",
+    "dev-win": "set NODE_ENV=development && vite --port 3000 --host 0.0.0.0",
     "build": "set NODE_ENV=production && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -15,6 +16,7 @@
     "@reduxjs/toolkit": "^2.3.0",
     "axios": "^1.7.7",
     "classnames": "^2.5.1",
+    "google-libphonenumber": "^3.2.40",
     "iconsax-react": "^0.0.8",
     "js-cookie": "^3.0.5",
     "react": "^18.3.1",
@@ -29,6 +31,7 @@
   "devDependencies": {
     "@eslint/js": "^9.13.0",
     "@types/classnames": "^2.3.4",
+    "@types/google-libphonenumber": "^7.4.30",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^22.9.1",
     "@types/react": "^18.3.12",
@@ -39,6 +42,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.11.0",
+    "orval": "^7.7.0",
     "prettier": "^3.3.3",
     "sass": "^1.81.0",
     "typescript": "~5.6.2",
