@@ -1,0 +1,118 @@
+.container {
+  width: 100%;
+  flex: 1 1 0%;
+  flex-direction: column;
+  @include flex-start-start;
+
+  --height: 48px;
+
+  .label {
+    color: var(--gray);
+    margin-bottom: 12px;
+    display: inline-block;
+    @include transition;
+    @include text-14-regular;
+  }
+
+  .inputContainer {
+    gap: 8px;
+    width: 100%;
+    flex: 1 1 0%;
+    padding-right: 12px;
+    min-height: var(--height);
+    max-height: var(--height);
+    border: 1px solid var(--stroke);
+    background-color: var(--white);
+    @include radius-8;
+    @include transition;
+    @include text-14-regular;
+    @include flex-start-center;
+
+    .input {
+      width: 100%;
+      flex: 1 1 0%;
+      border: none;
+      outline: none;
+      padding-left: 12px;
+      height: var(--height);
+      background-color: transparent;
+
+      &::placeholder {
+        color: var(--dark-blue);
+        @include text-14-regular;
+      }
+
+      &:focus::placeholder {
+        opacity: 50%;
+      }
+    }
+
+    .content {
+      cursor: pointer;
+      @include centering;
+    }
+
+    &:has(.content[data-place="start"]) {
+      padding-inline: 12px;
+      .input {
+        padding: 0px;
+      }
+    }
+  }
+
+  &[data-error="true"] {
+    .label {
+      color: var(--red);
+    }
+
+    .inputContainer {
+      border: 1px solid var(--red);
+    }
+  }
+
+  &[data-error="false"] {
+    .inputContainer {
+      &:hover {
+        border: 1px solid var(--stroke);
+      }
+
+      &:has(.input:focus) {
+        border: 1px solid var(--gray);
+        background-color: var(--white);
+      }
+    }
+  }
+
+  &[data-disabled="true"] {
+    .inputContainer {
+      cursor: not-allowed;
+      border: 1px solid var(--stroke);
+
+      .content {
+        color: var(--gray);
+      }
+    }
+  }
+
+  .error {
+    margin-top: 8px;
+    font-size: 10px;
+    color: var(--red);
+    display: inline-block;
+  }
+
+  .helperText {
+    gap: 8px;
+    margin-top: 8px;
+    font-size: 10px;
+    color: var(--gray);
+    @include flex-start-center;
+
+    .circle {
+      width: 5px;
+      height: 5px;
+      background-color: var(--gray);
+      @include radius-full;
+    }
+  }
+}

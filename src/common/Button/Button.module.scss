@@ -1,0 +1,54 @@
+.button {
+  all: unset;
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  position: relative;
+  @include radius-8;
+  @include centering;
+  @include transition;
+  @include text-16-semibold;
+
+  &[data-disabled="true"],
+  &[data-loading="true"] {
+    cursor: not-allowed;
+  }
+
+  &[data-loading="true"] {
+    .body {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  .loading {
+    inset: 0;
+    position: absolute;
+    @include centering;
+  }
+
+  &:active {
+    scale: 95%;
+  }
+}
+
+// ? sizes
+.md {
+  height: 48px;
+  min-width: 120px;
+  padding-inline: 24px;
+}
+
+// ? variants
+.purple {
+  color: var(--white);
+  background-color: var(--primary);
+
+  &[data-disabled="true"] {
+    background-color: var(--primary);
+  }
+
+  &:not([data-disabled="true"], [data-loading="true"]):hover {
+    background-color: var(--primary);
+  }
+}

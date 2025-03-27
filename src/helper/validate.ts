@@ -1,22 +1,40 @@
 import { email_regex } from "./regex";
-
-type TDateObject = { date: string | Date | null; time: object | null };
+import { PhoneNumberUtil } from "google-libphonenumber";
 
 type TRuleCallback = (value: any, form: any) => boolean | string;
 type TRule = { message: string; rule: TRuleCallback };
 
+const phoneUtil = PhoneNumberUtil.getInstance();
+
 class Rules {
   protected rules: TRule[] = [];
 
-  required = (message: string = "This field is required") => {
+  required = (message: string = "این فیلد اجباری می باشد") => {
     this.rules.push({ message, rule: (value: string | any[]) => (Array.isArray(value) ? !value.length : !value) });
     return this;
   };
 
-  dateRequired(message: string = "This field is required") {
-    this.rules.push({ message, rule: (value: TDateObject) => !(value.date && value.time) });
+  isPhoneNumber(message: string = "شماره همراه معتبر نمی باشد") {
+    this.rules.push({
+      message,
+      rule: (value: string) => {
+        try {
+          const phone_number = phoneUtil.parseAndKeepRawInput(value, "IR");
+          if (phone_number.getCountryCode() && phone_number.getNationalNumber()) {
+            return !phoneUtil.isValidNumber(phone_number);
+          } else return true;
+        } catch (error) {
+          return true;
+        }
+      },
+    });
     return this;
   }
+
+  isNumber = (message: string = "یک عدد معتبر وارد کنید") => {
+    this.rules.push({ message, rule: (value: string) => isNaN(+value) });
+    return this;
+  };
 
   pattern = (value: RegExp | string, message: string = "Value does'nt match the pattern") => {
     const regex = new RegExp(value);
@@ -24,30 +42,14 @@ class Rules {
     return this;
   };
 
-  email = (message: string = "Email is not valid") => {
+  email = (message: string = "ایمیل معتبر نمیباشد") => {
     return this.pattern(email_regex, message);
-  };
-
-  oneOf = (values: string[], message?: string) => {
-    this.rules.push({
-      rule: (value: string) => !values.includes(value),
-      message: message ?? `It must be equal to one of these values: ${values.toString()}`,
-    });
-    return this;
-  };
-
-  notOneOf = (values: string[], message?: string) => {
-    this.rules.push({
-      rule: (value: string) => values.includes(value),
-      message: message ?? `It must not be equal to these values: ${values.toString()}`,
-    });
-    return this;
   };
 
   min = (min: number, message?: string) => {
     this.rules.push({
       rule: (value: string) => !(+value >= min),
-      message: message ?? `Value must be bigger than ${min}`,
+      message: message ?? `مقدار باید بزرگ تر از ${min} باشد`,
     });
     return this;
   };
@@ -55,7 +57,7 @@ class Rules {
   max = (max: number, message?: string) => {
     this.rules.push({
       rule: (value: string) => !(+value <= max),
-      message: message ?? `Value must be less than ${max}`,
+      message: message ?? `مقدار باید کوچک تر از ${max} باشد`,
     });
     return this;
   };
@@ -63,7 +65,7 @@ class Rules {
   minLength = (min: number, message?: string) => {
     this.rules.push({
       rule: (value: string) => !(value.length >= min),
-      message: message ?? `Value must be at least ${min} characters`,
+      message: message ?? `مقدار باید حداقل ${min} کاراکتر باشد`,
     });
     return this;
   };
@@ -71,7 +73,7 @@ class Rules {
   maxLength = (max: number, message?: string) => {
     this.rules.push({
       rule: (value: string) => !(value.length <= max),
-      message: message ?? `Value must be at most ${max} characters`,
+      message: message ?? `مقدار باید حداکثر ${max} کاراکتر باشد`,
     });
     return this;
   };

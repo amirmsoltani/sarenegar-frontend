@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  gap: 10px;
+
+  .input {
+    width: 48px;
+    height: 56px;
+    outline: none;
+    text-align: center;
+    border: 0.5px solid var(--stroke);
+    @include radius-8;
+    @include transition;
+    @include text-28-semibold;
+
+    &[data-error="true"] {
+      border-color: var(--red);
+    }
+  }
+}
