@@ -90,29 +90,10 @@
 }
 
 // ? typography
-@mixin text-40-regular {
-  font-size: 40px;
-  font-weight: 400;
-}
-
-@mixin text-40-bold {
-  font-size: 40px;
-  font-weight: 700;
-}
-
-@mixin text-32-bold {
-  font-size: 32px;
-  font-weight: 700;
-}
-
-@mixin text-32-black {
-  font-size: 32px;
-  font-weight: 900;
-}
-
-@mixin text-24-regular {
-  font-size: 24px;
-  font-weight: 400;
+@mixin text-28-semibold {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 150%;
 }
 
 @mixin text-24-bold {
@@ -120,9 +101,9 @@
   font-weight: 700;
 }
 
-@mixin text-20-regular {
+@mixin text-20-extrabold {
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 @mixin text-20-bold {
@@ -135,14 +116,25 @@
   font-weight: 400;
 }
 
+@mixin text-18-semibold {
+  font-size: 18px;
+  font-weight: 500;
+}
+
 @mixin text-18-bold {
   font-size: 18px;
   font-weight: 700;
 }
 
-@mixin text-16-regular {
+@mixin text-16-regular-150 {
   font-size: 16px;
   font-weight: 400;
+  line-height: 170%;
+}
+
+@mixin text-16-semibold {
+  font-size: 16px;
+  font-weight: 500;
 }
 
 @mixin text-16-bold {
@@ -150,9 +142,32 @@
   font-weight: 700;
 }
 
+@mixin text-16-bold-150 {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 150%;
+}
+
 @mixin text-14-regular {
   font-size: 14px;
   font-weight: 400;
+}
+
+@mixin text-14-regular-150 {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+@mixin text-14-semibold {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@mixin text-14-semibold-150 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 150%;
 }
 
 @mixin text-14-bold {
@@ -160,29 +175,36 @@
   font-weight: 700;
 }
 
+@mixin text-14-bold-150 {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 150%;
+}
+
+@mixin text-12-light {
+  font-size: 12px;
+  font-weight: 300;
+}
+
 @mixin text-12-regular {
   font-size: 12px;
   font-weight: 400;
 }
 
+@mixin text-12-regular-150 {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+@mixin text-12-semibold {
+  font-size: 12px;
+  font-weight: 600;
+}
+
 @mixin text-12-bold {
   font-size: 12px;
   font-weight: 700;
-}
-
-@mixin text-10-regular {
-  font-size: 10px;
-  font-weight: 400;
-}
-
-@mixin text-10-bold {
-  font-size: 10px;
-  font-weight: 700;
-}
-
-@mixin text-8-regular {
-  font-size: 8px;
-  font-weight: 400;
 }
 
 // ? shadow
@@ -254,6 +276,41 @@
   -ms-border-radius: 16px;
   -moz-border-radius: 16px;
   -webkit-border-radius: 16px;
+}
+
+@mixin radius-24 {
+  border-radius: 24px;
+  -o-border-radius: 24px;
+  -ms-border-radius: 24px;
+  -moz-border-radius: 24px;
+  -webkit-border-radius: 24px;
+}
+
+@mixin radius-32 {
+  border-radius: 32px;
+  -o-border-radius: 32px;
+  -ms-border-radius: 32px;
+  -moz-border-radius: 32px;
+  -webkit-border-radius: 32px;
+}
+
+@mixin radius-full {
+  border-radius: 50%;
+  -o-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+
+// ? fade
+@mixin fade-out {
+  opacity: 0%;
+  visibility: hidden;
+}
+
+@mixin fade-in {
+  opacity: 100%;
+  visibility: visible;
 }
 
 // ? scroll
