@@ -1,0 +1,26 @@
+.container {
+  opacity: 0%;
+  visibility: hidden;
+  @include fade-in-animation;
+
+  .title {
+    text-align: center;
+    @include text-20-extrabold;
+  }
+
+  .description {
+    margin-top: 16px;
+    text-align: center;
+    @include text-14-regular-150;
+  }
+
+  .form {
+    display: flex;
+    margin-top: 72px;
+    flex-direction: column;
+
+    .button {
+      margin-block: 40px;
+    }
+  }
+}

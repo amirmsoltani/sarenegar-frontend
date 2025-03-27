@@ -1,0 +1,64 @@
+.container {
+  opacity: 0%;
+  visibility: hidden;
+  @include fade-in-animation;
+
+  .title {
+    position: relative;
+    text-align: center;
+    padding-bottom: 5px;
+    @include text-20-extrabold;
+
+    &:before {
+      left: 50%;
+      width: 32px;
+      height: 4px;
+      content: "";
+      top: calc(100%);
+      border-radius: 5px;
+      position: absolute;
+      transform: translateX(-50%);
+      background-color: var(--secondary);
+      -webkit-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      -o-transform: translateX(-50%);
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
+    }
+  }
+
+  .description {
+    margin-top: 24px;
+    text-align: center;
+    @include text-14-regular-150;
+  }
+
+  .phone {
+    gap: 8px;
+    margin-block: 32px;
+    @include centering;
+    @include text-18-semibold;
+
+    .icon {
+      @include centering;
+      color: var(--secondary);
+    }
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+
+    .otp {
+      @include centering;
+    }
+
+    .button {
+      margin-top: 40px;
+      margin-bottom: 24px;
+    }
+  }
+}

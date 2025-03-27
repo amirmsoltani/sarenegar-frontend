@@ -1,0 +1,11 @@
+.resendOtp {
+  color: var(--gray);
+  margin-inline: auto;
+  @include text-14-regular-150;
+}
+
+.resendOtpActive {
+  margin-inline: auto;
+  color: var(--primary);
+  @include text-14-regular-150;
+}

@@ -1,105 +1,54 @@
-.wrapper {
-  background: #1D2742;
-  width: 100svw;
-  height: 100svh;
-  direction: rtl;
+.container {
+  gap: 24px;
+  flex: 1 1 0%;
   display: flex;
   flex-direction: column;
-  row-gap: 24px;
+  background-color: var(--dark-blue);
 
   .header {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 35%;
-    padding: 48px 0;
+    height: 221px;
     position: relative;
+    flex-direction: column;
+    @include centering;
+    @include transition;
 
     .logo {
       width: 85px;
       z-index: 10;
+      @include transition;
     }
 
     .shadow {
+      z-index: 0;
       width: 238px;
       height: 93px;
       position: absolute;
-      z-index: 0;
-      background: rgba(255, 255, 255, 0.10);
       filter: blur(44px);
+      background: rgba(255, 255, 255, 0.1);
+      @include transition;
+    }
+
+    &[data-close="true"] {
+      height: 0px;
+      overflow: hidden;
+
+      .logo {
+        @include fade-out;
+      }
+
+      .shadow {
+        @include fade-out;
+      }
     }
   }
 
-  .main {
-    padding: 56px 16px 0 16px;
-    background: #ffffff;
-    height: 65%;
-    border-radius: 32px 32px 0 0;
-    box-sizing: border-box;
-
-    .titleBox {
-      text-align: center;
-
-      .title {
-        color: #1D2742;
-        font-size: 20px;
-        font-weight: 700;
-        line-height: 100%;
-      }
-
-      .description {
-        margin-top: 16px;
-        color: #1D2742;
-        font-size: 14px;
-        line-height: 150%;
-      }
-
-
-    }
-
-    .mobileBox {
-      margin-top: 72px;
-
-      .label {
-        color: #61687B;
-        font-size: 14px;
-        line-height: 100%;
-
-      }
-
-      .input {
-        margin-top: 16px;
-        height: 48px;
-        width: 100%;
-        padding: 0 12px;
-        color: #1D2742;
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 100%;
-        border-radius: 8px;
-        border: 0.5px solid #D9DCE0;
-        background: #FFF;
-        outline: none;
-
-        &::placeholder {
-          color: #1D2742;
-        }
-      }
-
-      .btnBox {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 40px;
-        height: 48px;
-        color: #ffffff;
-        background: #674188;
-        border-radius: 8px;
-        font-weight: 500;
-        font-size: 16px;
-        text-decoration: none;
-      }
-    }
+  .wrapper {
+    flex: 1 1 0%;
+    padding-block: 56px;
+    padding-inline: 16px;
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
+    background-color: var(--background);
   }
 }
