@@ -1,5 +1,3 @@
-import { Profile, Rank, Setting2 } from "iconsax-react";
-
 // ? route options documentation
 
 // ! href: route pathname
@@ -13,33 +11,15 @@ const ID = ":id" as const;
 
 export const routes = {
   home: {
+    path: "",
     href: "/",
     icon: <></>,
     name: "Home",
-    modals: {
-      add: { name: "Add", href: "/add" },
-      edit: { name: "Edit", href: (id: TId = ID) => `/edit/${id}` },
-      delete: { name: "Delete", href: (id: TId = ID) => `/delete/${id}` },
-    },
   },
   login: {
-    href: "/login",
     icon: <></>,
+    path: "login",
     name: "Login",
-  },
-  match: {
-    href: "/match",
-    icon: Rank,
-    name: "Match",
-  },
-  users: {
-    href: "/user",
-    icon: Profile,
-    name: "User",
-  },
-  setting: {
-    href: "/setting",
-    icon: Setting2,
-    name: "Setting",
+    href: "/login",
   },
 };

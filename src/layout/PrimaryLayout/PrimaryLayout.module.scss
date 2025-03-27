@@ -1,0 +1,9 @@
+.container {
+  width: 100%;
+  display: flex;
+  direction: rtl;
+  max-width: 480px;
+  min-height: 100svh;
+  margin-inline: auto;
+  flex-direction: column;
+}
