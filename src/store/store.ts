@@ -1,4 +1,4 @@
-import authReducer from "./auth/authReducer";
+import authReducer from "./auth/authSlice";
 import { runEffects, sagaMiddleware } from "./sagaMiddleware";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";

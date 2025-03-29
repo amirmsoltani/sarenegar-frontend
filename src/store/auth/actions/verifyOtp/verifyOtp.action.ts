@@ -1,15 +1,19 @@
 import { routes } from "@/routes/routes";
+import { setToken } from "../../authSlice";
 import { StoreUtils } from "@/store/Store.utils.ts";
 import { CookieRepository } from "@/helper/cookie.ts";
 import { RouterService } from "@/services/RouterService";
 import { apiAuthenticationAuthVerifyOtpCreate, VerifyOTP } from "@/services/api.ts";
 
-export const verifyOtpAction = StoreUtils.createAsyncThunk("auth/verifyOtp", async (loginData: VerifyOTP) => {
+export const verifyOtpAction = StoreUtils.createAsyncThunk("auth/verifyOtp", async (loginData: VerifyOTP, thunk) => {
   const response = await apiAuthenticationAuthVerifyOtpCreate(loginData);
 
-  CookieRepository.set("access_token", response.data.token, { expires: 1 });
+  const token = response.data.token;
 
-  RouterService.navigate(routes.home.href, { replace: true });
+  thunk.dispatch(setToken(token));
+  CookieRepository.set("access_token", token, { expires: 1 });
+
+  RouterService.navigate(routes.home.href(), { replace: true });
 
   return response.data;
 });

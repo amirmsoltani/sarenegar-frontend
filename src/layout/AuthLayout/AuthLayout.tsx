@@ -1,39 +1,30 @@
-import { Outlet } from "react-router-dom";
+import { getNow } from "@/helper/helper";
 import styles from "./AuthLayout.module.scss";
-import { useCallback, useEffect } from "react";
+import { useAuthLayout } from "./useAuthLayout";
 import { Spinner } from "@/common/Spinner/Spinner";
-import { useAppDispatch, useAppSelector } from "@/store/store";
-import { profileAction } from "@/store/auth/actions/profile/profile.action";
+import { Navigate, Outlet } from "react-router-dom";
+import { RouterService } from "@/services/RouterService";
 
 export const AuthLayout = () => {
-  const dispatch = useAppDispatch();
-  const state = useAppSelector((store) => store.auth.profile);
+  const { state, getData, isValid } = useAuthLayout();
 
-  const getData = useCallback(() => dispatch(profileAction(undefined)), [dispatch]);
-
-  useEffect(() => {
-    getData();
-  }, [getData]);
-
-  if (state.status === "loading") {
-    return (
+  return isValid ? (
+    state.status === "loading" ? (
       <div className={styles.container}>
-        <Spinner />
+        <Spinner variant="black" size="lg" />
       </div>
-    );
-  }
-
-  if (state.status === "error") {
-    return (
+    ) : state.status === "error" ? (
       <div className={styles.container}>
         <button onClick={getData} className={styles.error}>
           تلاش مجدد
         </button>
       </div>
-    );
-  }
-
-  if (state.status === "success") {
-    return <Outlet />;
-  }
+    ) : state.status === "success" ? (
+      <Outlet />
+    ) : (
+      <></>
+    )
+  ) : (
+    <Navigate to={`/${getNow()}${RouterService.location.pathname}`} />
+  );
 };
