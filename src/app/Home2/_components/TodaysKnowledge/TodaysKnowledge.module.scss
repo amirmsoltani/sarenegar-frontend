@@ -1,0 +1,15 @@
+.container {
+  flex: 1 1 0%;
+  @include flex-start-end;
+  @include text-14-semibold;
+
+  .wrapper {
+    gap: 4px;
+    @include flex-start-center;
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
+  }
+}

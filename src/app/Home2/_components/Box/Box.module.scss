@@ -1,0 +1,36 @@
+.container {
+  flex: 1 1 0%;
+  display: flex;
+  padding: 16px;
+  overflow: hidden;
+  position: relative;
+  color: var(--white);
+  padding-bottom: 24px;
+  flex-direction: column;
+  @include radius-20;
+  @include box-effect;
+
+  .header {
+    @include flex-between-center;
+
+    .title {
+      @include text-16-semibold;
+    }
+  }
+
+  &[data-variant="red"] {
+    background-color: var(--secondary);
+  }
+
+  &[data-variant="yellow"] {
+    background-color: var(--yellow);
+  }
+
+  &[data-variant="green"] {
+    background-color: var(--green);
+  }
+
+  &[data-variant="blue"] {
+    background-color: var(--blue);
+  }
+}

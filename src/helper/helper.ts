@@ -3,3 +3,7 @@ export const timeToSecond = (time: number) => {
   const second = time % 60;
   return `${minute >= 10 ? minute : `0${minute}`}:${second >= 10 ? second : `0${second}`}`;
 };
+
+export const isDateValid = (date: string) => !isNaN(Date.parse(date));
+
+export const getNow = () => new Date().toLocaleDateString().replace(/\//g, "-");

@@ -1,0 +1,9 @@
+.container {
+  flex: 1 1 0%;
+  @include centering;
+
+  .cover {
+    width: 97px;
+    height: 105px;
+  }
+}

@@ -8,7 +8,7 @@ export type TLoginDefaultValues = { phone_number: string; otp: string[] };
 const defaultValues: TLoginDefaultValues = { phone_number: "", otp: new Array(6).fill("") };
 
 export const useLogin = () => {
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
 
   const methods = useForm({ defaultValues });
 

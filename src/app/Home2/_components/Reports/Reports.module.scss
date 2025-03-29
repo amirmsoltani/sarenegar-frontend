@@ -1,0 +1,16 @@
+.container {
+  gap: 5px;
+  flex: 1 1 0%;
+  flex-direction: column;
+  @include flex-end-center;
+
+  .title {
+    text-align: center;
+    @include text-14-bold;
+  }
+
+  .description {
+    text-align: center;
+    @include text-12-regular-150;
+  }
+}

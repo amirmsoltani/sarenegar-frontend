@@ -2,7 +2,7 @@ import styles from './Home.module.scss';
 import {Profile, Book1, ArrowLeft2, Note1} from 'iconsax-react';
 import Notification from '@/assets/svg/notification-bing.svg'
 import Share from '@/assets/svg/share.svg';
-import Event from '@/assets/image/event.png';
+// import Event from '@/assets/image/event.png';
 import Pill from '@/assets/svg/pill.svg';
 import {Link, Outlet} from "react-router-dom";
 import {Navbar} from "@/app/_common/Navbar/Navbar.tsx";
