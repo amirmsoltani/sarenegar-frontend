@@ -1,5 +1,5 @@
 import { routes } from "./routes";
-import { Home } from "@/app/Home2/Home";
+import { Home } from "@/app/Home/Home";
 import { Login } from "@/app/Login/Login";
 import { useAppSelector } from "@/store/store.ts";
 import { AuthLayout } from "@/layout/AuthLayout/AuthLayout";

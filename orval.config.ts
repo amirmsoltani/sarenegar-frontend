@@ -18,7 +18,6 @@ export default defineConfig({
             .map((item) => toCamelCase(item))
             .join("");
           const summary = operation.operationId?.replace(/_/g, " ");
-          console.log({ operation, route, verb, summary, id: operation.operationId });
           const title = tag + " " + summary;
           return `api${toCamelCase(title)}`;
         },
