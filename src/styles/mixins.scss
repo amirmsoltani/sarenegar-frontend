@@ -126,6 +126,11 @@
   font-weight: 700;
 }
 
+@mixin text-16-regular {
+  font-size: 16px;
+  font-weight: 400;
+}
+
 @mixin text-16-regular-150 {
   font-size: 16px;
   font-weight: 400;
@@ -161,7 +166,7 @@
 
 @mixin text-14-semibold {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 @mixin text-14-semibold-150 {
@@ -172,7 +177,7 @@
 
 @mixin text-14-bold {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 @mixin text-14-bold-150 {
@@ -278,6 +283,14 @@
   -webkit-border-radius: 16px;
 }
 
+@mixin radius-20 {
+  border-radius: 20px;
+  -o-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+}
+
 @mixin radius-24 {
   border-radius: 24px;
   -o-border-radius: 24px;
@@ -352,5 +365,41 @@
   to {
     opacity: 0%;
     visibility: hidden;
+  }
+}
+
+@mixin box-effect {
+  &::after {
+    top: 10px;
+    left: 20px;
+    content: "";
+    width: 115px;
+    opacity: 20%;
+    height: 115px;
+    position: absolute;
+    transform: translateX(-50%) translateY(-50%) rotate(30deg);
+    background-image: linear-gradient(rgb(from var(--white) r g b / 0%), rgb(from var(--white) r g b / 100%));
+    @include radius-full;
+    -webkit-transform: translateX(-50%) translateY(-50%) rotate(30deg);
+    -moz-transform: translateX(-50%) translateY(-50%) rotate(30deg);
+    -ms-transform: translateX(-50%) translateY(-50%) rotate(30deg);
+    -o-transform: translateX(-50%) translateY(-50%) rotate(30deg);
+  }
+
+  &::before {
+    top: -6px;
+    left: 30px;
+    content: "";
+    width: 185px;
+    opacity: 20%;
+    height: 185px;
+    position: absolute;
+    transform: translateX(-50%) translateY(-50%) rotate(30deg);
+    background-image: linear-gradient(rgb(from var(--white) r g b / 0%), rgb(from var(--white) r g b / 100%));
+    @include radius-full;
+    -webkit-transform: translateX(-50%) translateY(-50%) rotate(30deg);
+    -moz-transform: translateX(-50%) translateY(-50%) rotate(30deg);
+    -ms-transform: translateX(-50%) translateY(-50%) rotate(30deg);
+    -o-transform: translateX(-50%) translateY(-50%) rotate(30deg);
   }
 }
