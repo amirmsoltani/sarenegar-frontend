@@ -1,5 +1,5 @@
 import { routes } from "./routes";
-import { Home } from "@/app/Home/Home";
+import { Home } from "@/app/Home2/Home";
 import { Login } from "@/app/Login/Login";
 import { useAppSelector } from "@/store/store.ts";
 import { AuthLayout } from "@/layout/AuthLayout/AuthLayout";
@@ -18,7 +18,7 @@ const AppRouter = () => {
         <Routes>
           <Route path="" Component={RouterStateManager}>
             <Route path={routes.login.path} Component={AppRouterUtils.withCondition(!isLogin, Login, RedirectToHome)} />
-            <Route path="" Component={AppRouterUtils.withCondition(isLogin, AuthLayout)}>
+            <Route path=":date?" Component={AppRouterUtils.withCondition(isLogin, AuthLayout)}>
               <Route path={routes.home.path} Component={Home} />
             </Route>
           </Route>
