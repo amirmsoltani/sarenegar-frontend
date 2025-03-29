@@ -1,0 +1,36 @@
+.container {
+  gap: 2px;
+  display: flex;
+  overflow: auto;
+  position: relative;
+  @include scroll-off;
+
+  .date {
+    gap: 12px;
+    height: 80px;
+    display: flex;
+    min-width: 48px;
+    align-items: center;
+    border-radius: 100px;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8px 6px 12px 6px;
+    @include transition;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -o-border-radius: 100px;
+    -webkit-border-radius: 100px;
+
+    .day {
+      @include text-18-bold;
+    }
+
+    .weekday {
+      @include text-12-regular;
+    }
+
+    &[data-active="true"] {
+      background-color: var(--secondary);
+    }
+  }
+}
