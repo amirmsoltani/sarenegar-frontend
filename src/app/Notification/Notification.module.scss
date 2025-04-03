@@ -1,5 +1,4 @@
 .wrapper {
-  width: 100vw;
   height: 100vh;
   direction: rtl;
   overflow-y: scroll;
@@ -7,31 +6,33 @@
   .header {
     width: 100%;
     height: 56px;
-    position: absolute;
+    position: sticky;
     display: flex;
+    top: 0;
     justify-content: space-between;
     align-items: center;
     padding: 0 16px;
-    border-bottom: 0.5px solid #D9DCE0;
-    background: #FFF;
+    border-bottom: 0.5px solid #d9dce0;
+    background: #fff;
     box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.05);
 
-    .sectionLeft, .sectionRight {
+    .sectionLeft,
+    .sectionRight {
       display: flex;
       align-items: center;
 
-      .title{
-        color: #1D2742;
+      .title {
+        color: #1d2742;
         font-size: 18px;
         font-weight: 500;
         line-height: 100%;
       }
 
-      .btnBack{
+      .btnBack {
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #1D2742;
+        color: #1d2742;
       }
 
       .icon {
@@ -52,10 +53,4 @@
       }
     }
   }
-
-  .main{
-    margin-top: 56px;
-  }
-
-
 }

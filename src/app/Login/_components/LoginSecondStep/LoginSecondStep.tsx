@@ -24,7 +24,9 @@ export const LoginSecondStep = ({ changeStepHandler }: TLoginSecondStep) => {
         <div className={styles.otp}>
           <Otp name="otp" length={6} />
         </div>
-        <FormButton className={styles.button}>ورود</FormButton>
+        <FormButton radius="md" className={styles.button}>
+          ورود
+        </FormButton>
         <ResendCode />
       </div>
     </div>

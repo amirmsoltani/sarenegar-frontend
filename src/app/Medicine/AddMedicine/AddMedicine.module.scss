@@ -1,30 +1,30 @@
-.wrapper{
-  width: 100svw;
+.wrapper {
   height: 100svh;
-  background: #FAF9FB;
+  background: #faf9fb;
   direction: rtl;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  .content{
+  .content {
     height: 100%;
-    overflow-y : scroll;
+    overflow-y: scroll;
 
-    .header{
+    .header {
       height: 56px;
       width: 100%;
-      background: #FFFFFF;
-      border-bottom: 0.5px solid #D9DCE0;
+      background: #ffffff;
+      border-bottom: 0.5px solid #d9dce0;
       box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.05);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 16px;
-      color: #1D2742;
-      position: fixed;
+      color: #1d2742;
+      position: sticky;
+      top: 0;
 
-      .secRight{
+      .secRight {
         display: flex;
         align-items: center;
         column-gap: 8px;
@@ -32,54 +32,50 @@
         font-weight: 500;
         line-height: 100%;
 
-        .link{
+        .link {
           display: flex;
           align-items: center;
           justify-content: center;
           text-decoration: none;
-          color: #1D2742;
+          color: #1d2742;
         }
       }
 
-      .stage{
+      .stage {
         display: flex;
         align-items: center;
         column-gap: 4px;
-        color: #DF6A6A;
+        color: #df6a6a;
         font-size: 14px;
         font-weight: 500;
         line-height: 100%;
         letter-spacing: -0.28px;
       }
-
     }
-
-
   }
 
-  .footer{
+  .footer {
     width: 100%;
     height: 80px;
     border-radius: 32px 32px 0 0;
-    border-top: 0.5px solid #D9DCE0;
-    background: #FFFFFF;
+    border-top: 0.5px solid #d9dce0;
+    background: #ffffff;
     box-shadow: 0 -4px 24px 0 rgba(0, 0, 0, 0.05);
     display: flex;
     align-items: center;
     justify-content: center;
 
-    .btn{
+    .btn {
       height: 48px;
       width: 90%;
       border-radius: 100px;
-      background: rgba(103, 65, 136, 0.30);
+      background: rgba(103, 65, 136, 0.3);
       mix-blend-mode: luminosity;
-      color: #FFFFFF;
+      color: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
       text-decoration: none;
     }
   }
-
 }

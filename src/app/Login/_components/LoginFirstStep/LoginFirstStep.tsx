@@ -16,7 +16,7 @@ export const LoginFirstStep = () => {
           label="شماره همراه خود را وارد نمایید"
           validate={Validate.gen().required().isPhoneNumber()}
         />
-        <FormButton className={styles.button}>ارسال کد فعالسازی</FormButton>
+        <FormButton radius="md" className={styles.button}>ارسال کد فعالسازی</FormButton>
       </div>
     </div>
   );

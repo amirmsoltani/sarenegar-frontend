@@ -1,9 +1,9 @@
-.wrapper{
+.wrapper {
   position: absolute;
-  width: 100svw;
+
   height: 100svh;
   z-index: 50;
-  background: linear-gradient(0deg, rgba(103, 65, 136, 0.10) 0%, rgba(103, 65, 136, 0.10) 100%), rgba(0, 0, 0, 0.40);
+  background: linear-gradient(0deg, rgba(103, 65, 136, 0.1) 0%, rgba(103, 65, 136, 0.1) 100%), rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
   justify-content: end;
@@ -11,9 +11,9 @@
   .modal {
     width: 100%;
     height: 340px;
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: 16px 16px 0 0;
-    box-shadow: 0px -4px 16px 0px rgba(0, 0, 0, 0.10);
+    box-shadow: 0px -4px 16px 0px rgba(0, 0, 0, 0.1);
 
     .header {
       width: 100%;
@@ -24,12 +24,11 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 0.5px solid #D9DCE0;
+      border-bottom: 0.5px solid #d9dce0;
       box-sizing: border-box;
 
-
       .title {
-        color: #1D2742;
+        color: #1d2742;
         font-size: 14px;
         font-weight: 500;
         line-height: 100%;
@@ -45,27 +44,26 @@
           rotate: 45deg;
           width: 24px;
           height: 24px;
-          color: #1D2742;
+          color: #1d2742;
         }
       }
     }
 
-    .dateTable{
+    .dateTable {
       margin-top: 16px;
-      .row{
+      .row {
         display: flex;
         align-items: center;
         opacity: 0.5;
 
-
-        .col{
+        .col {
           flex: 2;
           height: 40px;
           display: flex;
           align-items: center;
           justify-content: center;
           text-align: center;
-          color: #172B4D;
+          color: #172b4d;
           font-size: 16px;
           font-weight: 500;
           line-height: 100%;
@@ -76,25 +74,24 @@
           width: 20px;
         }
 
-        &:first-child{
+        &:first-child {
           opacity: 1;
         }
 
-        &:nth-child(3){
-          background: #FDF7F7;
+        &:nth-child(3) {
+          background: #fdf7f7;
           opacity: 1;
           height: 59px;
-          .col{
+          .col {
             flex: 2;
-            color: #DF6A6A;
+            color: #df6a6a;
             font-size: 24px;
             font-weight: 600;
             line-height: 100%;
             letter-spacing: -0.48px;
           }
-          .colon{
-
-            color: #DF6A6A;
+          .colon {
+            color: #df6a6a;
             text-align: center;
             font-size: 58px;
             font-weight: 300;
@@ -102,15 +99,13 @@
           }
         }
       }
-
-
     }
 
-    .btnBox{
+    .btnBox {
       margin-top: 24px;
-      padding:0 16px;
+      padding: 0 16px;
 
-      .btn{
+      .btn {
         width: 100%;
         height: 48px;
         box-sizing: border-box;
@@ -119,9 +114,8 @@
         justify-content: center;
         border-radius: 100px;
         background: #674188;
-        color: #FFFFFF;
+        color: #ffffff;
       }
     }
-
   }
 }

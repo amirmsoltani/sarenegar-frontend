@@ -1,8 +1,4 @@
 .container {
   flex: 1 1 0%;
   @include centering;
-
-  .error {
-    color: var(--red);
-  }
 }

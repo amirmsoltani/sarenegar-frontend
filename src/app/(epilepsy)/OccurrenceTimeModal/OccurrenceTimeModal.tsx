@@ -1,0 +1,24 @@
+import { Modal } from "@/common/Modal/Modal";
+import { Button } from "@/common/Button/Button";
+import styles from "./OccurrenceTimeModal.module.scss";
+import { useOccurrenceTimeModal } from "./useOccurrenceTimeModal";
+import { FormRowCalendar } from "@/common/RowCalendar/FormRowCalendar";
+import { TimePicker } from "@/common/WheelPicker/TimePicker/TimePicker";
+
+export const OccurrenceTimeModal = () => {
+  const { _ref, onClose, closeHandler } = useOccurrenceTimeModal();
+
+  return (
+    <Modal _ref={_ref} fullWidth onClose={onClose} title="حمله چه زمانی اتفاق افتاده است ؟">
+      <div className={styles.row}>
+        <FormRowCalendar name="time_of_occurrence.date" />
+      </div>
+      <div className={styles.wheelPickerContainer}>
+        <TimePicker name="time_of_occurrence.time" />
+      </div>
+      <div className={styles.submitButton}>
+        <Button onClick={closeHandler}>تایید</Button>
+      </div>
+    </Modal>
+  );
+};

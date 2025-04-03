@@ -1,11 +1,9 @@
 .wrapper {
-  width: 100svw;
   height: 100svh;
-  background: #FAF9FB;
+  background: #faf9fb;
   direction: rtl;
-  color: #1D2742;
+  color: #1d2742;
   position: relative;
-
 
   .header {
     width: 100%;
@@ -14,12 +12,12 @@
     align-items: center;
     column-gap: 8px;
     padding: 0 16px;
-    background: #FFFFFF;
-    position: fixed;
+    background: #ffffff;
+    position: sticky;
     top: 0;
     z-index: 50;
 
-    border-bottom: 0.5px solid #D9DCE0;
+    border-bottom: 0.5px solid #d9dce0;
     box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.05);
 
     .title {
@@ -34,35 +32,34 @@
       justify-content: center;
 
       .icon {
-        color: #1D2742;
+        color: #1d2742;
         width: 24px;
         height: 24px;
       }
     }
-
-
   }
 
   .main {
     width: 100%;
     height: 100%;
-    padding:56px 16px 16px 16px;
+    padding: 0px 16px 16px 16px;
     overflow-y: scroll;
 
     .title {
-      color: #61687B;
+      color: #61687b;
       font-size: 14px;
       line-height: 100%;
       margin-top: 24px;
     }
 
-    .card , .cardSelected {
+    .card,
+    .cardSelected {
       width: 100%;
       margin-top: 16px;
       padding: 16px 12px;
-      background: #FFFFFF;
+      background: #ffffff;
       border-radius: 8px;
-      border: 0.5px solid #D9DCE0;
+      border: 0.5px solid #d9dce0;
       box-sizing: border-box;
 
       .topCard {
@@ -70,21 +67,22 @@
         align-items: center;
         justify-content: space-between;
 
-        .title{
-          color: #1D2742;
+        .title {
+          color: #1d2742;
           font-size: 14px;
           font-weight: 500;
           line-height: 100%;
           margin-top: 0;
         }
 
-        .icon, .iconSupport{
-          color: #61687B;
+        .icon,
+        .iconSupport {
+          color: #61687b;
           width: 24px;
           height: 24px;
 
-          &Support{
-            color: #1D2742;
+          &Support {
+            color: #1d2742;
           }
         }
       }
@@ -92,21 +90,19 @@
       .text {
         display: none;
         margin-top: 8px;
-        color: #61687B;
+        color: #61687b;
         font-size: 14px;
         line-height: 150%;
       }
 
-
-      &Selected{
-        .iconSelected{
+      &Selected {
+        .iconSelected {
           rotate: 270deg;
         }
-        .text{
+        .text {
           display: block;
         }
       }
-
     }
   }
 }

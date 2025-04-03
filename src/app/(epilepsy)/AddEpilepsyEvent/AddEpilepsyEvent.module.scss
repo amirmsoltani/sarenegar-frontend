@@ -1,0 +1,95 @@
+.container {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background);
+
+  .header {
+    top: 0px;
+    gap: 8px;
+    height: 56px;
+    position: sticky;
+    padding-inline: 16px;
+    background-color: var(--white);
+    border-bottom: 0.5px solid var(--stroke);
+    box-shadow: 0px 4px 24px 0px rgba(from var(--black) r g b / 5%);
+    @include flex-start-center;
+
+    .title {
+      @include text-18-semibold;
+    }
+
+    .iconWrapper {
+      width: 24px;
+      height: 24px;
+      @include centering;
+
+      .icon {
+        width: 24px;
+        height: 24px;
+        color: var(--dark-blue);
+      }
+    }
+  }
+
+  .form {
+    flex: 1 1 0%;
+    display: flex;
+    padding-top: 24px;
+    flex-direction: column;
+
+    .formWrapper {
+      gap: 32px;
+      flex: 1 1 0%;
+      display: flex;
+      padding-inline: 16px;
+      padding-bottom: 24px;
+      flex-direction: column;
+
+      .wrapper {
+        gap: 32px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .rangeContainer {
+        gap: 35px;
+        display: flex;
+        flex-direction: column;
+
+        .label {
+          @include label;
+          margin-bottom: 0px;
+        }
+
+        .chart {
+          margin-bottom: 10px;
+          @include centering;
+        }
+
+        .input {
+          width: 100%;
+          max-width: 60%;
+          margin-inline: auto;
+        }
+      }
+    }
+
+    .buttonWrapper {
+      @include radius-32;
+
+      bottom: 0px;
+      height: 80px;
+      display: flex;
+      position: sticky;
+      padding-inline: 16px;
+      flex-direction: column;
+      justify-content: center;
+      background-color: var(--white);
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top: 0.5px solid var(--stroke);
+      box-shadow: 0px -4px 24px 0px rgba(from var(--black) r g b / 5%);
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "conventionalCommits.scopes": ["configs", "styles", "store", "services", "routes", "common", "public", "app", "assets"],
+  "workbench.colorCustomizations": {
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#6400a8",
+    "titleBar.activeBackground": "#8200db",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#8200db99",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#8200db"
+}

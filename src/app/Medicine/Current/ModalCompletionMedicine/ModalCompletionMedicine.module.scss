@@ -1,7 +1,6 @@
-.wrapper{
-  width: 100svw;
+.wrapper {
   height: 100svh;
-  background: linear-gradient(0deg, rgba(103, 65, 136, 0.10) 0%, rgba(103, 65, 136, 0.10) 100%), rgba(0, 0, 0, 0.40);
+  background: linear-gradient(0deg, rgba(103, 65, 136, 0.1) 0%, rgba(103, 65, 136, 0.1) 100%), rgba(0, 0, 0, 0.4);
   position: absolute;
   z-index: 50;
   padding: 0 24px;
@@ -10,19 +9,18 @@
   justify-content: center;
   direction: rtl;
 
-
-  .modal{
+  .modal {
     width: 100%;
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: 16px;
-    box-shadow: 0 -4px 16px 0 rgba(0, 0, 0, 0.10);
+    box-shadow: 0 -4px 16px 0 rgba(0, 0, 0, 0.1);
     padding: 40px 16px 24px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    .title{
-      color: #172B4D;
+    .title {
+      color: #172b4d;
       font-size: 20px;
       font-weight: 600;
       line-height: 100%;
@@ -30,9 +28,9 @@
       margin-top: 24px;
     }
 
-    .text{
+    .text {
       width: 271px;
-      color: #61687B;
+      color: #61687b;
       font-size: 16px;
       font-weight: 400;
       line-height: 170%;
@@ -41,14 +39,14 @@
       text-align: center;
     }
 
-    .btnBox{
+    .btnBox {
       width: 100%;
       display: flex;
       align-items: center;
       margin-top: 40px;
       column-gap: 8px;
 
-      .btnDelete{
+      .btnDelete {
         flex: 1;
         height: 40px;
         display: flex;
@@ -56,13 +54,13 @@
         justify-content: center;
         border-radius: 100px;
         background: #674188;
-        color: #FFFFFF;
+        color: #ffffff;
         font-size: 16px;
         font-weight: 500;
         line-height: 100%;
       }
 
-      .btnCancel{
+      .btnCancel {
         flex: 1;
         height: 40px;
         display: flex;
@@ -77,7 +75,5 @@
         text-decoration: none;
       }
     }
-
   }
-
 }

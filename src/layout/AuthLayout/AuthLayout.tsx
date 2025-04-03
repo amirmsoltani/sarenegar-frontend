@@ -1,30 +1,17 @@
-import { getNow } from "@/helper/helper";
+import { getNowDate } from "@/helper/helper";
 import styles from "./AuthLayout.module.scss";
 import { useAuthLayout } from "./useAuthLayout";
-import { Spinner } from "@/common/Spinner/Spinner";
 import { Navigate, Outlet } from "react-router-dom";
-import { RouterService } from "@/services/RouterService";
+import { StatusHandler } from "@/common/StatusHandler/StatusHandler";
 
 export const AuthLayout = () => {
-  const { state, getData, isValid } = useAuthLayout();
+  const { state, getProfile, isValid } = useAuthLayout();
 
   return isValid ? (
-    state.status === "loading" ? (
-      <div className={styles.container}>
-        <Spinner variant="black" size="lg" />
-      </div>
-    ) : state.status === "error" ? (
-      <div className={styles.container}>
-        <button onClick={getData} className={styles.error}>
-          تلاش مجدد
-        </button>
-      </div>
-    ) : state.status === "success" ? (
+    <StatusHandler status={state.status} onClick={getProfile} size="lg" className={styles.container}>
       <Outlet />
-    ) : (
-      <></>
-    )
+    </StatusHandler>
   ) : (
-    <Navigate to={`/${getNow()}${RouterService.location.pathname}`} />
+    <Navigate to={`/${getNowDate()}`} />
   );
 };

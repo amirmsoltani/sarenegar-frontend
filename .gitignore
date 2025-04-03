@@ -27,7 +27,3 @@ dist-ssr
 .idea/
 **/.idea
 */.idea
-.vscode
-**/.vscode
-*.vscode
-.vscode/

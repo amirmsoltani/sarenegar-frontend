@@ -1,66 +1,63 @@
 .wrapper {
-  width: 100svw;
   height: 100svh;
-  background: #FFFFFF;
+  background: #ffffff;
   direction: rtl;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  .main{
-    .header{
+  .main {
+    .header {
       width: 100%;
       height: 56px;
-      background: #FFFFFF;
+      background: #ffffff;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 16px;
 
-
-      .secRight{
+      .secRight {
         display: flex;
         column-gap: 8px;
         align-items: center;
 
-        .link{
+        .link {
           display: flex;
           align-items: center;
           justify-content: center;
           width: 24px;
           height: 24px;
-          color: #1D2742;
+          color: #1d2742;
         }
 
-        .title{
-          color: #1D2742;
+        .title {
+          color: #1d2742;
           font-size: 18px;
           font-weight: 500;
           line-height: 100%;
         }
       }
 
-      .edit{
-        color: #DF6A6A;
+      .edit {
+        color: #df6a6a;
         font-size: 14px;
         font-weight: 500;
         line-height: 100%;
         letter-spacing: -0.28px;
         text-decoration: none;
       }
-
     }
 
-    .medicine{
+    .medicine {
       width: 100%;
       height: 128px;
       padding: 16px;
       display: flex;
       justify-content: space-between;
       align-items: start;
-      background: #00C9AF;
+      background: #00c9af;
       position: relative;
-      color: #FFFFFF;
+      color: #ffffff;
 
       .secRight {
         display: flex;
@@ -78,26 +75,26 @@
           }
         }
 
-        .nameBox{
+        .nameBox {
           height: 96px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           padding: 4px 0;
 
-          .nameFa{
+          .nameFa {
             font-size: 20px;
             font-weight: 600;
             line-height: 100%;
             letter-spacing: -0.4px;
           }
-          .nameEn{
+          .nameEn {
             font-size: 16px;
             font-weight: 500;
             line-height: 100%;
           }
 
-          .company{
+          .company {
             font-size: 12px;
             font-weight: 400;
             line-height: 100%;
@@ -105,14 +102,13 @@
             align-items: center;
             column-gap: 4px;
 
-            .name{
+            .name {
               font-size: 12px;
               font-weight: 500;
               line-height: 100%;
             }
           }
         }
-
       }
 
       .icon {
@@ -123,7 +119,7 @@
 
       .shadowBox {
         direction: ltr;
-        background: linear-gradient(184deg, rgba(255, 255, 255, 0.00) -5.44%, rgba(255, 255, 255, 0.20) 96.47%);
+        background: linear-gradient(184deg, rgba(255, 255, 255, 0) -5.44%, rgba(255, 255, 255, 0.2) 96.47%);
         width: 185px;
         height: 185px;
         position: absolute;
@@ -135,7 +131,7 @@
         .shadowInner {
           width: 115px;
           height: 115px;
-          background: linear-gradient(179deg, rgba(255, 255, 255, 0.00) 17.02%, rgba(255, 255, 255, 0.20) 99.23%);
+          background: linear-gradient(179deg, rgba(255, 255, 255, 0) 17.02%, rgba(255, 255, 255, 0.2) 99.23%);
           border-radius: 100%;
           transform: rotate(315deg);
           position: absolute;
@@ -145,7 +141,7 @@
       }
     }
 
-    .details{
+    .details {
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -153,23 +149,23 @@
       padding: 0 16px;
       margin-top: 32px;
 
-      .row{
+      .row {
         display: flex;
         align-items: center;
         justify-content: space-between;
 
-        .title{
-          color: #61687B;
+        .title {
+          color: #61687b;
           font-size: 14px;
           font-weight: 400;
           line-height: 100%;
         }
 
-        .value{
+        .value {
           display: flex;
           column-gap: 8px;
           align-items: center;
-          color: #1D2742;
+          color: #1d2742;
           font-size: 14px;
           font-weight: 400;
           line-height: 100%;
@@ -182,14 +178,10 @@
         height: 126px;
         align-self: center;
 
-
         .chart {
           width: 100%;
           height: 100%;
-          background: conic-gradient(
-                          #DF6A6A 0% 60%,
-                          #EBEEF2 60% 100%
-          );
+          background: conic-gradient(#df6a6a 0% 60%, #ebeef2 60% 100%);
           border-radius: 50%;
           position: relative;
 
@@ -211,7 +203,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: #1D2742;
+            color: #1d2742;
             font-size: 12px;
             font-weight: 400;
             line-height: 100%;
@@ -220,11 +212,11 @@
             align-items: center;
             row-gap: 8px;
 
-            .days{
+            .days {
               display: flex;
               align-items: center;
               column-gap: 4px;
-              color: #1D2742;
+              color: #1d2742;
               font-size: 20px;
               font-weight: 600;
               line-height: 100%;
@@ -233,48 +225,46 @@
           }
         }
       }
-
     }
   }
 
-  .btnDelete{
+  .btnDelete {
     width: 161px;
     height: 48px;
     align-self: center;
     text-decoration: none;
     border-radius: 100px;
-    border: 1px solid #FD305B;
+    border: 1px solid #fd305b;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #FD305B;
+    color: #fd305b;
     font-size: 16px;
     font-weight: 500;
     line-height: 100%;
   }
 
-  .footer{
+  .footer {
     width: 100%;
     height: 80px;
     border-radius: 32px 32px 0 0;
-    border-top: 0.5px solid #D9DCE0;
-    background: #FFFFFF;
+    border-top: 0.5px solid #d9dce0;
+    background: #ffffff;
     box-shadow: 0 -4px 24px 0 rgba(0, 0, 0, 0.05);
     display: flex;
     align-items: center;
     justify-content: center;
 
-    .btn{
+    .btn {
       height: 48px;
       width: 90%;
       border-radius: 100px;
       background: #674188;
-      color: #FFFFFF;
+      color: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
       text-decoration: none;
     }
   }
-
 }

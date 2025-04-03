@@ -1,5 +1,4 @@
 .wrapper {
-  width: 100svw;
   height: 100svh;
   display: flex;
   align-items: center;
@@ -8,37 +7,34 @@
   top: 0;
   z-index: 50;
   padding: 24px;
-  background: linear-gradient(0deg, rgba(103, 65, 136, 0.10) 0%, rgba(103, 65, 136, 0.10) 100%), rgba(0, 0, 0, 0.40);
+  background: linear-gradient(0deg, rgba(103, 65, 136, 0.1) 0%, rgba(103, 65, 136, 0.1) 100%), rgba(0, 0, 0, 0.4);
 
-
-  .modal{
+  .modal {
     width: 100%;
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: 16px;
-    box-shadow: 0 -4px 16px 0 rgba(0, 0, 0, 0.10);
+    box-shadow: 0 -4px 16px 0 rgba(0, 0, 0, 0.1);
     padding: 16px 16px 24px 16px;
     text-align: center;
 
-    .title{
+    .title {
       margin-bottom: 16px;
-      color: #172B4D;
+      color: #172b4d;
       font-size: 20px;
       font-weight: 600;
       line-height: 100%;
       letter-spacing: -0.4px;
     }
 
-    .text{
+    .text {
       margin-bottom: 24px;
-      color: #61687B;
+      color: #61687b;
       font-size: 16px;
       line-height: 170%;
       letter-spacing: -0.32px;
     }
 
-
-
-    .btnBox{
+    .btnBox {
       width: 100%;
       display: flex;
       align-items: center;
@@ -49,7 +45,7 @@
       line-height: 100%;
       margin-top: 24px;
 
-      .btnDel{
+      .btnDel {
         flex: 1;
         height: 40px;
         display: flex;
@@ -57,10 +53,10 @@
         justify-content: center;
         border-radius: 100px;
         background: #674188;
-        color: #FFFFFF;
+        color: #ffffff;
         text-decoration: none;
       }
-      .btnCan{
+      .btnCan {
         flex: 1;
         height: 40px;
         display: flex;

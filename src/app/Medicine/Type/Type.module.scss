@@ -1,22 +1,22 @@
 .wrapper {
-  width: 100svw;
   height: 100svh;
-  position: absolute;
-  background: linear-gradient(0deg, rgba(103, 65, 136, 0.10) 0%, rgba(103, 65, 136, 0.10) 100%), rgba(0, 0, 0, 0.40);
+  position: fixed;
+  background: linear-gradient(0deg, rgba(103, 65, 136, 0.1) 0%, rgba(103, 65, 136, 0.1) 100%), rgba(0, 0, 0, 0.4);
   z-index: 50;
   top: 0;
   right: 0;
+  inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: end;
 
-
   .content {
-    width: 100%;
+    width: 380px;
     height: 331px;
-    background: #FFFFFF;
+    margin-inline: auto;
+    background: #ffffff;
     border-radius: 16px 16px 0 0;
-    box-shadow: 0 -4px 16px 0 rgba(0, 0, 0, 0.10);
+    box-shadow: 0 -4px 16px 0 rgba(0, 0, 0, 0.1);
 
     .header {
       width: 100%;
@@ -25,15 +25,14 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 16px;
-      border-bottom: 0.5px solid #D9DCE07d;
+      border-bottom: 0.5px solid #d9dce07d;
 
       .title {
-        color: #1D2742;
+        color: #1d2742;
         font-size: 14px;
         font-weight: 500;
         line-height: 100%;
       }
-
 
       .link {
         width: 24px;
@@ -43,17 +42,15 @@
         justify-content: center;
 
         .icon {
-          color: #1D2742;
+          color: #1d2742;
           rotate: 45deg;
         }
       }
-
     }
 
     .dateTable {
       margin-top: 16px;
       display: flex;
-
 
       .col {
         flex: 1;
@@ -61,7 +58,7 @@
         .row {
           height: 40px;
           opacity: 0.5;
-          color: #172B4D;
+          color: #172b4d;
           font-size: 14px;
           font-weight: 500;
           line-height: 100%;
@@ -70,18 +67,16 @@
           align-items: center;
           justify-content: center;
 
-
           &:first-child {
             opacity: 1;
             font-size: 16px;
           }
 
-
           &:nth-child(3) {
-            background: #FDF7F7;
+            background: #fdf7f7;
             opacity: 1;
             height: 59px;
-            color: #DF6A6A;
+            color: #df6a6a;
             font-size: 20px;
             font-weight: 600;
             line-height: 100%;
@@ -89,8 +84,6 @@
           }
         }
       }
-
-
     }
 
     .btnBox {
@@ -106,7 +99,7 @@
         justify-content: center;
         border-radius: 100px;
         background: #674188;
-        color: #FFFFFF;
+        color: #ffffff;
       }
     }
   }

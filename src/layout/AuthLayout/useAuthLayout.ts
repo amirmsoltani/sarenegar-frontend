@@ -3,6 +3,7 @@ import { isDateValid } from "@/helper/helper";
 import { useCallback, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { profileAction } from "@/store/auth/actions/profile/profile.action";
+import { getEpilepsyEventListAction } from "@/store/epilepsy/actions/getEpilepsyEventList/getEpilepsyEventList.action";
 
 export const useAuthLayout = () => {
   const { date } = useParams();
@@ -12,11 +13,17 @@ export const useAuthLayout = () => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((store) => store.auth.profile);
 
-  const getData = useCallback(() => dispatch(profileAction(undefined)), [dispatch]);
+  const getProfile = useCallback(() => dispatch(profileAction(undefined)), [dispatch]);
+
+  const getInfo = useCallback(() => dispatch(getEpilepsyEventListAction({ date: date as string })), [date, dispatch]);
 
   useEffect(() => {
-    getData();
-  }, [getData]);
+    getProfile();
+  }, [getProfile]);
 
-  return { state, getData, isValid };
+  useEffect(() => {
+    state.status === "success" && getInfo();
+  }, [getInfo, state.status]);
+
+  return { state, getProfile, isValid };
 };
