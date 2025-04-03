@@ -28,7 +28,7 @@ export const api = async <T>(
       return Promise.reject(err);
     })
     .then((res: any) => {
-      const message = res.data?.message;
+      const message = res.data?.detail ?? res.data?.message;
       if (message && typeof message === "string") toast.success(message);
 
       return res as AxiosResponse<T, any>;
