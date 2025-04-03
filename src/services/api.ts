@@ -55,22 +55,25 @@ export interface EpilepsyCreate {
   tremor_and_shaking: boolean;
   triggered_by?: string;
   notes?: string;
+  readonly id: number;
 }
 
 export interface EpilepsyDetail {
   time_of_occurrence: string;
-  duration: number;
+  duration: string;
   severity: SeverityEnum;
   state_of_consciousness: boolean;
   tremor_and_shaking: boolean;
   triggered_by: string;
   notes: string;
+  id: number;
 }
 
 export interface EpilepsyList {
   id: number;
   time_of_occurrence: string;
   duration: string;
+  severity: SeverityEnum;
 }
 
 export interface Error {
@@ -121,13 +124,13 @@ export interface Token {
 }
 
 /**
- * * `SAT` - Saturday
-* `SUN` - Sunday
-* `MON` - Monday
-* `TUE` - Tuesday
-* `WED` - Wednesday
-* `THU` - Thursday
-* `FRI` - Friday
+ * * `SAT` - شنبه
+* `SUN` - یکشنبه
+* `MON` - دوشنبه
+* `TUE` - سه شنبه
+* `WED` - چهارشنبه
+* `THU` - پنجشنبه
+* `FRI` - جمعه
  */
 export type UsageDaysEnum = typeof UsageDaysEnum[keyof typeof UsageDaysEnum];
 
@@ -158,6 +161,21 @@ export interface VerifyOTP {
   /** @maxLength 128 */
   password?: string;
 }
+
+export type ApiEpilepsyEpilepsyRetrieveParams = {
+/**
+ * Filter events on a specific day (format: YYYY/MM/DD)
+ */
+time_of_occurrence?: string;
+/**
+ * Filter events after this date (format: YYYY/MM/DD)
+ */
+time_of_occurrence_after?: string;
+/**
+ * Filter events before this date (format: YYYY/MM/DD)
+ */
+time_of_occurrence_before?: string;
+};
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
@@ -294,10 +312,11 @@ export const apiDrugDosageDosemanagerDrugDosagesDestroy2 = (
  * Get all epilepsy events for the authenticated user
  */
 export const apiEpilepsyEpilepsyRetrieve = (
-    
+    params?: ApiEpilepsyEpilepsyRetrieveParams,
  options?: SecondParameter<typeof api>,) => {
       return api<PaginatedEpilepsyList>(
-      {url: `/epilepsy/`, method: 'GET'
+      {url: `/epilepsy/`, method: 'GET',
+        params
     },
       options);
     }
@@ -306,12 +325,51 @@ export const apiEpilepsyEpilepsyRetrieve = (
  * Create a new epilepsy event for the authenticated user
  */
 export const apiEpilepsyEpilepsyCreate = (
-    epilepsyCreate: EpilepsyCreate,
+    epilepsyCreate: NonReadonly<EpilepsyCreate>,
  options?: SecondParameter<typeof api>,) => {
       return api<EpilepsyDetail>(
       {url: `/epilepsy/`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: epilepsyCreate
+    },
+      options);
+    }
+  
+/**
+ * Get details of a specific epilepsy event for the authenticated user
+ */
+export const apiEpilepsyEpilepsyRetrieve2 = (
+    id: number,
+ options?: SecondParameter<typeof api>,) => {
+      return api<EpilepsyDetail>(
+      {url: `/epilepsy/${id}/`, method: 'GET'
+    },
+      options);
+    }
+  
+/**
+ * Update an epilepsy event for the authenticated user
+ */
+export const apiEpilepsyEpilepsyUpdate = (
+    id: number,
+    epilepsyCreate: NonReadonly<EpilepsyCreate>,
+ options?: SecondParameter<typeof api>,) => {
+      return api<EpilepsyDetail>(
+      {url: `/epilepsy/${id}/`, method: 'PUT',
+      headers: {'Content-Type': 'application/json', },
+      data: epilepsyCreate
+    },
+      options);
+    }
+  
+/**
+ * Delete an epilepsy event for the authenticated user
+ */
+export const apiEpilepsyEpilepsyDestroy = (
+    id: number,
+ options?: SecondParameter<typeof api>,) => {
+      return api<void>(
+      {url: `/epilepsy/${id}/`, method: 'DELETE'
     },
       options);
     }
@@ -345,4 +403,7 @@ export type ApiDrugDosageDosemanagerDrugDosagesUpdate2Result = NonNullable<Await
 export type ApiDrugDosageDosemanagerDrugDosagesDestroy2Result = NonNullable<Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosagesDestroy2>>>
 export type ApiEpilepsyEpilepsyRetrieveResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyRetrieve>>>
 export type ApiEpilepsyEpilepsyCreateResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyCreate>>>
+export type ApiEpilepsyEpilepsyRetrieve2Result = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyRetrieve2>>>
+export type ApiEpilepsyEpilepsyUpdateResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyUpdate>>>
+export type ApiEpilepsyEpilepsyDestroyResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyDestroy>>>
 export type ApiNotificationNotificationCreateResult = NonNullable<Awaited<ReturnType<typeof apiNotificationNotificationCreate>>>

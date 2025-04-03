@@ -19,7 +19,7 @@ export const api = async <T>(
 ): Promise<AxiosResponse<T, any>> => {
   return apiInstance<T>({ url, method, data, headers, params, ...options })
     .catch(async (err) => {
-      const message = err?.response?.data?.detail;
+      const message = err?.response?.data?.detail ?? err?.response?.data?.message;
       if (message && typeof message === "string") toast.error(message);
 
       const status = err?.response?.status;

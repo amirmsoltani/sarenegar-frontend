@@ -1,4 +1,4 @@
-import { getNow } from "@/helper/helper";
+import { getNowDate } from "@/helper/helper";
 import { NavigateFunction, Location } from "react-router-dom";
 
 class Router {
@@ -8,7 +8,7 @@ class Router {
 
   public setDate = () => {
     const date = this.params.date;
-    return date ? `/${date}` : `/${getNow()}`;
+    return date ? `/${date}` : `/${getNowDate()}`;
   };
 
   public updateDate = (date: string) => {

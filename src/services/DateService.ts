@@ -33,6 +33,10 @@ class DateInstant {
   public custom(date: string | number | Date, options: Intl.DateTimeFormatOptions) {
     return new Intl.DateTimeFormat("fa-IR", options).format(new Date(date));
   }
+
+  public replaceSlashWithDash(date: string) {
+    return date.replace(/\//g, "-");
+  }
 }
 
 export const DateService = new DateInstant();
