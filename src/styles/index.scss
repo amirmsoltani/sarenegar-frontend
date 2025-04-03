@@ -14,6 +14,7 @@
 }
 
 :root {
+  --black: #000000;
   --secondary: #df6a6a;
   --primary: #674188;
   --dark-blue: #1d2742;
@@ -25,19 +26,48 @@
   --white: #ffffff;
   --stroke: #d9dce0;
   --purple-stroke: #9d79be;
+  --purple: #723da1;
   --violet: #f1ecf6;
   --orange-background: #fdf7f7;
   --red: #fd305b;
-  --greensuccess-10: #e8f7ec;
-  --greensuccess: #18a941;
+  --green-success-10: #e8f7ec;
+  --green-success: #18a941;
   --red-10: #feecee;
+
+  --toastify-toast-shadow: 0px 4px 8px 0px rgba(from var(--black) r g b / 10%);
 }
 
+html,
 body {
   color: var(--dark-blue);
+  background-color: var(--background);
+  @include scroll-off;
 }
 
 button {
   all: unset;
   cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+.Toastify__toast--error {
+  color: var(--black);
+  background-color: rgba(from var(--red) r g b / 10%);
+}
+
+.Toastify__toast--success {
+  color: var(--black);
+  background-color: rgba(from var(--green-success) r g b / 10%);
+}
+
+.Toastify__progress-bar--wrp {
+  bottom: none;
+  top: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 }
