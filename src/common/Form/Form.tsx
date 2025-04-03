@@ -17,6 +17,7 @@ export const Form = <T extends FieldValues>({
   onSubmit,
   children,
   getValues,
+  subscribe,
   formState,
   resetField,
   unregister,
@@ -37,6 +38,7 @@ export const Form = <T extends FieldValues>({
       setValue={setValue}
       setError={setError}
       setFocus={setFocus}
+      subscribe={subscribe}
       getValues={getValues}
       formState={formState}
       resetField={resetField}

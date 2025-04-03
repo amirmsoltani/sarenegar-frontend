@@ -1,8 +1,9 @@
 import { useLayoutEffect, useRef } from "react";
-import { TSmallCalendar } from "./SmallCalendar.types";
-import { calendarList } from "./SmallCalendar.constants";
+import { TRowCalendar } from "./RowCalendar.types";
+import { calendarList } from "./RowCalendar.constants";
+import { FieldValues, useFormContext } from "react-hook-form";
 
-export const useSmallCalendar = ({ active }: Pick<TSmallCalendar, "active">) => {
+export const useRowCalendar = ({ active }: Pick<TRowCalendar, "active">) => {
   const container = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
@@ -17,4 +18,10 @@ export const useSmallCalendar = ({ active }: Pick<TSmallCalendar, "active">) => 
   }, [active]);
 
   return { container };
+};
+
+export const useFormRowCalendar = <T extends FieldValues>() => {
+  const { control } = useFormContext<T>();
+
+  return { control };
 };

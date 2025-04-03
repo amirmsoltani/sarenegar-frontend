@@ -1,4 +1,4 @@
-import { Profile } from "iconsax-react";
+import { Profile } from "@wandersonalwes/iconsax-react";
 import styles from "./Avatar.module.scss";
 
 type TAvatar = { cover?: string };

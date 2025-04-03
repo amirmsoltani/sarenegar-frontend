@@ -2,7 +2,7 @@ import type { FormHTMLAttributes } from "react";
 // react-hook-form
 import type { FieldValues, Path, PathValue, RegisterOptions, SubmitHandler, UseFormReturn, Validate } from "react-hook-form";
 
-type TMethods<T extends FieldValues> = UseFormReturn<T, any, undefined>;
+type TMethods<T extends FieldValues> = UseFormReturn<T, any, T>;
 type THtmlFormElement = Omit<FormHTMLAttributes<HTMLFormElement>, "onSubmit">;
 type TFormProps<T extends FieldValues> = { onSubmit?: SubmitHandler<T>; onError?: (errors: any) => void };
 

@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+  flex-direction: column;
+  @include centering;
+
+  .icon {
+    cursor: pointer;
+    background-color: var(--red);
+    @include centering;
+    @include radius-full;
+  }
+
+  .title {
+    color: var(--red);
+  }
+
+  &[data-size="md"] {
+    gap: 16px;
+    .icon {
+      width: 40px;
+      height: 40px;
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .title {
+      @include text-12-regular;
+    }
+  }
+}

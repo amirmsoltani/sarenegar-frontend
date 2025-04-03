@@ -31,6 +31,10 @@
     --spinner-color: var(--white);
   }
 
+  &[data-variant="red"] {
+    --spinner-color: var(--red);
+  }
+
   width: var(--spinner-size);
   height: var(--spinner-size);
   background:

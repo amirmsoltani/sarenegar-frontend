@@ -1,0 +1,97 @@
+.container {
+  gap: 12px;
+  display: flex;
+  flex-direction: column;
+
+  .input {
+    height: 8px;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: var(--stroke);
+    @include radius-4;
+
+    // ? progress
+    &::-webkit-slider-runnable-track {
+      height: 8px;
+      cursor: pointer;
+      background-color: var(--stroke);
+      @include radius-4;
+    }
+    &::-moz-range-track {
+      height: 8px;
+      cursor: pointer;
+      background-color: var(--stroke);
+      @include radius-4;
+    }
+    &::-ms-fill-upper {
+      height: 8px;
+      cursor: pointer;
+      background-color: var(--stroke);
+      @include radius-4;
+    }
+
+    // ? fill
+    &::-moz-range-progress {
+      height: 100%;
+      cursor: pointer;
+      background-color: var(--secondary);
+      @include radius-4;
+    }
+    &::-ms-fill-lower {
+      height: 100%;
+      cursor: pointer;
+      background-color: var(--secondary);
+      @include radius-4;
+    }
+
+    // ? thumb
+    &::-webkit-slider-thumb {
+      width: 20px;
+      border: none;
+      height: 20px;
+      outline: none;
+      cursor: pointer;
+      background-color: var(--secondary);
+      @include radius-100;
+    }
+
+    &::-moz-range-thumb {
+      width: 20px;
+      border: none;
+      height: 20px;
+      outline: none;
+      cursor: pointer;
+      background-color: var(--secondary);
+      @include radius-100;
+    }
+  }
+
+  .options {
+    @include flex-between-center;
+
+    .option {
+      @include transition;
+      @include text-14-semibold-150;
+
+      &:first-child {
+        transform: translateX(50%);
+        -webkit-transform: translateX(50%);
+        -moz-transform: translateX(50%);
+        -ms-transform: translateX(50%);
+        -o-transform: translateX(50%);
+      }
+
+      &:last-child {
+        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
+      }
+
+      &[data-active="true"] {
+        color: var(--primary);
+      }
+    }
+  }
+}

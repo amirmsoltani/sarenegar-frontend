@@ -1,13 +1,22 @@
 .button {
   all: unset;
+  flex: 1 1 0%;
   cursor: pointer;
   user-select: none;
   text-align: center;
   position: relative;
-  @include radius-8;
+
   @include centering;
   @include transition;
   @include text-16-semibold;
+
+  &[data-radius="md"] {
+    @include radius-8;
+  }
+
+  &[data-radius="full"] {
+    @include radius-100;
+  }
 
   &[data-disabled="true"],
   &[data-loading="true"] {
@@ -33,9 +42,17 @@
 }
 
 // ? sizes
+.sm {
+  min-width: 90px;
+  min-height: 40px;
+  max-height: 40px;
+  padding-inline: 16px;
+}
+
 .md {
-  height: 48px;
   min-width: 120px;
+  min-height: 48px;
+  max-height: 48px;
   padding-inline: 24px;
 }
 
@@ -50,5 +67,32 @@
 
   &:not([data-disabled="true"], [data-loading="true"]):hover {
     background-color: var(--primary);
+  }
+}
+
+.red {
+  color: var(--white);
+  background-color: var(--red);
+
+  &[data-disabled="true"] {
+    background-color: var(--red);
+  }
+
+  &:not([data-disabled="true"], [data-loading="true"]):hover {
+    background-color: var(--red);
+  }
+}
+
+.borderedRed {
+  color: var(--red);
+  background-color: transparent;
+  border: 0.5px solid var(--red);
+
+  &[data-disabled="true"] {
+    background-color: transparent;
+  }
+
+  &:not([data-disabled="true"], [data-loading="true"]):hover {
+    background-color: transparent;
   }
 }

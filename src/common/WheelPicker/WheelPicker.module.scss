@@ -1,0 +1,68 @@
+.picker {
+  flex: 1 1 0%;
+
+  > div:nth-of-type(2) {
+    z-index: -1;
+    height: 59px !important;
+    background-color: var(--orange-background);
+
+    & > * {
+      display: none;
+    }
+  }
+}
+
+.container {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+
+  .wrapper {
+    width: 100%;
+    @include flex-start-center;
+  }
+
+  .label {
+    height: 40px;
+    @include centering;
+    @include text-16-semibold;
+  }
+
+  .option {
+    z-index: 100;
+    position: relative;
+    @include transition;
+    @include text-16-semibold;
+
+    &[data-active="false"] {
+      opacity: 50%;
+    }
+
+    &[data-active="true"] {
+      color: var(--secondary);
+      @include text-24-bold;
+    }
+  }
+}
+
+.wheelPickerContainer {
+  flex: 1 1 0%;
+  @include flex-start-center;
+}
+
+.sideBox {
+  width: 56px;
+  height: 59px;
+  margin-top: 40px;
+  background-color: var(--orange-background);
+}
+
+.centerBox {
+  width: 27px;
+  height: 59px;
+  font-size: 58px;
+  margin-top: 40px;
+  color: var(--secondary);
+  background-color: var(--orange-background);
+  @include centering;
+}
