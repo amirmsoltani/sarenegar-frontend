@@ -25,11 +25,8 @@ jobs:
         uses: pnpm/action-setup@v3 # Use pnpm setup action
         with:
           version: 8 # Specify pnpm version (optional, defaults to latest)
-          run_install: false # We want to run install manually later
+          run_install: ture # We want to run install manually later
 
-      # Step 4: Install dependencies using pnpm
-      - name: Install Dependencies
-        run: pnpm install --frozen-lockfile # Use pnpm install with frozen lockfile (like npm ci)
 
       # Step 5: Build the React app using pnpm
       - name: Build React App
