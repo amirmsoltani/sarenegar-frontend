@@ -40,7 +40,7 @@ jobs:
       # Step 6: Deploy Build to the Dev server if on dev branch
       - name: Deploy to Dev Server
         if: github.ref == 'refs/heads/dev'
-        uses: appleboy/scp-action@v1.0.0 # Use specific version tag instead of master
+        uses: appleboy/scp-action@v0.1.7 # Use specific version tag instead of master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
@@ -52,7 +52,7 @@ jobs:
       # Step 7: Deploy Build to the Production server if on main branch
       - name: Deploy to Production Server
         if: github.ref == 'refs/heads/main'
-        uses: appleboy/scp-action@v1.0.0 # Use specific version tag instead of master
+        uses: appleboy/scp-action@v0.1.7 # Use specific version tag instead of master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
