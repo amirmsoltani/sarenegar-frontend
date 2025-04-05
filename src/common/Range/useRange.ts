@@ -7,7 +7,6 @@ export const useRange = <T extends FieldValues>({ options }: TUseRange<T>) => {
 
   const onChange = (e: ChangeEvent<HTMLInputElement>, fieldOnChange: Function) => {
     const option = options.find((option) => option.value === e.target.value);
-    console.log(e.target.value, options);
     option && fieldOnChange(option);
   };
 

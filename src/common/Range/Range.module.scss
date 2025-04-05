@@ -3,66 +3,101 @@
   display: flex;
   flex-direction: column;
 
+  .wrapper {
+    position: relative;
+
+    .wrapperInner {
+      top: 50%;
+      right: 0px;
+      height: 8px;
+      cursor: pointer;
+      position: absolute;
+      pointer-events: none;
+      transform: translateY(-50%);
+      background-color: var(--secondary);
+      @include radius-4;
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+    }
+  }
+
   .input {
-    height: 8px;
     appearance: none;
     -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    outline: none;
     background-color: var(--stroke);
     @include radius-4;
 
-    // ? progress
+    // ? track
+    /* Chrome & Safari: Track */
     &::-webkit-slider-runnable-track {
       height: 8px;
       cursor: pointer;
       background-color: var(--stroke);
       @include radius-4;
     }
+
+    /* Firefox: Track */
     &::-moz-range-track {
       height: 8px;
       cursor: pointer;
       background-color: var(--stroke);
       @include radius-4;
     }
-    &::-ms-fill-upper {
+
+    /* IE/Edge: Track */
+    &::-ms-track {
       height: 8px;
       cursor: pointer;
-      background-color: var(--stroke);
-      @include radius-4;
-    }
-
-    // ? fill
-    &::-moz-range-progress {
-      height: 100%;
-      cursor: pointer;
-      background-color: var(--secondary);
-      @include radius-4;
-    }
-    &::-ms-fill-lower {
-      height: 100%;
-      cursor: pointer;
-      background-color: var(--secondary);
-      @include radius-4;
+      color: transparent;
+      background: var(--stroke);
+      border-color: transparent;
     }
 
     // ? thumb
+    /* Chrome & Safari: Thumb */
     &::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
       width: 20px;
-      border: none;
       height: 20px;
+      border: none;
       outline: none;
       cursor: pointer;
-      background-color: var(--secondary);
-      @include radius-100;
+      margin-top: -6px;
+      border-radius: 50%;
+      background: var(--secondary);
     }
 
+    /* Firefox: Thumb */
     &::-moz-range-thumb {
+      appearance: none;
+      -webkit-appearance: none;
       width: 20px;
-      border: none;
       height: 20px;
+      border: none;
       outline: none;
       cursor: pointer;
-      background-color: var(--secondary);
-      @include radius-100;
+      border-radius: 50%;
+      background: var(--secondary);
+    }
+
+    /* IE/Edge: Thumb */
+    &::-ms-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      margin-top: -6px;
+      border-radius: 50%;
+      background: var(--secondary);
     }
   }
 
@@ -74,19 +109,19 @@
       @include text-14-semibold-150;
 
       &:first-child {
-        transform: translateX(50%);
-        -webkit-transform: translateX(50%);
-        -moz-transform: translateX(50%);
-        -ms-transform: translateX(50%);
-        -o-transform: translateX(50%);
+        transform: translateX(30%);
+        -webkit-transform: translateX(30%);
+        -moz-transform: translateX(30%);
+        -ms-transform: translateX(30%);
+        -o-transform: translateX(30%);
       }
 
       &:last-child {
-        transform: translateX(-50%);
-        -webkit-transform: translateX(-50%);
-        -moz-transform: translateX(-50%);
-        -ms-transform: translateX(-50%);
-        -o-transform: translateX(-50%);
+        transform: translateX(-30%);
+        -webkit-transform: translateX(-30%);
+        -moz-transform: translateX(-30%);
+        -ms-transform: translateX(-30%);
+        -o-transform: translateX(-30%);
       }
 
       &[data-active="true"] {
