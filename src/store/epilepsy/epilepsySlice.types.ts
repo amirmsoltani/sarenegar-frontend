@@ -3,7 +3,7 @@ import { EpilepsyDetail, PaginatedEpilepsyList } from "@/services/api";
 import { TFullTimePicker, TRangeOption, TTimePicker, TToggleOption } from "@/common/Form/FormUtils.types";
 
 export type TEpilepsySlice = {
-  epilepsyEventList: INormalState<PaginatedEpilepsyList>;
+  epilepsyEventList: INormalState<PaginatedEpilepsyList & { date: string }>;
 
   deleteEpilepsyEvent: INormalState<null>;
   addEpilepsyEvent: INormalState<EpilepsyDetail>;

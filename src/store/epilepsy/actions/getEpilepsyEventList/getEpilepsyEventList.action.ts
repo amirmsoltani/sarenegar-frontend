@@ -11,6 +11,6 @@ export const getEpilepsyEventListAction = StoreUtils.createAsyncThunk(
 
     const response = await apiEpilepsyEpilepsyRetrieve({ time_of_occurrence: _date });
 
-    return response.data;
+    return { ...response.data, date };
   },
 );

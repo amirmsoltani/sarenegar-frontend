@@ -15,6 +15,8 @@ export const appStore = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 });
 
+export type TAppStore = ReturnType<typeof reducers>;
+
 export type AppDispatch = typeof appStore.dispatch;
 export const useAppDispatch: () => AppDispatch = useDispatch;
 
