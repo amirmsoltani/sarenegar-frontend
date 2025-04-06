@@ -1,6 +1,9 @@
+.modal {
+  max-height: calc(100svh - 216px) !important;
+}
+
 .container {
   display: flex;
-  min-height: 60svh;
   flex-direction: column;
 
   .wrapper {

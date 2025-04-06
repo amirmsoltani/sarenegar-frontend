@@ -35,6 +35,7 @@ export const Dashboard = () => {
             <TodaysKnowledge />
           </Box>
         </div>
+        <span className={styles.fade}></span>
         <div className={styles.fourthSection}>
           <Navbar />
         </div>

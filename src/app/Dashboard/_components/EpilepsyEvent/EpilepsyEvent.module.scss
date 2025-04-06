@@ -14,6 +14,10 @@
   .link {
     margin-inline: auto;
     max-width: fit-content;
+
+    &[data-disabled="true"] {
+      pointer-events: none;
+    }
   }
 
   .cover {
