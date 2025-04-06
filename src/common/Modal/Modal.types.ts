@@ -6,6 +6,7 @@ export type TModal = {
   title?: string;
   children: ReactNode;
   fullWidth?: boolean;
+  wrapperClassName?: string;
   variant?: "FULL" | "SMALL";
   onClose: (context?: any) => void;
   _ref?: RefObject<TModalOpenStateActions | null>;
