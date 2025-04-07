@@ -1,6 +1,6 @@
-import { withPadStart } from "@/helper/helper";
 import { StoreUtils } from "@/store/Store.utils";
 import { DateService } from "@/services/DateService";
+import { toLabelValue, withPadStart } from "@/helper/helper";
 import { apiEpilepsyEpilepsyRetrieve2 } from "@/services/api";
 import { TEpilepsyEventForm } from "../../epilepsySlice.types";
 import { consciousnessTranslator, severityOptionTranslator, shakingTranslator } from "@/app/(epilepsy)/_common/epilepsyForm";
@@ -15,15 +15,23 @@ export const getEpilepsyEventInfo = StoreUtils.createAsyncThunk(
     const [hour, minute, second] = data.duration.split(":");
     const date = new Date();
 
+    const duration = { hour: toLabelValue(hour), minute: toLabelValue(minute), second: toLabelValue(second) };
+
+    const time_of_occurrence = {
+      date: DateService.replaceSlashWithDash(date.toLocaleDateString()),
+      time: { hour: toLabelValue(withPadStart(date.getHours())), minute: toLabelValue(withPadStart(date.getMinutes())) },
+    };
+
     const _data: TEpilepsyEventForm = {
-      duration: { hour, minute, second },
+      duration: { ...duration },
+      duration_placeholder: { ...duration },
+
+      time_of_occurrence: { ...time_of_occurrence },
+      time_of_occurrence_placeholder: { ...time_of_occurrence },
+
       severity: severityOptionTranslator(data.severity),
       tremor_and_shaking: shakingTranslator(data.tremor_and_shaking),
       state_of_consciousness: consciousnessTranslator(data.state_of_consciousness),
-      time_of_occurrence: {
-        date: DateService.replaceSlashWithDash(date.toLocaleDateString()),
-        time: { hour: withPadStart(date.getHours()), minute: withPadStart(date.getMinutes()) },
-      },
     };
 
     return _data;

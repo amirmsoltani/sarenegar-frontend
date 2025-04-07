@@ -10,13 +10,19 @@ export const addEpilepsyEventAction = StoreUtils.createAsyncThunk(
     const { duration, severity, state_of_consciousness, time_of_occurrence, tremor_and_shaking } = form;
 
     const [month, day, year] = time_of_occurrence.date.split("-");
-    const date = new Date(+year, +month - 1, +day, +time_of_occurrence.time.hour, +time_of_occurrence.time.minute).toISOString();
+    const date = new Date(
+      +year,
+      +month - 1,
+      +day,
+      +time_of_occurrence.time.hour.value,
+      +time_of_occurrence.time.minute.value,
+    ).toISOString();
 
     const data: Omit<EpilepsyCreate, "id"> = {
       time_of_occurrence: date,
       tremor_and_shaking: tremor_and_shaking.value,
       state_of_consciousness: state_of_consciousness.value,
-      duration: `${duration.hour}:${duration.minute}:${duration.hour}`,
+      duration: `${duration.hour.value}:${duration.minute.value}:${duration.second.value}`,
       severity: severity.value === "1" ? "Mild" : severity.value === "2" ? "Moderate" : "Severe",
     };
 

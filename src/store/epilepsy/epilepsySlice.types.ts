@@ -14,7 +14,9 @@ export type TEpilepsySlice = {
 export type TEpilepsyEventForm = {
   severity: TRangeOption;
   duration: TFullTimePicker;
+  duration_placeholder: TFullTimePicker;
   tremor_and_shaking: TToggleOption<boolean>;
   state_of_consciousness: TToggleOption<boolean>;
   time_of_occurrence: { date: string; time: TTimePicker };
+  time_of_occurrence_placeholder: { date: string; time: TTimePicker };
 };
