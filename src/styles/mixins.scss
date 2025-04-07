@@ -237,6 +237,32 @@
   @include text-12-regular;
 }
 
+@mixin form-footer {
+  @include radius-32;
+  @include shadow-top;
+
+  bottom: 0px;
+  height: 80px;
+  display: flex;
+  position: sticky;
+  padding-inline: 16px;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--white);
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top: 0.5px solid var(--stroke);
+}
+
+// ? shadow
+@mixin shadow-top {
+  box-shadow: 0px -4px 24px 0px rgba(from var(--black) r g b / 5%);
+}
+
+@mixin shadow-bottom {
+  box-shadow: 0px 4px 24px 0px rgba(from var(--black) r g b / 5%);
+}
+
 // ? radius
 @mixin radius-4 {
   border-radius: 4px;
@@ -349,29 +375,8 @@
   -webkit-animation: fade-out 200ms forwards 1;
 }
 
-@keyframes fade-in {
-  from {
-    opacity: 0%;
-    visibility: hidden;
-  }
-  to {
-    opacity: 100%;
-    visibility: visible;
-  }
-}
-
-@keyframes fade-out {
-  from {
-    opacity: 100%;
-    visibility: visible;
-  }
-  to {
-    opacity: 0%;
-    visibility: hidden;
-  }
-}
-
-@mixin box-effect {
+// ? effects
+@mixin box-effect1 {
   &::after {
     top: 10px;
     left: 20px;
@@ -404,5 +409,51 @@
     -moz-transform: translateX(-50%) translateY(-50%) rotate(30deg);
     -ms-transform: translateX(-50%) translateY(-50%) rotate(30deg);
     -o-transform: translateX(-50%) translateY(-50%) rotate(30deg);
+  }
+}
+
+@mixin box-effect2 {
+  &::after {
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    content: "";
+    height: 93px;
+    position: absolute;
+    border-radius: 40%;
+    filter: blur(30px);
+    transform: translateX(-50%) translateY(-40%);
+    background-color: rgba(from #d9d9d9 r g b / 10%);
+    -o-border-radius: 40%;
+    -ms-border-radius: 40%;
+    -moz-border-radius: 40%;
+    -webkit-border-radius: 40%;
+    -webkit-filter: blur(30px);
+    -o-transform: translateX(-50%) translateY(-40%);
+    -ms-transform: translateX(-50%) translateY(-40%);
+    -moz-transform: translateX(-50%) translateY(-40%);
+    -webkit-transform: translateX(-50%) translateY(-40%);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0%;
+    visibility: hidden;
+  }
+  to {
+    opacity: 100%;
+    visibility: visible;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 100%;
+    visibility: visible;
+  }
+  to {
+    opacity: 0%;
+    visibility: hidden;
   }
 }

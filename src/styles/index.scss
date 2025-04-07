@@ -38,6 +38,7 @@
   --green-success: #18a941;
   --red-10: #feecee;
 
+  --toastify-font-family: "Yekan Bakh FaNum", sans-serif;
   --toastify-toast-shadow: 0px 4px 8px 0px rgba(from var(--black) r g b / 10%);
 }
 
@@ -55,6 +56,10 @@ button {
 
 a {
   text-decoration: none;
+}
+
+.Toastify__toast {
+  @include text-14-bold;
 }
 
 .Toastify__toast--error {
