@@ -22,7 +22,7 @@ export const useAddEpilepsyEvent = () => {
     state,
     onSuccess: () => {
       dispatch(clearStateAction([{ reducerName: "epilepsy", stateName: "addEpilepsyEvent" }]));
-      navigate(routes.dashboard.modals.epilepsy.href());
+      navigate(routes.dashboard.href());
     },
   });
 

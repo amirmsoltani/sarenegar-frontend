@@ -14,6 +14,10 @@
 }
 
 :root {
+  // ? layout
+  --max-width: 480px;
+
+  // ? colors
   --black: #000000;
   --secondary: #df6a6a;
   --primary: #674188;
@@ -55,12 +59,12 @@ a {
 
 .Toastify__toast--error {
   color: var(--black);
-  background-color: rgba(from var(--red) r g b / 10%);
+  background-color: var(--red-10);
 }
 
 .Toastify__toast--success {
   color: var(--black);
-  background-color: rgba(from var(--green-success) r g b / 10%);
+  background-color: var(--green-success-10);
 }
 
 .Toastify__progress-bar--wrp {

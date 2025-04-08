@@ -22,16 +22,22 @@ const epilepsySlice = createSlice({
   initialState,
   reducers: {
     addEvent: (state, action: PayloadAction<EpilepsyDetail>) => {
-      state.epilepsyEventList.data!.results.unshift(action.payload);
-      state.epilepsyEventList.data!.count++;
+      if (state.epilepsyEventList.data) {
+        state.epilepsyEventList.data.results.unshift(action.payload);
+        state.epilepsyEventList.data.count++;
+      }
     },
     editEvent: (state, action: PayloadAction<{ id: number; data: EpilepsyDetail }>) => {
-      const index = state.epilepsyEventList.data!.results.findIndex((item) => item.id === action.payload.id);
-      if (index >= 0) state.epilepsyEventList.data!.results[index] = action.payload.data;
+      if (state.epilepsyEventList.data) {
+        const index = state.epilepsyEventList.data.results.findIndex((item) => item.id === action.payload.id);
+        if (index >= 0) state.epilepsyEventList.data.results[index] = action.payload.data;
+      }
     },
     deleteEvent: (state, action: PayloadAction<number>) => {
-      state.epilepsyEventList.data!.results = state.epilepsyEventList.data!.results.filter((item) => item.id !== action.payload);
-      state.epilepsyEventList.data!.count--;
+      if (state.epilepsyEventList.data) {
+        state.epilepsyEventList.data.results = state.epilepsyEventList.data!.results.filter((item) => item.id !== action.payload);
+        state.epilepsyEventList.data.count--;
+      }
     },
   },
   extraReducers: (builder) => {

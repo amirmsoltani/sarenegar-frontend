@@ -14,7 +14,7 @@ export const EpilepsyModal = () => {
   const { onClose, state, getData } = useEpilepsyModal();
 
   return (
-    <Modal title={`رخدادهای صرع ${DateService.getDate()}`} onClose={onClose}>
+    <Modal title={`رخدادهای صرع ${DateService.getDate()}`} onClose={onClose} wrapperClassName={styles.modal}>
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <StatusHandler status={state.status} onClick={getData}>

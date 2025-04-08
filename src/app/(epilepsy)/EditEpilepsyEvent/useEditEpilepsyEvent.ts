@@ -35,7 +35,7 @@ export const useEditEpilepsyEvent = () => {
     state: state.editState,
     onSuccess: () => {
       dispatch(clearStateAction([{ reducerName: "epilepsy", stateName: "editEpilepsyEvent" }]));
-      navigate(routes.dashboard.modals.epilepsy.href());
+      navigate(routes.dashboard.href());
     },
   });
 

@@ -1,5 +1,4 @@
 import styles from "./EmptyCalender.module.scss";
-// import AddEvent from "@/assets/image/add-event-icon.png";
 import { Link } from "react-router-dom";
 
 export const EmptyCalender = () => {

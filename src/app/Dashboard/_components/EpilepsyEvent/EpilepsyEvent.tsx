@@ -12,7 +12,11 @@ export const EpilepsyEvent = () => {
       <div className={styles.count}>
         {state.status === "loading" ? <Spinner /> : state.status === "success" ? `${state.data?.count} مورد` : ""}
       </div>
-      <Link to={routes.dashboard.modals.epilepsy.href()} className={styles.link}>
+      <Link
+        className={styles.link}
+        data-loading={state.status === "loading"}
+        to={state.data?.count ? routes.dashboard.modals.epilepsy.href() : routes.addEpilepsyEvent.href()}
+      >
         <img src="/event.png" className={styles.cover} />
       </Link>
     </section>
