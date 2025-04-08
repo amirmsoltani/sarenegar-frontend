@@ -47,7 +47,11 @@ jobs:
             exit 1
           fi
 
-      # Step 7: Deploy Build to the Dev server if on dev branch
+      # Step 7: Check SSH Connection
+      - name: Check SSH Connection
+        run: ssh -i ${{ secrets.SSH_KEY }} -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo SSH connection established"
+
+      # Step 8: Deploy Build to the Dev server if on dev branch
       - name: Deploy to Dev Server
         if: github.ref == 'refs/heads/dev'
         uses: appleboy/scp-action@v0.1.7
@@ -59,7 +63,7 @@ jobs:
           source: "dist/"
           target: "/var/www/dev.epical"
 
-      # Step 8: Deploy Build to the Production server if on main branch
+      # Step 9: Deploy Build to the Production server if on main branch
       - name: Deploy to Production Server
         if: github.ref == 'refs/heads/main'
         uses: appleboy/scp-action@v0.1.7
