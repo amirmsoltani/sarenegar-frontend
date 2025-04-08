@@ -12,7 +12,7 @@ jobs:
     steps:
       # Step 1: Check out the repository
       - name: Checkout Code
-        uses: actions/checkout@v4 # Updated to v4
+        uses: actions/checkout@v4
 
       # Step 2: Setup Node.js (adjust node-version as needed)
       - name: Setup Node.js
@@ -22,41 +22,51 @@ jobs:
 
       # Step 3: Setup pnpm
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3 # Use pnpm setup action
+        uses: pnpm/action-setup@v3
         with:
-          version: 8 # Specify pnpm version (optional, defaults to latest)
-          run_install: false # We want to run install manually later
+          version: 8
+          run_install: false
 
       # Step 4: Install dependencies using pnpm
       - name: Install Dependencies
-        run: pnpm install  # Use pnpm install with frozen lockfile (like npm ci)
+        run: pnpm install
 
       # Step 5: Build the React app using pnpm
       - name: Build React App
         env:
           VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
-        run: pnpm build # Use pnpm build
+        run: pnpm build
 
-      # Step 6: Deploy Build to the Dev server if on dev branch
+      # Step 6: Verify Build Directory
+      - name: Verify Build Directory
+        run: |
+          if [ -d "dist" ] && [ "$(ls -A dist)" ]; then
+            echo "Build directory exists and is not empty."
+          else
+            echo "Build directory is empty or does not exist."
+            exit 1
+          fi
+
+      # Step 7: Deploy Build to the Dev server if on dev branch
       - name: Deploy to Dev Server
         if: github.ref == 'refs/heads/dev'
-        uses: appleboy/scp-action@v0.1.7 # Use specific version tag instead of master
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: 22
-          source: "build/" # Assuming pnpm build still outputs to 'build/'
-          target: "/var/www/dev.epical" # Adjust to your target directory on the dev server
+          source: "dist/"
+          target: "/var/www/dev.epical"
 
-      # Step 7: Deploy Build to the Production server if on main branch
+      # Step 8: Deploy Build to the Production server if on main branch
       - name: Deploy to Production Server
         if: github.ref == 'refs/heads/main'
-        uses: appleboy/scp-action@v0.1.7 # Use specific version tag instead of master
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: 22
-          source: "build/" # Assuming pnpm build still outputs to 'build/'
-          target: "/var/www/epical" # Adjust to your target directory on the production server
+          source: "dist/"
+          target: "/var/www/epical"
