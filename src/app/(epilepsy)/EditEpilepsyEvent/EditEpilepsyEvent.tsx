@@ -8,9 +8,9 @@ import { ArrowRight } from "@wandersonalwes/iconsax-react";
 import { useEditEpilepsyEvent } from "./useEditEpilepsyEvent";
 import { StatusHandler } from "@/common/StatusHandler/StatusHandler";
 import { consciousnessOptions, severityOptions, shakingOptions } from "../_common/epilepsyForm";
-import { OccurrencePlaceholder } from "./_components/OccurrencePlaceholder/OccurrencePlaceholder";
-import { EpilepsyChartContainer } from "./_components/EpilepsyChartContainer/EpilepsyChartContainer";
-import { DurationTimePlaceholder } from "./_components/DurationTimePlaceholder/DurationTimePlaceholder";
+import { OccurrencePlaceholder } from "../_components/OccurrencePlaceholder/OccurrencePlaceholder";
+import { EpilepsyChartContainer } from "../_components/EpilepsyChartContainer/EpilepsyChartContainer";
+import { DurationTimePlaceholder } from "../_components/DurationTimePlaceholder/DurationTimePlaceholder";
 
 export const EditEpilepsyEvent = () => {
   const { id, methods, onSubmit, status, getData } = useEditEpilepsyEvent();
