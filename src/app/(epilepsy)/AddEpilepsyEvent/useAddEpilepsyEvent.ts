@@ -1,6 +1,6 @@
 import { routes } from "@/routes/routes";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { epilepsyEventFormDefaultValues } from "../_common/epilepsyForm";
 import { TEpilepsyEventForm } from "@/store/epilepsy/epilepsySlice.types";
@@ -9,9 +9,15 @@ import { useStatusHandler } from "@/common/useStatusHandler/useStatusHandler";
 import { addEpilepsyEventAction } from "@/store/epilepsy/actions/addEpilepsyEvent/addEpilepsyEvent.action";
 
 export const useAddEpilepsyEvent = () => {
+  const { date } = useParams();
   const navigate = useNavigate();
 
-  const methods = useForm({ defaultValues: epilepsyEventFormDefaultValues });
+  const methods = useForm({
+    defaultValues: {
+      ...epilepsyEventFormDefaultValues,
+      time_of_occurrence: { ...epilepsyEventFormDefaultValues.time_of_occurrence, date: date as string },
+    },
+  });
 
   const dispatch = useAppDispatch();
   const state = useAppSelector((store) => store.epilepsy.addEpilepsyEvent);

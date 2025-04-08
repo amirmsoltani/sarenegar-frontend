@@ -7,9 +7,9 @@ import { Form, FormButton } from "@/common/Form/Form";
 import { ArrowRight } from "@wandersonalwes/iconsax-react";
 import { useAddEpilepsyEvent } from "./useAddEpilepsyEvent";
 import { consciousnessOptions, severityOptions, shakingOptions } from "../_common/epilepsyForm";
-import { OccurrencePlaceholder } from "./_components/OccurrencePlaceholder/OccurrencePlaceholder";
-import { EpilepsyChartContainer } from "./_components/EpilepsyChartContainer/EpilepsyChartContainer";
-import { DurationTimePlaceholder } from "./_components/DurationTimePlaceholder/DurationTimePlaceholder";
+import { OccurrencePlaceholder } from "../_components/OccurrencePlaceholder/OccurrencePlaceholder";
+import { EpilepsyChartContainer } from "../_components/EpilepsyChartContainer/EpilepsyChartContainer";
+import { DurationTimePlaceholder } from "../_components/DurationTimePlaceholder/DurationTimePlaceholder";
 
 export const AddEpilepsyEvent = () => {
   const { methods, onSubmit } = useAddEpilepsyEvent();
@@ -17,7 +17,7 @@ export const AddEpilepsyEvent = () => {
   return (
     <main className={styles.container}>
       <header className={styles.header}>
-        <Link to={routes.dashboard.modals.epilepsy.href()} className={styles.iconWrapper}>
+        <Link to={routes.dashboard.href()} className={styles.iconWrapper}>
           <ArrowRight className={styles.icon} />
         </Link>
         <h1 className={styles.title}>ثبت رخداد صرع</h1>
