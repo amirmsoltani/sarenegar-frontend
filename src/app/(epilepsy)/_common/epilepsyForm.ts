@@ -1,5 +1,5 @@
 import { SeverityEnum } from "@/services/api";
-import { getNowDate, getNowTime } from "@/helper/helper";
+import { getNowDate, getNowTime, toLabelValue } from "@/helper/helper";
 import { TEpilepsyEventForm } from "@/store/epilepsy/epilepsySlice.types";
 import { TRangeOption, TToggleOption } from "@/common/Form/FormUtils.types";
 
@@ -31,6 +31,8 @@ export const epilepsyEventFormDefaultValues: TEpilepsyEventForm = {
   severity: severityOptions[1],
   tremor_and_shaking: shakingOptions[1],
   state_of_consciousness: consciousnessOptions[0],
-  duration: { hour: "00", minute: "00", second: "00" },
   time_of_occurrence: { date: getNowDate(), time: getNowTime() },
+  time_of_occurrence_placeholder: { date: getNowDate(), time: getNowTime() },
+  duration: { hour: toLabelValue("00"), minute: toLabelValue("00"), second: toLabelValue("00") },
+  duration_placeholder: { hour: toLabelValue("00"), minute: toLabelValue("00"), second: toLabelValue("00") },
 };
