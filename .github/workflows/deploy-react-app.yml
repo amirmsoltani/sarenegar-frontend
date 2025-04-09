@@ -32,13 +32,26 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      # Step 5: Build the React app using pnpm
+      # Step 5: Add commit hash to HTML tag
+      - name: Add commit hash to HTML
+        run: |
+          COMMIT_HASH=$(git rev-parse --short HEAD)
+          echo "Using commit hash: $COMMIT_HASH"
+          # Find the index.html file (adjust path if needed)
+          INDEX_FILE=$(find . -name "index.html" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
+          echo "Found index.html at: $INDEX_FILE"
+          # Add commit hash attribute to the <html> tag
+          sed -i "s/<html/<html data-commit-hash=\"$COMMIT_HASH\"/g" $INDEX_FILE
+          # Verify the change
+          grep -n "<html" $INDEX_FILE
+
+      # Step 6: Build the React app using pnpm
       - name: Build React App
         env:
           VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
         run: pnpm build
 
-      # Step 6: Verify Build Directory
+      # Step 7: Verify Build Directory
       - name: Verify Build Directory
         run: |
           if [ -d "dist" ] && [ "$(ls -A dist)" ]; then
@@ -48,11 +61,11 @@ jobs:
             exit 1
           fi
 
-      # Step 7: Check SSH Connection
+      # Step 8: Check SSH Connection
       - name: Check SSH Connection
         run: sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.SSH_HOST }} "echo SSH connection established"
 
-      # Step 8: Deploy Build to the Dev server if on dev branch
+      # Step 9: Deploy Build to the Dev server if on dev branch
       - name: Deploy to Dev Server
         if: github.ref == 'refs/heads/dev'
         uses: appleboy/scp-action@v0.1.7
@@ -64,7 +77,7 @@ jobs:
           source: "dist/"
           target: "/var/www/dev.epical"
 
-      # Step 9: Deploy Build to the Production server if on main branch
+      # Step 10: Deploy Build to the Production server if on main branch
       - name: Deploy to Production Server
         if: github.ref == 'refs/heads/main'
         uses: appleboy/scp-action@v0.1.7
