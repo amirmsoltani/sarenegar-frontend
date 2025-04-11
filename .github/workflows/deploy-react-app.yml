@@ -33,18 +33,6 @@ jobs:
         run: pnpm install
 
       # Step 5: Add commit hash to HTML tag
-      - name: Add commit hash to HTML
-        run: |
-          COMMIT_HASH=$(git rev-parse --short HEAD)
-          echo "Using commit hash: $COMMIT_HASH"
-          # Find the index.html file (adjust path if needed)
-          INDEX_FILE=$(find . -name "index.html" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
-          echo "Found index.html at: $INDEX_FILE"
-          # Add commit hash attribute to the <html> tag
-          sed -i "s/<html/<html data-commit-hash=\"$COMMIT_HASH\"/g" $INDEX_FILE
-          # Verify the change
-          grep -n "<html" $INDEX_FILE
-
       # Step 6: Build the React app using pnpm
       - name: Build React App
         env:
@@ -86,5 +74,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: 22
-          source: "dist/"
-          target: "/var/www/epical"
+          source: "dist/*"
+          target: "/var/www/epical/"
