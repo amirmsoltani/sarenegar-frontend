@@ -3,9 +3,9 @@ import { setToken } from "../../authSlice";
 import { StoreUtils } from "@/store/Store.utils.ts";
 import { CookieRepository } from "@/helper/cookie.ts";
 import { RouterService } from "@/services/RouterService";
-import { apiAuthenticationAuthVerifyOtpCreate, VerifyOTP } from "@/services/api.ts";
+import { apiAuthenticationAuthVerifyOtpCreate, VerifyOTPRequest } from "@/services/api.ts";
 
-export const verifyOtpAction = StoreUtils.createAsyncThunk("auth/verifyOtp", async (loginData: VerifyOTP, thunk) => {
+export const verifyOtpAction = StoreUtils.createAsyncThunk("auth/verifyOtp", async (loginData: VerifyOTPRequest, thunk) => {
   const response = await apiAuthenticationAuthVerifyOtpCreate(loginData);
 
   const token = response.data.token;

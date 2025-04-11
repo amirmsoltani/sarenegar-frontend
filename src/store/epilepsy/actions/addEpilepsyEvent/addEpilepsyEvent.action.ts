@@ -2,7 +2,7 @@ import { TAppStore } from "@/store/store";
 import { addEvent } from "../../epilepsySlice";
 import { StoreUtils } from "@/store/Store.utils";
 import { TEpilepsyEventForm } from "../../epilepsySlice.types";
-import { apiEpilepsyEpilepsyCreate, EpilepsyCreate } from "@/services/api";
+import { apiEpilepsyEpilepsyCreate, EpilepsyCreateRequest } from "@/services/api";
 
 export const addEpilepsyEventAction = StoreUtils.createAsyncThunk(
   "epilepsy/addEpilepsyEvent",
@@ -18,7 +18,7 @@ export const addEpilepsyEventAction = StoreUtils.createAsyncThunk(
       +time_of_occurrence.time.minute.value,
     ).toISOString();
 
-    const data: Omit<EpilepsyCreate, "id"> = {
+    const data: Omit<EpilepsyCreateRequest, "id"> = {
       time_of_occurrence: date,
       tremor_and_shaking: tremor_and_shaking.value,
       state_of_consciousness: state_of_consciousness.value,
