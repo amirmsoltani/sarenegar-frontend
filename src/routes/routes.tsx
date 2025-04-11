@@ -79,6 +79,98 @@ export const routes = {
     path: "medicine",
     activeIcon: PillActive,
     href: () => `${RouterService.setDate()}/medicine`,
+    tabs: {
+      current: {
+        path: "current",
+        href: () => `${RouterService.setDate()}/medicine/current`,
+      },
+      completed: {
+        path: "completed",
+        href: () => `${RouterService.setDate()}/medicine/completed`,
+      },
+    },
+  },
+  medicineInfo: {
+    path: "medicine-info/:id",
+    href: (id: TId) => `${RouterService.setDate()}/medicine-info/${id}`,
+    modals: {
+      delete: {
+        path: "delete",
+        href: () => `${RouterService.setDate()}/medicine-info/${RouterService.params.id}/delete`,
+      },
+      complete: {
+        path: "complete",
+        href: () => `${RouterService.setDate()}/medicine-info/${RouterService.params.id}/complete`,
+      },
+    },
+  },
+  addMedicine: {
+    path: "add-medicine",
+    href: () => `${RouterService.setDate()}/add-medicine`,
+    modals: {
+      startDate: {
+        path: "start-date",
+        href: () => `${RouterService.setDate()}/add-medicine/start-date`,
+      },
+      endDate: {
+        path: "end-date",
+        href: () => `${RouterService.setDate()}/add-medicine/end-date`,
+      },
+      dayCounts: {
+        path: "day-counts",
+        href: () => `${RouterService.setDate()}/add-medicine/day-counts`,
+      },
+      drugs: {
+        path: "drugs",
+        href: () => `${RouterService.setDate()}/add-medicine/drugs`,
+      },
+      dose: {
+        path: "dose",
+        href: () => `${RouterService.setDate()}/add-medicine/dose`,
+      },
+      usageType: {
+        path: "usage-type",
+        href: () => `${RouterService.setDate()}/add-medicine/usage-type`,
+      },
+      doseTime: {
+        path: "dose-time/:dose",
+        href: (id: TId) => `${RouterService.setDate()}/add-medicine/dose-time/${id}`,
+      },
+    },
+  },
+  editMedicine: {
+    path: "edit-medicine",
+    href: (id: TId) => `${RouterService.setDate()}/edit-medicine/${id}`,
+    modals: {
+      startDate: {
+        path: "start-date",
+        href: () => `${RouterService.setDate()}/edit-medicine/start-date`,
+      },
+      endDate: {
+        path: "end-date",
+        href: () => `${RouterService.setDate()}/edit-medicine/end-date`,
+      },
+      dayCounts: {
+        path: "day-counts",
+        href: () => `${RouterService.setDate()}/edit-medicine/day-counts`,
+      },
+      drugs: {
+        path: "drugs",
+        href: () => `${RouterService.setDate()}/edit-medicine/drugs`,
+      },
+      dose: {
+        path: "dose",
+        href: () => `${RouterService.setDate()}/edit-medicine/${RouterService.params.id}/dose`,
+      },
+      usageType: {
+        path: "usage-type",
+        href: () => `${RouterService.setDate()}/edit-medicine/${RouterService.params.id}/usage-type`,
+      },
+      doseTime: {
+        path: "dose-time",
+        href: (id: TId) => `${RouterService.setDate()}/edit-medicine/dose-time/${id}`,
+      },
+    },
   },
   calender: {
     path: "calender",
