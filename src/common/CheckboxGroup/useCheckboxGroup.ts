@@ -1,6 +1,6 @@
 import { FieldValues, useFormContext } from "react-hook-form";
 
-export const useInputController = <T extends FieldValues>() => {
+export const useCheckboxGroup = <T extends FieldValues>() => {
   const { control } = useFormContext<T>();
 
   return { control };

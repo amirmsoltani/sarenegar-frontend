@@ -1,10 +1,11 @@
 import Picker from "react-mobile-picker";
 import styles from "./WheelPicker.module.scss";
+import { useWheelPicker } from "./useWheelPicker";
 import { TWheelPicker } from "./WheelPicker.types";
-import { Controller, FieldValues, useFormContext } from "react-hook-form";
+import { Controller, FieldValues } from "react-hook-form";
 
-export const WheelPicker = <T extends FieldValues>({ options, name, label, StartContent, EndContent }: TWheelPicker<T>) => {
-  const { control } = useFormContext<T>();
+export const WheelPicker = <T extends FieldValues>({ name, label, options, onChange }: TWheelPicker<T>) => {
+  const { control, onChangeHandler } = useWheelPicker<T>({ onChange, options });
 
   return (
     <Controller
@@ -14,24 +15,27 @@ export const WheelPicker = <T extends FieldValues>({ options, name, label, Start
         <div className={styles.container}>
           <div className={styles.label}>{label}</div>
           <div className={styles.wrapper}>
-            {StartContent && <StartContent />}
             <Picker
               height={165}
               itemHeight={59}
               wheelMode="normal"
               className={styles.picker}
-              value={{ value: field.value }}
-              onChange={({ value }) => field.onChange(value)}
+              value={{ value: field.value?.value }}
+              onChange={({ value }) => onChangeHandler(value, field.onChange)}
             >
               <Picker.Column key={name} name="value">
                 {options.map((option) => (
-                  <Picker.Item key={option} value={option} className={styles.option} data-active={option === field.value}>
-                    {option}
+                  <Picker.Item
+                    key={option.value}
+                    value={option.value}
+                    className={styles.option}
+                    data-active={option.value === field.value?.value}
+                  >
+                    {option.label}
                   </Picker.Item>
                 ))}
               </Picker.Column>
             </Picker>
-            {EndContent && <EndContent />}
           </div>
         </div>
       )}

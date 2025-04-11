@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  .mainLabel {
+    @include label;
+  }
+
+  .wrapper {
+    @include flex-start-center;
+
+    .option {
+      flex: 1 1 0%;
+
+      .optionWrapper {
+        gap: 4px;
+        cursor: pointer;
+        @include flex-start-center;
+      }
+
+      .input {
+        display: none;
+      }
+
+      .circle {
+        width: 24px;
+        height: 24px;
+        background-color: var(--white);
+        border: 0.5px solid var(--stroke);
+        @include centering;
+        @include radius-full;
+
+        .circleInner {
+          width: 20px;
+          height: 20px;
+          background-color: var(--primary);
+          transform: scale(0%);
+          -webkit-transform: scale(0%);
+          -moz-transform: scale(0%);
+          -ms-transform: scale(0%);
+          -o-transform: scale(0%);
+          @include centering;
+          @include transition;
+          @include radius-full;
+
+          &[data-checked="true"] {
+            transform: scale(100%);
+            -webkit-transform: scale(100%);
+            -moz-transform: scale(100%);
+            -ms-transform: scale(100%);
+            -o-transform: scale(100%);
+          }
+        }
+      }
+
+      .label {
+        @include text-14-semibold;
+      }
+    }
+  }
+}

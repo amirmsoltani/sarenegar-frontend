@@ -9,6 +9,7 @@ type TExtraProps = {
   endContent?: ReactNode;
   startContent?: ReactNode;
   type?: "text" | "password";
+  variant?: "DEFAULT" | "DARK";
   endContentHandler?: () => void;
   startContentHandler?: () => void;
 };

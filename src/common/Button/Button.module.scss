@@ -96,3 +96,17 @@
     background-color: transparent;
   }
 }
+
+.borderedPurple {
+  color: var(--primary);
+  background-color: transparent;
+  border: 0.5px solid var(--primary);
+
+  &[data-disabled="true"] {
+    background-color: transparent;
+  }
+
+  &:not([data-disabled="true"], [data-loading="true"]):hover {
+    background-color: transparent;
+  }
+}

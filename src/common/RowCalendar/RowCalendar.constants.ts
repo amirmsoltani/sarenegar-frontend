@@ -10,17 +10,25 @@ const genList = () => {
 
   const _today = {
     date: today,
-    day: DateService.custom(today, { day: "numeric" }),
-    weekday: DateService.custom(today, { weekday: "short" }),
+    day: DateService.customTranslate(today, { day: "numeric" }),
+    weekday: DateService.customTranslate(today, { weekday: "short" }),
   };
 
   const before = new Array(14).fill("").map((_, index) => {
     const date = DateService.replaceSlashWithDash(new Date(now - (index + 1) * DAY_IN_MILLISECOND).toLocaleDateString());
-    return { date, day: DateService.custom(date, { day: "numeric" }), weekday: DateService.custom(date, { weekday: "short" }) };
+    return {
+      date,
+      day: DateService.customTranslate(date, { day: "numeric" }),
+      weekday: DateService.customTranslate(date, { weekday: "short" }),
+    };
   });
   const after = new Array(14).fill("").map((_, index) => {
     const date = DateService.replaceSlashWithDash(new Date(now + (index + 1) * DAY_IN_MILLISECOND).toLocaleDateString());
-    return { date, day: DateService.custom(date, { day: "numeric" }), weekday: DateService.custom(date, { weekday: "short" }) };
+    return {
+      date,
+      day: DateService.customTranslate(date, { day: "numeric" }),
+      weekday: DateService.customTranslate(date, { weekday: "short" }),
+    };
   });
 
   return [...before.reverse(), _today, ...after];

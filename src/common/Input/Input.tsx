@@ -21,6 +21,7 @@ export const InputUi = forwardRef(function InputUi(
     startContent,
     endContentHandler,
     startContentHandler,
+    variant = "DEFAULT",
     ...rest
   }: TInputUi,
   ref: LegacyRef<HTMLInputElement>,
@@ -28,7 +29,7 @@ export const InputUi = forwardRef(function InputUi(
   const id = useId();
 
   return (
-    <div className={styles.container} data-disabled={disabled} data-error={!!error}>
+    <div className={styles.container} data-disabled={disabled} data-error={!!error} data-variant={variant}>
       {label && (
         <label className={styles.label} htmlFor={id}>
           {label}

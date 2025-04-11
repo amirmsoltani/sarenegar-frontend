@@ -1,10 +1,22 @@
+import { UsageDaysEnum } from "@/services/api";
+
+// ? checkbox
+export type TCheckboxOption<T = string> = { label: string; value: T };
+
 // ? toggle
 export type TToggleOption<T = string> = { label: string; value: T };
 
 // ? range
 export type TRangeOption = { label: string; value: string | number };
 
-// ? time & data
-export type TTimePicker = { hour: string; minute: string };
+// ? wheel picker
+export type TWheelPickerOption<T = string> = { label: string; value: T };
 
-export type TFullTimePicker = { hour: string; minute: string; second: string };
+// ? time & data
+export type TDatePicker = { year: TWheelPickerOption; month: TWheelPickerOption; day: TWheelPickerOption };
+
+export type TTimePicker = { hour: TWheelPickerOption; minute: TWheelPickerOption };
+
+export type TFullTimePicker = { hour: TWheelPickerOption; minute: TWheelPickerOption; second: TWheelPickerOption };
+
+export type TDayPickerDay = { label: string; value: UsageDaysEnum };

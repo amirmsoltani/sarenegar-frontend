@@ -11,7 +11,7 @@ export const StatusHandler = ({ children, status, onClick, size, variant, classN
     </div>
   ) : status === "error" ? (
     <div className={classNames(styles.container, className)}>
-      <TryAgain onClick={onClick} />
+      <TryAgain onClick={() => onClick()} />
     </div>
   ) : (
     status === "success" && children

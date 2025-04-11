@@ -4,7 +4,16 @@
   flex-direction: column;
   @include flex-start-start;
 
-  --height: 48px;
+  &[data-variant="DEFAULT"] {
+    --height: 48px;
+    --background: var(--white);
+    --placeholder: var(--dark-blue);
+  }
+
+  &[data-variant="DARK"] {
+    --height: 40px;
+    --placeholder: var(--gray);
+  }
 
   .label {
     color: var(--gray);
@@ -22,7 +31,7 @@
     min-height: var(--height);
     max-height: var(--height);
     border: 1px solid var(--stroke);
-    background-color: var(--white);
+    background-color: var(--background);
     @include radius-8;
     @include transition;
     @include text-14-regular;
@@ -38,7 +47,7 @@
       background-color: transparent;
 
       &::placeholder {
-        color: var(--dark-blue);
+        color: var(--placeholder);
         @include text-14-regular;
       }
 
@@ -52,7 +61,7 @@
       @include centering;
     }
 
-    &:has(.content[data-place="start"]) {
+    &:has(.content[data-place="end"]) {
       padding-inline: 12px;
       .input {
         padding: 0px;

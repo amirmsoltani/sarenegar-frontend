@@ -26,4 +26,8 @@
     stroke-width: 10px;
     color: var(--gray);
   }
+
+  .error {
+    @include error;
+  }
 }

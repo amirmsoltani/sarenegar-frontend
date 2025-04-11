@@ -1,0 +1,11 @@
+.container {
+  display: inline-grid;
+  grid-template-columns: minmax(0px, 1fr);
+
+  .child {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

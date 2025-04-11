@@ -3,7 +3,12 @@ import { TButton } from "./Button.types";
 import styles from "./Button.module.scss";
 import { Spinner, VARIANTS as SpinnerVariants } from "@/common/Spinner/Spinner";
 
-export const VARIANTS = { purple: styles.purple, red: styles.red, borderedRed: styles.borderedRed } as const;
+export const VARIANTS = {
+  red: styles.red,
+  purple: styles.purple,
+  borderedRed: styles.borderedRed,
+  borderedPurple: styles.borderedPurple,
+} as const;
 
 export const SIZES = { md: "md", sm: "sm" } as const;
 
@@ -11,9 +16,10 @@ export const RADIUS = { md: "md", full: "full" } as const;
 
 type TSpinnerVariantTranslator = Record<keyof typeof VARIANTS, keyof typeof SpinnerVariants>;
 const spinnerVariantTranslator: TSpinnerVariantTranslator = {
-  purple: "white",
   red: "white",
+  purple: "white",
   borderedRed: "red",
+  borderedPurple: "black",
 } as const;
 
 export const Button = ({

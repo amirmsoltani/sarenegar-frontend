@@ -1,0 +1,25 @@
+.container {
+  gap: 4px;
+  @include flex-start-center;
+
+  .weekday {
+    height: 46px;
+    flex: 1 1 0%;
+    cursor: pointer;
+    user-select: none;
+    color: var(--gray);
+    background-color: var(--white);
+    border: 0.5px solid var(--stroke);
+    @include radius-8;
+    @include centering;
+    @include transition;
+    @include text-12-regular;
+
+    &[data-active="true"] {
+      color: var(--dark-blue);
+      background-color: var(--violet);
+      border-color: var(--purple-stroke);
+      @include text-12-bold;
+    }
+  }
+}

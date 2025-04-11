@@ -1,10 +1,11 @@
-import { FC } from "react";
 import { FieldValues } from "react-hook-form";
-import { TFormOptions } from "../Form/Form.types";
+import { TWheelPickerOption } from "../Form/FormUtils.types";
+import { TFormOptions, TOnChangeReturn } from "../Form/Form.types";
 
 export type TWheelPicker<T extends FieldValues> = {
   label?: string;
-  EndContent?: FC;
-  StartContent?: FC;
-  options: string[];
+  options: TWheelPickerOption[];
+  onChange?: (value: TWheelPickerOption) => TOnChangeReturn<TWheelPickerOption>;
 } & TFormOptions<T>;
+
+export type TUseWheelPicker<T extends FieldValues> = Pick<TWheelPicker<T>, "onChange" | "options">;

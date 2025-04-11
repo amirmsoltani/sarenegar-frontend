@@ -16,12 +16,12 @@
 
     width: 100%;
     flex: 1 1 0%;
-    height: 40px;
+    height: 44px;
     gap: var(--gap);
     position: relative;
     padding: var(--padding);
+    background-color: var(--white);
     border: 0.5px solid var(--stroke);
-    background-color: var(--text-back);
     @include radius-100;
     @include flex-start-center;
 
