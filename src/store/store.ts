@@ -1,12 +1,16 @@
 import authReducer from "./auth/authSlice";
+import drugReducer from "./drug/drugReducer";
 import epilepsyReducer from "./epilepsy/epilepsySlice";
+import medicineReducer from "./medicine/medicineSlice";
 import { runEffects, sagaMiddleware } from "./sagaMiddleware";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 const reducers = combineReducers({
   auth: authReducer,
+  drug: drugReducer,
   epilepsy: epilepsyReducer,
+  medicine: medicineReducer,
 });
 
 export const appStore = configureStore({
