@@ -25,11 +25,10 @@ const medicineSlice = createSlice({
   initialState,
   reducers: {
     addMedicine(state, action: PayloadAction<DrugDosageRetrieve>) {
-      console.log(action, state);
-      // if (state.currentMedicinesList.data) {
-      //   state.currentMedicinesList.data.results.unshift(action.payload);
-      //   state.currentMedicinesList.data.count++;
-      // }
+      if (state.currentMedicinesList.data) {
+        state.currentMedicinesList.data.results.unshift(action.payload);
+        state.currentMedicinesList.data.count++;
+      }
     },
     deleteMedicine: (state, action: PayloadAction<number>) => {
       if (state.currentMedicinesList.data) {
