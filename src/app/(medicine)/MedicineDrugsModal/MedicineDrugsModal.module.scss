@@ -1,0 +1,90 @@
+.container {
+  height: 100%;
+
+  .status {
+    flex: 1 1 0%;
+  }
+}
+
+.wrapper {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    margin-top: 24px;
+    @include text-14-bold;
+  }
+
+  .list {
+    margin-block: 16px;
+  }
+
+  .option {
+    gap: 8px;
+    width: 100%;
+    padding-block: 8px;
+    border-top: 0.5px solid var(--stroke);
+    @include flex-start-center;
+
+    &:last-child {
+      border-bottom: 0.5px solid var(--stroke);
+    }
+
+    .coverContainer {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      @include centering;
+    }
+
+    .cover {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+    }
+
+    .optionWrapper {
+      flex: 1 1 0%;
+      display: flex;
+      align-self: stretch;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .titleContainer {
+        gap: 16px;
+        @include flex-between-center;
+
+        .faTitle {
+          @include text-14-regular;
+        }
+
+        .enTitle {
+          @include text-12-regular;
+        }
+      }
+
+      .company {
+        color: var(--gray);
+        @include text-12-light;
+      }
+    }
+  }
+}
+
+.emptyList {
+  flex: 1 1 0%;
+  padding-top: 32px;
+  padding-bottom: 50px;
+  flex-direction: column;
+  @include centering;
+
+  .cover {
+    width: 195px;
+    height: 226px;
+  }
+
+  .title {
+    @include text-16-bold-150;
+  }
+}

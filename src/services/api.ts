@@ -5,7 +5,7 @@
  * Your project description
  * OpenAPI spec version: 0.1.0
  */
-import { api } from './api.instance';
+import { api } from "./api.instance";
 export interface Drug {
   readonly id?: number;
   /** @maxLength 256 */
@@ -65,6 +65,8 @@ export interface DrugDosageRetrieve {
    */
   end_by_day?: number | null;
   is_daily?: boolean;
+  total_doses: number;
+  taken_doses: number;
   /** Days of the week when the drug should be taken (e.g., MON, TUE). */
   usage_days?: UsageDaysEnum[];
   /** Indicates if the dosage is currently active based on start and end dates */
@@ -182,17 +184,15 @@ export interface RequestOTPRequest {
 
 /**
  * * `Mild` - Mild
-* `Moderate` - Moderate
-* `Severe` - Severe
+ * `Moderate` - Moderate
+ * `Severe` - Severe
  */
-export type SeverityEnum = typeof SeverityEnum[keyof typeof SeverityEnum];
+export type SeverityEnum = (typeof SeverityEnum)[keyof typeof SeverityEnum];
 
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const SeverityEnum = {
-  Mild: 'Mild',
-  Moderate: 'Moderate',
-  Severe: 'Severe',
+  Mild: "Mild",
+  Moderate: "Moderate",
+  Severe: "Severe",
 } as const;
 
 export interface Token {
@@ -202,40 +202,36 @@ export interface Token {
 
 /**
  * * `BEFORE_MEAL` - قبل از غذا
-* `AFTER_MEAL` - بعد از غذا
-* `ANYTIME` - هر زمان
+ * `AFTER_MEAL` - بعد از غذا
+ * `ANYTIME` - هر زمان
  */
-export type TypeOfUsageEnum = typeof TypeOfUsageEnum[keyof typeof TypeOfUsageEnum];
+export type TypeOfUsageEnum = (typeof TypeOfUsageEnum)[keyof typeof TypeOfUsageEnum];
 
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const TypeOfUsageEnum = {
-  BEFORE_MEAL: 'BEFORE_MEAL',
-  AFTER_MEAL: 'AFTER_MEAL',
-  ANYTIME: 'ANYTIME',
+  BEFORE_MEAL: "BEFORE_MEAL",
+  AFTER_MEAL: "AFTER_MEAL",
+  ANYTIME: "ANYTIME",
 } as const;
 
 /**
  * * `SAT` - شنبه
-* `SUN` - یکشنبه
-* `MON` - دوشنبه
-* `TUE` - سه‌شنبه
-* `WED` - چهارشنبه
-* `THU` - پنج‌شنبه
-* `FRI` - جمعه
+ * `SUN` - یکشنبه
+ * `MON` - دوشنبه
+ * `TUE` - سه‌شنبه
+ * `WED` - چهارشنبه
+ * `THU` - پنج‌شنبه
+ * `FRI` - جمعه
  */
-export type UsageDaysEnum = typeof UsageDaysEnum[keyof typeof UsageDaysEnum];
+export type UsageDaysEnum = (typeof UsageDaysEnum)[keyof typeof UsageDaysEnum];
 
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const UsageDaysEnum = {
-  SAT: 'SAT',
-  SUN: 'SUN',
-  MON: 'MON',
-  TUE: 'TUE',
-  WED: 'WED',
-  THU: 'THU',
-  FRI: 'FRI',
+  SAT: "SAT",
+  SUN: "SUN",
+  MON: "MON",
+  TUE: "TUE",
+  WED: "WED",
+  THU: "THU",
+  FRI: "FRI",
 } as const;
 
 export interface User {
@@ -262,307 +258,289 @@ export interface VerifyOTPRequest {
 }
 
 export type ApiDrugDosageDosemanagerDrugDosageRetrieveParams = {
-/**
- * Filter drug dosages by active status
- */
-is_active?: boolean;
-/**
- * A page number within the paginated result set.
- */
-page?: number;
-/**
- * Number of results to return per page.
- */
-page_size?: number;
-/**
- * Search drug dosages by drug name
- */
-search?: string;
+  /**
+   * Filter drug dosages by active status
+   */
+  is_active?: boolean;
+  /**
+   * A page number within the paginated result set.
+   */
+  page?: number;
+  /**
+   * Number of results to return per page.
+   */
+  page_size?: number;
+  /**
+   * Search drug dosages by drug name
+   */
+  search?: string;
 };
 
 /**
  * Unspecified response body
  */
-export type ApiDrugDosageDosemanagerDrugDosageCreate400 = {[key: string]: unknown};
+export type ApiDrugDosageDosemanagerDrugDosageCreate400 = { [key: string]: unknown };
 
 /**
  * Unspecified response body
  */
-export type ApiDrugDosageDosemanagerDrugDosageRetrieve2404 = {[key: string]: unknown};
+export type ApiDrugDosageDosemanagerDrugDosageRetrieve2404 = { [key: string]: unknown };
 
 /**
  * Unspecified response body
  */
-export type ApiDrugDosageDosemanagerDrugDosageUpdate400 = {[key: string]: unknown};
+export type ApiDrugDosageDosemanagerDrugDosageUpdate400 = { [key: string]: unknown };
 
 /**
  * Unspecified response body
  */
-export type ApiDrugDosageDosemanagerDrugDosageUpdate404 = {[key: string]: unknown};
+export type ApiDrugDosageDosemanagerDrugDosageUpdate404 = { [key: string]: unknown };
 
 /**
  * Unspecified response body
  */
-export type ApiDrugDosageDosemanagerDrugDosageDestroy404 = {[key: string]: unknown};
+export type ApiDrugDosageDosemanagerDrugDosageDestroy404 = { [key: string]: unknown };
 
 export type ApiDrugsDosemanagerDrugsRetrieveParams = {
-/**
- * A page number within the paginated result set.
- */
-page?: number;
-/**
- * Number of results to return per page.
- */
-page_size?: number;
-/**
- * Search drugs by English or Persian name
- */
-search?: string;
+  /**
+   * A page number within the paginated result set.
+   */
+  page?: number;
+  /**
+   * Number of results to return per page.
+   */
+  page_size?: number;
+  /**
+   * Search drugs by English or Persian name
+   */
+  search?: string;
 };
 
 export type ApiEpilepsyEpilepsyRetrieveParams = {
-/**
- * Filter events on a specific day (format: YYYY/MM/DD)
- */
-time_of_occurrence?: string;
-/**
- * Filter events after this date (format: YYYY/MM/DD)
- */
-time_of_occurrence_after?: string;
-/**
- * Filter events before this date (format: YYYY/MM/DD)
- */
-time_of_occurrence_before?: string;
+  /**
+   * Filter events on a specific day (format: YYYY/MM/DD)
+   */
+  time_of_occurrence?: string;
+  /**
+   * Filter events after this date (format: YYYY/MM/DD)
+   */
+  time_of_occurrence_after?: string;
+  /**
+   * Filter events before this date (format: YYYY/MM/DD)
+   */
+  time_of_occurrence_before?: string;
 };
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
-
-  /**
+/**
  * Logs out the current authenticated user
  */
-export const apiAuthenticationAuthLogoutCreate = (
-    
- options?: SecondParameter<typeof api>,) => {
-      return api<void>(
-      {url: `/auth/logout/`, method: 'POST'
-    },
-      options);
-    }
-  
+export const apiAuthenticationAuthLogoutCreate = (options?: SecondParameter<typeof api>) => {
+  return api<void>({ url: `/auth/logout/`, method: "POST" }, options);
+};
+
 /**
  * Retrieves the current authenticated user's information including ID and phone number
  */
-export const apiUserAuthMeRetrieve = (
-    
- options?: SecondParameter<typeof api>,) => {
-      return api<User>(
-      {url: `/auth/me/`, method: 'GET'
-    },
-      options);
-    }
-  
+export const apiUserAuthMeRetrieve = (options?: SecondParameter<typeof api>) => {
+  return api<User>({ url: `/auth/me/`, method: "GET" }, options);
+};
+
 export const apiAuthenticationAuthRequestotpCreate = (
-    requestOTPRequest: RequestOTPRequest,
- options?: SecondParameter<typeof api>,) => {
-      return api<Message>(
-      {url: `/auth/requestotp/`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: requestOTPRequest
-    },
-      options);
-    }
-  
+  requestOTPRequest: RequestOTPRequest,
+  options?: SecondParameter<typeof api>,
+) => {
+  return api<Message>(
+    { url: `/auth/requestotp/`, method: "POST", headers: { "Content-Type": "application/json" }, data: requestOTPRequest },
+    options,
+  );
+};
+
 export const apiAuthenticationAuthVerifyOtpCreate = (
-    verifyOTPRequest: VerifyOTPRequest,
- options?: SecondParameter<typeof api>,) => {
-      return api<Token>(
-      {url: `/auth/verify-otp/`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: verifyOTPRequest
-    },
-      options);
-    }
-  
+  verifyOTPRequest: VerifyOTPRequest,
+  options?: SecondParameter<typeof api>,
+) => {
+  return api<Token>(
+    { url: `/auth/verify-otp/`, method: "POST", headers: { "Content-Type": "application/json" }, data: verifyOTPRequest },
+    options,
+  );
+};
+
 /**
  * This endpoint retrieves all drug dosages associated with the authenticated user with pagination support. You can filter by active status using the is_active parameter.
  * @summary Retrieve all drug dosages
  */
 export const apiDrugDosageDosemanagerDrugDosageRetrieve = (
-    params?: ApiDrugDosageDosemanagerDrugDosageRetrieveParams,
- options?: SecondParameter<typeof api>,) => {
-      return api<PaginatedDrugDosageRetrieve>(
-      {url: `/dosemanager/drug-dosage/`, method: 'GET',
-        params
-    },
-      options);
-    }
-  
+  params?: ApiDrugDosageDosemanagerDrugDosageRetrieveParams,
+  options?: SecondParameter<typeof api>,
+) => {
+  return api<PaginatedDrugDosageRetrieve>({ url: `/dosemanager/drug-dosage/`, method: "GET", params }, options);
+};
+
 /**
  * This endpoint allows authenticated users to create a new drug dosage record. The request body must include all required fields for the DrugDosage model.
  * @summary Create a new drug dosage
  */
 export const apiDrugDosageDosemanagerDrugDosageCreate = (
-    drugDosageCreateUpdateRequest: DrugDosageCreateUpdateRequest,
- options?: SecondParameter<typeof api>,) => {
-      return api<DrugDosageRetrieve>(
-      {url: `/dosemanager/drug-dosage/`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: drugDosageCreateUpdateRequest
+  drugDosageCreateUpdateRequest: DrugDosageCreateUpdateRequest,
+  options?: SecondParameter<typeof api>,
+) => {
+  return api<DrugDosageRetrieve>(
+    {
+      url: `/dosemanager/drug-dosage/`,
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      data: drugDosageCreateUpdateRequest,
     },
-      options);
-    }
-  
+    options,
+  );
+};
+
 /**
  * This endpoint retrieves a specific drug dosage by ID.
  * @summary Retrieve a specific drug dosage
  */
-export const apiDrugDosageDosemanagerDrugDosageRetrieve2 = (
-    id: number,
- options?: SecondParameter<typeof api>,) => {
-      return api<DrugDosageRetrieve>(
-      {url: `/dosemanager/drug-dosage/${id}/`, method: 'GET'
-    },
-      options);
-    }
-  
+export const apiDrugDosageDosemanagerDrugDosageRetrieve2 = (id: number, options?: SecondParameter<typeof api>) => {
+  return api<DrugDosageRetrieve>({ url: `/dosemanager/drug-dosage/${id}/`, method: "GET" }, options);
+};
+
 /**
  * This endpoint allows authenticated users to update an existing drug dosage record. The record must belong to the authenticated user.
  * @summary Update a drug dosage
  */
 export const apiDrugDosageDosemanagerDrugDosageUpdate = (
-    id: number,
-    drugDosageCreateUpdateRequest: DrugDosageCreateUpdateRequest,
- options?: SecondParameter<typeof api>,) => {
-      return api<DrugDosageRetrieve>(
-      {url: `/dosemanager/drug-dosage/${id}/`, method: 'PUT',
-      headers: {'Content-Type': 'application/json', },
-      data: drugDosageCreateUpdateRequest
+  id: number,
+  drugDosageCreateUpdateRequest: DrugDosageCreateUpdateRequest,
+  options?: SecondParameter<typeof api>,
+) => {
+  return api<DrugDosageRetrieve>(
+    {
+      url: `/dosemanager/drug-dosage/${id}/`,
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      data: drugDosageCreateUpdateRequest,
     },
-      options);
-    }
-  
+    options,
+  );
+};
+
 /**
  * This endpoint allows authenticated users to delete an existing drug dosage record. The record must belong to the authenticated user.
  * @summary Delete a drug dosage
  */
-export const apiDrugDosageDosemanagerDrugDosageDestroy = (
-    id: number,
- options?: SecondParameter<typeof api>,) => {
-      return api<void>(
-      {url: `/dosemanager/drug-dosage/${id}/`, method: 'DELETE'
-    },
-      options);
-    }
-  
+export const apiDrugDosageDosemanagerDrugDosageDestroy = (id: number, options?: SecondParameter<typeof api>) => {
+  return api<void>({ url: `/dosemanager/drug-dosage/${id}/`, method: "DELETE" }, options);
+};
+
 /**
  * This endpoint retrieves all drugs with pagination support and search functionality.
  * @summary Retrieve all drugs
  */
 export const apiDrugsDosemanagerDrugsRetrieve = (
-    params?: ApiDrugsDosemanagerDrugsRetrieveParams,
- options?: SecondParameter<typeof api>,) => {
-      return api<PaginatedDrug>(
-      {url: `/dosemanager/drugs/`, method: 'GET',
-        params
-    },
-      options);
-    }
-  
+  params?: ApiDrugsDosemanagerDrugsRetrieveParams,
+  options?: SecondParameter<typeof api>,
+) => {
+  return api<PaginatedDrug>({ url: `/dosemanager/drugs/`, method: "GET", params }, options);
+};
+
 /**
  * Get all epilepsy events for the authenticated user
  */
 export const apiEpilepsyEpilepsyRetrieve = (
-    params?: ApiEpilepsyEpilepsyRetrieveParams,
- options?: SecondParameter<typeof api>,) => {
-      return api<PaginatedEpilepsyList>(
-      {url: `/epilepsy/`, method: 'GET',
-        params
-    },
-      options);
-    }
-  
+  params?: ApiEpilepsyEpilepsyRetrieveParams,
+  options?: SecondParameter<typeof api>,
+) => {
+  return api<PaginatedEpilepsyList>({ url: `/epilepsy/`, method: "GET", params }, options);
+};
+
 /**
  * Create a new epilepsy event for the authenticated user
  */
 export const apiEpilepsyEpilepsyCreate = (
-    epilepsyCreateRequest: EpilepsyCreateRequest,
- options?: SecondParameter<typeof api>,) => {
-      return api<EpilepsyDetail>(
-      {url: `/epilepsy/`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: epilepsyCreateRequest
-    },
-      options);
-    }
-  
+  epilepsyCreateRequest: EpilepsyCreateRequest,
+  options?: SecondParameter<typeof api>,
+) => {
+  return api<EpilepsyDetail>(
+    { url: `/epilepsy/`, method: "POST", headers: { "Content-Type": "application/json" }, data: epilepsyCreateRequest },
+    options,
+  );
+};
+
 /**
  * Get details of a specific epilepsy event for the authenticated user
  */
-export const apiEpilepsyEpilepsyRetrieve2 = (
-    id: number,
- options?: SecondParameter<typeof api>,) => {
-      return api<EpilepsyDetail>(
-      {url: `/epilepsy/${id}/`, method: 'GET'
-    },
-      options);
-    }
-  
+export const apiEpilepsyEpilepsyRetrieve2 = (id: number, options?: SecondParameter<typeof api>) => {
+  return api<EpilepsyDetail>({ url: `/epilepsy/${id}/`, method: "GET" }, options);
+};
+
 /**
  * Update an epilepsy event for the authenticated user
  */
 export const apiEpilepsyEpilepsyUpdate = (
-    id: number,
-    epilepsyCreateRequest: EpilepsyCreateRequest,
- options?: SecondParameter<typeof api>,) => {
-      return api<EpilepsyDetail>(
-      {url: `/epilepsy/${id}/`, method: 'PUT',
-      headers: {'Content-Type': 'application/json', },
-      data: epilepsyCreateRequest
-    },
-      options);
-    }
-  
+  id: number,
+  epilepsyCreateRequest: EpilepsyCreateRequest,
+  options?: SecondParameter<typeof api>,
+) => {
+  return api<EpilepsyDetail>(
+    { url: `/epilepsy/${id}/`, method: "PUT", headers: { "Content-Type": "application/json" }, data: epilepsyCreateRequest },
+    options,
+  );
+};
+
 /**
  * Delete an epilepsy event for the authenticated user
  */
-export const apiEpilepsyEpilepsyDestroy = (
-    id: number,
- options?: SecondParameter<typeof api>,) => {
-      return api<void>(
-      {url: `/epilepsy/${id}/`, method: 'DELETE'
-    },
-      options);
-    }
-  
+export const apiEpilepsyEpilepsyDestroy = (id: number, options?: SecondParameter<typeof api>) => {
+  return api<void>({ url: `/epilepsy/${id}/`, method: "DELETE" }, options);
+};
+
 /**
  * Register a new push notification token
  * @summary Register Push Notification
  */
 export const apiNotificationNotificationCreate = (
-    registerPushNotificationRequest: RegisterPushNotificationRequest,
- options?: SecondParameter<typeof api>,) => {
-      return api<RegisterPushNotification>(
-      {url: `/notification/`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: registerPushNotificationRequest
+  registerPushNotificationRequest: RegisterPushNotificationRequest,
+  options?: SecondParameter<typeof api>,
+) => {
+  return api<RegisterPushNotification>(
+    {
+      url: `/notification/`,
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      data: registerPushNotificationRequest,
     },
-      options);
-    }
-  
-export type ApiAuthenticationAuthLogoutCreateResult = NonNullable<Awaited<ReturnType<typeof apiAuthenticationAuthLogoutCreate>>>
-export type ApiUserAuthMeRetrieveResult = NonNullable<Awaited<ReturnType<typeof apiUserAuthMeRetrieve>>>
-export type ApiAuthenticationAuthRequestotpCreateResult = NonNullable<Awaited<ReturnType<typeof apiAuthenticationAuthRequestotpCreate>>>
-export type ApiAuthenticationAuthVerifyOtpCreateResult = NonNullable<Awaited<ReturnType<typeof apiAuthenticationAuthVerifyOtpCreate>>>
-export type ApiDrugDosageDosemanagerDrugDosageRetrieveResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosageRetrieve>>>
-export type ApiDrugDosageDosemanagerDrugDosageCreateResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosageCreate>>>
-export type ApiDrugDosageDosemanagerDrugDosageRetrieve2Result = NonNullable<Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosageRetrieve2>>>
-export type ApiDrugDosageDosemanagerDrugDosageUpdateResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosageUpdate>>>
-export type ApiDrugDosageDosemanagerDrugDosageDestroyResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosageDestroy>>>
-export type ApiDrugsDosemanagerDrugsRetrieveResult = NonNullable<Awaited<ReturnType<typeof apiDrugsDosemanagerDrugsRetrieve>>>
-export type ApiEpilepsyEpilepsyRetrieveResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyRetrieve>>>
-export type ApiEpilepsyEpilepsyCreateResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyCreate>>>
-export type ApiEpilepsyEpilepsyRetrieve2Result = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyRetrieve2>>>
-export type ApiEpilepsyEpilepsyUpdateResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyUpdate>>>
-export type ApiEpilepsyEpilepsyDestroyResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyDestroy>>>
-export type ApiNotificationNotificationCreateResult = NonNullable<Awaited<ReturnType<typeof apiNotificationNotificationCreate>>>
+    options,
+  );
+};
+
+export type ApiAuthenticationAuthLogoutCreateResult = NonNullable<Awaited<ReturnType<typeof apiAuthenticationAuthLogoutCreate>>>;
+export type ApiUserAuthMeRetrieveResult = NonNullable<Awaited<ReturnType<typeof apiUserAuthMeRetrieve>>>;
+export type ApiAuthenticationAuthRequestotpCreateResult = NonNullable<
+  Awaited<ReturnType<typeof apiAuthenticationAuthRequestotpCreate>>
+>;
+export type ApiAuthenticationAuthVerifyOtpCreateResult = NonNullable<
+  Awaited<ReturnType<typeof apiAuthenticationAuthVerifyOtpCreate>>
+>;
+export type ApiDrugDosageDosemanagerDrugDosageRetrieveResult = NonNullable<
+  Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosageRetrieve>>
+>;
+export type ApiDrugDosageDosemanagerDrugDosageCreateResult = NonNullable<
+  Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosageCreate>>
+>;
+export type ApiDrugDosageDosemanagerDrugDosageRetrieve2Result = NonNullable<
+  Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosageRetrieve2>>
+>;
+export type ApiDrugDosageDosemanagerDrugDosageUpdateResult = NonNullable<
+  Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosageUpdate>>
+>;
+export type ApiDrugDosageDosemanagerDrugDosageDestroyResult = NonNullable<
+  Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosageDestroy>>
+>;
+export type ApiDrugsDosemanagerDrugsRetrieveResult = NonNullable<Awaited<ReturnType<typeof apiDrugsDosemanagerDrugsRetrieve>>>;
+export type ApiEpilepsyEpilepsyRetrieveResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyRetrieve>>>;
+export type ApiEpilepsyEpilepsyCreateResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyCreate>>>;
+export type ApiEpilepsyEpilepsyRetrieve2Result = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyRetrieve2>>>;
+export type ApiEpilepsyEpilepsyUpdateResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyUpdate>>>;
+export type ApiEpilepsyEpilepsyDestroyResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyDestroy>>>;
+export type ApiNotificationNotificationCreateResult = NonNullable<Awaited<ReturnType<typeof apiNotificationNotificationCreate>>>;

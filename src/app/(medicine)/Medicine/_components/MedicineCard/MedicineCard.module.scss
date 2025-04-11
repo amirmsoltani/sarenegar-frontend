@@ -1,0 +1,99 @@
+.container {
+  gap: 24px;
+  padding: 12px;
+  display: flex;
+  position: relative;
+  color: var(--white);
+  padding-bottom: 16px;
+  flex-direction: column;
+  background-color: var(--green);
+  @include radius-16;
+  @include box-effect1;
+
+  .header {
+    gap: 16px;
+    @include flex-between-center;
+
+    .headerWrapper {
+      gap: 12px;
+      @include flex-start-center;
+
+      .coverContainer {
+        width: 78px;
+        height: 78px;
+        background-color: var(--white);
+        @include radius-6;
+        @include centering;
+
+        .cover {
+          width: 56px;
+          height: 56px;
+          object-fit: cover;
+        }
+      }
+
+      .textsContainer {
+        display: flex;
+        align-self: stretch;
+        flex-direction: column;
+
+        .faTitle {
+          @include text-16-semibold;
+        }
+
+        .enTitle {
+          margin-top: 4px;
+          @include text-14-semibold;
+        }
+
+        .detail {
+          margin-top: auto;
+          @include text-14-semibold;
+        }
+      }
+    }
+
+    .iconWrapper {
+      align-self: stretch;
+
+      .icon {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+
+  .body {
+    gap: 12px;
+    display: flex;
+    flex-direction: column;
+
+    .detail {
+      @include flex-between-center;
+
+      .count {
+        @include text-12-semibold;
+      }
+
+      .times {
+        @include text-12-regular;
+      }
+    }
+
+    .timeline {
+      height: 8px;
+      position: relative;
+      background-color: var(--white);
+      @include radius-16;
+
+      .inner {
+        top: 0px;
+        right: 0px;
+        height: 100%;
+        position: absolute;
+        background-color: var(--dark-blue);
+        @include radius-16;
+      }
+    }
+  }
+}

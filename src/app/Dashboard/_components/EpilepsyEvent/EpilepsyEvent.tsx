@@ -17,7 +17,7 @@ export const EpilepsyEvent = () => {
         data-loading={state.status === "loading"}
         to={state.data?.count ? routes.dashboard.modals.epilepsy.href() : routes.addEpilepsyEvent.href()}
       >
-        <img src="/event.png" className={styles.cover} />
+        <img src="/add-event.png" className={styles.cover} />
       </Link>
     </section>
   );

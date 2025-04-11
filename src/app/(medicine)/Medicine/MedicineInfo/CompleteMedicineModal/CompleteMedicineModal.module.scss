@@ -1,0 +1,29 @@
+.container {
+  padding-top: 16px;
+
+  .cover {
+    width: 68px;
+    height: 74px;
+    display: block;
+    margin-inline: auto;
+  }
+
+  .title {
+    margin-top: 24px;
+    text-align: center;
+    @include text-20-bold;
+  }
+
+  .description {
+    margin-top: 16px;
+    color: var(--gray);
+    text-align: center;
+    @include text-16-regular-150;
+  }
+
+  .actions {
+    gap: 8px;
+    margin-top: 40px;
+    @include flex-start-center;
+  }
+}

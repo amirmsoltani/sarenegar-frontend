@@ -1,6 +1,8 @@
 import { routes } from "@/routes/routes";
+import { useFormContext } from "react-hook-form";
 import { useModalRef } from "@/common/Modal/useModalRef";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { TEpilepsyEventForm } from "@/store/epilepsy/epilepsySlice.types";
 
 export const useDurationTimeModal = () => {
   const params = useParams();
@@ -9,6 +11,8 @@ export const useDurationTimeModal = () => {
 
   const _ref = useModalRef();
 
+  const { setValue, getValues, formState } = useFormContext<TEpilepsyEventForm>();
+
   const onClose = () =>
     navigate(
       pathname.includes(routes.addEpilepsyEvent.href())
@@ -16,7 +20,11 @@ export const useDurationTimeModal = () => {
         : routes.editEpilepsyEvent.href(params.id!),
     );
 
-  const closeHandler = () => _ref.current?.close();
+  const submitHandler = () => {
+    const duration = getValues("duration_placeholder");
+    setValue("duration", duration, { shouldValidate: formState.isSubmitted });
+    _ref.current?.close();
+  };
 
-  return { _ref, onClose, closeHandler };
+  return { _ref, onClose, submitHandler };
 };

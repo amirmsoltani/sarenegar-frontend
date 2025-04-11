@@ -8,7 +8,7 @@
   padding-bottom: 24px;
   flex-direction: column;
   @include radius-20;
-  @include box-effect;
+  @include box-effect1;
 
   .header {
     @include flex-between-center;

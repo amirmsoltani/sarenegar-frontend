@@ -6,18 +6,18 @@ import { FormRowCalendar } from "@/common/RowCalendar/FormRowCalendar";
 import { TimePicker } from "@/common/WheelPicker/TimePicker/TimePicker";
 
 export const OccurrenceTimeModal = () => {
-  const { _ref, onClose, closeHandler } = useOccurrenceTimeModal();
+  const { _ref, onClose, submitHandler } = useOccurrenceTimeModal();
 
   return (
     <Modal _ref={_ref} fullWidth onClose={onClose} title="حمله چه زمانی اتفاق افتاده است ؟">
       <div className={styles.row}>
-        <FormRowCalendar name="time_of_occurrence.date" />
+        <FormRowCalendar name="time_of_occurrence_placeholder.date" />
       </div>
       <div className={styles.wheelPickerContainer}>
-        <TimePicker name="time_of_occurrence.time" />
+        <TimePicker name="time_of_occurrence_placeholder.time" />
       </div>
       <div className={styles.submitButton}>
-        <Button onClick={closeHandler}>تایید</Button>
+        <Button onClick={submitHandler}>تایید</Button>
       </div>
     </Modal>
   );

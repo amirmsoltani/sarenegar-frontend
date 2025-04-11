@@ -47,13 +47,13 @@ export const EpilepsyEventInfo = () => {
                 <div className={styles.box}>
                   <div className={styles.title}>زمان حمله</div>
                   <div className={styles.value}>
-                    {data.time_of_occurrence.time.hour}:{data.time_of_occurrence.time.minute}
+                    {data.time_of_occurrence.time.hour.value}:{data.time_of_occurrence.time.minute.value}
                   </div>
                 </div>
                 <div className={styles.box}>
                   <div className={styles.title}>مدت زمان حمله</div>
                   <div className={styles.value}>
-                    {data.duration.hour}:{data.duration.minute}:{data.duration.second}
+                    {data.duration.hour.value}:{data.duration.minute.value}:{data.duration.second.value}
                   </div>
                 </div>
                 <div className={styles.box}>

@@ -1,5 +1,6 @@
 import { email_regex } from "./regex";
 import { PhoneNumberUtil } from "google-libphonenumber";
+import { TFullTimePicker, TTimePicker } from "@/common/Form/FormUtils.types";
 
 type TRuleCallback = (value: any, form: any) => boolean | string;
 type TRule = { message: string; rule: TRuleCallback };
@@ -33,6 +34,22 @@ class Rules {
 
   isNumber = (message: string = "یک عدد معتبر وارد کنید") => {
     this.rules.push({ message, rule: (value: string) => isNaN(+value) });
+    return this;
+  };
+
+  time = (message: string = "مدت زمان اجباری میباشد") => {
+    this.rules.push({
+      message,
+      rule: (value: TTimePicker) => value.hour.value === "00" && value.minute.value === "00",
+    });
+    return this;
+  };
+
+  fullTime = (message: string = "مدت زمان اجباری میباشد") => {
+    this.rules.push({
+      message,
+      rule: (value: TFullTimePicker) => value.hour.value === "00" && value.minute.value === "00" && value.second.value === "00",
+    });
     return this;
   };
 

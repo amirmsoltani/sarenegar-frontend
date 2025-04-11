@@ -1,0 +1,32 @@
+.row {
+  padding-inline: 16px;
+}
+
+.wheelPickerContainer {
+  flex: 1 1 0%;
+  margin-block: 16px;
+  @include flex-start-center;
+
+  .sideBox {
+    width: 56px;
+    height: 59px;
+    margin-top: 40px;
+    background-color: var(--orange-background);
+  }
+
+  .centerBox {
+    width: 27px;
+    height: 59px;
+    font-size: 58px;
+    margin-top: 40px;
+    color: var(--secondary);
+    background-color: var(--orange-background);
+    @include centering;
+  }
+}
+
+.submitButton {
+  display: flex;
+  padding-inline: 16px;
+  flex-direction: column;
+}
