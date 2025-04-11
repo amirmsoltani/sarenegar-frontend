@@ -1,7 +1,7 @@
 import { editEvent } from "../../epilepsySlice";
 import { StoreUtils } from "@/store/Store.utils";
 import { TEpilepsyEventForm } from "../../epilepsySlice.types";
-import { apiEpilepsyEpilepsyUpdate, EpilepsyCreate } from "@/services/api";
+import { apiEpilepsyEpilepsyUpdate, EpilepsyCreateRequest } from "@/services/api";
 
 type TEditEpilepsyEventAction = { id: number; form: TEpilepsyEventForm };
 
@@ -19,7 +19,7 @@ export const editEpilepsyEventAction = StoreUtils.createAsyncThunk(
       +time_of_occurrence.time.minute.value,
     ).toISOString();
 
-    const data: Omit<EpilepsyCreate, "id"> = {
+    const data: Omit<EpilepsyCreateRequest, "id"> = {
       time_of_occurrence: date,
       tremor_and_shaking: tremor_and_shaking.value,
       state_of_consciousness: state_of_consciousness.value,

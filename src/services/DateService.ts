@@ -1,3 +1,7 @@
+import jalaali from "jalaali-js";
+import { toLabelValue } from "@/helper/helper";
+import { TDatePicker } from "@/common/Form/FormUtils.types";
+
 class DateInstant {
   protected static readonly dateOptions: Intl.DateTimeFormatOptions = {
     year: "numeric",
@@ -30,12 +34,28 @@ class DateInstant {
     return `${this.getDate(date)} ${this.getTime(date)}`;
   }
 
-  public custom(date: string | number | Date, options: Intl.DateTimeFormatOptions) {
+  public customTranslate(date: string | number | Date, options: Intl.DateTimeFormatOptions) {
     return new Intl.DateTimeFormat("fa-IR", options).format(new Date(date));
   }
 
   public replaceSlashWithDash(date: string) {
     return date.replace(/\//g, "-");
+  }
+
+  public jalaliToGregorian({ year, month, day }: TDatePicker) {
+    const gregorian = jalaali.toGregorian(+year.value, +month.value, +day.value);
+    return new Date(gregorian.gy, gregorian.gm - 1, gregorian.gd);
+  }
+
+  public gregorianToJalali(date?: string | Date): TDatePicker {
+    const _date = date ? new Date(date) : new Date();
+    const { jy, jm, jd } = jalaali.toJalaali(_date);
+    return { year: toLabelValue(jy.toString()), month: toLabelValue(jm.toString()), day: toLabelValue(jd.toString()) };
+  }
+
+  public setToGlobalFormat(date: Date) {
+    const [day, month, year] = this.replaceSlashWithDash(date.toLocaleDateString()).split("-");
+    return `${year}-${month}-${day}`;
   }
 }
 

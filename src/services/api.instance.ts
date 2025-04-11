@@ -10,6 +10,7 @@ const apiInstance = axios.create({ baseURL: import.meta.env.VITE_API_BASE_URL, p
 apiInstance.interceptors.request.use((config) => {
   const access_token = CookieRepository.get("access_token");
   access_token && config.headers.set("Authorization", `Token ${access_token}`);
+  config.headers.set("Accept-Language", "fa");
   return config;
 });
 
