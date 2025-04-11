@@ -260,8 +260,13 @@ export interface VerifyOTPRequest {
 export type ApiDrugDosageDosemanagerDrugDosageRetrieveParams = {
   /**
    * Filter drug dosages by active status
+   *
+   *
    */
   is_active?: boolean;
+
+  is_expired?: boolean;
+
   /**
    * A page number within the paginated result set.
    */
