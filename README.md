@@ -1,5 +1,5 @@
 # React + TypeScript + Vite
-
+[![Deploy React App](https://github.com/amirmsoltani/sarenegar-frontend/actions/workflows/deploy-react-app.yml/badge.svg)](https://github.com/amirmsoltani/sarenegar-frontend/actions/workflows/deploy-react-app.yml)
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
