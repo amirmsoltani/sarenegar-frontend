@@ -38,7 +38,18 @@ jobs:
         env:
           VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
         run: pnpm build
-
+# Step 5: Add commit hash as meta tag to head
+      - name: Add commit hash as meta tag
+        run: |
+          COMMIT_HASH=$(git rev-parse --short HEAD)
+          echo "Using commit hash: $COMMIT_HASH"
+          # Find the index.html file (adjust path if needed)
+          INDEX_FILE=$(find . -name "index.html" -not -path "*/node_modules/*" -not -path "*/dist/*" | head -n 1)
+          echo "Found index.html at: $INDEX_FILE"
+          # Add commit hash as meta tag to the head section
+          sed -i "s/<head>/<head>\n  <meta name=\"commit-hash\" content=\"$COMMIT_HASH\">/g" $INDEX_FILE
+          # Verify the change
+          grep -n "commit-hash" $INDEX_FILE
       # Step 7: Verify Build Directory
       - name: Verify Build Directory
         run: |
@@ -64,6 +75,8 @@ jobs:
           port: 22
           source: "dist/*"
           target: "/var/www/dev.epical/"
+          strip_components: 1
+          overwrite: true
 
       # Step 10: Deploy Build to the Production server if on main branch
       - name: Deploy to Production Server
