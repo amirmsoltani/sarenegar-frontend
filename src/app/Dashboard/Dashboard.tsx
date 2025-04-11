@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Box } from "./_components/Box/Box";
 import styles from "./Dashboard.module.scss";
 import NoteIcon from "@/assets/svg/note.svg";
-import PillIcon from "@/assets/svg/pill.svg";
+import PillIcon from "@/assets/svg/Pill.svg";
 import BookIcon from "@/assets/svg/book.svg";
 import FlashIcon from "@/assets/svg/flash.svg";
 import { Header } from "./_components/Header/Header";
