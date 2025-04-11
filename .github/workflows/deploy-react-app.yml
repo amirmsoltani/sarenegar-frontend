@@ -32,13 +32,7 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      # Step 5: Add commit hash to HTML tag
-      # Step 6: Build the React app using pnpm
-      - name: Build React App
-        env:
-          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
-        run: pnpm build
-# Step 5: Add commit hash as meta tag to head
+      # Step 5: Add commit hash as meta tag to head
       - name: Add commit hash as meta tag
         run: |
           COMMIT_HASH=$(git rev-parse --short HEAD)
@@ -50,6 +44,13 @@ jobs:
           sed -i "s/<head>/<head>\n  <meta name=\"commit-hash\" content=\"$COMMIT_HASH\">/g" $INDEX_FILE
           # Verify the change
           grep -n "commit-hash" $INDEX_FILE
+        
+      # Step 6: Build the React app using pnpm
+      - name: Build React App
+        env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+        run: pnpm build
+
       # Step 7: Verify Build Directory
       - name: Verify Build Directory
         run: |
