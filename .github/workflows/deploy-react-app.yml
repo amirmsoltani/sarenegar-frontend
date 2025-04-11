@@ -74,7 +74,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: 22
-          source: "dist/"
+          source: "dist/*"
           target: "/var/www/dev.epical"
 
       # Step 10: Deploy Build to the Production server if on main branch
