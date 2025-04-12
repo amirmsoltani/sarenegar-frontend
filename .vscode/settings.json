@@ -1,5 +1,16 @@
 {
-  "conventionalCommits.scopes": ["configs", "styles", "store", "services", "routes", "common", "public", "app", "assets"],
+  "conventionalCommits.scopes": [
+    "configs",
+    "styles",
+    "store",
+    "services",
+    "routes",
+    "common",
+    "public",
+    "app",
+    "assets",
+    "global"
+  ],
   "workbench.colorCustomizations": {
     "commandCenter.border": "#e7e7e799",
     "sash.hoverBorder": "#6400a8",

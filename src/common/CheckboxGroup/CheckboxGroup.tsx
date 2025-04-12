@@ -22,7 +22,7 @@ export const CheckboxGroup = <T extends FieldValues, Y>({ name, options, label }
               const checked = field.value?.value === option.value;
               return (
                 <div key={option.label} className={styles.option}>
-                  <input className={styles.input} checked={checked} />
+                  <input className={styles.input} checked={checked} readOnly />
                   <button type="button" className={styles.optionWrapper} onClick={() => field.onChange(option)}>
                     <div className={styles.circle}>
                       <div className={styles.circleInner} data-checked={checked}>

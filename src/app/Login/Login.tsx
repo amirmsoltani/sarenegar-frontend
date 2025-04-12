@@ -10,8 +10,8 @@ export const Login = () => {
   return (
     <Form {...methods} onSubmit={onSubmit} className={styles.container}>
       <div className={styles.header} data-close={step === 2}>
-        <img src="./logoArt.png" alt="" className={styles.logo} />
-        <img src="./logoText.png" alt="" className={styles.logo} />
+        <img src="/logoArt.png" alt="" className={styles.logo} />
+        <img src="/logoText.png" alt="" className={styles.logo} />
         <div className={styles.shadow} />
       </div>
       <div className={styles.wrapper}>
