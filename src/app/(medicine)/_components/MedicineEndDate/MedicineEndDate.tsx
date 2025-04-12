@@ -20,7 +20,15 @@ export const MedicineEndDate = () => {
           name="end_date"
           Placeholder={DatePlaceholder}
           onClick={openDateModalHandler}
-          validate={Validate.gen().required()}
+          validate={Validate.gen()
+            .required()
+            .custom((value: TMedicineForm["end_date"], form: TMedicineForm) => {
+              if (value && form.start_date) {
+                const end = DateService.jalaliToGregorian(value);
+                const start = DateService.jalaliToGregorian(form.start_date);
+                return end > start ? false : "تاریخ پایان باید بزرگ تر از تاریخ شروع باشد";
+              } else return false;
+            })}
         />
       ) : (
         <InputController
