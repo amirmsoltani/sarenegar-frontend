@@ -1,4 +1,5 @@
 import { TOtp } from "./Otp";
+import { int_regex } from "@/helper/regex";
 import { useFormContext } from "react-hook-form";
 import { ChangeEvent, ClipboardEvent, KeyboardEvent } from "react";
 
@@ -8,18 +9,23 @@ export const useOtp = ({ name, length }: TOtp) => {
   const onChangeHandler = (index: number, e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    if (value.length === 1 && /\d+/.test(value)) {
-      setValue(`${name}.${index}`, value, { shouldValidate: formState.isSubmitted });
+    if (int_regex.test(value)) {
+      if (value.length === 1) setValue(`${name}.${index}`, value, { shouldValidate: formState.isSubmitted });
+      else if (value.length === 2)
+        index + 1 < length && setValue(`${name}.${index + 1}`, value.slice(-1), { shouldValidate: formState.isSubmitted });
       const nextElement = e.target.nextElementSibling as HTMLInputElement;
       nextElement && nextElement.focus();
     }
   };
 
   const clearHandler = (index: number, e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.code === "Backspace") {
+    if (e.key === "Backspace") {
       setValue(`${name}.${index}`, "", { shouldValidate: formState.isSubmitted });
       const prevElement = (e.target as HTMLInputElement).previousElementSibling as HTMLInputElement;
-      prevElement && prevElement.focus();
+      if (prevElement) {
+        prevElement.focus();
+        setTimeout(() => prevElement.select(), 0);
+      }
     }
   };
 

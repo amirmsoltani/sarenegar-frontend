@@ -23,6 +23,8 @@ export const Form = <T extends FieldValues>({
   unregister,
   clearErrors,
   handleSubmit,
+  // @ts-ignore
+  formControl,
   getFieldState,
   ...form
 }: TForm<T>) => {
@@ -44,6 +46,8 @@ export const Form = <T extends FieldValues>({
       resetField={resetField}
       unregister={unregister}
       clearErrors={clearErrors}
+      // @ts-ignore
+      formControl={formControl}
       handleSubmit={handleSubmit}
       getFieldState={getFieldState}
     >

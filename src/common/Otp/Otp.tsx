@@ -20,6 +20,7 @@ export const Otp = ({ name, length }: TOtp) => {
             <input
               {...field}
               className={styles.input}
+              onMouseUp={(e) => e.preventDefault()}
               data-error={!!fieldState.error?.message}
               onPaste={(e) => onPasteHandler(index, e)}
               onKeyDown={(e) => clearHandler(index, e)}
