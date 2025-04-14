@@ -1,12 +1,12 @@
 import { ChangeEvent } from "react";
 import { Drug } from "@/services/api";
-import { routes } from "@/routes/routes";
 import { useFormContext } from "react-hook-form";
 import { useDebouncedCallback } from "use-debounce";
 import { useModalRef } from "@/common/Modal/useModalRef";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { TMedicineForm } from "@/store/medicine/medicineSlice.types";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { medicineBackwardNavigation } from "../_common/medicineNavigation";
 import { useStatusHandler } from "@/common/useStatusHandler/useStatusHandler";
 import { getDrugsListAction } from "@/store/drug/actions/getDrugsList/getDrugsList.action";
 
@@ -22,8 +22,7 @@ export const useMedicineDrugsModal = () => {
 
   const { setValue, formState } = useFormContext<TMedicineForm>();
 
-  const onClose = () =>
-    navigate(pathname.includes(routes.addMedicine.href()) ? routes.addMedicine.href() : routes.editMedicine.href(params.id!));
+  const onClose = () => navigate(medicineBackwardNavigation(pathname, params));
 
   const onSubmit = (drug: Drug) => {
     setValue("drug", drug, { shouldValidate: formState.isSubmitted });

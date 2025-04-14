@@ -5,7 +5,8 @@ import { toOrderedNumber } from "@/helper/helper";
 import { useMedicineDoses } from "./useMedicineDoses";
 import { AddCircle, ArrowLeft2, Trash } from "@wandersonalwes/iconsax-react";
 
-export const MedicineDoses = () => {
+type TMedicineDoses = { type: "ADD" | "EDIT" | "RETAKE" };
+export const MedicineDoses = ({ type }: TMedicineDoses) => {
   const { fields, appendHandler, removeHandler } = useMedicineDoses();
 
   return (
@@ -20,7 +21,16 @@ export const MedicineDoses = () => {
                 <div className={styles.time}>
                   {field.value.hour.value}:{field.value.minute.value}
                 </div>
-                <Link to={routes.addMedicine.modals.doseTime.href(index)} className={styles.iconWrapper}>
+                <Link
+                  className={styles.iconWrapper}
+                  to={
+                    type === "ADD"
+                      ? routes.addMedicine.modals.doseTime.href(index)
+                      : type === "EDIT"
+                        ? routes.editMedicine.modals.doseTime.href(index)
+                        : routes.retakeMedicine.modals.doseTime.href(index)
+                  }
+                >
                   <ArrowLeft2 className={styles.icon} />
                 </Link>
               </div>

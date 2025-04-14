@@ -1,0 +1,39 @@
+.container {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    height: 56px;
+    padding-inline: 16px;
+    border-bottom: 0.5px solid var(--stroke);
+    @include shadow-top;
+    @include flex-between-center;
+
+    .headerWrapper {
+      gap: 8px;
+      @include flex-start-center;
+
+      .iconWrapper {
+        @include centering;
+      }
+
+      .icon {
+        color: var(--dark-blue);
+      }
+
+      .title {
+        @include text-18-semibold;
+      }
+    }
+
+    .step {
+      color: var(--secondary);
+      @include text-14-semibold;
+    }
+  }
+
+  .status {
+    flex: 1 1 0%;
+  }
+}

@@ -1,18 +1,26 @@
 import { routes } from "@/routes/routes";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { shallowEqual } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { medicineFormDefaultValues } from "../_common/medicineForm";
 import { TMedicineForm } from "@/store/medicine/medicineSlice.types";
 import { clearStateAction } from "@/store/_common/actions/clearState.action";
 import { useStatusHandler } from "@/common/useStatusHandler/useStatusHandler";
 import { addMedicineAction } from "@/store/medicine/actions/addMedicine/addMedicine.action";
+import { getMedicineInfoAction } from "@/store/medicine/actions/getMedicineInfo/getMedicineInfo.action";
 
-export const useAddMedicine = () => {
+export const useRetakeMedicine = () => {
+  const params = useParams();
   const navigate = useNavigate();
 
+  const id = +params.id!;
+
   const dispatch = useAppDispatch();
-  const state = useAppSelector((store) => store.medicine.addMedicine);
+  const { addState, infoState } = useAppSelector(
+    (store) => ({ addState: store.medicine.addMedicine, infoState: store.medicine.medicineInfo }),
+    shallowEqual,
+  );
 
   const methods = useForm({ defaultValues: medicineFormDefaultValues });
 
@@ -25,13 +33,21 @@ export const useAddMedicine = () => {
     else await dispatch(addMedicineAction(form));
   };
 
+  const getInfo = () => dispatch(getMedicineInfoAction({ id }));
+
   useStatusHandler({
-    state,
+    state: infoState,
+    onComponentDidMount: getInfo,
+    onSuccess: () => methods.reset({ ...medicineFormDefaultValues, drug: infoState.data?.drug }),
+  });
+
+  useStatusHandler({
+    state: addState,
     onSuccess: () => {
       dispatch(clearStateAction([{ reducerName: "medicine", stateName: "addMedicine" }]));
-      navigate(state.data?.is_expired ? routes.medicine.tabs.completed.href() : routes.medicine.tabs.current.href());
+      navigate(addState.data?.is_expired ? routes.medicine.tabs.completed.href() : routes.medicine.tabs.current.href());
     },
   });
 
-  return { methods, step, submitHandler, changeStep };
+  return { id, methods, step, submitHandler, changeStep, getInfo, status: infoState.status };
 };

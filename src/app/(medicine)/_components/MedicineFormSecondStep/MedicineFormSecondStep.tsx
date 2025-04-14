@@ -1,11 +1,12 @@
 import { FormButton } from "@/common/Form/Form";
-import styles from "./AddMedicineFormSecondStep.module.scss";
+import styles from "./MedicineFormSecondStep.module.scss";
 import { MedicineDoses } from "@/app/(medicine)/_components/MedicineDoses/MedicineDoses";
 import { MedicineTiming } from "@/app/(medicine)/_components/MedicineTiming/MedicineTiming";
 import { MedicineEndDate } from "@/app/(medicine)/_components/MedicineEndDate/MedicineEndDate";
 import { MedicineStartDatePlaceholder } from "@/app/(medicine)/_components/MedicineStartDatePlaceholder/MedicineStartDatePlaceholder";
 
-export const AddMedicineFormSecondStep = () => {
+type TMedicineFormSecondStep = { type: "ADD" | "EDIT" | "RETAKE" };
+export const MedicineFormSecondStep = ({ type }: TMedicineFormSecondStep) => {
   return (
     <>
       <section className={styles.container}>
@@ -14,11 +15,11 @@ export const AddMedicineFormSecondStep = () => {
           <MedicineTiming />
           <MedicineStartDatePlaceholder />
           <MedicineEndDate />
-          <MedicineDoses />
+          <MedicineDoses type={type} />
         </div>
       </section>
       <footer className={styles.footer}>
-        <FormButton>ثبت دارو</FormButton>
+        <FormButton>{type === "ADD" ? "افروزن دارو" : type === "EDIT" ? "ویرایش دارو" : "باز مصرف دارو"}</FormButton>
       </footer>
     </>
   );

@@ -1,16 +1,11 @@
-import { routes } from "@/routes/routes";
 import { useLocation, useNavigate } from "react-router-dom";
+import { medicineForwardNavigation } from "../../_common/medicineNavigation";
 
 export const useMedicineUsageTypePlaceholder = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const onClick = () =>
-    navigate(
-      pathname.includes(routes.addMedicine.href())
-        ? routes.addMedicine.modals.usageType.href()
-        : routes.editMedicine.modals.usageType.href(),
-    );
+  const onClick = () => navigate(medicineForwardNavigation(pathname, "usageType"));
 
   return { onClick };
 };

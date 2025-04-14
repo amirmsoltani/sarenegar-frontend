@@ -1,4 +1,5 @@
 import { routes } from "@/routes/routes";
+import { shallowEqual } from "react-redux";
 import { useModalRef } from "@/common/Modal/useModalRef";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/store";
@@ -13,21 +14,24 @@ export const useDeleteMedicineModal = () => {
   const _ref = useModalRef();
 
   const dispatch = useAppDispatch();
-  const state = useAppSelector((store) => store.medicine.deleteMedicine);
+  const { deleteState, infoState } = useAppSelector(
+    (store) => ({ deleteState: store.medicine.deleteMedicine, infoState: store.medicine.medicineInfo }),
+    shallowEqual,
+  );
 
-  const onSubmit = () => dispatch(deleteMedicineAction({ id: +id! }));
+  const onSubmit = () => dispatch(deleteMedicineAction({ id: +id!, is_expired: infoState.data!.is_expired! }));
 
   const onClose = (context?: { close?: boolean }) => {
     if (context?.close) navigate(routes.medicineInfo.href(id!));
     else {
       dispatch(clearStateAction([{ reducerName: "medicine", stateName: "deleteMedicine" }]));
-      navigate(routes.medicine.tabs.current.href());
+      navigate(infoState.data!.is_expired ? routes.medicine.tabs.completed.href() : routes.medicine.tabs.current.href());
     }
   };
 
   const closeHandler = () => _ref.current?.close({ close: true });
 
-  useStatusHandler({ state, onSuccess: () => _ref.current?.close() });
+  useStatusHandler({ state: deleteState, onSuccess: () => _ref.current?.close() });
 
-  return { _ref, state, onSubmit, onClose, closeHandler };
+  return { _ref, state: deleteState, onSubmit, onClose, closeHandler };
 };

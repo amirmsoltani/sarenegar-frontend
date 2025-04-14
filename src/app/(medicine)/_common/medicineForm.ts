@@ -1,9 +1,8 @@
 import { TypeOfUsageEnum } from "@/services/api";
 import { DateService } from "@/services/DateService";
-import { toLabelValue, withPadStart } from "@/helper/helper";
 import { TMedicineForm } from "@/store/medicine/medicineSlice.types";
+import { formOptionTranslator, toLabelValue, withPadStart } from "@/helper/helper";
 import { TCheckboxOption, TWheelPickerOption } from "@/common/Form/FormUtils.types";
-
 export const medicineUnits: TWheelPickerOption[] = [
   { label: "میلی گرم ( mg )", value: "MG" },
   { label: "قرص ( pill )", value: "PILL" },
@@ -41,8 +40,10 @@ export const endDaysCounts: TWheelPickerOption[] = new Array(60).fill("").map((_
   return { value, label: value };
 });
 
-export const medicineUnitTranslator = (value: string) => medicineUnits.find((option) => option.value === value)!;
-export const medicineUsageTypeTranslator = (value: string) => medicineUsageType.find((option) => option.value === value)!;
+export const medicineUnitTranslator = (value: string) => formOptionTranslator(medicineUnits, value)!;
+export const medicineAmountTranslator = (value: string) => formOptionTranslator(medicineAmounts, value)!;
+export const medicineUsageTypeTranslator = (value: string) => formOptionTranslator(medicineUsageType, value)!;
+export const endDaysCountTranslator = (value: number) => formOptionTranslator(endDaysCounts, value)!;
 
 export const medicineFormDefaultValues: TMedicineForm = {
   step: 1,

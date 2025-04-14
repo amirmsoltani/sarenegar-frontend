@@ -1,16 +1,11 @@
-import { routes } from "@/routes/routes";
 import { useLocation, useNavigate } from "react-router-dom";
+import { medicineForwardNavigation } from "../../_common/medicineNavigation";
 
 export const useMedicineStartDatePlaceholder = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const onClick = () =>
-    navigate(
-      pathname.includes(routes.addMedicine.href())
-        ? routes.addMedicine.modals.startDate.href()
-        : routes.editMedicine.modals.startDate.href(),
-    );
+  const onClick = () => navigate(medicineForwardNavigation(pathname, "startDate"));
 
   return { onClick };
 };

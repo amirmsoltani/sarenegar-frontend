@@ -3,18 +3,16 @@ import PillIcon from "@/assets/svg/Pill.svg";
 import { Fragment } from "react/jsx-runtime";
 import { Link, Outlet } from "react-router-dom";
 import styles from "./MedicineInfo.module.scss";
-import useMedicineInfo from "./useMedicineInfo";
 import { Button } from "@/common/Button/Button";
-import { DrugDosageRetrieve } from "@/services/api";
+import { useMedicineInfo } from "./useMedicineInfo";
 import { DateService } from "@/services/DateService";
 import { ArrowRight } from "@wandersonalwes/iconsax-react";
 import { TextOverflow } from "@/common/TextOverflow/TextOverflow";
-import { calcMedicineTimeData } from "../../_common/medicineTime";
 import { StatusHandler } from "@/common/StatusHandler/StatusHandler";
-import { medicineUnitTranslator, medicineUsageTypeTranslator } from "../../_common/medicineForm";
+import { TMedicineSlice } from "@/store/medicine/medicineSlice.types";
 
 export const MedicineInfo = () => {
-  const { getData, status, data } = useMedicineInfo();
+  const { getData, status, data, id } = useMedicineInfo();
 
   return (
     <main className={styles.container}>
@@ -25,14 +23,14 @@ export const MedicineInfo = () => {
           </Link>
           <h1 className={styles.title}>اطلاعات دارو</h1>
         </div>
-        <Link to="" className={styles.link}>
+        <Link to={routes.editMedicine.href(id)} className={styles.link}>
           ویرایش اطلاعات
         </Link>
       </header>
       <StatusHandler status={status} onClick={getData} className={styles.status}>
         {data && (
           <>
-            <Info {...data} />
+            <Info {...data} id={id} />
             <Outlet />
           </>
         )}
@@ -41,25 +39,22 @@ export const MedicineInfo = () => {
   );
 };
 
+type TInfo = NonNullable<TMedicineSlice["medicineInfo"]["data"]> & { id: number };
 const Info = ({
-  dose,
+  id,
   drug,
+  days,
+  dose,
+  doses,
   end_date,
-  is_daily,
-  end_by_day,
+  usage_type,
   start_date,
-  usage_days,
+  is_expired,
   total_doses,
   taken_doses,
-  type_of_usage,
-  reminder_times,
-}: DrugDosageRetrieve) => {
-  const unit = medicineUnitTranslator((dose as any).unit);
-  const usageType = medicineUsageTypeTranslator(type_of_usage!);
-
-  const { start, end } = calcMedicineTimeData({ end_by_day, start_date, end_date });
-
-  const percent = (taken_doses * 100) / total_doses;
+  end_time_type,
+}: TInfo) => {
+  const percent = ((taken_doses ?? 0) * 100) / (total_doses ?? 0);
 
   return (
     <>
@@ -85,35 +80,38 @@ const Info = ({
           <div className={styles.option}>
             <div className={styles.title}>مقدار هر دوز</div>
             <div>
-              {(dose as any).amount} {unit.label}
+              {dose.amount?.label} {dose.unit?.label}
             </div>
           </div>
           <div className={styles.option}>
             <div className={styles.title}>نوع مصرف</div>
-            <div>{usageType.label}</div>
+            <div>{usage_type?.label}</div>
           </div>
           <div className={styles.option}>
             <div className={styles.title}>زمانبندی</div>
-            <div>{is_daily ? "هر روز" : `${usage_days?.length ?? 0} روز در هفته`}</div>
+            <div>{end_time_type.value === "ALL_DAY" ? "هر روز" : `${days.length} روز در هفته`}</div>
           </div>
           <div className={styles.option}>
             <div className={styles.title}>ساعات مصرف</div>
             <div>
-              {reminder_times?.map((item) => (
-                <Fragment key={item.time}>
-                  <span>{item.time}</span>
-                  <span className={styles.divider}>-</span>
-                </Fragment>
-              ))}
+              {doses?.map(({ value }) => {
+                const time = `${value.hour.label}:${value.minute.label}`;
+                return (
+                  <Fragment key={time}>
+                    <span>{time}</span>
+                    <span className={styles.divider}>-</span>
+                  </Fragment>
+                );
+              })}
             </div>
           </div>
           <div className={styles.option}>
             <div className={styles.title}>ناریخ شروع مصرف</div>
-            <div>{DateService.getDate(start)}</div>
+            <div>{DateService.getDate(DateService.jalaliToGregorian(start_date!))}</div>
           </div>
           <div className={styles.option}>
             <div className={styles.title}>تاریخ اتمام مصرف</div>
-            <div>{DateService.getDate(end)}</div>
+            <div>{DateService.getDate(DateService.jalaliToGregorian(end_date!))}</div>
           </div>
         </div>
         <div className={styles.chart}>
@@ -134,8 +132,11 @@ const Info = ({
         <Button variant="borderedRed">حذف دارو</Button>
       </Link>
       <footer className={styles.footer}>
-        <Link to={routes.medicineInfo.modals.complete.href()} className={styles.link}>
-          <Button>{percent === 100 ? "باز مصرف دارو" : "تکمیل مصرف دارو"}</Button>
+        <Link
+          className={styles.link}
+          to={is_expired ? routes.retakeMedicine.href(id) : routes.medicineInfo.modals.complete.href()}
+        >
+          <Button>{is_expired ? "باز مصرف دارو" : "تکمیل مصرف دارو"}</Button>
         </Link>
       </footer>
     </>

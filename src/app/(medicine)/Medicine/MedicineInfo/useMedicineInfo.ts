@@ -6,14 +6,14 @@ import { getMedicineInfoAction } from "@/store/medicine/actions/getMedicineInfo/
 export const useMedicineInfo = () => {
   const params = useParams();
 
+  const id = +params.id!;
+
   const dispatch = useAppDispatch();
   const state = useAppSelector((store) => store.medicine.medicineInfo);
 
-  const getData = () => dispatch(getMedicineInfoAction({ id: +params.id! }));
+  const getData = () => dispatch(getMedicineInfoAction({ id }));
 
   useStatusHandler({ state, onComponentDidMount: getData });
 
-  return { ...state, getData };
+  return { ...state, id, getData };
 };
-
-export default useMedicineInfo;

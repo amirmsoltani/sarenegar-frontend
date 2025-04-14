@@ -1,8 +1,8 @@
-import { routes } from "@/routes/routes";
 import { useFormContext } from "react-hook-form";
 import { useModalRef } from "@/common/Modal/useModalRef";
 import { TMedicineForm } from "@/store/medicine/medicineSlice.types";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { medicineBackwardNavigation } from "../_common/medicineNavigation";
 
 export const useMedicineDrugDoseModal = () => {
   const _ref = useModalRef();
@@ -35,8 +35,7 @@ export const useMedicineDrugDoseModal = () => {
     _ref.current?.close();
   };
 
-  const onClose = () =>
-    navigate(pathname.includes(routes.addMedicine.href()) ? routes.addMedicine.href() : routes.editMedicine.href(params.id!));
+  const onClose = () => navigate(medicineBackwardNavigation(pathname, params));
 
   return { _ref, onSubmit, onClose, doseId };
 };

@@ -1,14 +1,15 @@
 import { routes } from "@/routes/routes";
 import { Form } from "@/common/Form/Form";
-import styles from "./AddMedicine.module.scss";
+import styles from "./EditMedicine.module.scss";
 import { Link, Outlet } from "react-router-dom";
-import { useAddMedicine } from "./useAddMedicine";
+import { useEditMedicine } from "./useEditMedicine";
 import { ArrowRight } from "@wandersonalwes/iconsax-react";
+import { StatusHandler } from "@/common/StatusHandler/StatusHandler";
 import { MedicineFormFirstStep } from "../_components/MedicineFormFirstStep/MedicineFormFirstStep";
 import { MedicineFormSecondStep } from "../_components/MedicineFormSecondStep/MedicineFormSecondStep";
 
-export const AddMedicine = () => {
-  const { methods, step, submitHandler, changeStep } = useAddMedicine();
+export const EditMedicine = () => {
+  const { methods, step, submitHandler, changeStep, status, getInfo } = useEditMedicine();
 
   return (
     <Form {...methods} className={styles.container} onSubmit={submitHandler}>
@@ -23,12 +24,14 @@ export const AddMedicine = () => {
               <ArrowRight className={styles.icon} />
             </button>
           )}
-          <div className={styles.title}>ثبت دارو</div>
+          <div className={styles.title}>ویرایش دارو</div>
         </div>
         <div className={styles.step}>مرحله {step} از 2</div>
       </header>
-      {step === 1 ? <MedicineFormFirstStep /> : <MedicineFormSecondStep type="ADD" />}
-      <Outlet />
+      <StatusHandler status={status} onClick={getInfo} className={styles.status}>
+        {step === 1 ? <MedicineFormFirstStep /> : <MedicineFormSecondStep type="EDIT" />}
+        <Outlet />
+      </StatusHandler>
     </Form>
   );
 };

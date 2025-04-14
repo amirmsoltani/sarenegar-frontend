@@ -17,6 +17,10 @@ export const isDateValid = (date: string) => !isNaN(Date.parse(date));
 const orderedNumbers = ["اولین", "دومین", "سومین", "چهارمین"];
 export const toOrderedNumber = (index: number) => orderedNumbers[index];
 
+export const formOptionTranslator = <T>(list: T[], value: any): T => {
+  return list.find((option) => (option as any).value == value) as T;
+};
+
 // ? time helper
 const generateTimesList = () => {
   const hours = new Array(23)
