@@ -2,7 +2,7 @@ import { TAppStore } from "@/store/store";
 import { addEvent } from "../../epilepsySlice";
 import { StoreUtils } from "@/store/Store.utils";
 import { TEpilepsyEventForm } from "../../epilepsySlice.types";
-import { apiEpilepsyEpilepsyCreate, EpilepsyCreateRequest } from "@/services/api";
+import { apiEpilepsyEpilepsyEventCreate, EpilepsyCreateRequest } from "@/services/api";
 
 export const addEpilepsyEventAction = StoreUtils.createAsyncThunk(
   "epilepsy/addEpilepsyEvent",
@@ -26,7 +26,7 @@ export const addEpilepsyEventAction = StoreUtils.createAsyncThunk(
       severity: severity.value === "1" ? "Mild" : severity.value === "2" ? "Moderate" : "Severe",
     };
 
-    const response = await apiEpilepsyEpilepsyCreate(data);
+    const response = await apiEpilepsyEpilepsyEventCreate(data);
 
     const store = thunk.getState() as TAppStore;
 

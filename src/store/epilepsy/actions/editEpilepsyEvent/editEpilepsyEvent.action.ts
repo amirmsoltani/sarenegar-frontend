@@ -1,7 +1,7 @@
 import { editEvent } from "../../epilepsySlice";
 import { StoreUtils } from "@/store/Store.utils";
 import { TEpilepsyEventForm } from "../../epilepsySlice.types";
-import { apiEpilepsyEpilepsyUpdate, EpilepsyCreateRequest } from "@/services/api";
+import { apiEpilepsyEpilepsyEventUpdate, EpilepsyCreateRequest } from "@/services/api";
 
 type TEditEpilepsyEventAction = { id: number; form: TEpilepsyEventForm };
 
@@ -27,7 +27,7 @@ export const editEpilepsyEventAction = StoreUtils.createAsyncThunk(
       severity: severity.value === "1" ? "Mild" : severity.value === "2" ? "Moderate" : "Severe",
     };
 
-    const response = await apiEpilepsyEpilepsyUpdate(id, data);
+    const response = await apiEpilepsyEpilepsyEventUpdate(id, data);
 
     thunk.dispatch(editEvent({ id, data: response.data }));
 
