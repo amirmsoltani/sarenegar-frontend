@@ -1,16 +1,22 @@
 import { INormalState } from "../store.types";
+import { Drug, DrugDosageRetrieve, PaginatedDrugDosageRetrieve } from "@/services/api";
+import { PaginatedReminderDetailList, TypeOfUsageEnum, UsageDaysEnum } from "@/services/api";
 import { TCheckboxOption, TDatePicker, TTimePicker, TWheelPickerOption } from "@/common/Form/FormUtils.types";
-import { Drug, DrugDosageRetrieve, PaginatedDrugDosageRetrieve, TypeOfUsageEnum, UsageDaysEnum } from "@/services/api";
+
+export type TMedicineInfo = TMedicineForm & Pick<DrugDosageRetrieve, "total_doses" | "taken_doses" | "is_expired">;
 
 export type TMedicineSlice = {
+  dosesList: INormalState<PaginatedReminderDetailList & { date: string }>;
+
   currentMedicinesList: INormalState<PaginatedDrugDosageRetrieve>;
   completedMedicinesList: INormalState<PaginatedDrugDosageRetrieve>;
 
-  medicineInfo: INormalState<DrugDosageRetrieve>;
+  medicineInfo: INormalState<TMedicineInfo>;
 
   deleteMedicine: INormalState<null>;
   completeMedicine: INormalState<null>;
   addMedicine: INormalState<DrugDosageRetrieve>;
+  editMedicine: INormalState<DrugDosageRetrieve>;
 };
 
 export type TMedicineForm = {

@@ -1,15 +1,15 @@
 import { StoreUtils } from "@/store/Store.utils";
 import { deleteMedicine } from "../../medicineSlice";
-import { apiDrugDosageDosemanagerDrugDosageDestroy } from "@/services/api";
+import { apiDrugDosageDosemanagerDrugDosageDelete } from "@/services/api";
 
-type TDeleteMedicineAction = { id: number };
+type TDeleteMedicineAction = { id: number; is_expired: boolean };
 
 export const deleteMedicineAction = StoreUtils.createAsyncThunk(
   "medicine/deleteMedicine",
-  async ({ id }: TDeleteMedicineAction, thunk) => {
-    const response = await apiDrugDosageDosemanagerDrugDosageDestroy(id);
+  async ({ id, is_expired }: TDeleteMedicineAction, thunk) => {
+    const response = await apiDrugDosageDosemanagerDrugDosageDelete(id);
 
-    thunk.dispatch(deleteMedicine(id));
+    thunk.dispatch(deleteMedicine({ id, is_expired }));
 
     return response.data;
   },
