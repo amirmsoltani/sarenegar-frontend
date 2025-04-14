@@ -57,11 +57,6 @@ class DateInstant {
     const [month, day, year] = this.replaceSlashWithDash(date.toLocaleDateString()).split("-");
     return `${year}-${month}-${day}`;
   }
-
-  public setToLocalFormat(date: string) {
-    const [year, month, day] = date.split("-");
-    return `${year}-${month}-${day}`;
-  }
 }
 
 export const DateService = new DateInstant();

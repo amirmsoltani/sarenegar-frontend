@@ -63,6 +63,19 @@ export interface DrugDosageCreateUpdateRequest {
 }
 
 /**
+ * Serializer for detailed information about a specific DrugDosageReminder instance.
+ */
+export interface DrugDosageReminderDetail {
+  readonly id?: number;
+  readonly reminder_time?: string;
+  readonly reminder_name?: string;
+  readonly taken?: boolean;
+  /** @nullable */
+  readonly time_taken?: string | null;
+  readonly drug_dosage?: DrugDosageRetrieve;
+}
+
+/**
  * Serializer for retrieving DrugDosage instances with expanded drug information
  */
 export interface DrugDosageRetrieve {
@@ -936,6 +949,19 @@ export const apiDrugDosageRemindersDosemanagerRemindersList = (
     }
   
 /**
+ * This endpoint retrieves detailed information about a specific drug dosage reminder, including its associated drug dosage data.
+ * @summary Retrieve specific reminder details
+ */
+export const apiDrugDosageRemindersDosemanagerReminderDetail = (
+    reminderId: number,
+ options?: SecondParameter<typeof api>,) => {
+      return api<DrugDosageReminderDetail>(
+      {url: `/dosemanager/drug-dosage/reminders/${reminderId}/`, method: 'GET'
+    },
+      options);
+    }
+  
+/**
  * This endpoint toggles the 'taken' status of a specific reminder. If the status is set to taken, the current time is recorded as time_taken.
  * @summary Toggle the taken status of a reminder
  */
@@ -1165,6 +1191,7 @@ export type ApiDrugDosageDosemanagerDrugDosageUpdateResult = NonNullable<Awaited
 export type ApiDrugDosageDosemanagerDrugDosageDeleteResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosageDelete>>>
 export type ApiDrugDosageDosemanagerDrugDosageCompleteResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosageComplete>>>
 export type ApiDrugDosageRemindersDosemanagerRemindersListResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageRemindersDosemanagerRemindersList>>>
+export type ApiDrugDosageRemindersDosemanagerReminderDetailResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageRemindersDosemanagerReminderDetail>>>
 export type ApiDrugDosageRemindersDosemanagerReminderToggleTakenResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageRemindersDosemanagerReminderToggleTaken>>>
 export type ApiDrugsDosemanagerDrugsRetrieveResult = NonNullable<Awaited<ReturnType<typeof apiDrugsDosemanagerDrugsRetrieve>>>
 export type ApiEpilepsyEpilepsyEventListResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyEventList>>>
