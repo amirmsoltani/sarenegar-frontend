@@ -24,8 +24,10 @@ import { Current } from "@/app/(medicine)/Medicine/Current/Current";
 import { PrimaryLayout } from "@/layout/PrimaryLayout/PrimaryLayout";
 import { AddMedicine } from "@/app/(medicine)/AddMedicine/AddMedicine";
 import { Completed } from "@/app/(medicine)/Medicine/Completed/Completed";
+import { EditMedicine } from "@/app/(medicine)/EditMedicine/EditMedicine";
 import { EventCalender } from "@/app/Calendar/EventCalender/EventCalender";
 import { EpilepsyModal } from "@/app/Dashboard/EpilepsyModal/EpilepsyModal";
+import { RetakeMedicine } from "@/app/(medicine)/RetakeMedicine/RetakeMedicine";
 import { ModalUsage } from "@/app/Calendar/MedicineCalender/ModalUsage/ModalUsage";
 import { MedicineInfo } from "@/app/(medicine)/Medicine/MedicineInfo/MedicineInfo";
 import { MedicineCalender } from "@/app/Calendar/MedicineCalender/MedicineCalender";
@@ -118,6 +120,24 @@ const AppRouter = () => {
                 <Route path={routes.addMedicine.modals.dose.path} Component={MedicineDoseModal} />
                 <Route path={routes.addMedicine.modals.usageType.path} Component={MedicineUsageTypeModal} />
                 <Route path={routes.addMedicine.modals.doseTime.path} Component={MedicineDrugDoseModal} />
+              </Route>
+              <Route path={routes.editMedicine.path} Component={EditMedicine}>
+                <Route path={routes.editMedicine.modals.startDate.path} Component={MedicineStartDateModal} />
+                <Route path={routes.editMedicine.modals.endDate.path} Component={MedicineEndDateModal} />
+                <Route path={routes.editMedicine.modals.dayCounts.path} Component={MedicineEndDayCountsModal} />
+                <Route path={routes.editMedicine.modals.drugs.path} Component={MedicineDrugsModal} />
+                <Route path={routes.editMedicine.modals.dose.path} Component={MedicineDoseModal} />
+                <Route path={routes.editMedicine.modals.usageType.path} Component={MedicineUsageTypeModal} />
+                <Route path={routes.editMedicine.modals.doseTime.path} Component={MedicineDrugDoseModal} />
+              </Route>
+              <Route path={routes.retakeMedicine.path} Component={RetakeMedicine}>
+                <Route path={routes.retakeMedicine.modals.startDate.path} Component={MedicineStartDateModal} />
+                <Route path={routes.retakeMedicine.modals.endDate.path} Component={MedicineEndDateModal} />
+                <Route path={routes.retakeMedicine.modals.dayCounts.path} Component={MedicineEndDayCountsModal} />
+                <Route path={routes.retakeMedicine.modals.drugs.path} Component={MedicineDrugsModal} />
+                <Route path={routes.retakeMedicine.modals.dose.path} Component={MedicineDoseModal} />
+                <Route path={routes.retakeMedicine.modals.usageType.path} Component={MedicineUsageTypeModal} />
+                <Route path={routes.retakeMedicine.modals.doseTime.path} Component={MedicineDrugDoseModal} />
               </Route>
 
               {/* not refactored routes */}
