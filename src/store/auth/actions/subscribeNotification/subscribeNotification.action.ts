@@ -10,7 +10,7 @@ export const subscribeNotificationAction = StoreUtils.createAsyncThunk("auth/sub
       const p256dh = subscription.getKey("p256dh");
       const auth = subscription.getKey("auth");
       if (p256dh && auth) {
-        const decoder = new TextDecoder("utf-8");
+        // const decoder = new TextDecoder("utf-8");
         console.log(subscription.endpoint, subscription.toJSON(), "******************");
 
         // await apiNotificationNotificationRegisterCreate({
