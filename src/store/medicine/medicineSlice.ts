@@ -4,7 +4,10 @@ import { TMedicineSlice } from "./medicineSlice.types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getDosesList } from "./actions/getDosesList/getDosesList.action";
 import { addMedicineAction } from "./actions/addMedicine/addMedicine.action";
+import { getDoseInfoAction } from "./actions/getDoseInfo/getDoseInfo.action";
 import { editMedicineAction } from "./actions/editMedicine/editMedicine.action";
+import { completeDoseAction } from "./actions/completeDose/completeDose.action";
+import { notTakingDoseAction } from "./actions/notTakingDose/notTakingDose.action";
 import { deleteMedicineAction } from "./actions/deleteMedicine/deleteMedicine.action";
 import { getMedicineInfoAction } from "./actions/getMedicineInfo/getMedicineInfo.action";
 import { completeMedicineAction } from "./actions/completeMedicine/completeMedicine.action";
@@ -12,7 +15,10 @@ import { getCurrentMedicinesListAction } from "./actions/getCurrentMedicinesList
 import { getCompletedMedicinesListAction } from "./actions/getCompletedMedicinesList/getCompletedMedicinesList.action";
 
 const initialState: TMedicineSlice = {
+  doseInfo: StoreUtils.normalActionInitState,
   dosesList: StoreUtils.normalActionInitState,
+  completeDose: StoreUtils.normalActionInitState,
+  notTakingDose: StoreUtils.normalActionInitState,
 
   currentMedicinesList: StoreUtils.normalActionInitState,
   completedMedicinesList: StoreUtils.normalActionInitState,
@@ -35,6 +41,7 @@ const medicineSlice = createSlice({
         state[currentList].data.results.push(action.payload);
         state[currentList].data.count++;
       }
+      state.dosesList = StoreUtils.normalActionInitState;
     },
     deleteMedicine: (state, action: PayloadAction<{ id: number; is_expired: boolean }>) => {
       const currentList = action.payload.is_expired ? "completedMedicinesList" : "currentMedicinesList";
@@ -42,6 +49,7 @@ const medicineSlice = createSlice({
         state[currentList].data.results = state[currentList].data!.results.filter((item) => item.id !== action.payload.id);
         state[currentList].data.count--;
       }
+      state.dosesList = StoreUtils.normalActionInitState;
     },
     completeMedicine: (state, action: PayloadAction<DrugDosageRetrieve>) => {
       if (state.currentMedicinesList.data) {
@@ -54,6 +62,7 @@ const medicineSlice = createSlice({
         state.completedMedicinesList.data.results.unshift(action.payload);
         state.completedMedicinesList.data.count++;
       }
+      state.dosesList = StoreUtils.normalActionInitState;
     },
     editMedicine: (state, action: PayloadAction<DrugDosageRetrieve>) => {
       const oppositeList = action.payload.is_expired ? "currentMedicinesList" : "completedMedicinesList";
@@ -70,10 +79,21 @@ const medicineSlice = createSlice({
           item.id === action.payload.id ? action.payload : item,
         );
       }
+      state.dosesList = StoreUtils.normalActionInitState;
+    },
+    changeDoseStatus: (state, action: PayloadAction<number>) => {
+      if (state.dosesList.data) {
+        state.dosesList.data.results = state.dosesList.data.results.map((dose) =>
+          dose.reminder_id === action.payload ? { ...dose, taken: !dose.taken } : dose,
+        );
+      }
     },
   },
   extraReducers: (builder) => {
     StoreUtils.normalAction(getDosesList, builder, "dosesList");
+    StoreUtils.normalAction(getDoseInfoAction, builder, "doseInfo");
+    StoreUtils.normalAction(completeDoseAction, builder, "completeDose");
+    StoreUtils.normalAction(notTakingDoseAction, builder, "notTakingDose");
 
     StoreUtils.normalAction(getCurrentMedicinesListAction, builder, "currentMedicinesList");
     StoreUtils.normalAction(getCompletedMedicinesListAction, builder, "completedMedicinesList");
@@ -91,6 +111,6 @@ const medicineSlice = createSlice({
 
 const medicineReducer = medicineSlice.reducer;
 
-export const { addMedicine, editMedicine, deleteMedicine, completeMedicine } = medicineSlice.actions;
+export const { addMedicine, editMedicine, deleteMedicine, completeMedicine, changeDoseStatus } = medicineSlice.actions;
 
 export default medicineReducer;

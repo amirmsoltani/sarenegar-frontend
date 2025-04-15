@@ -10,7 +10,7 @@ export const getDosesList = StoreUtils.createAsyncThunk(
     const [month, day, year] = params.date!.split("-");
     const _date = `${year}-${month}-${day}`;
 
-    const response = await apiDrugDosageRemindersDosemanagerRemindersList({ ...params, date: undefined, page_size: 100 });
+    const response = await apiDrugDosageRemindersDosemanagerRemindersList({ ...params, date: _date, page_size: 100 });
 
     return { ...response.data, date: params.date };
   },
