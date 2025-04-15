@@ -34,6 +34,10 @@ export const routes = {
         path: "epilepsy",
         href: () => `${RouterService.setDate()}/dashboard/epilepsy`,
       },
+      notTakeDoseModal: {
+        path: "not-take-dose/:id",
+        href: (id: TId) => `${RouterService.setDate()}/dashboard/not-take-dose/${id}`,
+      },
     },
   },
   addEpilepsyEvent: {

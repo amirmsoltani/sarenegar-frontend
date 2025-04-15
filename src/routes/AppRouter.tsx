@@ -32,6 +32,7 @@ import { ModalUsage } from "@/app/Calendar/MedicineCalender/ModalUsage/ModalUsag
 import { MedicineInfo } from "@/app/(medicine)/Medicine/MedicineInfo/MedicineInfo";
 import { MedicineCalender } from "@/app/Calendar/MedicineCalender/MedicineCalender";
 import { AddEpilepsyEvent } from "@/app/(epilepsy)/AddEpilepsyEvent/AddEpilepsyEvent";
+import { NotTakeDoseModal } from "@/app/(medicine)/NotTakeDoseModal/NotTakeDoseModal";
 import { RouterStateManager } from "./components/RouterStateManager/RouterStateManager";
 import { EpilepsyEventInfo } from "@/app/(epilepsy)/EpilepsyEventInfo/EpilepsyEventInfo";
 import { DurationTimeModal } from "@/app/(epilepsy)/DurationTimeModal/DurationTimeModal";
@@ -90,6 +91,7 @@ const AppRouter = () => {
               <Route path="" Component={RedirectToDashboard} />
               <Route path={routes.dashboard.path} Component={Dashboard}>
                 <Route path={routes.dashboard.modals.epilepsy.path} Component={EpilepsyModal} />
+                <Route path={routes.dashboard.modals.notTakeDoseModal.path} Component={NotTakeDoseModal} />
               </Route>
               <Route path={routes.addEpilepsyEvent.path} Component={AddEpilepsyEvent}>
                 <Route path={routes.addEpilepsyEvent.modals.occurrenceTimeModal.path} Component={OccurrenceTimeModal} />
