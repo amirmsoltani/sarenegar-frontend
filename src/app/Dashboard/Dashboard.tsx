@@ -8,7 +8,7 @@ import FlashIcon from "@/assets/svg/flash.svg";
 import { Header } from "./_components/Header/Header";
 import { Navbar } from "../_components/Navbar/Navbar";
 import { Reports } from "./_components/Reports/Reports";
-import { PillReminder } from "./_components/PillReminder/PillReminder";
+import { DoseReminder } from "./_components/DoseReminder/DoseReminder";
 import { EpilepsyEvent } from "./_components/EpilepsyEvent/EpilepsyEvent";
 import { TodaysKnowledge } from "./_components/TodaysKnowledge/TodaysKnowledge";
 
@@ -27,7 +27,7 @@ export const Dashboard = () => {
         </div>
         <div className={styles.secondSection}>
           <Box title="یادآور دارو" icon={PillIcon} variant="green">
-            <PillReminder />
+            <DoseReminder />
           </Box>
         </div>
         <div className={styles.thirdSection}>

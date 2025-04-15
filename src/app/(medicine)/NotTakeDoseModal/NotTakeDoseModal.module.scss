@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    text-align: center;
+    margin-bottom: 16px;
+    @include text-20-bold;
+  }
+
+  .description {
+    color: var(--gray);
+    text-align: center;
+    margin-bottom: 24px;
+    @include text-16-regular-150;
+  }
+
+  .body {
+    gap: 24px;
+    display: flex;
+    min-height: 172px;
+    flex-direction: column;
+
+    .status {
+      flex: 1 1 0%;
+    }
+
+    .card {
+      padding: 12px;
+      background-color: var(--green);
+      @include radius-16;
+
+      .topHeader {
+        gap: 12px;
+        @include flex-between-center;
+      }
+    }
+
+    .actions {
+      gap: 8px;
+      @include flex-start-center;
+    }
+  }
+}
