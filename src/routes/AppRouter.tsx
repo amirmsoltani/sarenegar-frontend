@@ -76,13 +76,6 @@ const AppRouter = () => {
       });
     }
     dispatch(subscribeNotificationAction(undefined));
-    // NotificationHelper.subscribeUser().then((aaaaaa)=>{
-    //
-    //   console.log(aaaaaa?.endpoint,"***************************");
-    // }).catch((e)=>{
-    //   console.log(e,"***************************");
-    // })
-
   }, [dispatch]);
 
   return (
