@@ -19,7 +19,7 @@ const spinnerVariantTranslator: TSpinnerVariantTranslator = {
   red: "white",
   purple: "white",
   borderedRed: "red",
-  borderedPurple: "black",
+  borderedPurple: "purple",
 } as const;
 
 export const Button = ({

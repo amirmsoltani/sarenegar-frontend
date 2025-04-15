@@ -1,7 +1,7 @@
 import { TSpinner } from "./Spinner.types";
 import styles from "./Spinner.module.scss";
 
-export const VARIANTS = { white: "white", black: "black", red: "red" } as const;
+export const VARIANTS = { white: "white", black: "black", red: "red", purple: "purple" } as const;
 export const SIZES = { sm: "sm", md: "md", lg: "lg", xl: "xl" } as const;
 
 export const Spinner = ({ variant = "white", size = "md" }: TSpinner) => {

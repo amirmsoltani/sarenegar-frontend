@@ -35,6 +35,10 @@
     --spinner-color: var(--red);
   }
 
+  &[data-variant="purple"] {
+    --spinner-color: var(--purple);
+  }
+
   width: var(--spinner-size);
   height: var(--spinner-size);
   background:
