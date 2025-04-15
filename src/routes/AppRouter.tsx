@@ -5,7 +5,7 @@ import { Year } from "@/app/Reports/Year/Year";
 import { City } from "@/app/Profile/City/City";
 import { Reports } from "@/app/Reports/Reports";
 import { ProFile } from "@/app/Profile/Profile";
-import { useAppSelector } from "@/store/store.ts";
+import { useAppDispatch, useAppSelector } from "@/store/store.ts";
 import { Month } from "@/app/Reports/month/Month";
 import { Calendar } from "@/app/Calendar/Calendar";
 import { Logout } from "@/app/Profile/Logout/Logout";
@@ -50,16 +50,40 @@ import { DeleteMedicineModal } from "@/app/(medicine)/Medicine/MedicineInfo/Dele
 import { CompleteMedicineModal } from "@/app/(medicine)/Medicine/MedicineInfo/CompleteMedicineModal/CompleteMedicineModal";
 import { DeleteEpilepsyEventModal } from "@/app/(epilepsy)/EpilepsyEventInfo/DeleteEpilepsyEventModal/DeleteEpilepsyEventModal";
 import { useEffect } from "react";
+import {
+  subscribeNotificationAction
+} from "@/store/auth/actions/subscribeNotification/subscribeNotification.action.ts";
 
 const AppRouter = () => {
   const isLogin = useAppSelector((state) => state.auth.token.status === "success");
+  const dispatch = useAppDispatch()
   useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-      })
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").then((registration) => {
+          console.log("ServiceWorker registration successful");
+          return registration.pushManager
+            .getSubscription()
+            .then((subscription) => {
+              if (subscription) {
+                console.log("User is already subscribed:", subscription);
+              }
+            })
+            .catch((err) => {
+              console.log("ServiceWorker registration failed: ", err);
+            });
+        });
+      });
     }
-  }, []);
+    dispatch(subscribeNotificationAction(undefined));
+    // NotificationHelper.subscribeUser().then((aaaaaa)=>{
+    //
+    //   console.log(aaaaaa?.endpoint,"***************************");
+    // }).catch((e)=>{
+    //   console.log(e,"***************************");
+    // })
+
+  }, [dispatch]);
 
   return (
     <PrimaryLayout>
