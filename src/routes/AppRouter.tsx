@@ -49,9 +49,17 @@ import { MedicineEndDayCountsModal } from "@/app/(medicine)/MedicineEndDayCounts
 import { DeleteMedicineModal } from "@/app/(medicine)/Medicine/MedicineInfo/DeleteMedicineModal/DeleteMedicineModal";
 import { CompleteMedicineModal } from "@/app/(medicine)/Medicine/MedicineInfo/CompleteMedicineModal/CompleteMedicineModal";
 import { DeleteEpilepsyEventModal } from "@/app/(epilepsy)/EpilepsyEventInfo/DeleteEpilepsyEventModal/DeleteEpilepsyEventModal";
+import { useEffect } from "react";
 
 const AppRouter = () => {
   const isLogin = useAppSelector((state) => state.auth.token.status === "success");
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+      })
+    }
+  }, []);
 
   return (
     <PrimaryLayout>
