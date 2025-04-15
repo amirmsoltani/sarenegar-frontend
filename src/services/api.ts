@@ -72,7 +72,7 @@ export interface DrugDosageReminderDetail {
   readonly taken?: boolean;
   /** @nullable */
   readonly time_taken?: string | null;
-  readonly drug_dosage?: DrugDosageRetrieve;
+  drug_dosage_info: ReminderDrugDosageInfo;
 }
 
 /**

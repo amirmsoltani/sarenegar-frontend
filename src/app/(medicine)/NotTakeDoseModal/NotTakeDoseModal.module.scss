@@ -27,11 +27,54 @@
 
     .card {
       padding: 12px;
+      color: var(--white);
       background-color: var(--green);
       @include radius-16;
 
       .topHeader {
         gap: 12px;
+        @include flex-between-center;
+
+        .info {
+          gap: 12px;
+          @include flex-start-center;
+
+          .coverContainer {
+            width: 56px;
+            height: 56px;
+            background-color: var(--white);
+            @include radius-6;
+            @include centering;
+
+            .cover {
+              width: 48px;
+              height: 48px;
+              object-fit: cover;
+            }
+          }
+
+          .infoContainer {
+            .faTitle {
+              @include text-20-bold;
+            }
+
+            .enTitle {
+              margin-top: 12px;
+              @include text-20-bold;
+            }
+          }
+        }
+
+        .date {
+          align-self: stretch;
+          @include text-14-semibold;
+        }
+      }
+
+      .cardBody {
+        gap: 12px;
+        margin-top: 12px;
+        @include text-14-semibold;
         @include flex-between-center;
       }
     }
