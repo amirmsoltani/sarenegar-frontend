@@ -1,5 +1,6 @@
-export interface INormalState<D> {
+export interface INormalState<D, T = any> {
   data?: D;
   error?: unknown;
-  status: 'idle' | 'success' | 'loading' | 'error';
+  requestData?: T;
+  status: "idle" | "success" | "loading" | "error";
 }
