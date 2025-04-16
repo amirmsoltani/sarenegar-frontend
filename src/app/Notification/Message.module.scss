@@ -1,51 +1,50 @@
-.messageBox,.messageBoxRead{
+.messageBox,
+.messageBoxRead {
   display: flex;
   padding: 12px;
   flex-direction: column;
   background: #fff;
-  border-bottom: 0.5px solid #D9DCE0;
+  border-bottom: 0.5px solid #d9dce0;
   box-sizing: border-box;
 
-
-
-  .sectionTop{
-    color: #1D2742;
+  .sectionTop {
+    color: #1d2742;
     font-size: 14px;
     font-weight: 600;
     line-height: 100%;
 
-    .ellipse{
+    .ellipse {
       width: 8px;
       height: 8px;
       margin-left: 6px;
     }
   }
-  .sectionMid{
+  .sectionMid {
     margin-top: 12px;
-    color: #1D2742;
+    color: #1d2742;
     font-size: 14px;
     font-weight: 400;
     line-height: 150%;
     text-align: justify;
   }
 
-  .sectionBottom{
+  .sectionBottom {
     margin-top: 8px;
     align-self: end;
     display: flex;
     align-items: center;
     column-gap: 4px;
-    color: rgba(23, 43, 77, 0.50);
+    color: rgba(23, 43, 77, 0.5);
     font-size: 12px;
     font-weight: 400;
     line-height: 100%;
 
-    .time{
+    .time {
       direction: ltr;
     }
   }
 }
 
-.messageBoxRead{
-  background: rgba(241, 236, 246, 0.50);
+.messageBoxRead {
+  background: rgba(241, 236, 246, 0.5);
 }
