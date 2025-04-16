@@ -9,7 +9,8 @@
     "public",
     "app",
     "assets",
-    "global"
+    "global",
+    "constants"
   ],
   "workbench.colorCustomizations": {
     "commandCenter.border": "#e7e7e799",
