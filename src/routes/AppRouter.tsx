@@ -1,6 +1,9 @@
 import { routes } from "./routes";
+import { useEffect } from "react";
 import { Login } from "@/app/Login/Login";
 import { Dashboard } from "@/app/Dashboard/Dashboard";
+import { Profile } from "@/app/(profile)/Profile/Profile";
+import { Support } from "@/app/(profile)/Support/Support";
 import { AuthLayout } from "@/layout/AuthLayout/AuthLayout";
 import { AppRouterUtils } from "@/routes/AppRouter.utils.ts";
 import { Medicine } from "@/app/(medicine)/Medicine/Medicine";
@@ -8,11 +11,16 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/store.ts";
 import { Current } from "@/app/(medicine)/Medicine/Current/Current";
 import { PrimaryLayout } from "@/layout/PrimaryLayout/PrimaryLayout";
+import { ProfileInfo } from "@/app/(profile)/ProfileInfo/ProfileInfo";
 import { AddMedicine } from "@/app/(medicine)/AddMedicine/AddMedicine";
 import { Completed } from "@/app/(medicine)/Medicine/Completed/Completed";
 import { EditMedicine } from "@/app/(medicine)/EditMedicine/EditMedicine";
 import { EpilepsyModal } from "@/app/Dashboard/EpilepsyModal/EpilepsyModal";
+import { CityModal } from "@/app/(profile)/ProfileInfo/CityModal/CityModal";
+import { LogoutModal } from "@/app/(profile)/Profile/LogoutModal/LogoutModal";
+import { StateModal } from "@/app/(profile)/ProfileInfo/StateModal/StateModal";
 import { RetakeMedicine } from "@/app/(medicine)/RetakeMedicine/RetakeMedicine";
+import { GenderModal } from "@/app/(profile)/ProfileInfo/GenderModal/GenderModal";
 import { MedicineInfo } from "@/app/(medicine)/Medicine/MedicineInfo/MedicineInfo";
 import { AddEpilepsyEvent } from "@/app/(epilepsy)/AddEpilepsyEvent/AddEpilepsyEvent";
 import { NotTakeDoseModal } from "@/app/(medicine)/NotTakeDoseModal/NotTakeDoseModal";
@@ -21,6 +29,7 @@ import { EpilepsyEventInfo } from "@/app/(epilepsy)/EpilepsyEventInfo/EpilepsyEv
 import { DurationTimeModal } from "@/app/(epilepsy)/DurationTimeModal/DurationTimeModal";
 import { EditEpilepsyEvent } from "@/app/(epilepsy)/EditEpilepsyEvent/EditEpilepsyEvent";
 import { MedicineDoseModal } from "@/app/(medicine)/MedicineDoseModal/MedicineDoseModal";
+import { BirthdateModal } from "@/app/(profile)/ProfileInfo/BirthdateModal/BirthdateModal";
 import { MedicineDrugsModal } from "@/app/(medicine)/MedicineDrugsModal/MedicineDrugsModal";
 import { OccurrenceTimeModal } from "@/app/(epilepsy)/OccurrenceTimeModal/OccurrenceTimeModal";
 import { MedicineEndDateModal } from "@/app/(medicine)/MedicineEndDateModal/MedicineEndDateModal";
@@ -30,10 +39,9 @@ import { MedicineUsageTypeModal } from "@/app/(medicine)/MedicineUsageTypeModal/
 import { MedicineStartDateModal } from "@/app/(medicine)/MedicineStartDateModal/MedicineStartDateModal";
 import { MedicineEndDayCountsModal } from "@/app/(medicine)/MedicineEndDayCountsModal/MedicineEndDayCountsModal";
 import { DeleteMedicineModal } from "@/app/(medicine)/Medicine/MedicineInfo/DeleteMedicineModal/DeleteMedicineModal";
+import { subscribeNotificationAction } from "@/store/auth/actions/subscribeNotification/subscribeNotification.action.ts";
 import { CompleteMedicineModal } from "@/app/(medicine)/Medicine/MedicineInfo/CompleteMedicineModal/CompleteMedicineModal";
 import { DeleteEpilepsyEventModal } from "@/app/(epilepsy)/EpilepsyEventInfo/DeleteEpilepsyEventModal/DeleteEpilepsyEventModal";
-import { useEffect } from "react";
-import { subscribeNotificationAction } from "@/store/auth/actions/subscribeNotification/subscribeNotification.action.ts";
 
 const AppRouter = () => {
   const isLogin = useAppSelector((state) => state.auth.token.status === "success");
@@ -119,6 +127,16 @@ const AppRouter = () => {
                 <Route path={routes.retakeMedicine.modals.usageType.path} Component={MedicineUsageTypeModal} />
                 <Route path={routes.retakeMedicine.modals.doseTime.path} Component={MedicineDrugDoseModal} />
               </Route>
+              <Route path={routes.profile.path} Component={Profile}>
+                <Route path={routes.profile.modals.path} Component={LogoutModal} />
+              </Route>
+              <Route path={routes.profileInfo.path} Component={ProfileInfo}>
+                <Route path={routes.profileInfo.modals.genderModal.path} Component={GenderModal} />
+                <Route path={routes.profileInfo.modals.birthdateModal.path} Component={BirthdateModal} />
+                <Route path={routes.profileInfo.modals.stateModal.path} Component={StateModal} />
+                <Route path={routes.profileInfo.modals.cityModal.path} Component={CityModal} />
+              </Route>
+              <Route path={routes.support.path} Component={Support} />
             </Route>
           </Route>
         </Routes>

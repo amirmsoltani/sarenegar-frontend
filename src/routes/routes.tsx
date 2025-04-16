@@ -225,6 +225,36 @@ export const routes = {
   profile: {
     path: "profile",
     href: () => `${RouterService.setDate()}/profile`,
+    modals: {
+      path: "logout",
+      href: () => `${RouterService.setDate()}/profile/logout`,
+    },
+  },
+  profileInfo: {
+    path: "profile-info",
+    href: () => `${RouterService.setDate()}/profile-info`,
+    modals: {
+      genderModal: {
+        path: "gender",
+        href: () => `${RouterService.setDate()}/profile-info/gender`,
+      },
+      birthdateModal: {
+        path: "birthdate",
+        href: () => `${RouterService.setDate()}/profile-info/birthdate`,
+      },
+      stateModal: {
+        path: "state",
+        href: () => `${RouterService.setDate()}/profile-info/state`,
+      },
+      cityModal: {
+        path: "city",
+        href: () => `${RouterService.setDate()}/profile-info/city`,
+      },
+    },
+  },
+  support: {
+    path: "support",
+    href: () => `${RouterService.setDate()}/support`,
   },
   notification: {
     path: "notification",
