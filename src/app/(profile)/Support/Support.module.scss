@@ -1,0 +1,65 @@
+.container {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    top: 0;
+    gap: 8px;
+    height: 56px;
+    position: sticky;
+    padding-inline: 16px;
+    background-color: var(--white);
+    border-bottom: 0.5px solid var(--stroke);
+    @include shadow-bottom;
+    @include flex-start-center;
+
+    .iconWrapper {
+      @include centering;
+
+      .icon {
+        color: var(--dark-blue);
+      }
+    }
+
+    .title {
+      @include text-18-semibold;
+    }
+  }
+
+  .wrapper {
+    flex: 1 1 0%;
+    padding: 0px 16px 24px 16px;
+
+    .title {
+      margin-top: 24px;
+      color: var(--gray);
+      @include text-14-regular;
+    }
+
+    .boxes {
+      gap: 16px;
+      display: flex;
+      margin-top: 12px;
+      flex-direction: column;
+
+      .box {
+        height: 44px;
+        padding-inline: 12px;
+        border: 0.5px solid var(--stroke);
+        @include radius-8;
+        @include flex-between-center;
+
+        .bpxTitle {
+          color: var(--dark-blue);
+          @include text-14-semibold;
+        }
+
+        .icon {
+          width: 24px;
+          width: 24px;
+        }
+      }
+    }
+  }
+}

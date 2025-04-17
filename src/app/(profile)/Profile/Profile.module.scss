@@ -1,0 +1,139 @@
+.container {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    display: flex;
+    min-height: 258px;
+    color: var(--white);
+    flex-direction: column;
+    background-color: var(--dark-blue);
+
+    .topWrapper {
+      gap: 8px;
+      min-height: 56px;
+      padding-inline: 16px;
+      @include flex-start-center;
+
+      .title {
+        @include text-18-semibold;
+      }
+
+      .link {
+        @include centering;
+
+        .icon {
+          width: 24px;
+          height: 24px;
+          color: var(--white);
+        }
+      }
+    }
+
+    .bottomWrapper {
+      flex: 1 1 0%;
+      position: relative;
+      padding-bottom: 24px;
+      @include centering;
+      @include box-effect2;
+
+      &::after {
+        top: 0;
+        transform: translateX(-50%);
+        background-color: rgba(from #d9d9d9 r g b / 10%);
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
+      }
+
+      .info {
+        gap: 16px;
+        flex-direction: column;
+        @include centering;
+
+        .cover {
+          width: 68px;
+          height: 68px;
+          background-image: linear-gradient(152deg, var(--primary) -78.83%, var(--secondary) 138.91%);
+          @include centering;
+          @include radius-full;
+        }
+
+        .name {
+          @include text-18-semibold;
+        }
+
+        .phone {
+          @include text-12-regular;
+        }
+      }
+    }
+  }
+
+  .wrapper {
+    flex: 1 1 0%;
+    padding: 16px 16px 32px 16px;
+    background-color: var(--background);
+
+    .boxes {
+      gap: 16px;
+      display: flex;
+      flex-direction: column;
+
+      .box {
+        padding-inline: 16px;
+        background-color: var(--white);
+        border: 0.5px solid var(--stroke);
+        box-shadow: 0px 2px 4px 0px rgba(from var(--black) r g b / 10%);
+        @include radius-12;
+
+        .row {
+          min-height: 56px;
+          color: var(--dark-blue);
+          border-top: 0.5px solid var(--stroke);
+          @include flex-between-center;
+
+          &:first-child {
+            border-top: none;
+          }
+
+          .rowWrapper {
+            gap: 8px;
+            @include flex-start-center;
+
+            .title {
+              @include text-14-semibold;
+            }
+
+            .icon {
+              width: 20px;
+              height: 20px;
+            }
+          }
+
+          .icon {
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+    }
+
+    .logoContainer {
+      margin: 48px 0px 24px 0px;
+      @include centering;
+
+      .logo {
+        width: 79px;
+        height: 81px;
+      }
+    }
+
+    .version {
+      text-align: center;
+      @include text-14-semibold;
+    }
+  }
+}

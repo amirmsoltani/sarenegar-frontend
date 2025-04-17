@@ -1,0 +1,47 @@
+.container {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    top: 0;
+    gap: 8px;
+    height: 56px;
+    position: sticky;
+    padding-inline: 16px;
+    background-color: var(--white);
+    border-bottom: 0.5px solid var(--stroke);
+    @include shadow-bottom;
+    @include flex-start-center;
+
+    .iconWrapper {
+      @include centering;
+
+      .icon {
+        color: var(--dark-blue);
+      }
+    }
+
+    .title {
+      @include text-18-semibold;
+    }
+  }
+
+  .wrapper {
+    flex: 1 1 0%;
+    display: flex;
+    flex-direction: column;
+
+    .form {
+      gap: 24px;
+      flex: 1 1 0%;
+      display: flex;
+      padding: 24px 16px;
+      flex-direction: column;
+    }
+
+    .footer {
+      @include form-footer;
+    }
+  }
+}

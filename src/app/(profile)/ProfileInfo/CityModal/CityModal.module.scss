@@ -1,0 +1,15 @@
+.wheelPickerContainer {
+  margin-block: 16px;
+}
+
+.description {
+  text-align: center;
+  padding-bottom: 56px;
+  @include text-14-regular;
+}
+
+.submitButton {
+  display: flex;
+  padding-inline: 16px;
+  flex-direction: column;
+}

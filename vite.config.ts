@@ -12,8 +12,11 @@ export default defineConfig({
       svgrOptions: { exportType: "default", ref: true, svgo: false, titleProp: true },
     }),
     VitePWA({
-      registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico'],
+      strategies: 'injectManifest',
+      srcDir: 'src',
+      filename: 'sw.js',
+
+
       manifest: {
         name: 'Seizure',
         short_name: 'Seizure',
@@ -31,7 +34,15 @@ export default defineConfig({
             type: 'image/png'
           }
         ]
+      },
+
+      devOptions: {
+        enabled: true, // Enable in development
+        type: 'module', // Use module worker in dev
+        navigateFallback: 'index.html'
       }
+
+
     })
   ],
   resolve: {
