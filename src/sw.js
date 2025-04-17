@@ -15,11 +15,14 @@ self.addEventListener('fetch', event => {
   );
 });
 self.addEventListener('push', event => {
-  console.log('Push event received:', event);
+  console.log('Push event received:', event.data.text(),event.data.json());
   const options = {
+    title:"drug notification",
     body: event.data.text(),
     icon: '/icon-512.png',
-    badge: '/favicon.ico'
+    badge: '/favicon.ico',
+    sound: '/notification-sound.ogg',
+    vibrate: [200, 100, 200],
   };
   event.waitUntil(
     self.registration.showNotification('Push Notification', options)
