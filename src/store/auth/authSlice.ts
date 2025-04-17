@@ -1,3 +1,4 @@
+import { UserProfile } from "@/services/api";
 import { TAuthReducer } from "./authSlice.types";
 import { CookieRepository } from "@/helper/cookie";
 import { StoreUtils } from "@/store/Store.utils.ts";
@@ -6,13 +7,16 @@ import { logoutAction } from "./actions/logout/logout.action";
 import { profileAction } from "./actions/profile/profile.action";
 import { verifyOtpAction } from "./actions/verifyOtp/verifyOtp.action";
 import { requestOtpAction } from "./actions/requestOtp/requestOtp.action";
+import { updateProfileAction } from "./actions/updateProfile/updateProfile.action";
 
 const init = (): TAuthReducer => {
   const token = CookieRepository.get("access_token");
 
   return {
-    logout: StoreUtils.normalActionInitState,
     profile: StoreUtils.normalActionInitState,
+    updateProfile: StoreUtils.normalActionInitState,
+
+    logout: StoreUtils.normalActionInitState,
     verifyOtp: StoreUtils.normalActionInitState,
     requestOtp: StoreUtils.normalActionInitState,
     token: { status: token ? "success" : "error", data: token },
@@ -31,9 +35,13 @@ const authSlice = createSlice({
       state.token = StoreUtils.normalActionInitState;
       state.profile = StoreUtils.normalActionInitState;
     },
+    updateProfile: (state, action: PayloadAction<UserProfile>) => {
+      state.profile.data = action.payload;
+    },
   },
   extraReducers: (builder) => {
     StoreUtils.normalAction(profileAction, builder, "profile");
+    StoreUtils.normalAction(updateProfileAction, builder, "updateProfile");
 
     StoreUtils.normalAction(logoutAction, builder, "logout");
     StoreUtils.normalAction(verifyOtpAction, builder, "verifyOtp");
@@ -43,6 +51,6 @@ const authSlice = createSlice({
 
 const authReducer = authSlice.reducer;
 
-export const { setToken, removeProfile } = authSlice.actions;
+export const { setToken, removeProfile, updateProfile } = authSlice.actions;
 
 export default authReducer;
