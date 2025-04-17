@@ -14,21 +14,21 @@ self.addEventListener('fetch', event => {
       .then(response => response || fetch(event.request))
   );
 });
-// self.addEventListener('push', event => {
-//   console.log('Push event received:', event);
-//   const options = {
-//     body: event.data.text(),
-//     icon: '/icon.png',
-//     badge: '/badge.png'
-//   };
-//   event.waitUntil(
-//     self.registration.showNotification('Push Notification', options)
-//   );
-// });
-//
-// self.addEventListener('notificationclick', event => {
-//   event.notification.close();
-//   event.waitUntil(
-//     clients.openWindow('https://dev.epical.ir/')
-//   );
-// });
+self.addEventListener('push', event => {
+  console.log('Push event received:', event);
+  const options = {
+    body: event.data.text(),
+    icon: '/icon-512.png',
+    badge: '/favicon.ico'
+  };
+  event.waitUntil(
+    self.registration.showNotification('Push Notification', options)
+  );
+});
+
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+  event.waitUntil(
+    clients.openWindow('https://dev.epical.ir/')
+  );
+});

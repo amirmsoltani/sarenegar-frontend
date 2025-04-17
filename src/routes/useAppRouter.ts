@@ -1,6 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/store/store.ts";
 import { useEffect } from "react";
-import { subscribeNotificationAction } from "@/store/auth/actions/subscribeNotification/subscribeNotification.action.ts";
 
 export function useAppRouter() {
   const isLogin = useAppSelector((state) => state.auth.token.status === "success");
@@ -30,7 +29,6 @@ export function useAppRouter() {
           });
       });
     }
-    dispatch(subscribeNotificationAction(undefined));
   }, [dispatch]);
 
   return { isLogin };

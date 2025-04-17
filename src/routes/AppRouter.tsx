@@ -1,5 +1,4 @@
 import { routes } from "./routes";
-import { useEffect } from "react";
 import { Login } from "@/app/Login/Login";
 import { Dashboard } from "@/app/Dashboard/Dashboard";
 import { Profile } from "@/app/(profile)/Profile/Profile";
@@ -8,7 +7,6 @@ import { AuthLayout } from "@/layout/AuthLayout/AuthLayout";
 import { AppRouterUtils } from "@/routes/AppRouter.utils.ts";
 import { Medicine } from "@/app/(medicine)/Medicine/Medicine";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "@/store/store.ts";
 import { Current } from "@/app/(medicine)/Medicine/Current/Current";
 import { PrimaryLayout } from "@/layout/PrimaryLayout/PrimaryLayout";
 import { ProfileInfo } from "@/app/(profile)/ProfileInfo/ProfileInfo";
@@ -39,33 +37,12 @@ import { MedicineUsageTypeModal } from "@/app/(medicine)/MedicineUsageTypeModal/
 import { MedicineStartDateModal } from "@/app/(medicine)/MedicineStartDateModal/MedicineStartDateModal";
 import { MedicineEndDayCountsModal } from "@/app/(medicine)/MedicineEndDayCountsModal/MedicineEndDayCountsModal";
 import { DeleteMedicineModal } from "@/app/(medicine)/Medicine/MedicineInfo/DeleteMedicineModal/DeleteMedicineModal";
-import { subscribeNotificationAction } from "@/store/auth/actions/subscribeNotification/subscribeNotification.action.ts";
 import { CompleteMedicineModal } from "@/app/(medicine)/Medicine/MedicineInfo/CompleteMedicineModal/CompleteMedicineModal";
 import { DeleteEpilepsyEventModal } from "@/app/(epilepsy)/EpilepsyEventInfo/DeleteEpilepsyEventModal/DeleteEpilepsyEventModal";
+import { useAppRouter } from "@/routes/useAppRouter.ts";
 
 const AppRouter = () => {
-  const isLogin = useAppSelector((state) => state.auth.token.status === "success");
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/sw.js").then((registration) => {
-          console.log("ServiceWorker registration successful");
-          return registration.pushManager
-            .getSubscription()
-            .then((subscription) => {
-              if (subscription) {
-                console.log("User is already subscribed:", subscription);
-              }
-            })
-            .catch((err) => {
-              console.log("ServiceWorker registration failed: ", err);
-            });
-        });
-      });
-    }
-    dispatch(subscribeNotificationAction(undefined));
-  }, [dispatch]);
+  const { isLogin } = useAppRouter();
 
   return (
     <PrimaryLayout>
