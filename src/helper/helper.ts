@@ -78,7 +78,7 @@ export const jalaliMonths: TWheelPickerOption[] = [
 const generateJalaliYears = () => {
   const { jy } = jalaali.toJalaali(new Date());
 
-  const before: TWheelPickerOption[] = new Array(5)
+  const before: TWheelPickerOption[] = new Array(90)
     .fill("")
     .map((_, index) => {
       const value = (jy - (index + 1)).toString();
