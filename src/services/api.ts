@@ -68,6 +68,7 @@ export interface DrugDosageCreateUpdateRequest {
 export interface DrugDosageReminderDetail {
   readonly id?: number;
   readonly reminder_time?: string;
+  /** Get the name of the reminder from the parent drug dosage's reminder_times. */
   readonly reminder_name?: string;
   readonly taken?: boolean;
   /** @nullable */
@@ -113,6 +114,16 @@ export interface EpilepsyAnalytics {
   previous_period: PeriodAnalytics;
 }
 
+export interface EpilepsyCalendarEvent {
+  id: number;
+  title: string;
+  reminder_time: string;
+  type?: string;
+  status?: string;
+  details: EpilepsyEventDetails;
+  color: string;
+}
+
 export interface EpilepsyCreateRequest {
   time_of_occurrence: string;
   duration: string;
@@ -134,6 +145,19 @@ export interface EpilepsyDetail {
   triggered_by?: string;
   notes?: string;
   id: number;
+}
+
+export interface EpilepsyEventDetails {
+  /** @nullable */
+  severity: string | null;
+  /** @nullable */
+  notes: string | null;
+  /** @nullable */
+  triggered_by: string | null;
+  /** @nullable */
+  tremor_and_shaking: string | null;
+  /** @nullable */
+  state_of_consciousness: string | null;
 }
 
 export interface EpilepsyList {
@@ -172,6 +196,28 @@ export interface Error {
 export interface EventDistribution {
   period: string;
   count: number;
+}
+
+export interface MedicationCalendarEvent {
+  id: number;
+  title: string;
+  reminder_time: string;
+  type?: string;
+  status: string;
+  taken: boolean;
+  details: MedicationEventDetails;
+  color: string;
+}
+
+export interface MedicationEventDetails {
+  drug_name: string;
+  drug_id: number;
+  dosage_id: number;
+  reminder_id: number;
+  dose: unknown;
+  type_of_usage: string;
+  /** @nullable */
+  time_taken: string | null;
 }
 
 export interface Message {
@@ -224,6 +270,15 @@ export interface PaginatedNotificationList {
   /** @nullable */
   previous?: string | null;
   results: Notification[];
+}
+
+export interface PaginatedReminderDetail {
+  count: number;
+  /** @nullable */
+  next: string | null;
+  /** @nullable */
+  previous: string | null;
+  results: ReminderDetail[];
 }
 
 export interface PaginatedReminderDetailList {
@@ -422,6 +477,16 @@ export interface TimeOfDayDistributionDetail {
   percentage: number;
 }
 
+export interface ToggleReminderResponse {
+  reminder_id: number;
+  taken: boolean;
+}
+
+export interface ToggleReminderResponseRequest {
+  reminder_id: number;
+  taken: boolean;
+}
+
 export interface Token {
   user: User;
   token: string;
@@ -544,7 +609,33 @@ export interface VerifyOTPRequest {
   password?: string;
 }
 
+export type ApiCalendarCalendarEpilepsyEventsListParams = {
+/**
+ * End date for the calendar range (format: YYYY-MM-DD)
+ */
+end_date?: string;
+/**
+ * Start date for the calendar range (format: YYYY-MM-DD)
+ */
+start_date?: string;
+};
+
+export type ApiCalendarCalendarMedicationEventsListParams = {
+/**
+ * End date for the calendar range (format: YYYY-MM-DD)
+ */
+end_date?: string;
+/**
+ * Start date for the calendar range (format: YYYY-MM-DD)
+ */
+start_date?: string;
+};
+
 export type ApiDrugDosageDosemanagerDrugDosageListParams = {
+/**
+ * Filter drug dosages by completion status (true for completed dosages, false for ongoing dosages)
+ */
+is_completed?: boolean;
 /**
  * Filter drug dosages by expiration status (true for expired dosages, false for non-expired)
  */
@@ -574,6 +665,17 @@ export type ApiDrugDosageDosemanagerDrugDosageUpdate404 = {[key: string]: unknow
 export type ApiDrugDosageDosemanagerDrugDosageDelete404 = {[key: string]: unknown};
 
 export type ApiDrugDosageDosemanagerDrugDosageComplete404 = {[key: string]: unknown};
+
+export type ApiDrugDosageDosemanagerDrugDosageSpecificRemindersParams = {
+/**
+ * A page number within the paginated result set.
+ */
+page?: number;
+/**
+ * Number of results to return per page.
+ */
+page_size?: number;
+};
 
 export type ApiDrugDosageRemindersDosemanagerRemindersListParams = {
 /**
@@ -658,10 +760,24 @@ export type ApiEpilepsyEpilepsyEventAnalyticsParams = {
  */
 end_date: string;
 /**
+ * Type of period aggregation: day, week, month, or year
+ */
+period_type?: ApiEpilepsyEpilepsyEventAnalyticsPeriodType;
+/**
  * Start date for the analysis period (format: YYYY-MM-DD or YYYY/MM/DD)
  */
 start_date: string;
 };
+
+export type ApiEpilepsyEpilepsyEventAnalyticsPeriodType = typeof ApiEpilepsyEpilepsyEventAnalyticsPeriodType[keyof typeof ApiEpilepsyEpilepsyEventAnalyticsPeriodType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ApiEpilepsyEpilepsyEventAnalyticsPeriodType = {
+  month: 'month',
+  week: 'week',
+  year: 'year',
+} as const;
 
 export type ApiEpilepsyEpilepsyEventAnalytics400 = {[key: string]: unknown};
 
@@ -851,6 +967,32 @@ export const apiAuthenticationAuthVerifyOtpCreate = (
     }
   
 /**
+ * @summary Get epilepsy events for calendar display
+ */
+export const apiCalendarCalendarEpilepsyEventsList = (
+    params?: ApiCalendarCalendarEpilepsyEventsListParams,
+ options?: SecondParameter<typeof api>,) => {
+      return api<EpilepsyCalendarEvent[]>(
+      {url: `/dosemanager/calendar/events/epilepsy/`, method: 'GET',
+        params
+    },
+      options);
+    }
+  
+/**
+ * @summary Get medication events for calendar display
+ */
+export const apiCalendarCalendarMedicationEventsList = (
+    params?: ApiCalendarCalendarMedicationEventsListParams,
+ options?: SecondParameter<typeof api>,) => {
+      return api<MedicationCalendarEvent[]>(
+      {url: `/dosemanager/calendar/events/medication/`, method: 'GET',
+        params
+    },
+      options);
+    }
+  
+/**
  * This endpoint retrieves all drug dosages associated with the authenticated user with pagination support. You can filter by active status using the is_active parameter and by expiration status using the is_expired parameter.
  * @summary Retrieve all drug dosages
  */
@@ -935,6 +1077,21 @@ export const apiDrugDosageDosemanagerDrugDosageComplete = (
     }
   
 /**
+ * This endpoint retrieves all reminders for a specific drug dosage from the database without generating future reminders.
+ * @summary Retrieve reminders for a specific drug dosage
+ */
+export const apiDrugDosageDosemanagerDrugDosageSpecificReminders = (
+    id: number,
+    params?: ApiDrugDosageDosemanagerDrugDosageSpecificRemindersParams,
+ options?: SecondParameter<typeof api>,) => {
+      return api<PaginatedReminderDetail>(
+      {url: `/dosemanager/drug-dosage/${id}/reminders/`, method: 'GET',
+        params
+    },
+      options);
+    }
+  
+/**
  * This endpoint retrieves drug dosage reminders. By default, it returns a paginated list for the specified date (or today). If `nearest=true` is passed, it returns the single closest upcoming reminder *for each active dosage*, sorted by time.
  * @summary Retrieve drug dosage reminders
  */
@@ -967,9 +1124,12 @@ export const apiDrugDosageRemindersDosemanagerReminderDetail = (
  */
 export const apiDrugDosageRemindersDosemanagerReminderToggleTaken = (
     reminderId: number,
+    toggleReminderResponseRequest: ToggleReminderResponseRequest,
  options?: SecondParameter<typeof api>,) => {
-      return api<void>(
-      {url: `/dosemanager/drug-dosage/reminders/${reminderId}/toggle-taken/`, method: 'POST'
+      return api<ToggleReminderResponse>(
+      {url: `/dosemanager/drug-dosage/reminders/${reminderId}/toggle-taken/`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: toggleReminderResponseRequest
     },
       options);
     }
@@ -1184,12 +1344,15 @@ export type ApiProfileAuthProfilePartialUpdateResult = NonNullable<Awaited<Retur
 export type ApiProfileAuthProfileChangePasswordCreateResult = NonNullable<Awaited<ReturnType<typeof apiProfileAuthProfileChangePasswordCreate>>>
 export type ApiAuthenticationAuthRequestotpCreateResult = NonNullable<Awaited<ReturnType<typeof apiAuthenticationAuthRequestotpCreate>>>
 export type ApiAuthenticationAuthVerifyOtpCreateResult = NonNullable<Awaited<ReturnType<typeof apiAuthenticationAuthVerifyOtpCreate>>>
+export type ApiCalendarCalendarEpilepsyEventsListResult = NonNullable<Awaited<ReturnType<typeof apiCalendarCalendarEpilepsyEventsList>>>
+export type ApiCalendarCalendarMedicationEventsListResult = NonNullable<Awaited<ReturnType<typeof apiCalendarCalendarMedicationEventsList>>>
 export type ApiDrugDosageDosemanagerDrugDosageListResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosageList>>>
 export type ApiDrugDosageDosemanagerDrugDosageCreateResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosageCreate>>>
 export type ApiDrugDosageDosemanagerDrugDosageRetrieveResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosageRetrieve>>>
 export type ApiDrugDosageDosemanagerDrugDosageUpdateResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosageUpdate>>>
 export type ApiDrugDosageDosemanagerDrugDosageDeleteResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosageDelete>>>
 export type ApiDrugDosageDosemanagerDrugDosageCompleteResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosageComplete>>>
+export type ApiDrugDosageDosemanagerDrugDosageSpecificRemindersResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageDosemanagerDrugDosageSpecificReminders>>>
 export type ApiDrugDosageRemindersDosemanagerRemindersListResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageRemindersDosemanagerRemindersList>>>
 export type ApiDrugDosageRemindersDosemanagerReminderDetailResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageRemindersDosemanagerReminderDetail>>>
 export type ApiDrugDosageRemindersDosemanagerReminderToggleTakenResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageRemindersDosemanagerReminderToggleTaken>>>
