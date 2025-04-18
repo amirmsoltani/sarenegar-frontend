@@ -7,7 +7,7 @@ type TCompleteDoseAction = { id: number };
 export const completeDoseAction = StoreUtils.createAsyncThunk(
   "medicine/completeDose",
   async ({ id }: TCompleteDoseAction, thunk) => {
-    const response = await apiDrugDosageRemindersDosemanagerReminderToggleTaken(id);
+    const response = await apiDrugDosageRemindersDosemanagerReminderToggleTaken(id, { reminder_id: id, taken: true });
 
     thunk.dispatch(changeDoseStatus(id));
 
