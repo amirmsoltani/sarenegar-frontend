@@ -1,5 +1,6 @@
 import { routes } from "./routes";
 import { Login } from "@/app/Login/Login";
+import { Reports } from "@/app/Reports/Reports";
 import { Dashboard } from "@/app/Dashboard/Dashboard";
 import { Profile } from "@/app/(profile)/Profile/Profile";
 import { Support } from "@/app/(profile)/Support/Support";
@@ -9,6 +10,7 @@ import { Medicine } from "@/app/(medicine)/Medicine/Medicine";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Current } from "@/app/(medicine)/Medicine/Current/Current";
 import { PrimaryLayout } from "@/layout/PrimaryLayout/PrimaryLayout";
+import { ReportsLayout } from "@/layout/ReportsLayout/ReportsLayout";
 import { ProfileInfo } from "@/app/(profile)/ProfileInfo/ProfileInfo";
 import { AddMedicine } from "@/app/(medicine)/AddMedicine/AddMedicine";
 import { Completed } from "@/app/(medicine)/Medicine/Completed/Completed";
@@ -67,7 +69,6 @@ const AppRouter = () => {
               <Route path={routes.epilepsyEventInfo.path} Component={EpilepsyEventInfo}>
                 <Route path={routes.epilepsyEventInfo.modals.deleteEpilepsyEvent.path} Component={DeleteEpilepsyEventModal} />
               </Route>
-
               <Route path={routes.medicine.path} Component={Medicine}>
                 <Route path="" Component={RedirectToCurrentMedicines} />
                 <Route path={routes.medicine.tabs.current.path} Component={Current} />
@@ -114,6 +115,9 @@ const AppRouter = () => {
                 <Route path={routes.profileInfo.modals.cityModal.path} Component={CityModal} />
               </Route>
               <Route path={routes.support.path} Component={Support} />
+              <Route path={routes.reports.path} Component={ReportsLayout}>
+                <Route path={routes.reportsInfo.path} Component={Reports} />
+              </Route>
             </Route>
           </Route>
         </Routes>

@@ -1,14 +1,16 @@
-// ? route options documentation
-
 import Home from "@/assets/svg/home.svg";
 import Pill from "@/assets/svg/PillMenu.svg";
+import { DateService } from "@/services/DateService";
 import PillActive from "@/assets/svg/pill-active.svg";
 import HomeActive from "@/assets/svg/home-active.svg";
+import { reportTypes } from "@/app/Reports/useReports";
 import { RouterService } from "@/services/RouterService";
 import CalendarTick from "@/assets/svg/calendar-tick.svg";
 import ClipboardText from "@/assets/svg/clipboard-text.svg";
 import CalendarTickActive from "@/assets/svg/calendar-tick-active.svg";
 import ClipboardTextActive from "@/assets/svg/clipboard-text-active.svg";
+
+// ? route options documentation
 
 // ! href: route pathname
 // ! name: route name to display
@@ -221,6 +223,15 @@ export const routes = {
     icon: ClipboardText,
     activeIcon: ClipboardTextActive,
     href: () => `${RouterService.setDate()}/reports`,
+  },
+  reportsInfo: {
+    icon: ClipboardText,
+    path: ":type/:start/:end",
+    activeIcon: ClipboardTextActive,
+    href: (type?: string, _start?: string, _end?: string) => {
+      const { start, end } = DateService.getWeekRange();
+      return `${RouterService.setDate()}/reports/${type ?? reportTypes[0].value}/${_start ?? start}/${_end ?? end}`;
+    },
   },
   profile: {
     path: "profile",
