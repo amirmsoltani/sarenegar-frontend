@@ -40,7 +40,7 @@
 
     &[data-active="true"] {
       color: var(--secondary);
-      @include text-24-bold;
+      @include text-20-bold;
     }
   }
 }

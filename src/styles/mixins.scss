@@ -111,6 +111,11 @@
   font-weight: 600;
 }
 
+@mixin text-20-semibold {
+  font-size: 20px;
+  font-weight: 500;
+}
+
 @mixin text-18-regular {
   font-size: 18px;
   font-weight: 400;

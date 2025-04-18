@@ -6,10 +6,17 @@ export const toLabelValue = <T>(value: T) => ({ label: value, value });
 
 export const withPadStart = (number: number) => (number >= 10 ? `${number}` : `0${number}`);
 
-export const timeToSecond = (time: number) => {
+export const secondToMinute = (time: number) => {
   const minute = Math.floor(time / 60);
   const second = time % 60;
-  return `${withPadStart(minute)}:${withPadStart(second)}`;
+  return `${withPadStart(minute)}:${withPadStart(Math.floor(second))}`;
+};
+
+export const secondToTime = (time: number) => {
+  const hour = Math.floor(time / (60 * 60));
+  const minute = Math.floor((time - hour * 60 * 60) / 60);
+  const second = time % 60;
+  return `${withPadStart(hour)}:${withPadStart(minute)}:${withPadStart(Math.floor(second))}`;
 };
 
 export const isDateValid = (date: string) => !isNaN(Date.parse(date));
