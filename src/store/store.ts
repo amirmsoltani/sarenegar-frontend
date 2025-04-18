@@ -1,5 +1,6 @@
 import authReducer from "./auth/authSlice";
 import drugReducer from "./drug/drugReducer";
+import reportReducer from "./report/reportReducer";
 import epilepsyReducer from "./epilepsy/epilepsySlice";
 import medicineReducer from "./medicine/medicineSlice";
 import { runEffects, sagaMiddleware } from "./sagaMiddleware";
@@ -9,6 +10,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 const reducers = combineReducers({
   auth: authReducer,
   drug: drugReducer,
+  report: reportReducer,
   epilepsy: epilepsyReducer,
   medicine: medicineReducer,
 });
