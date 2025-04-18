@@ -11,7 +11,8 @@
     "assets",
     "global",
     "constants",
-    "helper"
+    "helper",
+    "layouts"
   ],
   "workbench.colorCustomizations": {
     "commandCenter.border": "#e7e7e799",
