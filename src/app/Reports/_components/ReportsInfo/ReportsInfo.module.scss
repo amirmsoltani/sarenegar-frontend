@@ -1,0 +1,294 @@
+.status {
+  flex: 1 1 0%;
+}
+
+.title {
+  position: relative;
+  margin-bottom: 24px;
+  @include text-16-semibold;
+
+  &::after {
+    right: 0px;
+    content: "";
+    height: 3px;
+    width: 24px;
+    bottom: -8px;
+    position: absolute;
+    background-color: var(--secondary);
+    @include radius-4;
+  }
+}
+
+.description {
+  color: var(--gray);
+  margin-bottom: 12px;
+  @include text-12-regular;
+}
+
+.descriptionStrong {
+  color: var(--black);
+  @include text-12-semibold;
+}
+
+.boxes {
+  gap: 12px;
+  @include flex-start-center;
+}
+
+.box {
+  flex: 1 1 0%;
+  padding: 12px;
+  border: 0.5px solid var(--stroke);
+  box-shadow: 0px 0px 16px 0px rgba(from var(--black) r g b / 3%);
+  @include radius-12;
+}
+
+.spacingSm {
+  height: 12px;
+}
+
+.spacingMd {
+  height: 32px;
+}
+
+.boxTitle {
+  color: var(--gray);
+  margin-bottom: 12px;
+  @include text-12-regular;
+}
+
+.boxValue {
+  line-height: 100%;
+  @include text-14-semibold;
+}
+
+.boxValueStrong {
+  @include text-24-bold;
+}
+
+.secondSection {
+  color: var(--secondary);
+  padding: 12px 4px 12px 12px;
+  @include flex-between-center;
+
+  .maxTitle {
+    @include text-14-semibold;
+  }
+
+  .maxValue {
+    @include text-24-bold;
+  }
+}
+
+.chartLabelSm {
+  @include text-12-regular;
+  font-size: 11px !important;
+}
+
+.firstChart {
+  padding: 12px 4px 4px 4px;
+
+  .chartContainer {
+    gap: 8px;
+    @include flex-start-center;
+  }
+
+  .times {
+    @include text-12-regular;
+
+    display: flex;
+    align-self: stretch;
+    flex-direction: column;
+    font-size: 11px !important;
+    justify-content: space-between;
+  }
+
+  .chart {
+    gap: 1px;
+    flex: 1 1 0%;
+    display: flex;
+    margin-block: 12px;
+    flex-direction: column;
+
+    .recordContainer {
+      &[data-color="dark"] {
+        --border-color: #303952;
+        --background-color: #a7afc2;
+      }
+
+      &[data-color="purple"] {
+        --border-color: #574b90;
+        --background-color: #afa7d9;
+      }
+
+      &[data-color="orange"] {
+        --border-color: #f19066;
+        --background-color: #ffd7c5;
+      }
+
+      &[data-color="yellow"] {
+        --border-color: #f5cd79;
+        --background-color: #ffefce;
+      }
+
+      gap: 8px;
+      @include text-16-semibold;
+      @include flex-end-center;
+
+      .record {
+        width: 50%;
+        height: 51px;
+        padding-inline: 8px;
+        flex-direction: column;
+        background-color: var(--background-color);
+        border-left: 4px solid var(--border-color);
+        @include flex-center-end;
+      }
+
+      .valueContainer {
+        display: flex;
+        align-items: end;
+        flex-direction: column;
+      }
+
+      .recordTitle {
+        line-height: 100%;
+        @include text-12-regular;
+      }
+    }
+  }
+
+  .divider {
+    border-top: 0.5px solid var(--stroke);
+  }
+}
+
+.secondChart {
+  height: 270px;
+  padding: 12px 4px 4px 4px;
+}
+
+.thirdChart {
+  padding: 4px;
+  height: 168px;
+  @include flex-start-center;
+
+  .chartContainer {
+    width: 168px;
+    overflow: hidden;
+    position: relative;
+    align-self: stretch;
+    @include centering;
+
+    .chartTitle {
+      inset: 0;
+      margin-top: 5px;
+      color: var(--gray);
+      position: absolute;
+      flex-direction: column;
+      @include centering;
+      @include text-12-regular;
+
+      .chartTitleStrong {
+        color: var(--dark-blue);
+        @include text-16-semibold;
+      }
+    }
+
+    .chartWrapper {
+      z-index: 5;
+      position: relative;
+    }
+  }
+
+  .info {
+    flex: 1 1 0%;
+    align-self: stretch;
+    flex-direction: column;
+    @include flex-between-center;
+
+    .data {
+      width: 100%;
+      .infoLabel {
+        color: var(--gray);
+        margin-bottom: 4px;
+        @include text-14-regular;
+      }
+
+      .infoValueStrong {
+        @include text-20-semibold;
+      }
+
+      .infoValue {
+        @include text-14-semibold;
+      }
+    }
+
+    .colors {
+      gap: 8px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .color {
+        gap: 8px;
+        @include flex-start-center;
+
+        .colorBox {
+          width: 16px;
+          height: 16px;
+          @include radius-4;
+        }
+
+        .colorTitle {
+          color: var(--gray);
+          @include text-14-regular;
+        }
+
+        .quantity {
+          @include text-14-regular;
+        }
+      }
+    }
+  }
+}
+
+.fourthChart {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 4px 4px 4px;
+
+  .chartRecord {
+    &[data-color="green"] {
+      --color: var(--green);
+    }
+
+    &[data-color="secondary"] {
+      --color: var(--secondary);
+    }
+
+    gap: 4px;
+    display: flex;
+    flex-direction: column;
+
+    .recordContainer {
+      gap: 8px;
+      @include text-16-semibold;
+      @include flex-start-center;
+    }
+
+    .chartLabel {
+      @include text-12-regular;
+    }
+
+    .record {
+      width: 50%;
+      height: 51px;
+      padding-right: 8px;
+      border-right: 4px solid var(--color);
+      background-color: rgba(from var(--color) r g b / 20%);
+      @include flex-start-center;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { timeToSecond } from "@/helper/helper";
+import { secondToMinute } from "@/helper/helper";
 import { useFormContext } from "react-hook-form";
 import { TLoginDefaultValues } from "../../useLogin";
 import { useAppDispatch, useAppSelector } from "@/store/store";
@@ -31,7 +31,7 @@ export const useResendCode = () => {
       .then(() => setTime(defaultTime));
   };
 
-  const timer = timeToSecond(time);
+  const timer = secondToMinute(time);
 
   return { timer, time, isLoading, submitHandler };
 };

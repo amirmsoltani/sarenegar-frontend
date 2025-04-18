@@ -60,8 +60,8 @@ export const DoseReminder = () => {
                 <div className={styles.body}>
                   <div>
                     {(drug_dosage_info?.dose as any)?.amount}{" "}
-                    {medicineUnitTranslator((drug_dosage_info?.dose as any)?.unit).label} |
-                    {medicineUsageTypeTranslator(drug_dosage_info!.type_of_usage!).label}
+                    {medicineUnitTranslator((drug_dosage_info?.dose as any)?.unit)?.label} |
+                    {medicineUsageTypeTranslator(drug_dosage_info!.type_of_usage!)?.label}
                   </div>
                   <div>{reminder_name}</div>
                 </div>

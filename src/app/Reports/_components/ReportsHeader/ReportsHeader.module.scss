@@ -1,0 +1,49 @@
+.container {
+  gap: 8px;
+  position: relative;
+  color: var(--white);
+  flex-direction: column;
+  @include centering;
+  @include box-effect2;
+
+  .title {
+    min-height: 56px;
+    @include centering;
+    @include text-18-semibold;
+  }
+
+  .links {
+    z-index: 10;
+    padding: 3px;
+    display: block;
+    position: relative;
+    margin-bottom: 24px;
+    border-radius: 100px;
+    width: calc(100% - 54px);
+    background-color: rgba(from var(--black) r g b / 10%);
+    -o-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    @include flex-start-center;
+
+    .link {
+      flex: 1 1 0%;
+      height: 34px;
+      color: var(--white);
+      border-radius: 100px;
+      -o-border-radius: 100px;
+      -ms-border-radius: 100px;
+      -moz-border-radius: 100px;
+      -webkit-border-radius: 100px;
+      @include centering;
+      @include transition;
+      @include text-12-regular;
+
+      &[data-active="true"] {
+        background-color: var(--secondary);
+        @include text-12-bold;
+      }
+    }
+  }
+}
