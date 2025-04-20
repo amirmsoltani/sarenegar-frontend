@@ -109,3 +109,28 @@ export const generateJalaliDays = (year: number, month: number): TWheelPickerOpt
   const days = jalaali.jalaaliMonthLength(year, month);
   return new Array(days).fill("").map((_, index) => toLabelValue((index + 1).toString()));
 };
+
+const mapEnglishNumber2PersianNumber = {
+  "0": "۰",
+  "1": "۱",
+  "2": "۲",
+  "3": "۳",
+  "4": "۴",
+  "5": "۵",
+  "6": "۶",
+  "7": "۷",
+  "8": "۸",
+  "9": "۹",
+};
+
+export function e2p(english?: string | number | null) {
+  if (!["number", "string"].includes(typeof english)) return english;
+  if (typeof english === "number") english = english.toString();
+  const separatedText = english!.split("");
+  const text = separatedText.map((char) =>
+    char in mapEnglishNumber2PersianNumber
+      ? mapEnglishNumber2PersianNumber[char as keyof typeof mapEnglishNumber2PersianNumber]
+      : char,
+  );
+  return text.join("");
+}

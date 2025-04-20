@@ -12,7 +12,8 @@ export const useEpilepsyModal = () => {
 
   const getData = () => dispatch(getEpilepsyEventListAction({ date: date as string }));
 
-  const onClose = () => navigate(routes.dashboard.href());
+  const onClose = () =>
+    navigate(window.location.pathname.includes("calendar") ? routes.calendar.href() : routes.dashboard.href());
 
-  return { onClose, state, getData };
+  return { onClose, state, getData,date };
 };

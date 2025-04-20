@@ -11,10 +11,10 @@ import { StatusHandler } from "@/common/StatusHandler/StatusHandler";
 import { severityOptionTranslator, severityTranslator } from "@/app/(epilepsy)/_common/epilepsyForm";
 
 export const EpilepsyModal = () => {
-  const { onClose, state, getData } = useEpilepsyModal();
+  const { onClose, state, getData,date } = useEpilepsyModal();
 
   return (
-    <Modal title={`رخدادهای صرع ${DateService.getDate()}`} onClose={onClose} wrapperClassName={styles.modal}>
+    <Modal title={`رخدادهای صرع ${DateService.getDate(date)}`} onClose={onClose} wrapperClassName={styles.modal}>
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <StatusHandler status={state.status} onClick={getData}>

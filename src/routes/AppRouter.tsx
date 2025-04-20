@@ -42,6 +42,7 @@ import { DeleteMedicineModal } from "@/app/(medicine)/Medicine/MedicineInfo/Dele
 import { CompleteMedicineModal } from "@/app/(medicine)/Medicine/MedicineInfo/CompleteMedicineModal/CompleteMedicineModal";
 import { DeleteEpilepsyEventModal } from "@/app/(epilepsy)/EpilepsyEventInfo/DeleteEpilepsyEventModal/DeleteEpilepsyEventModal";
 import { useAppRouter } from "@/routes/useAppRouter.ts";
+import { Calendar } from "@/app/Calendar/Calendar.tsx";
 
 const AppRouter = () => {
   const { isLogin } = useAppRouter();
@@ -118,6 +119,9 @@ const AppRouter = () => {
               <Route path={routes.reports.path} Component={ReportsLayout}>
                 <Route path={routes.reportsInfo.path} Component={Reports} />
               </Route>
+            </Route>
+            <Route path={routes.calendar.path} Component={Calendar} >
+              <Route path={routes.calendar.modals.epilepsy.path} Component={EpilepsyModal} />
             </Route>
           </Route>
         </Routes>

@@ -1,0 +1,155 @@
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--dark-blue);
+  flex-grow: 1;
+
+  .header {
+    height: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .title {
+
+      color: var(--white);
+      @include text-18-bold;
+    }
+  }
+
+  .tabs {
+    background-color: var(--black-10);
+    margin-top: 22px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 100px;
+    row-gap: 7px;
+    padding: 2px;
+    box-sizing: border-box;
+
+    .tabItem {
+      @include text-14-bold;
+      color: var(--white);
+      width: 105px;
+      text-align: center;
+      height: 40px;
+      border-radius: 100px;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+
+      &.active {
+        background-color: var(--secondary);
+      }
+    }
+  }
+
+  .calendar {
+    margin-top: 24px;
+    background-color: var(--white);
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 100%;
+
+    .header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+
+      .monthTitle {
+        @include text-18-regular;
+      }
+
+
+      .prevButton {
+        @include centering;
+      }
+
+      .nextButton {
+        transform: scale(-1);
+        -webkit-transform: scale(-1);
+        -moz-transform: scale(-1);
+        -ms-transform: scale(-1);
+        -o-transform: scale(-1);
+        @include centering;
+      }
+
+
+
+    }
+
+    .month{
+      border-style: solid;
+      border-color: var(--stroke);
+      border-width: 1px 0 1px 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+
+      & > *{
+        border-right:solid var(--stroke) 1px;
+        border-top:solid var(--stroke) 1px;
+        aspect-ratio: 1;
+        display: flex;
+        flex-grow: 1;
+        flex-basis: 14%;
+      }
+
+      & :nth-child(7n+1){
+        border-right: none;
+      }
+
+      .weekDayTitle{
+        @include centering;
+        @include text-16-bold;
+        background-color: var(--blue-background);
+        border-top: none;
+      }
+
+      .loading{
+        @include centering
+      }
+
+      .weekDay{
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: space-between;
+        @include text-14-regular;
+        color: var(--text);
+
+        .event{
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          @include radius-4;
+          padding: 0 4px;
+          border:solid 1px var(--secondary);
+          color: var(--secondary);
+          background-color: var(--secondary-10);
+
+          svg{
+            opacity: 0.8;
+            margin: 0;
+          }
+          span{
+            @include text-14-regular;
+          }
+        }
+
+      }
+    }
+
+  }
+}

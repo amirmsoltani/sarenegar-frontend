@@ -6,6 +6,7 @@ import medicineReducer from "./medicine/medicineSlice";
 import { runEffects, sagaMiddleware } from "./sagaMiddleware";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import calendarReducer from "@/store/calendar/calendarSlice.ts";
 
 const reducers = combineReducers({
   auth: authReducer,
@@ -13,6 +14,7 @@ const reducers = combineReducers({
   report: reportReducer,
   epilepsy: epilepsyReducer,
   medicine: medicineReducer,
+  calendar: calendarReducer,
 });
 
 export const appStore = configureStore({

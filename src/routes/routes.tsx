@@ -44,7 +44,7 @@ export const routes = {
   },
   addEpilepsyEvent: {
     path: "add-epilepsy",
-    href: () => `${RouterService.setDate()}/add-epilepsy`,
+    href: (date?:string) => `${RouterService.setDate(date)}/add-epilepsy`,
     modals: {
       occurrenceTimeModal: {
         path: "occurrence-time",
@@ -212,12 +212,6 @@ export const routes = {
       },
     },
   },
-  calender: {
-    path: "calender",
-    icon: CalendarTick,
-    activeIcon: CalendarTickActive,
-    href: () => `${RouterService.setDate()}/calender`,
-  },
   reports: {
     path: "reports",
     icon: ClipboardText,
@@ -271,4 +265,16 @@ export const routes = {
     path: "notification",
     href: () => `${RouterService.setDate()}/notification`,
   },
+  calendar:{
+    path: "calendar",
+    href: () => `/calendar`,
+    icon: CalendarTick,
+    activeIcon: CalendarTickActive,
+    modals:{
+      epilepsy: {
+        path: ":date/epilepsy",
+        href: (date:string) => `/calendar/${date}/epilepsy`,
+      },
+    }
+  }
 };

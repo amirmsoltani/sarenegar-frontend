@@ -3,7 +3,7 @@ import { routes } from "@/routes/routes";
 import styles from "./Navbar.module.scss";
 import { NavLink } from "react-router-dom";
 
-const links = [routes.dashboard, routes.medicine, routes.calender, routes.reports];
+const links = [routes.dashboard, routes.medicine, routes.calendar, routes.reports];
 
 export const Navbar = () => {
   return (

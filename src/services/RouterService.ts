@@ -6,8 +6,8 @@ class Router {
   public navigate!: NavigateFunction;
   public params!: Readonly<Partial<Record<string, string>>>;
 
-  public setDate = () => {
-    const date = this.params.date;
+  public setDate = (_date?:string) => {
+    const date =_date || this.params.date;
     return date ? `/${date}` : `/${getNowDate()}`;
   };
 
