@@ -83,10 +83,12 @@ const medicineSlice = createSlice({
     },
     changeDoseStatus: (state, action: PayloadAction<number>) => {
       if (state.dosesList.data) {
-        state.dosesList.data.results = state.dosesList.data.results.map((dose) =>
-          dose.reminder_id === action.payload ? { ...dose, taken: !dose.taken } : dose,
-        );
+        state.dosesList.data.results = state.dosesList.data.results.map((dose) => {
+          return dose.reminder_id === action.payload ? { ...dose, taken: !dose.taken } : dose;
+        });
       }
+      state.currentMedicinesList = StoreUtils.normalActionInitState;
+      state.completedMedicinesList = StoreUtils.normalActionInitState;
     },
   },
   extraReducers: (builder) => {

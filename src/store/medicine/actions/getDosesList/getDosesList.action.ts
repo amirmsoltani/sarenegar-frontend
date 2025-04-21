@@ -3,14 +3,19 @@ import {
   apiDrugDosageRemindersDosemanagerRemindersList,
   ApiDrugDosageRemindersDosemanagerRemindersListParams,
 } from "@/services/api";
+import { DateService } from "@/services/DateService";
 
 export const getDosesList = StoreUtils.createAsyncThunk(
   "medicine/dosesList",
   async (params: ApiDrugDosageRemindersDosemanagerRemindersListParams) => {
-    const [month, day, year] = params.date!.split("-");
-    const _date = `${year}-${month}-${day}`;
+    const _date = DateService.setToGlobalFormat(new Date(params.date!));
 
-    const response = await apiDrugDosageRemindersDosemanagerRemindersList({ ...params, date: _date, page_size: 100 });
+    const response = await apiDrugDosageRemindersDosemanagerRemindersList({
+      ...params,
+      date: _date,
+      page_size: 100,
+      is_taken: false,
+    });
 
     return { ...response.data, date: params.date };
   },

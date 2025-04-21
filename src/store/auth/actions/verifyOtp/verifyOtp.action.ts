@@ -12,7 +12,7 @@ export const verifyOtpAction = StoreUtils.createAsyncThunk("auth/verifyOtp", asy
   const token = response.data.token;
 
   thunk.dispatch(setToken(token));
-  CookieRepository.set("access_token", token, { expires: 1 });
+  CookieRepository.set("access_token", token, { expires: 365 });
   thunk.dispatch(subscribeNotificationAction(undefined));
   RouterService.navigate(routes.dashboard.href(), { replace: true });
 

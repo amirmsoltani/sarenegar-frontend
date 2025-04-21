@@ -10,11 +10,12 @@ export const editEpilepsyEventAction = StoreUtils.createAsyncThunk(
   async ({ id, form }: TEditEpilepsyEventAction, thunk) => {
     const { duration, severity, state_of_consciousness, time_of_occurrence, tremor_and_shaking } = form;
 
-    const [month, day, year] = time_of_occurrence.date.split("-");
+    const _date = new Date(time_of_occurrence.date);
+
     const date = new Date(
-      +year,
-      +month - 1,
-      +day,
+      _date.getFullYear(),
+      _date.getMonth(),
+      _date.getDate(),
       +time_of_occurrence.time.hour.value,
       +time_of_occurrence.time.minute.value,
     ).toISOString();

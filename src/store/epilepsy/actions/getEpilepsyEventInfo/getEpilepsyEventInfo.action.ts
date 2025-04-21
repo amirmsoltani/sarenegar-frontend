@@ -18,7 +18,7 @@ export const getEpilepsyEventInfo = StoreUtils.createAsyncThunk(
     const duration = { hour: toLabelValue(hour), minute: toLabelValue(minute), second: toLabelValue(second) };
 
     const time_of_occurrence = {
-      date: DateService.replaceSlashWithDash(date.toLocaleDateString()),
+      date: DateService.setToGlobalFormat(date),
       time: { hour: toLabelValue(withPadStart(date.getHours())), minute: toLabelValue(withPadStart(date.getMinutes())) },
     };
 
