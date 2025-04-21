@@ -18,6 +18,22 @@ export interface ChangePasswordRequest {
   new_password: string;
 }
 
+/**
+ * Serializer for consciousness distribution data.
+ */
+export interface ConsciousnessDistribution {
+  retained: PhysicalStateDetail;
+  lost: PhysicalStateDetail;
+}
+
+/**
+ * Serializer for date-based event distributions (used in calendar views).
+ */
+export interface DateCount {
+  date: string;
+  count: number;
+}
+
 export interface Drug {
   readonly id?: number;
   /** @maxLength 256 */
@@ -112,16 +128,7 @@ export interface DrugDosageRetrieve {
 export interface EpilepsyAnalytics {
   selected_period: PeriodAnalytics;
   previous_period: PeriodAnalytics;
-}
-
-export interface EpilepsyCalendarEvent {
-  id: number;
-  title: string;
-  reminder_time: string;
-  type?: string;
-  status?: string;
-  details: EpilepsyEventDetails;
-  color: string;
+  readonly comparison?: string;
 }
 
 export interface EpilepsyCreateRequest {
@@ -147,24 +154,21 @@ export interface EpilepsyDetail {
   id: number;
 }
 
-export interface EpilepsyEventDetails {
-  /** @nullable */
-  severity: string | null;
-  /** @nullable */
-  notes: string | null;
-  /** @nullable */
-  triggered_by: string | null;
-  /** @nullable */
-  tremor_and_shaking: string | null;
-  /** @nullable */
-  state_of_consciousness: string | null;
-}
-
 export interface EpilepsyList {
   id: number;
   time_of_occurrence: string;
   duration: string;
   severity: SeverityEnum;
+}
+
+export type EpilepsySeverityDistributionSeverityDistribution = {[key: string]: SeverityDistributionDetail};
+
+/**
+ * Serializer that only returns the severity distribution data for a specified period.
+ */
+export interface EpilepsySeverityDistribution {
+  total_events: number;
+  severity_distribution: EpilepsySeverityDistributionSeverityDistribution;
 }
 
 export type EpilepsySummarySeverityDistribution = {[key: string]: number};
@@ -191,33 +195,22 @@ export interface Error {
 }
 
 /**
+ * Serializer for individual event details in analytics.
+ */
+export interface EventDetail {
+  time: string;
+  severity: string;
+  tremor: boolean;
+  /** @nullable */
+  duration_seconds: number | null;
+}
+
+/**
  * Serializer for event distribution data (e.g., by weekday, month day, year month).
  */
 export interface EventDistribution {
   period: string;
   count: number;
-}
-
-export interface MedicationCalendarEvent {
-  id: number;
-  title: string;
-  reminder_time: string;
-  type?: string;
-  status: string;
-  taken: boolean;
-  details: MedicationEventDetails;
-  color: string;
-}
-
-export interface MedicationEventDetails {
-  drug_name: string;
-  drug_id: number;
-  dosage_id: number;
-  reminder_id: number;
-  dose: unknown;
-  type_of_usage: string;
-  /** @nullable */
-  time_taken: string | null;
 }
 
 export interface Message {
@@ -324,10 +317,6 @@ export type PeriodAnalyticsTimeOfDayDistribution = {[key: string]: TimeOfDayDist
 
 export type PeriodAnalyticsSeverityDistribution = {[key: string]: SeverityDistributionDetail};
 
-export type PeriodAnalyticsTremorShakingDistribution = {[key: string]: TremorShakingDistributionDetail};
-
-export type PeriodAnalyticsEventDetailsItem = {[key: string]: unknown};
-
 /**
  * Serializer for analytics data within a specific period.
  */
@@ -338,12 +327,28 @@ export interface PeriodAnalytics {
   events_distribution: EventDistribution[];
   time_of_day_distribution: PeriodAnalyticsTimeOfDayDistribution;
   severity_distribution: PeriodAnalyticsSeverityDistribution;
-  tremor_shaking_distribution: PeriodAnalyticsTremorShakingDistribution;
+  physical_state_distribution: PhysicalStateDistribution;
   /** @nullable */
   average_duration_seconds?: number | null;
   /** @nullable */
   max_duration_seconds?: number | null;
-  event_details?: PeriodAnalyticsEventDetailsItem[];
+  event_details?: EventDetail[];
+}
+
+/**
+ * Serializer for count and percentage of a physical state category.
+ */
+export interface PhysicalStateDetail {
+  count: number;
+  percentage: number;
+}
+
+/**
+ * Combined serializer for all physical state distribution data.
+ */
+export interface PhysicalStateDistribution {
+  consciousness: ConsciousnessDistribution;
+  tremor_shaking: TremorShakingDistribution;
 }
 
 export interface RegisterPushNotification {
@@ -493,11 +498,11 @@ export interface Token {
 }
 
 /**
- * Serializer for count and percentage of events based on tremor/shaking.
+ * Serializer for tremor/shaking distribution data.
  */
-export interface TremorShakingDistributionDetail {
-  count: number;
-  percentage: number;
+export interface TremorShakingDistribution {
+  present: PhysicalStateDetail;
+  absent: PhysicalStateDetail;
 }
 
 /**
@@ -683,6 +688,10 @@ export type ApiDrugDosageRemindersDosemanagerRemindersListParams = {
  */
 date?: string;
 /**
+ * Filter reminders by taken status (true for taken reminders, false for untaken reminders).
+ */
+is_taken?: boolean;
+/**
  * If true, returns the nearest upcoming reminder for each active drug dosage, sorted by time. Ignores 'date' and pagination parameters.
  */
 nearest?: boolean;
@@ -760,28 +769,29 @@ export type ApiEpilepsyEpilepsyEventAnalyticsParams = {
  */
 end_date: string;
 /**
- * Type of period aggregation: day, week, month, or year
+ * Start date for the analysis period (format: YYYY-MM-DD or YYYY/MM/DD)
  */
-period_type?: ApiEpilepsyEpilepsyEventAnalyticsPeriodType;
+start_date: string;
+};
+
+export type ApiEpilepsyEpilepsyEventAnalytics400 = {[key: string]: unknown};
+
+export type ApiEpilepsyEpilepsyEventAnalytics401 = {[key: string]: unknown};
+
+export type ApiEpilepsyEpilepsySeverityDistributionParams = {
+/**
+ * End date for the analysis period (format: YYYY-MM-DD or YYYY/MM/DD), inclusive.
+ */
+end_date: string;
 /**
  * Start date for the analysis period (format: YYYY-MM-DD or YYYY/MM/DD)
  */
 start_date: string;
 };
 
-export type ApiEpilepsyEpilepsyEventAnalyticsPeriodType = typeof ApiEpilepsyEpilepsyEventAnalyticsPeriodType[keyof typeof ApiEpilepsyEpilepsyEventAnalyticsPeriodType];
+export type ApiEpilepsyEpilepsySeverityDistribution400 = {[key: string]: unknown};
 
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const ApiEpilepsyEpilepsyEventAnalyticsPeriodType = {
-  month: 'month',
-  week: 'week',
-  year: 'year',
-} as const;
-
-export type ApiEpilepsyEpilepsyEventAnalytics400 = {[key: string]: unknown};
-
-export type ApiEpilepsyEpilepsyEventAnalytics401 = {[key: string]: unknown};
+export type ApiEpilepsyEpilepsySeverityDistribution401 = {[key: string]: unknown};
 
 export type ApiEpilepsyEpilepsyEventSummaryParams = {
 /**
@@ -967,12 +977,12 @@ export const apiAuthenticationAuthVerifyOtpCreate = (
     }
   
 /**
- * @summary Get epilepsy events for calendar display
+ * @summary Get epilepsy events distribution for calendar display
  */
 export const apiCalendarCalendarEpilepsyEventsList = (
     params?: ApiCalendarCalendarEpilepsyEventsListParams,
  options?: SecondParameter<typeof api>,) => {
-      return api<EpilepsyCalendarEvent[]>(
+      return api<DateCount[]>(
       {url: `/dosemanager/calendar/events/epilepsy/`, method: 'GET',
         params
     },
@@ -980,12 +990,12 @@ export const apiCalendarCalendarEpilepsyEventsList = (
     }
   
 /**
- * @summary Get medication events for calendar display
+ * @summary Get medication events distribution for calendar display
  */
 export const apiCalendarCalendarMedicationEventsList = (
     params?: ApiCalendarCalendarMedicationEventsListParams,
  options?: SecondParameter<typeof api>,) => {
-      return api<MedicationCalendarEvent[]>(
+      return api<DateCount[]>(
       {url: `/dosemanager/calendar/events/medication/`, method: 'GET',
         params
     },
@@ -1243,6 +1253,19 @@ export const apiEpilepsyEpilepsyEventAnalytics = (
     }
   
 /**
+ * Get only severity distribution of epilepsy events for the authenticated user within a date range.
+ */
+export const apiEpilepsyEpilepsySeverityDistribution = (
+    params: ApiEpilepsyEpilepsySeverityDistributionParams,
+ options?: SecondParameter<typeof api>,) => {
+      return api<EpilepsySeverityDistribution>(
+      {url: `/epilepsy/events/severity-distribution/`, method: 'GET',
+        params
+    },
+      options);
+    }
+  
+/**
  * Get a comprehensive summary of epilepsy events for the authenticated user, filterable by date range and period type.
  */
 export const apiEpilepsyEpilepsyEventSummary = (
@@ -1364,6 +1387,7 @@ export type ApiEpilepsyEpilepsyEventUpdateResult = NonNullable<Awaited<ReturnTyp
 export type ApiEpilepsyEpilepsyEventPartialUpdateResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyEventPartialUpdate>>>
 export type ApiEpilepsyEpilepsyEventDeleteResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyEventDelete>>>
 export type ApiEpilepsyEpilepsyEventAnalyticsResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyEventAnalytics>>>
+export type ApiEpilepsyEpilepsySeverityDistributionResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsySeverityDistribution>>>
 export type ApiEpilepsyEpilepsyEventSummaryResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyEventSummary>>>
 export type ApiNotificationNotificationsListResult = NonNullable<Awaited<ReturnType<typeof apiNotificationNotificationsList>>>
 export type ApiNotificationNotificationsRetrieveResult = NonNullable<Awaited<ReturnType<typeof apiNotificationNotificationsRetrieve>>>

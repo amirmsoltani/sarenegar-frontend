@@ -71,7 +71,9 @@ class DateInstant {
   }
 
   public setToGlobalFormat(date: Date) {
-    const [month, day, year] = this.replaceSlashWithDash(date.toLocaleDateString()).split("-");
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
     return `${year}-${month}-${day}`;
   }
 
