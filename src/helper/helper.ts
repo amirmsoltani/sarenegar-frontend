@@ -65,7 +65,7 @@ export const weekdays: TDayPickerDay[] = [
 ];
 
 // ? date helper
-export const getNowDate = () => DateService.replaceSlashWithDash(new Date().toLocaleDateString());
+export const getNowDate = () => DateService.replaceSlashWithDash(DateService.setToGlobalFormat(new Date()));
 
 export const jalaliMonths: TWheelPickerOption[] = [
   { value: "1", label: "فروردین" },
@@ -82,7 +82,12 @@ export const jalaliMonths: TWheelPickerOption[] = [
   { value: "12", label: "اسفند" },
 ];
 
-const generateJalaliYears = () => {
+export const generateJalaliMonths = (year: number) => {
+  const { jy, jm } = jalaali.toJalaali(new Date());
+  return jy == year ? jalaliMonths.slice(0, jm) : jalaliMonths;
+};
+
+const generateJalaliYears = (removeFuture?: boolean) => {
   const { jy } = jalaali.toJalaali(new Date());
 
   const before: TWheelPickerOption[] = new Array(90)
@@ -93,21 +98,29 @@ const generateJalaliYears = () => {
     })
     .reverse();
 
-  const after: TWheelPickerOption[] = new Array(5).fill("").map((_, index) => {
-    const value = (jy + (index + 1)).toString();
-    return toLabelValue(value);
-  });
+  const after: TWheelPickerOption[] = removeFuture
+    ? []
+    : new Array(10).fill("").map((_, index) => {
+        const value = (jy + (index + 1)).toString();
+        return toLabelValue(value);
+      });
 
   const current: TWheelPickerOption = toLabelValue(jy.toString());
 
   return [...before, current, ...after];
 };
 
-export const jalaliYears = generateJalaliYears();
+export const allJalaliYears = generateJalaliYears();
+export const tillNowJalaliYears = generateJalaliYears(true);
 
-export const generateJalaliDays = (year: number, month: number): TWheelPickerOption[] => {
-  const days = jalaali.jalaaliMonthLength(year, month);
-  return new Array(days).fill("").map((_, index) => toLabelValue((index + 1).toString()));
+export const generateJalaliDays = (year: number, month: number, removeFuture?: boolean): TWheelPickerOption[] => {
+  const { jy, jm, jd } = jalaali.toJalaali(new Date());
+
+  let monthDays = jalaali.jalaaliMonthLength(year, month);
+
+  if (removeFuture && jy == year && jm == month) monthDays = Math.min(monthDays, jd);
+
+  return new Array(monthDays).fill("").map((_, index) => toLabelValue((index + 1).toString()));
 };
 
 const mapEnglishNumber2PersianNumber = {
