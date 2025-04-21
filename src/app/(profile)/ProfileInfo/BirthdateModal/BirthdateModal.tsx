@@ -10,7 +10,7 @@ export const BirthdateModal = () => {
   return (
     <Modal _ref={_ref} onClose={onClose} fullWidth title="تاریخ تولد خود را وارد نمایید">
       <div className={styles.wheelPickerContainer}>
-        <JalaliDatePicker name="birth_date_placeholder" />
+        <JalaliDatePicker name="birth_date_placeholder" removeFuture />
       </div>
       <div className={styles.submitButton}>
         <Button onClick={onSubmit}>تایید</Button>

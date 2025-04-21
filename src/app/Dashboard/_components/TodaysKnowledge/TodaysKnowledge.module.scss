@@ -1,5 +1,6 @@
 .container {
   flex: 1 1 0%;
+  padding-bottom: 4px;
   @include flex-start-end;
   @include text-14-semibold;
 

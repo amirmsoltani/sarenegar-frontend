@@ -52,7 +52,7 @@ const Info = ({
   is_expired,
   total_doses,
   taken_doses,
-  end_time_type,
+  drug_timing_type,
 }: TInfo) => {
   const percent = ((taken_doses ?? 0) * 100) / (total_doses ?? 0);
 
@@ -89,7 +89,7 @@ const Info = ({
           </div>
           <div className={styles.option}>
             <div className={styles.title}>زمانبندی</div>
-            <div>{end_time_type.value === "ALL_DAY" ? "هر روز" : `${days.length} روز در هفته`}</div>
+            <div>{drug_timing_type.value === "ALL_DAY" ? "هر روز" : `${days.length} روز در هفته`}</div>
           </div>
           <div className={styles.option}>
             <div className={styles.title}>ساعات مصرف</div>

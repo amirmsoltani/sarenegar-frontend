@@ -1,9 +1,13 @@
 import { useParams } from "react-router-dom";
 import { useCallback, useEffect } from "react";
 import { reportTypes } from "../../useReports";
+import { jalaliMonths } from "@/helper/helper";
+import { DateService } from "@/services/DateService";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { severityOptions } from "@/app/(epilepsy)/_common/epilepsyForm";
 import { getAnalyticsAction } from "@/store/report/actions/getAnalytics/getAnalytics.action";
+
+const DEFAULT_MAX_BAR_CHART_VALUE = 4;
 
 const weekLabels = ["شنبه", "1شنبه", "2شنبه", "3شنبه", "4شنبه", "5شنبه", "جمعه"];
 const monthLabels = (items: any[]) => new Array(items.length).fill("").map((_, index) => String(index + 1));
@@ -12,12 +16,16 @@ const yearLabels = new Array(12).fill("").map((_, index) => String(index + 1));
 export const barChartOptions = {
   responsive: true,
   maintainAspectRatio: false,
+  layout: { padding: { left: -10 } },
   plugins: {
-    legend: { display: false },
     title: { display: false },
-    tooltip: { callbacks: { label: ({ raw }: any) => `${raw} مورد` } },
+    legend: { display: false },
+    tooltip: { callbacks: { title: () => "", label: (props: any) => `${props.raw}` } },
   },
-  scales: { x: { reverse: true, grid: { display: false } }, y: { min: 0, max: 0, ticks: { stepSize: 1 } } },
+  scales: {
+    x: { reverse: true, grid: { display: false }, border: { display: false } },
+    y: { min: 0, max: DEFAULT_MAX_BAR_CHART_VALUE, ticks: { stepSize: 1, padding: 10 }, border: { display: false } },
+  },
 };
 
 export const doughnutChartOptions = {
@@ -53,7 +61,7 @@ export const useReportsInfo = () => {
       current.count > prev.max && (prev.max = current.count);
       return prev;
     },
-    { data: [], max: 4 },
+    { data: [], max: DEFAULT_MAX_BAR_CHART_VALUE },
   );
   const barChartData = {
     labels:
@@ -66,6 +74,15 @@ export const useReportsInfo = () => {
   };
 
   barChartOptions.scales.y.max = barChartDataset.max;
+  barChartOptions.plugins.tooltip.callbacks.label = ({ dataIndex, raw }) => {
+    if (type === reportTypes[2].value) {
+      return `${jalaliMonths[dataIndex].label} ماه ${raw} مورد`;
+    } else {
+      const date = new Date(start!);
+      date.setDate(date.getDate() + dataIndex);
+      return `${DateService.customTranslate(date, { weekday: "long", day: "numeric", month: "long" })} ${raw} مورد`;
+    }
+  };
 
   const doughnutChartData = {
     labels: severityOptions.map((option) => option.label),
@@ -81,9 +98,7 @@ export const useReportsInfo = () => {
     ],
   };
 
-  // @ts-ignore
   const termor = state.data?.selected_period.physical_state_distribution.tremor_shaking.present?.percentage ?? 0;
-  // @ts-ignore
   const consciousness = state.data?.selected_period.physical_state_distribution.consciousness.retained?.percentage ?? 0;
 
   const morning = state.data?.selected_period.time_of_day_distribution.morning.percentage ?? 0;

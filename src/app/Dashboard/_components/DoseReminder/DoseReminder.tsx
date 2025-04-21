@@ -29,7 +29,7 @@ export const DoseReminder = () => {
             pagination={{ dynamicBullets: true }}
             onSwiper={(swiper) => (swiperRef.current = swiper)}
           >
-            {listState.data!.results.map(({ reminder_id, drug_dosage_info, reminder_name, taken }) => (
+            {listState.data!.results.map(({ reminder_id, drug_dosage_info, reminder_time, taken }) => (
               <SwiperSlide key={reminder_id} className={styles.card}>
                 <div className={styles.cardHeader}>
                   <div className={styles.detail}>
@@ -63,7 +63,7 @@ export const DoseReminder = () => {
                     {medicineUnitTranslator((drug_dosage_info?.dose as any)?.unit)?.label} |
                     {medicineUsageTypeTranslator(drug_dosage_info!.type_of_usage!)?.label}
                   </div>
-                  <div>{reminder_name}</div>
+                  <div>{reminder_time.slice(0, 5)}</div>
                 </div>
               </SwiperSlide>
             ))}

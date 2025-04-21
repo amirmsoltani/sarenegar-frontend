@@ -50,14 +50,14 @@ export const ReportsInfo = () => {
             </div>
             <div className={styles.boxes}>
               <div className={styles.box}>
-                <div className={styles.boxTitle}>هفته جاری</div>
+                <div className={styles.boxTitle}>{type} جاری</div>
                 <div className={styles.boxValue}>
                   <span className={styles.boxValueStrong}>{data.selected_period.total_events ?? 0}</span>
                   &nbsp;مورد
                 </div>
               </div>
               <div className={styles.box}>
-                <div className={styles.boxTitle}>هفته گذشته</div>
+                <div className={styles.boxTitle}>{type} گذشته</div>
                 <div className={styles.boxValue}>
                   <span className={styles.boxValueStrong}>{data.previous_period.total_events ?? 0}</span>
                   &nbsp;مورد
@@ -69,7 +69,7 @@ export const ReportsInfo = () => {
                 <div className={styles.spacingSm}></div>
                 <div className={styles.box}>
                   <div className={styles.firstChart}>
-                    <div className={styles.boxTitle}>نمودار هفته جاری</div>
+                    <div className={styles.boxTitle}>نمودار {type} جاری</div>
                     <div className={styles.chartContainer}>
                       <Bar options={barChartOptions} data={barChartData} />
                     </div>
@@ -99,7 +99,7 @@ export const ReportsInfo = () => {
             </div>
             <div className={styles.boxes}>
               <div className={styles.box}>
-                <div className={styles.boxTitle}>میانگین این هفته</div>
+                <div className={styles.boxTitle}>میانگین این {type}</div>
                 <div className={styles.boxValue}>
                   <span className={styles.boxValueStrong}>
                     {secondToTime(data.selected_period.average_duration_seconds ?? 0)}
@@ -107,7 +107,7 @@ export const ReportsInfo = () => {
                 </div>
               </div>
               <div className={styles.box}>
-                <div className={styles.boxTitle}>میانگین هفته گذشته</div>
+                <div className={styles.boxTitle}>میانگین {type} گذشته</div>
                 <div className={styles.boxValue}>
                   <span className={styles.boxValueStrong}>
                     {secondToTime(data.previous_period.average_duration_seconds ?? 0)}
