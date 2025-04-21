@@ -7,7 +7,7 @@ export const getCalendarEpilepsyEventsAction = StoreUtils.createAsyncThunk(
     const response = await apiEpilepsyEpilepsyEventAnalytics({
       end_date: range.endDate,
       start_date: range.startDate,
-      period_type: "month",
+      // period_type: "month",
     });
     const events: Record<string, number> = {};
 
