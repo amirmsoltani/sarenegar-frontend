@@ -15,15 +15,20 @@ const genList = () => {
   };
 
   const before = new Array(14).fill("").map((_, index) => {
-    const date = DateService.replaceSlashWithDash(new Date(now - (index + 1) * DAY_IN_MILLISECOND).toLocaleDateString());
+    const date = DateService.replaceSlashWithDash(
+      DateService.setToGlobalFormat(new Date(now - (index + 1) * DAY_IN_MILLISECOND)),
+    );
     return {
       date,
       day: DateService.customTranslate(date, { day: "numeric" }),
       weekday: DateService.customTranslate(date, { weekday: "short" }),
     };
   });
+
   const after = new Array(14).fill("").map((_, index) => {
-    const date = DateService.replaceSlashWithDash(new Date(now + (index + 1) * DAY_IN_MILLISECOND).toLocaleDateString());
+    const date = DateService.replaceSlashWithDash(
+      DateService.setToGlobalFormat(new Date(now + (index + 1) * DAY_IN_MILLISECOND)),
+    );
     return {
       date,
       day: DateService.customTranslate(date, { day: "numeric" }),
