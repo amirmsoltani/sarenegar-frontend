@@ -39,9 +39,11 @@
       align-items: center;
       justify-content: center;
       display: flex;
-
+      cursor: pointer;
+      user-select: none;
       &.active {
         background-color: var(--secondary);
+        pointer-events: none;
       }
     }
   }
@@ -97,7 +99,7 @@
       & > *{
         border-right:solid var(--stroke) 1px;
         border-top:solid var(--stroke) 1px;
-        aspect-ratio: 1;
+        aspect-ratio: 1.1;
         display: flex;
         flex-grow: 1;
         flex-basis: 14%;
@@ -126,6 +128,16 @@
         justify-content: space-between;
         @include text-14-regular;
         color: var(--text);
+        cursor: pointer;
+
+        &.selected{
+          border: solid var(--primary) 1px;
+          border-radius: 4px;
+        }
+
+        &.empty{
+          pointer-events: none;
+        }
 
         .event{
           display: flex;
@@ -139,6 +151,12 @@
           color: var(--secondary);
           background-color: var(--secondary-10);
 
+          &.medicine{
+            background-color: var(--medicine-10);
+            border-color: var(--medicine);
+            color: var(--medicine);
+          }
+
           svg{
             opacity: 0.8;
             margin: 0;
@@ -150,6 +168,8 @@
 
       }
     }
+
+
 
   }
 }

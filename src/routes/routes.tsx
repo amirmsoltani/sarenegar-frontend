@@ -44,7 +44,7 @@ export const routes = {
   },
   addEpilepsyEvent: {
     path: "add-epilepsy",
-    href: (date?:string) => `${RouterService.setDate(date)}/add-epilepsy`,
+    href: (date?: string) => `${RouterService.setDate(date)}/add-epilepsy`,
     modals: {
       occurrenceTimeModal: {
         path: "occurrence-time",
@@ -112,7 +112,7 @@ export const routes = {
   },
   addMedicine: {
     path: "add-medicine",
-    href: () => `${RouterService.setDate()}/add-medicine`,
+    href: (date?:string) => `${RouterService.setDate(date)}/add-medicine`,
     modals: {
       startDate: {
         path: "start-date",
@@ -265,16 +265,27 @@ export const routes = {
     path: "notification",
     href: () => `${RouterService.setDate()}/notification`,
   },
-  calendar:{
+  calendarWrapper: {
     path: "calendar",
-    href: () => `/calendar`,
+    href: (date?: string) => `${RouterService.setDate(date)}/calendar`,
     icon: CalendarTick,
     activeIcon: CalendarTickActive,
-    modals:{
-      epilepsy: {
-        path: ":date/epilepsy",
-        href: (date:string) => `/calendar/${date}/epilepsy`,
+  },
+  calendar: {
+    path: ":mode",
+    href: (date?: string, mode: "attack" | "medicine" = "attack") => `${RouterService.setDate(date)}/calendar/${mode}`,
+    modals: {
+      events: {
+        path: "events",
+        href: (date: string, mode: "attack" | "medicine") => `${RouterService.setDate(date)}/calendar/${mode}/events`,
+
+        modals: {
+          takeDose: {
+            path: ":reminderID",
+            href: (reminderID: number) => `${RouterService.setDate()}/calendar/medicine/events/${reminderID}`,
+          },
+        },
       },
-    }
-  }
+    },
+  },
 };

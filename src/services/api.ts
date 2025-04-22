@@ -881,11 +881,8 @@ export const apiUserAuthMeRetrieve = (
     }
   
 /**
- * API endpoint for user profile management.
-GET /auth/profile/ - Get profile
-PUT /auth/profile/ - Update profile
-POST /auth/profile/set_password/ - Set initial password
-POST /auth/profile/change_password/ - Change existing password
+ * Retrieve the user profile with caching.
+Cache varies by Authorization header to ensure user-specific cache.
  * @summary Retrieve authenticated user profile
  */
 export const apiProfileAuthProfileRetrieve = (
@@ -898,11 +895,7 @@ export const apiProfileAuthProfileRetrieve = (
     }
   
 /**
- * API endpoint for user profile management.
-GET /auth/profile/ - Get profile
-PUT /auth/profile/ - Update profile
-POST /auth/profile/set_password/ - Set initial password
-POST /auth/profile/change_password/ - Change existing password
+ * Update the complete user profile.
  * @summary Update authenticated user profile (full update)
  */
 export const apiProfileAuthProfileUpdate = (
@@ -917,11 +910,7 @@ export const apiProfileAuthProfileUpdate = (
     }
   
 /**
- * API endpoint for user profile management.
-GET /auth/profile/ - Get profile
-PUT /auth/profile/ - Update profile
-POST /auth/profile/set_password/ - Set initial password
-POST /auth/profile/change_password/ - Change existing password
+ * Update partial user profile data.
  * @summary Partially update authenticated user profile
  */
 export const apiProfileAuthProfilePartialUpdate = (
@@ -936,11 +925,7 @@ export const apiProfileAuthProfilePartialUpdate = (
     }
   
 /**
- * API endpoint for user profile management.
-GET /auth/profile/ - Get profile
-PUT /auth/profile/ - Update profile
-POST /auth/profile/set_password/ - Set initial password
-POST /auth/profile/change_password/ - Change existing password
+ * Change password for authenticated user.
  * @summary Change password for authenticated user (requires current password or OTP)
  */
 export const apiProfileAuthProfileChangePasswordCreate = (

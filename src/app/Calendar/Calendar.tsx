@@ -7,9 +7,22 @@ import { e2p } from "@/helper/helper.ts";
 import { Flash } from "@wandersonalwes/iconsax-react";
 import { Spinner } from "@/common/Spinner/Spinner.tsx";
 import { Outlet } from "react-router-dom";
+import PillIcon from "@/assets/svg/pill-icon.svg";
+import { CalendarFooter } from "@/app/Calendar/_components/CalendarFooter/CalendarFooter.tsx";
 
 export const Calendar = () => {
-  const { days, nextMonthHandler, previousMonthHandler, title, events, isLoading, mode, changeModeHandler, dayClickHandler } = useCalendar();
+  const {
+    days,
+    nextMonthHandler,
+    previousMonthHandler,
+    title,
+    events,
+    isLoading,
+    mode,
+    date,
+    changeModeHandler,
+    dayClickHandler,
+  } = useCalendar();
 
   return (
     <div className={styles.wrapper}>
@@ -21,7 +34,10 @@ export const Calendar = () => {
         <div className={classNames(styles.tabItem, { [styles.active]: mode === "attack" })} onClick={changeModeHandler("attack")}>
           حمله
         </div>
-        <div className={classNames(styles.tabItem, { [styles.active]: mode === "medicine" })} onClick={changeModeHandler("medicine")}>
+        <div
+          className={classNames(styles.tabItem, { [styles.active]: mode === "medicine" })}
+          onClick={changeModeHandler("medicine")}
+        >
           دارو
         </div>
       </div>
@@ -51,20 +67,24 @@ export const Calendar = () => {
             days.map((day, index) => (
               <div
                 onClick={dayClickHandler(day)}
-                className={styles.weekDay}
+                className={classNames(styles.weekDay, {
+                  [styles.selected]: day.type === "regular" && day.date === date,
+                  [styles.empty]: day.type === "empty",
+                })}
                 key={day.type === "empty" ? day.type + index : day.date + index}
               >
                 {e2p(day.type === "empty" ? "" : day.text)}
                 {day.type === "regular" && events[day.date] ? (
-                  <div className={styles.event}>
+                  <div className={classNames(styles.event, { [styles.medicine]: mode === "medicine" })}>
                     <span>{e2p(events[day.date])}</span>
-                    <Flash variant={"Bold"} size={14} />
+                    {mode === "attack" ? <Flash variant={"Bold"} size={14} /> : <PillIcon />}
                   </div>
                 ) : null}
               </div>
             ))
           )}
         </div>
+        <CalendarFooter/>
       </div>
 
       <Navbar />

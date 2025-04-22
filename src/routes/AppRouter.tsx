@@ -43,6 +43,11 @@ import { CompleteMedicineModal } from "@/app/(medicine)/Medicine/MedicineInfo/Co
 import { DeleteEpilepsyEventModal } from "@/app/(epilepsy)/EpilepsyEventInfo/DeleteEpilepsyEventModal/DeleteEpilepsyEventModal";
 import { useAppRouter } from "@/routes/useAppRouter.ts";
 import { Calendar } from "@/app/Calendar/Calendar.tsx";
+import { CalendarEvents } from "@/app/Calendar/_components/CalendarEvents/CalendarEvents.tsx";
+import { CalendarWrapper } from "@/app/Calendar/_components/CalendarWrapper/CalendarWrapper.tsx";
+import {
+  CalendarNotTakeDoseModal
+} from "@/app/Calendar/_components/CalendarNotTakeDoseModal/CalendarNotTakeDoseModal.tsx";
 
 const AppRouter = () => {
   const { isLogin } = useAppRouter();
@@ -119,9 +124,13 @@ const AppRouter = () => {
               <Route path={routes.reports.path} Component={ReportsLayout}>
                 <Route path={routes.reportsInfo.path} Component={Reports} />
               </Route>
-            </Route>
-            <Route path={routes.calendar.path} Component={Calendar} >
-              <Route path={routes.calendar.modals.epilepsy.path} Component={EpilepsyModal} />
+              <Route path={routes.calendarWrapper.path} Component={CalendarWrapper}>
+                <Route path={routes.calendar.path} Component={Calendar}>
+                  <Route path={routes.calendar.modals.events.path} Component={CalendarEvents} >
+                    <Route path={routes.calendar.modals.events.modals.takeDose.path} Component={CalendarNotTakeDoseModal}/>
+                  </Route>
+                </Route>
+              </Route>
             </Route>
           </Route>
         </Routes>

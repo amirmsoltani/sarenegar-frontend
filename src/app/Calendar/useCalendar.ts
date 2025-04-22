@@ -1,17 +1,17 @@
 import { useCustomState } from "@/common/UseCustomState/UseCustomState.ts";
 import { DateService } from "@/services/DateService.ts";
 import { useAppDispatch, useAppSelector } from "@/store/store.ts";
-import { getCalendarEpilepsyEventsAction } from "@/store/calendar/actions/getCalendarEpilepsyEvents/getCalendarEpilepsyEvents.ts";
+import { getCalendarEventsAction } from "@/store/calendar/actions/getCalendarEvents/getCalendarEvents.ts";
 import { getEpilepsyEventListAction } from "@/store/epilepsy/actions/getEpilepsyEventList/getEpilepsyEventList.action.ts";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { routes } from "@/routes/routes.tsx";
+import { useEffect } from "react";
 
 export const weekDays = ["ش", "ی", "د", "س", "چ", "پ", "ج"];
 
 type Day = { type: "empty" } | { type: "regular"; date: string; text: string };
 
 interface IState {
-  mode: "attack" | "medicine";
   monthStart: string;
   monthEnd: string;
   title: string;
@@ -21,12 +21,17 @@ interface IState {
 export function useCalendar() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const events = useAppSelector((store) => store.calendar.epilepsyEventObject);
+  const { date, mode } = useParams<{ date: string; mode: "attack" | "medicine" }>();
+  const events = useAppSelector((store) => store.calendar.calendarEventObject);
+
+  useEffect(() => {
+    dispatch(getCalendarEventsAction({ startDate: state.monthStart, endDate: state.monthEnd, mode: mode! }));
+    // eslint-disable-next-line
+  }, [mode, dispatch]);
 
   const { setState, state } = useCustomState<IState>(() => {
-    const data = DateService.createMonth() as unknown as IState;
-    data["mode"] = "attack";
-    dispatch(getCalendarEpilepsyEventsAction({ startDate: data.monthStart, endDate: data.monthEnd }));
+    const data = DateService.createMonth(new Date(date!)) as unknown as IState;
+    dispatch(getCalendarEventsAction({ startDate: data.monthStart, endDate: data.monthEnd, mode: mode! }));
     return data;
   });
 
@@ -34,7 +39,7 @@ export function useCalendar() {
     const endDate = new Date(state.monthEnd);
     endDate.setMonth(endDate.getMonth() + 1);
     const data = DateService.createMonth(endDate) as unknown as IState;
-    dispatch(getCalendarEpilepsyEventsAction({ startDate: data.monthStart, endDate: data.monthEnd }));
+    dispatch(getCalendarEventsAction({ startDate: data.monthStart, endDate: data.monthEnd, mode: mode! }));
     setState(data);
   }
 
@@ -42,33 +47,39 @@ export function useCalendar() {
     const startDate = new Date(state.monthStart);
     startDate.setMonth(startDate.getMonth() - 1);
     const data = DateService.createMonth(startDate) as unknown as IState;
-    dispatch(getCalendarEpilepsyEventsAction({ startDate: data.monthStart, endDate: data.monthEnd }));
+    dispatch(getCalendarEventsAction({ startDate: data.monthStart, endDate: data.monthEnd, mode: mode! }));
     setState(data);
   }
 
   function changeModeHandler(mode: "attack" | "medicine") {
     return () => {
-      setState({ mode });
-      dispatch(getCalendarEpilepsyEventsAction({ startDate: state.monthStart, endDate: state.monthEnd }));
+      navigate(routes.calendar.href(undefined,mode));
     };
   }
 
   function dayClickHandler(day: Day) {
     return () => {
       if (day.type === "empty") return;
-      if (state.mode === "attack") {
-        const [year,month,_day] = day.date.split("-");
-        dispatch(getEpilepsyEventListAction({ date: `${month}-${_day}-${year}` }));
-        if(events.data![day.date])
-        navigate(routes.calendar.modals.epilepsy.href(day.date));
-        else navigate(routes.addEpilepsyEvent.href(`${month}-${_day}-${year}`));
+      const globalFormat = DateService.setToGlobalFormat(new Date(day.date));
+      if (mode === "attack") {
+        if (events.data![day.date]) {
+          dispatch(getEpilepsyEventListAction({ date: globalFormat }));
+          navigate(routes.calendar.modals.events.href(globalFormat,"attack"));
+        } else navigate(routes.calendar.href(day.date,"attack"));
+      }
+
+      if (mode === "medicine") {
+        if (events.data![day.date]) {
+          navigate(routes.calendar.modals.events.href(globalFormat,"medicine"));
+        } else navigate(routes.calendar.href(day.date,"medicine"));
       }
     };
   }
 
   return {
     days: state.days,
-    mode: state.mode,
+    date: DateService.getGregorianDate(date),
+    mode,
     changeModeHandler,
     nextMonthHandler,
     previousMonthHandler,

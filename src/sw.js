@@ -17,27 +17,28 @@ self.addEventListener('fetch', event => {
   );
 });
 self.addEventListener('push', event => {
-  console.log('Push event received:', event.data.text(),event.data.json());
-  const data = event.data.json();
+  const data = event.data.json().data;
+  console.log(data , "*****************");
   const options = {
-    title:`یادآور مصرف دارو ${data.drug_title}`,
-    body: `پادآوری برای مصرف دارو در تاریخ ${DateService.getDate(data.drug_dosage_reminder_date)} و ساعت ${"ساعت ارسال نمی شود"} برای جزئیات بیشتر کلیک کنید`,
+    body: ` یادآوری برای مصرف دارو${data.drug_title} در تاریخ ${DateService.getDate(data.reminder_date)} و ساعت ${DateService.getTime(data.reminder_date)}`,
     icon: '/icon-512.png',
     badge: '/favicon.ico',
-    sound: '/notification-sound.ogg',
-    vibrate: [200, 100, 200],
+    silent:false,
+    requireInteraction:true,
+    dir:"rtl",
     data
   };
   event.waitUntil(
-    self.registration.showNotification('Push Notification', options)
+    self.registration.showNotification(`یادآور مصرف دارو ${data.drug_title}`, options)
   );
 });
 
 self.addEventListener('notificationclick', event => {
+  const data = event.notification.data;
+  console.log(data,"*****************");
+  const date = new Date(data.reminder_date);
   event.notification.close();
-  console.log(event.notification.data,"****************");
-  const [year,month,day] = event.notification.data.drug_dosage_reminder_date.split("-");
   event.waitUntil(
-    clients.openWindow(`https://dev.epical.ir/${month}-${day}-${year}/medicine-info/${event.notification.data.drug_dosage_id}`)
+    clients.openWindow(`https://dev.epical.ir/${DateService.setToGlobalFormat(date)}/calendar/medicine/events/${data.reminder_id}`)
   );
 });
