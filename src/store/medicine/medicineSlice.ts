@@ -38,7 +38,7 @@ const medicineSlice = createSlice({
     addMedicine(state, action: PayloadAction<DrugDosageRetrieve>) {
       const currentList = action.payload.is_expired ? "completedMedicinesList" : "currentMedicinesList";
       if (state[currentList].data) {
-        state[currentList].data.results.push(action.payload);
+        state[currentList].data.results.unshift(action.payload);
         state[currentList].data.count++;
       }
       state.dosesList = StoreUtils.normalActionInitState;

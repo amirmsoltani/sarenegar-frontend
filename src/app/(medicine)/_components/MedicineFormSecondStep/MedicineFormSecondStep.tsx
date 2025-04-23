@@ -19,7 +19,7 @@ export const MedicineFormSecondStep = ({ type }: TMedicineFormSecondStep) => {
         </div>
       </section>
       <footer className={styles.footer}>
-        <FormButton>{type === "ADD" ? "افروزن دارو" : type === "EDIT" ? "ویرایش دارو" : "باز مصرف دارو"}</FormButton>
+        <FormButton>{type === "ADD" ? "افزودن دارو" : type === "EDIT" ? "ویرایش دارو" : "باز مصرف دارو"}</FormButton>
       </footer>
     </>
   );
