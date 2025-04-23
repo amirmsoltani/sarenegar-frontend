@@ -2,6 +2,8 @@ import jalaali from "jalaali-js";
 import { DateService } from "@/services/DateService";
 import { TDayPickerDay, TWheelPickerOption } from "./../common/Form/FormUtils.types";
 
+export const isObject = (value: any) => typeof value === "object" && value !== null && !Array.isArray(value);
+
 export const toLabelValue = <T>(value: T) => ({ label: value, value });
 
 export const withPadStart = (number: number) => (number >= 10 ? `${number}` : `0${number}`);
@@ -65,7 +67,7 @@ export const weekdays: TDayPickerDay[] = [
 ];
 
 // ? date helper
-export const getNowDate = () => DateService.replaceSlashWithDash(DateService.setToGlobalFormat(new Date()));
+export const getNowDate = () => DateService.setToGlobalFormat(new Date());
 
 export const jalaliMonths: TWheelPickerOption[] = [
   { value: "1", label: "فروردین" },
@@ -100,7 +102,7 @@ const generateJalaliYears = (removeFuture?: boolean) => {
 
   const after: TWheelPickerOption[] = removeFuture
     ? []
-    : new Array(10).fill("").map((_, index) => {
+    : new Array(90).fill("").map((_, index) => {
         const value = (jy + (index + 1)).toString();
         return toLabelValue(value);
       });
@@ -123,6 +125,7 @@ export const generateJalaliDays = (year: number, month: number, removeFuture?: b
   return new Array(monthDays).fill("").map((_, index) => toLabelValue((index + 1).toString()));
 };
 
+// ? number helper
 const mapEnglishNumber2PersianNumber = {
   "0": "۰",
   "1": "۱",
@@ -135,15 +138,34 @@ const mapEnglishNumber2PersianNumber = {
   "8": "۸",
   "9": "۹",
 };
+type TMapEnglishNumber2PersianNumber = keyof typeof mapEnglishNumber2PersianNumber;
 
-export function e2p(english?: string | number | null) {
-  if (!["number", "string"].includes(typeof english)) return english;
-  if (typeof english === "number") english = english.toString();
-  const separatedText = english!.split("");
-  const text = separatedText.map((char) =>
-    char in mapEnglishNumber2PersianNumber
-      ? mapEnglishNumber2PersianNumber[char as keyof typeof mapEnglishNumber2PersianNumber]
-      : char,
-  );
-  return text.join("");
-}
+const mapPersianNumber2EnglishNumber = {
+  "۰": "0",
+  "۱": "1",
+  "۲": "2",
+  "۳": "3",
+  "۴": "4",
+  "۵": "5",
+  "۶": "6",
+  "۷": "7",
+  "۸": "8",
+  "۹": "9",
+};
+type TMapPersianNumber2EnglishNumber = keyof typeof mapPersianNumber2EnglishNumber;
+
+export const e2p = (english?: string | number | null) => {
+  if (english) {
+    return english
+      .toString()
+      .replace(/[1-9]/g, (char) => mapEnglishNumber2PersianNumber[char as TMapEnglishNumber2PersianNumber]);
+  } else return "";
+};
+
+export const p2e = (persian?: string | number | null) => {
+  if (persian) {
+    return persian
+      .toString()
+      .replace(/[۰-۹]/g, (char) => mapPersianNumber2EnglishNumber[char as TMapPersianNumber2EnglishNumber]);
+  } else return "";
+};

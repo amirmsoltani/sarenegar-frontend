@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import { isObject } from "@/helper/helper";
 import { appStore } from "@/store/store.ts";
 import axios, { AxiosResponse } from "axios";
 import { CookieRepository } from "@/helper/cookie";
@@ -20,8 +21,18 @@ export const api = async <T>(
 ): Promise<AxiosResponse<T, any>> => {
   return apiInstance<T>({ url, method, data, headers, params, ...options })
     .catch(async (err) => {
-      const message = err?.response?.data?.detail ?? err?.response?.data?.message;
+      const response = err?.response?.data;
+      const message = response?.error ?? response?.message;
       if (message && typeof message === "string") toast.error(message);
+      else if (isObject(response)) {
+        const errors = Object.values(response);
+        if (errors.length) {
+          errors.forEach(
+            (group) => Array.isArray(group) && (group as string[]).forEach((message: string) => toast.error(message)),
+          );
+          return;
+        }
+      }
 
       const status = err?.response?.status;
       if (status === 401 && url !== "/auth/logout/") await appStore.dispatch(logoutAction(undefined));
