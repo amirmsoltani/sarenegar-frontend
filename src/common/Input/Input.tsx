@@ -45,6 +45,7 @@ export const InputUi = forwardRef(function InputUi(
           id={id}
           {...rest}
           value={value}
+          autoComplete="off"
           disabled={disabled}
           dir={value ? dir : undefined}
           className={`${styles.input} ${className}`}

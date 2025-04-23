@@ -19,6 +19,7 @@ export const Otp = ({ name, length }: TOtp) => {
           render={({ field, fieldState }) => (
             <input
               {...field}
+              type="number"
               className={styles.input}
               onMouseUp={(e) => e.preventDefault()}
               data-error={!!fieldState.error?.message}

@@ -1,4 +1,5 @@
 import { TOtp } from "./Otp";
+import { p2e } from "@/helper/helper";
 import { int_regex } from "@/helper/regex";
 import { useFormContext } from "react-hook-form";
 import { ChangeEvent, ClipboardEvent, KeyboardEvent } from "react";
@@ -7,7 +8,7 @@ export const useOtp = ({ name, length }: TOtp) => {
   const { control, setValue, formState } = useFormContext();
 
   const onChangeHandler = (index: number, e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+    const value = p2e(e.target.value);
 
     if (int_regex.test(value)) {
       if (value.length === 1) setValue(`${name}.${index}`, value, { shouldValidate: formState.isSubmitted });
@@ -22,15 +23,12 @@ export const useOtp = ({ name, length }: TOtp) => {
     if (e.key === "Backspace") {
       setValue(`${name}.${index}`, "", { shouldValidate: formState.isSubmitted });
       const prevElement = (e.target as HTMLInputElement).previousElementSibling as HTMLInputElement;
-      if (prevElement) {
-        prevElement.focus();
-        setTimeout(() => prevElement.select(), 0);
-      }
+      if (prevElement) prevElement.focus();
     }
   };
 
   const onPasteHandler = (index: number, e: ClipboardEvent<HTMLInputElement>) => {
-    const value = e.clipboardData.getData("text/plain");
+    const value = p2e(e.clipboardData.getData("text/plain"));
     if (value.length > 1 && /\d+/.test(value)) {
       const splitted = value.split("");
       splitted.forEach((char, _index) => {
