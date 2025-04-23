@@ -26,7 +26,9 @@ export const Profile = () => {
               <User />
             </div>
             {user.full_name && <div className={styles.name}>{user.full_name}</div>}
-            <div className={styles.phone}>{user.phone_number}</div>
+            <div className={styles.phone} dir="ltr">
+              {user.phone_number}
+            </div>
           </div>
         </div>
       </header>

@@ -27,7 +27,7 @@ export const ProfileInfo = () => {
             <Input name="name" label="نام و نام‌خانوادگی" placeholder="نام و نام‌خانوادگی خود را وارد کنید" />
           </div>
           <div>
-            <Input name="phone" label="شماره موبایل" placeholder="شماره موبایل" disabled />
+            <Input name="phone" label="شماره موبایل" placeholder="شماره موبایل" disabled dir="ltr" />
           </div>
           <div>
             <GenderInput />
