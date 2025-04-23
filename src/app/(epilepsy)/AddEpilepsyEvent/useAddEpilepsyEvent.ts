@@ -15,7 +15,8 @@ export const useAddEpilepsyEvent = () => {
   const methods = useForm({
     defaultValues: {
       ...epilepsyEventFormDefaultValues,
-      time_of_occurrence: { ...epilepsyEventFormDefaultValues.time_of_occurrence, date: date as string },
+      time_of_occurrence: { ...epilepsyEventFormDefaultValues.time_of_occurrence, date: date! },
+      time_of_occurrence_placeholder: { ...epilepsyEventFormDefaultValues.time_of_occurrence_placeholder, date: date! },
     },
   });
 

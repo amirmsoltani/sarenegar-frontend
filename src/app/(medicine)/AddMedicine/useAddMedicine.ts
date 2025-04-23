@@ -1,6 +1,7 @@
 import { routes } from "@/routes/routes";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { DateService } from "@/services/DateService";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { medicineFormDefaultValues } from "../_common/medicineForm";
 import { TMedicineForm } from "@/store/medicine/medicineSlice.types";
@@ -9,12 +10,20 @@ import { useStatusHandler } from "@/common/useStatusHandler/useStatusHandler";
 import { addMedicineAction } from "@/store/medicine/actions/addMedicine/addMedicine.action";
 
 export const useAddMedicine = () => {
+  const { date } = useParams();
+
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
   const state = useAppSelector((store) => store.medicine.addMedicine);
 
-  const methods = useForm({ defaultValues: medicineFormDefaultValues });
+  const methods = useForm({
+    defaultValues: {
+      ...medicineFormDefaultValues,
+      start_date: DateService.gregorianToJalali(date),
+      start_date_placeholder: DateService.gregorianToJalali(date),
+    },
+  });
 
   const step = methods.watch("step");
 

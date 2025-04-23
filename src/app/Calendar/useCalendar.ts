@@ -53,7 +53,7 @@ export function useCalendar() {
 
   function changeModeHandler(mode: "attack" | "medicine") {
     return () => {
-      navigate(routes.calendar.href(undefined,mode));
+      navigate(routes.calendar.href(undefined, mode));
     };
   }
 
@@ -64,14 +64,14 @@ export function useCalendar() {
       if (mode === "attack") {
         if (events.data![day.date]) {
           dispatch(getEpilepsyEventListAction({ date: globalFormat }));
-          navigate(routes.calendar.modals.events.href(globalFormat,"attack"));
-        } else navigate(routes.calendar.href(day.date,"attack"));
+          navigate(routes.calendar.modals.events.href(globalFormat, "attack"));
+        } else navigate(routes.calendar.href(globalFormat, "attack"));
       }
 
       if (mode === "medicine") {
         if (events.data![day.date]) {
-          navigate(routes.calendar.modals.events.href(globalFormat,"medicine"));
-        } else navigate(routes.calendar.href(day.date,"medicine"));
+          navigate(routes.calendar.modals.events.href(globalFormat, "medicine"));
+        } else navigate(routes.calendar.href(globalFormat, "medicine"));
       }
     };
   }
