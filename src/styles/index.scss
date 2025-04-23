@@ -5,8 +5,8 @@
   padding: 0;
   box-sizing: border-box;
 
+  font-family: "Yekan Bakh", sans-serif;
   font-synthesis: none;
-  font-family: "Yekan Bakh FaNum", sans-serif;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -39,13 +39,12 @@
   --green-success-10: #e8f7ec;
   --green-success: #18a941;
   --red-10: #feecee;
-  --blue-background:#F7F9FC;
-  --text:#000E41;
-  --medicine : #00B099;
-  --medicine-10 : #00B09919;
+  --blue-background: #f7f9fc;
+  --text: #000e41;
+  --medicine: #00b099;
+  --medicine-10: #00b09919;
 
-
-  --toastify-font-family: "Yekan Bakh FaNum", sans-serif;
+  --toastify-font-family: "Yekan Bakh", sans-serif;
   --toastify-toast-shadow: 0px 4px 8px 0px rgba(from var(--black) r g b / 10%);
 }
 
