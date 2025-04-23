@@ -2,6 +2,7 @@ import { TAppStore } from "@/store/store";
 import { addEvent } from "../../epilepsySlice";
 import { StoreUtils } from "@/store/Store.utils";
 import { TEpilepsyEventForm } from "../../epilepsySlice.types";
+import { resetSummaryReport } from "@/store/report/reportSlice";
 import { apiEpilepsyEpilepsyEventCreate, EpilepsyCreateRequest } from "@/services/api";
 
 export const addEpilepsyEventAction = StoreUtils.createAsyncThunk(
@@ -34,6 +35,8 @@ export const addEpilepsyEventAction = StoreUtils.createAsyncThunk(
     if (store.epilepsy.epilepsyEventList.data?.date === time_of_occurrence.date) {
       thunk.dispatch(addEvent(response.data));
     }
+
+    thunk.dispatch(resetSummaryReport());
 
     return response.data;
   },

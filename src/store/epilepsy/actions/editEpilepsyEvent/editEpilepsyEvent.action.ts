@@ -1,6 +1,7 @@
 import { editEvent } from "../../epilepsySlice";
 import { StoreUtils } from "@/store/Store.utils";
 import { TEpilepsyEventForm } from "../../epilepsySlice.types";
+import { resetSummaryReport } from "@/store/report/reportSlice";
 import { apiEpilepsyEpilepsyEventUpdate, EpilepsyCreateRequest } from "@/services/api";
 
 type TEditEpilepsyEventAction = { id: number; form: TEpilepsyEventForm };
@@ -31,6 +32,7 @@ export const editEpilepsyEventAction = StoreUtils.createAsyncThunk(
     const response = await apiEpilepsyEpilepsyEventUpdate(id, data);
 
     thunk.dispatch(editEvent({ id, data: response.data }));
+    thunk.dispatch(resetSummaryReport());
 
     return response.data;
   },
