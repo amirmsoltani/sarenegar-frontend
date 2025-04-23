@@ -3,7 +3,7 @@
  * Do not edit manually.
  * Sarnegar API
  * Your project description
- * OpenAPI spec version: 0.1.0
+ * OpenAPI spec version: 0.1.20250423.121258+dev.e162f51
  */
 import { api } from './api.instance';
 export interface ChangePasswordRequest {
@@ -76,6 +76,13 @@ export interface DrugDosageCreateUpdateRequest {
   is_daily?: boolean;
   /** Days of the week when the drug should be taken (e.g., MON, TUE). */
   usage_days?: UsageDaysEnum[];
+  /** Indicates if the medication has been manually marked as completed */
+  is_completed?: boolean;
+  /**
+   * The date when the medication was marked as completed
+   * @nullable
+   */
+  completion_date?: string | null;
 }
 
 /**
@@ -120,6 +127,13 @@ export interface DrugDosageRetrieve {
   total_doses: number;
   /** Number of doses already taken */
   taken_doses: number;
+  /** Indicates if the medication has been manually marked as completed */
+  is_completed?: boolean;
+  /**
+   * The date when the medication was marked as completed
+   * @nullable
+   */
+  readonly completion_date?: string | null;
 }
 
 /**
@@ -646,6 +660,10 @@ is_completed?: boolean;
  */
 is_expired?: boolean;
 /**
+ * Order results by field(s). Prefix with '-' for descending order. Multiple fields can be specified as a comma-separated list. Available options: start_date, end_date, completion_date, nearest_reminder_time
+ */
+o?: string;
+/**
  * A page number within the paginated result set.
  */
 page?: number;
@@ -721,6 +739,14 @@ search?: string;
 };
 
 export type ApiEpilepsyEpilepsyEventListParams = {
+/**
+ * A page number within the paginated result set.
+ */
+page?: number;
+/**
+ * Number of results to return per page.
+ */
+page_size?: number;
 /**
  * Filter events on a specific day (format: YYYY/MM/DD)
  */
@@ -833,6 +859,10 @@ ordering?: string;
  * A page number within the paginated result set.
  */
 page?: number;
+/**
+ * Number of results to return per page.
+ */
+page_size?: number;
 /**
  * * `DRUG_REMINDER` - یادآوری دارو
 * `ADVERTISEMENT` - تبلیغات
@@ -988,7 +1018,7 @@ export const apiCalendarCalendarMedicationEventsList = (
     }
   
 /**
- * This endpoint retrieves all drug dosages associated with the authenticated user with pagination support. You can filter by active status using the is_active parameter and by expiration status using the is_expired parameter.
+ * This endpoint retrieves all drug dosages associated with the authenticated user with pagination support. You can filter by active status using the is_active parameter, by expiration status using the is_expired parameter, and by completion status using the is_completed parameter. You can also order the results by multiple fields including start_date, end_date, completion_date, and nearest_reminder_time. For multiple ordering, specify fields as a comma-separated list.
  * @summary Retrieve all drug dosages
  */
 export const apiDrugDosageDosemanagerDrugDosageList = (
@@ -1059,7 +1089,7 @@ export const apiDrugDosageDosemanagerDrugDosageDelete = (
     }
   
 /**
- * This endpoint sets the end_date of a drug dosage to today's date and marks it as completed, effectively ending the medication course.
+ * This endpoint sets the is_completed flag to True and records the completion date, effectively ending the medication course.
  * @summary Complete a drug dosage
  */
 export const apiDrugDosageDosemanagerDrugDosageComplete = (
@@ -1114,7 +1144,7 @@ export const apiDrugDosageRemindersDosemanagerReminderDetail = (
     }
   
 /**
- * This endpoint toggles the 'taken' status of a specific reminder. If the status is set to taken, the current time is recorded as time_taken.
+ * This endpoint toggles the 'taken' status of a specific reminder. If the status is set to taken, the current time is recorded as time_taken. Cannot toggle future reminders.
  * @summary Toggle the taken status of a reminder
  */
 export const apiDrugDosageRemindersDosemanagerReminderToggleTaken = (
@@ -1231,7 +1261,7 @@ export const apiEpilepsyEpilepsyEventAnalytics = (
     params: ApiEpilepsyEpilepsyEventAnalyticsParams,
  options?: SecondParameter<typeof api>,) => {
       return api<EpilepsyAnalytics>(
-      {url: `/epilepsy/events/analytics/`, method: 'GET',
+      {url: `/epilepsy/events/insights/`, method: 'GET',
         params
     },
       options);
