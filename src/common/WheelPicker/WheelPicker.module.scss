@@ -1,26 +1,9 @@
-.picker {
-  flex: 1 1 0%;
-
-  > div:nth-of-type(2) {
-    z-index: -1;
-    height: 59px !important;
-    background-color: var(--orange-background);
-
-    & > * {
-      display: none;
-    }
-  }
-}
-
 .container {
+  width: 100%;
   flex: 1 1 0%;
-  display: flex;
-  flex-direction: column;
+  user-select: none;
 
-  .wrapper {
-    width: 100%;
-    @include flex-start-center;
-  }
+  --option-height: 59px;
 
   .label {
     height: 40px;
@@ -28,19 +11,56 @@
     @include text-16-semibold;
   }
 
-  .option {
-    z-index: 100;
-    position: relative;
-    @include transition;
-    @include text-16-semibold;
+  .wrapper {
+    overflow: hidden;
+    min-height: calc(var(--option-height) * 3);
+    @include centering;
 
-    &[data-active="false"] {
-      opacity: 50%;
-    }
+    .carouselContainer {
+      width: 100%;
+      position: relative;
 
-    &[data-active="true"] {
-      color: var(--secondary);
-      @include text-20-bold;
+      &[data-loop="true"] {
+        overflow: hidden;
+      }
+
+      .carouselWrapper {
+        z-index: 1;
+        height: 100%;
+        display: flex;
+        position: relative;
+        flex-direction: column;
+
+        .option {
+          opacity: 50%;
+          flex: 0 0 var(--option-height);
+          transition: opacity 0.2s ease-in-out;
+          @include centering;
+          @include text-16-semibold;
+
+          &[data-active="true"] {
+            opacity: 100%;
+            color: var(--secondary);
+            @include text-20-bold;
+          }
+        }
+      }
+
+      .activeLine {
+        left: 0;
+        top: 50%;
+        z-index: 0;
+        width: 100%;
+        position: absolute;
+        pointer-events: none;
+        transform: translateY(-50%);
+        height: var(--option-height);
+        background-color: var(--orange-background);
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+      }
     }
   }
 }
@@ -62,6 +82,7 @@
   height: 59px;
   font-size: 58px;
   margin-top: 40px;
+  user-select: none;
   color: var(--secondary);
   background-color: var(--orange-background);
   @include centering;

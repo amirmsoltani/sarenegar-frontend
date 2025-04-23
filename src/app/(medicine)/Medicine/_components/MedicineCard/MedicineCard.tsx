@@ -39,7 +39,7 @@ export const MedicineCard = ({
             <TextOverflow className={styles.faTitle}>{drug?.fa_name}</TextOverflow>
             <TextOverflow className={styles.enTitle}>{drug?.en_name}</TextOverflow>
             <div className={styles.detail}>
-              {(dose as any).amount} {unit.label} - {usageType.label}
+              {(dose as any).amount} {unit?.label} - {usageType.label}
             </div>
           </div>
         </div>

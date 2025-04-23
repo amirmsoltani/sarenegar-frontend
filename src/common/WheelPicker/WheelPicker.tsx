@@ -1,11 +1,10 @@
-import Picker from "react-mobile-picker";
 import styles from "./WheelPicker.module.scss";
 import { useWheelPicker } from "./useWheelPicker";
 import { TWheelPicker } from "./WheelPicker.types";
 import { Controller, FieldValues } from "react-hook-form";
 
-export const WheelPicker = <T extends FieldValues>({ name, label, options, onChange }: TWheelPicker<T>) => {
-  const { control, onChangeHandler } = useWheelPicker<T>({ onChange, options });
+export const WheelPicker = <T extends FieldValues>({ name, label, options }: TWheelPicker<T>) => {
+  const { control, ref, loop } = useWheelPicker<T>({ name, options });
 
   return (
     <Controller
@@ -15,27 +14,21 @@ export const WheelPicker = <T extends FieldValues>({ name, label, options, onCha
         <div className={styles.container}>
           <div className={styles.label}>{label}</div>
           <div className={styles.wrapper}>
-            <Picker
-              height={165}
-              itemHeight={59}
-              wheelMode="normal"
-              className={styles.picker}
-              value={{ value: field.value?.value }}
-              onChange={({ value }) => onChangeHandler(value, field.onChange)}
+            <div
+              ref={ref}
+              data-loop={loop}
+              className={styles.carouselContainer}
+              style={{ height: `calc(var(--option-height)*${loop ? 3 : 1})` }}
             >
-              <Picker.Column key={name} name="value">
-                {options.map((option) => (
-                  <Picker.Item
-                    key={option.value}
-                    value={option.value}
-                    className={styles.option}
-                    data-active={option.value === field.value?.value}
-                  >
-                    {option.label}
-                  </Picker.Item>
+              <div className={styles.carouselWrapper}>
+                {options.map(({ value, label }) => (
+                  <div key={value} className={styles.option} data-active={field.value && field.value.value === value}>
+                    {label}
+                  </div>
                 ))}
-              </Picker.Column>
-            </Picker>
+              </div>
+              <div className={styles.activeLine} />
+            </div>
           </div>
         </div>
       )}
