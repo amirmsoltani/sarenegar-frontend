@@ -1,42 +1,40 @@
 import { getNowDate } from "@/helper/helper";
 import { DateService } from "@/services/DateService";
 
-const DAY_IN_MILLISECOND = 24 * 60 * 60 * 1000;
+const RANGE_LENGTH = 14;
 
 export const today = getNowDate();
 
-const genList = () => {
-  const now = Date.now();
+export const genRowCalenderList = (currentDate: string) => {
+  const date = new Date(currentDate);
 
-  const _today = {
-    date: today,
-    day: DateService.customTranslate(today, { day: "numeric" }),
-    weekday: DateService.customTranslate(today, { weekday: "short" }),
+  const current = {
+    date: DateService.setToGlobalFormat(date),
+    day: DateService.customTranslate(date, { day: "numeric" }),
+    weekday: DateService.customTranslate(date, { weekday: "short" }),
   };
 
-  const before = new Array(14).fill("").map((_, index) => {
-    const date = DateService.replaceSlashWithDash(
-      DateService.setToGlobalFormat(new Date(now - (index + 1) * DAY_IN_MILLISECOND)),
-    );
+  const before = new Array(RANGE_LENGTH).fill("").map(() => {
+    date.setDate(date.getDate() - 1);
+
     return {
-      date,
+      date: DateService.setToGlobalFormat(date),
       day: DateService.customTranslate(date, { day: "numeric" }),
       weekday: DateService.customTranslate(date, { weekday: "short" }),
     };
   });
 
-  const after = new Array(14).fill("").map((_, index) => {
-    const date = DateService.replaceSlashWithDash(
-      DateService.setToGlobalFormat(new Date(now + (index + 1) * DAY_IN_MILLISECOND)),
-    );
+  date.setDate(date.getDate() + RANGE_LENGTH);
+
+  const after = new Array(RANGE_LENGTH).fill("").map(() => {
+    date.setDate(date.getDate() + 1);
+
     return {
-      date,
+      date: DateService.setToGlobalFormat(date),
       day: DateService.customTranslate(date, { day: "numeric" }),
       weekday: DateService.customTranslate(date, { weekday: "short" }),
     };
   });
 
-  return [...before.reverse(), _today, ...after];
+  return [...before.reverse(), current, ...after];
 };
-
-export const calendarList = genList();

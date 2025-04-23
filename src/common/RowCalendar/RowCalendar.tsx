@@ -1,19 +1,19 @@
 import styles from "./RowCalendar.module.scss";
+import { today } from "./RowCalendar.constants";
 import { useRowCalendar } from "./useRowCalendar";
 import { TRowCalendar } from "./RowCalendar.types";
-import { calendarList, today } from "./RowCalendar.constants";
 
 export const RowCalendar = ({ active, onChange }: TRowCalendar) => {
-  const { container } = useRowCalendar({ active });
+  const { list, _active, container } = useRowCalendar({ active });
 
   return (
     <div ref={container} className={styles.container}>
-      {calendarList.map(({ date, day, weekday }) => (
+      {list.map(({ date, day, weekday }) => (
         <button
           key={date}
           type="button"
           className={styles.date}
-          data-active={date === active}
+          data-active={date === _active}
           onClick={() => onChange && onChange(date)}
         >
           <div className={styles.day}>{day}</div>
