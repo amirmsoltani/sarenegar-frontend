@@ -9,7 +9,7 @@ import { RowCalendar } from "@/common/RowCalendar/RowCalendar";
 import NotificationBing from "@/assets/svg/notification-bing.svg";
 
 export const Header = () => {
-  const { date } = useHeader();
+  const { date, notificationCount } = useHeader();
 
   return (
     <header className={styles.container}>
@@ -26,7 +26,7 @@ export const Header = () => {
         </Link>
         <Link to={routes.notification.href()} className={styles.notification}>
           <NotificationBing />
-          <div className={styles.count}>5</div>
+          {notificationCount ? <div className={styles.count}>{notificationCount}</div> : null}
         </Link>
       </div>
       <div className={styles.calendarContainer}>

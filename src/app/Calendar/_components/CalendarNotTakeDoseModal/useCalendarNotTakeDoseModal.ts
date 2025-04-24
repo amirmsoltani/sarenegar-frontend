@@ -7,6 +7,9 @@ import { clearStateAction } from "@/store/_common/actions/clearState.action";
 import { useStatusHandler } from "@/common/useStatusHandler/useStatusHandler";
 import { calendarNotTakeDoseAction } from "@/store/calendar/actions/calendarNotTakeDose/calendarNotTakeDose.ts";
 import { calendarTakeDoseAction } from "@/store/calendar/actions/calendarTakeDose/calendarTakeDose.ts";
+import { useEffect } from "react";
+import { parseSearchParams } from "@/helper/searchParams.ts";
+import { markAsReadAction } from "@/store/notification/actions/markAsRead/markAsRead.ts";
 
 export const useCalendarNotTakeDoseModal = () => {
   const { reminderID, date } = useParams();
@@ -23,6 +26,14 @@ export const useCalendarNotTakeDoseModal = () => {
     }),
     shallowEqual,
   );
+
+  useEffect(() => {
+    const {notificationID} = parseSearchParams([{key:"notificationID",default:undefined}]);
+
+    if(notificationID){
+      dispatch(markAsReadAction({ id:notificationID }));
+    }
+  }, [dispatch]);
 
   const onSubmit = () => dispatch(calendarNotTakeDoseAction({ id: +reminderID! }));
 

@@ -6,6 +6,7 @@ import { getEpilepsyEventListAction } from "@/store/epilepsy/actions/getEpilepsy
 import { useNavigate, useParams } from "react-router-dom";
 import { routes } from "@/routes/routes.tsx";
 import { useEffect } from "react";
+import { clearStateAction } from "@/store/_common/actions/clearState.action.ts";
 
 export const weekDays = ["ش", "ی", "د", "س", "چ", "پ", "ج"];
 
@@ -53,6 +54,7 @@ export function useCalendar() {
 
   function changeModeHandler(mode: "attack" | "medicine") {
     return () => {
+      dispatch(clearStateAction([{reducerName:"calendar",stateName:"calendarEventObject"}]));
       navigate(routes.calendar.href(undefined, mode));
     };
   }

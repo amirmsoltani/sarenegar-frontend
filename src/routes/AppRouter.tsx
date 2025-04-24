@@ -50,6 +50,7 @@ import { DeleteMedicineModal } from "@/app/(medicine)/Medicine/MedicineInfo/Dele
 import { CompleteMedicineModal } from "@/app/(medicine)/Medicine/MedicineInfo/CompleteMedicineModal/CompleteMedicineModal";
 import { CalendarNotTakeDoseModal } from "@/app/Calendar/_components/CalendarNotTakeDoseModal/CalendarNotTakeDoseModal.tsx";
 import { DeleteEpilepsyEventModal } from "@/app/(epilepsy)/EpilepsyEventInfo/DeleteEpilepsyEventModal/DeleteEpilepsyEventModal";
+import { Notification } from "@/app/Notification/Notification.tsx";
 
 const AppRouter = () => {
   const { isLogin } = useAppRouter();
@@ -158,6 +159,10 @@ const AppRouter = () => {
                     </Route>
                   </Route>
                 </Route>
+
+                <Route path={routes.notification.path} Component={Notification} />
+
+                
                 <Route path="*" Component={NotFound} />
               </Route>
             </Route>

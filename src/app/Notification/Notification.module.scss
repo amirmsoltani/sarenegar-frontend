@@ -1,12 +1,10 @@
 .wrapper {
-  height: 100vh;
-  direction: rtl;
-  overflow-y: scroll;
+  max-height: 100svh;
+  height: 100svh;
 
   .header {
     width: 100%;
     height: 56px;
-    position: sticky;
     display: flex;
     top: 0;
     justify-content: space-between;
@@ -52,5 +50,17 @@
         margin-left: 8px;
       }
     }
+  }
+
+  .main{
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    scrollbar-width: none;
+  }
+
+  :global #root {
+    max-height: 100svh;
   }
 }

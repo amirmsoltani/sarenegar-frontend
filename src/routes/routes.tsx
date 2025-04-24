@@ -320,7 +320,7 @@ export const routes = {
         modals: {
           takeDose: {
             path: ":reminderID",
-            href: (reminderID: number) => `${RouterService.setDate()}/calendar/medicine/events/${reminderID}`,
+            href: (reminderID: number,date?:string) => `${RouterService.setDate(date)}/calendar/medicine/events/${reminderID}`,
           },
         },
       },

@@ -7,6 +7,7 @@ import { runEffects, sagaMiddleware } from "./sagaMiddleware";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { calendarReducer } from "@/store/calendar/calendarSlice.ts";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { notificationReducer } from "@/store/notification/NotificationSlice.ts";
 
 const reducers = combineReducers({
   auth: authReducer,
@@ -15,6 +16,7 @@ const reducers = combineReducers({
   epilepsy: epilepsyReducer,
   medicine: medicineReducer,
   calendar: calendarReducer,
+  notification:notificationReducer,
 });
 
 export const appStore = configureStore({
