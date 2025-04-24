@@ -1,0 +1,27 @@
+.container {
+  gap: 25px;
+  min-height: 100svh;
+  padding-block: 96px;
+  flex-direction: column;
+  @include flex-between-center;
+
+  .cover {
+    width: 100%;
+    max-width: 195px;
+  }
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .title {
+      margin: 24px 0px 12px 0px;
+      @include text-16-bold-150;
+    }
+
+    .description {
+      @include text-14-regular;
+    }
+  }
+}
