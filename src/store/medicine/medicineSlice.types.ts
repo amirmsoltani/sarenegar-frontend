@@ -3,7 +3,8 @@ import { PaginatedReminderDetailList, TypeOfUsageEnum, UsageDaysEnum } from "@/s
 import { Drug, DrugDosageRetrieve, PaginatedDrugDosageRetrieve, ReminderDetail } from "@/services/api";
 import { TCheckboxOption, TDatePicker, TTimePicker, TWheelPickerOption } from "@/common/Form/FormUtils.types";
 
-export type TMedicineInfo = TMedicineForm & Pick<DrugDosageRetrieve, "total_doses" | "taken_doses" | "is_expired">;
+export type TMedicineInfo = TMedicineForm &
+  Pick<DrugDosageRetrieve, "total_doses" | "taken_doses" | "is_expired" | "is_completed">;
 
 export type TMedicineSlice = {
   dosesList: INormalState<PaginatedReminderDetailList & { date: string }>;

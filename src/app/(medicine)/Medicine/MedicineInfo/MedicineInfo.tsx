@@ -18,7 +18,14 @@ export const MedicineInfo = () => {
     <main className={styles.container}>
       <header className={styles.header}>
         <div className={styles.headerWrapper}>
-          <Link to={routes.medicine.tabs.current.href()} className={styles.icon}>
+          <Link
+            className={styles.icon}
+            to={
+              data && (data.is_expired || data.is_completed)
+                ? routes.medicine.tabs.completed.href()
+                : routes.medicine.tabs.current.href()
+            }
+          >
             <ArrowRight />
           </Link>
           <h1 className={styles.title}>اطلاعات دارو</h1>

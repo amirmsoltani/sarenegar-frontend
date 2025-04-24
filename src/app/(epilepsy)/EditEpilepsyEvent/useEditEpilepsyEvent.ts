@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { shallowEqual } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/store";
-import { epilepsyEventFormDefaultValues } from "../_common/epilepsyForm";
 import { TEpilepsyEventForm } from "@/store/epilepsy/epilepsySlice.types";
 import { clearStateAction } from "@/store/_common/actions/clearState.action";
 import { useStatusHandler } from "@/common/useStatusHandler/useStatusHandler";
+import { epilepsyEventFormDefaultValues, epilepsyTimeValidator } from "../_common/epilepsyForm";
 import { editEpilepsyEventAction } from "@/store/epilepsy/actions/editEpilepsyEvent/editEpilepsyEvent.action";
 import { getEpilepsyEventInfo } from "@/store/epilepsy/actions/getEpilepsyEventInfo/getEpilepsyEventInfo.action";
 
@@ -22,7 +22,9 @@ export const useEditEpilepsyEvent = () => {
     return { editState: store.epilepsy.editEpilepsyEvent, infoState: store.epilepsy.epilepsyEventInfo };
   }, shallowEqual);
 
-  const onSubmit = async (form: TEpilepsyEventForm) => await dispatch(editEpilepsyEventAction({ id: +id!, form }));
+  const onSubmit = async (form: TEpilepsyEventForm) => {
+    if (epilepsyTimeValidator(form)) await dispatch(editEpilepsyEventAction({ id: +id!, form }));
+  };
 
   const getData = () => dispatch(getEpilepsyEventInfo({ id: +id! }));
 

@@ -53,6 +53,7 @@ export const getMedicineInfoAction = StoreUtils.createAsyncThunk(
       }),
 
       is_expired: data.is_expired,
+      is_completed: data.is_completed,
       taken_doses: data.taken_doses,
       total_doses: data.total_doses,
     };

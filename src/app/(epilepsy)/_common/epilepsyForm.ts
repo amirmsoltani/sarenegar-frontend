@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { SeverityEnum } from "@/services/api";
 import { getNowDate, getNowTime, toLabelValue } from "@/helper/helper";
 import { TEpilepsyEventForm } from "@/store/epilepsy/epilepsySlice.types";
@@ -35,4 +36,22 @@ export const epilepsyEventFormDefaultValues: TEpilepsyEventForm = {
   time_of_occurrence_placeholder: { date: getNowDate(), time: getNowTime() },
   duration: { hour: toLabelValue("00"), minute: toLabelValue("00"), second: toLabelValue("00") },
   duration_placeholder: { hour: toLabelValue("00"), minute: toLabelValue("00"), second: toLabelValue("00") },
+};
+
+export const epilepsyTimeValidator = ({ time_of_occurrence, duration }: TEpilepsyEventForm) => {
+  const date = new Date(time_of_occurrence.date);
+
+  const time = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+    +time_of_occurrence.time.hour.value + +duration.hour.value,
+    +time_of_occurrence.time.minute.value + +duration.minute.value,
+    +duration.second.value,
+  ).getTime();
+
+  if (time >= Date.now()) {
+    toast.error("زمان رخداد صرع نباید بزرگ تر از زمان حال باشد");
+    return false;
+  } else return true;
 };
