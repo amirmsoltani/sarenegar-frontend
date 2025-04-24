@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form";
 import { useModalRef } from "@/common/Modal/useModalRef";
 import { TMedicineForm } from "@/store/medicine/medicineSlice.types";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { medicineBackwardNavigation } from "../_common/medicineNavigation";
+import { medicineSecondStepBackwardNavigation } from "../_common/medicineNavigation";
 
 export const useMedicineEndDayCountsModal = () => {
   const _ref = useModalRef();
@@ -19,7 +19,7 @@ export const useMedicineEndDayCountsModal = () => {
     _ref.current?.close();
   };
 
-  const onClose = () => navigate(medicineBackwardNavigation(pathname, params));
+  const onClose = () => navigate(medicineSecondStepBackwardNavigation(pathname, params));
 
   return { _ref, onSubmit, onClose };
 };

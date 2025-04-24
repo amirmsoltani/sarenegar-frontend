@@ -1,10 +1,10 @@
 import { routes } from "@/routes/routes";
 import { useForm } from "react-hook-form";
 import { DateService } from "@/services/DateService";
-import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { medicineFormDefaultValues } from "../_common/medicineForm";
 import { TMedicineForm } from "@/store/medicine/medicineSlice.types";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { clearStateAction } from "@/store/_common/actions/clearState.action";
 import { useStatusHandler } from "@/common/useStatusHandler/useStatusHandler";
 import { addMedicineAction } from "@/store/medicine/actions/addMedicine/addMedicine.action";
@@ -13,25 +13,35 @@ export const useAddMedicine = () => {
   const { date } = useParams();
 
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const dispatch = useAppDispatch();
   const state = useAppSelector((store) => store.medicine.addMedicine);
 
+  const activeDate = DateService.gregorianToJalali(date);
+
   const methods = useForm({
     defaultValues: {
       ...medicineFormDefaultValues,
-      start_date: DateService.gregorianToJalali(date),
-      start_date_placeholder: DateService.gregorianToJalali(date),
+      start_date: activeDate,
+      end_date_placeholder: activeDate,
+      start_date_placeholder: activeDate,
     },
   });
 
-  const step = methods.watch("step");
+  const step = pathname.includes(routes.addMedicine.tabs.firstStep.href())
+    ? 1
+    : pathname.includes(routes.addMedicine.tabs.secondStep.href())
+      ? 2
+      : null;
 
-  const changeStep = () => methods.setValue("step", 1);
+  const prevLink = step === 2 ? routes.addMedicine.tabs.firstStep.href() : routes.medicine.href();
 
   const submitHandler = async (form: TMedicineForm) => {
-    if (step === 1) methods.setValue("step", 2);
-    else await dispatch(addMedicineAction(form));
+    if (step === 1) {
+      methods.setValue("is_first_step_submitted", true);
+      navigate(routes.addMedicine.tabs.secondStep.href());
+    } else await dispatch(addMedicineAction(form));
   };
 
   useStatusHandler({
@@ -42,5 +52,5 @@ export const useAddMedicine = () => {
     },
   });
 
-  return { methods, step, submitHandler, changeStep };
+  return { methods, step, submitHandler, prevLink };
 };

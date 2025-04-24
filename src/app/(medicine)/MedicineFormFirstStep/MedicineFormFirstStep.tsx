@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import { FormButton } from "@/common/Form/Form";
 import styles from "./MedicineFormFirstStep.module.scss";
 import { MedicineDrugPlaceholder } from "@/app/(medicine)/_components/MedicineDrugPlaceholder/MedicineDrugPlaceholder";
@@ -13,6 +14,7 @@ export const MedicineFormFirstStep = () => {
           <MedicineDrugPlaceholder />
           <MedicineDoseInputPlaceholder />
           <MedicineUsageTypePlaceholder />
+          <Outlet />
         </div>
       </section>
       <footer className={styles.footer}>

@@ -2,8 +2,11 @@ import { routes } from "./routes";
 import { Login } from "@/app/Login/Login";
 import { Reports } from "@/app/Reports/Reports";
 import { Dashboard } from "@/app/Dashboard/Dashboard";
+import { Calendar } from "@/app/Calendar/Calendar.tsx";
+import { useAppRouter } from "@/routes/useAppRouter.ts";
 import { Profile } from "@/app/(profile)/Profile/Profile";
 import { Support } from "@/app/(profile)/Support/Support";
+import { NotFound } from "./components/NotFound/NotFound";
 import { AuthLayout } from "@/layout/AuthLayout/AuthLayout";
 import { AppRouterUtils } from "@/routes/AppRouter.utils.ts";
 import { Medicine } from "@/app/(medicine)/Medicine/Medicine";
@@ -13,6 +16,7 @@ import { PrimaryLayout } from "@/layout/PrimaryLayout/PrimaryLayout";
 import { ReportsLayout } from "@/layout/ReportsLayout/ReportsLayout";
 import { ProfileInfo } from "@/app/(profile)/ProfileInfo/ProfileInfo";
 import { AddMedicine } from "@/app/(medicine)/AddMedicine/AddMedicine";
+import { ErrorBoundary } from "./components/ErrorBoundary/ErrorBoundary";
 import { Completed } from "@/app/(medicine)/Medicine/Completed/Completed";
 import { EditMedicine } from "@/app/(medicine)/EditMedicine/EditMedicine";
 import { EpilepsyModal } from "@/app/Dashboard/EpilepsyModal/EpilepsyModal";
@@ -31,23 +35,21 @@ import { EditEpilepsyEvent } from "@/app/(epilepsy)/EditEpilepsyEvent/EditEpilep
 import { MedicineDoseModal } from "@/app/(medicine)/MedicineDoseModal/MedicineDoseModal";
 import { BirthdateModal } from "@/app/(profile)/ProfileInfo/BirthdateModal/BirthdateModal";
 import { MedicineDrugsModal } from "@/app/(medicine)/MedicineDrugsModal/MedicineDrugsModal";
+import { CalendarEvents } from "@/app/Calendar/_components/CalendarEvents/CalendarEvents.tsx";
 import { OccurrenceTimeModal } from "@/app/(epilepsy)/OccurrenceTimeModal/OccurrenceTimeModal";
+import { CalendarWrapper } from "@/app/Calendar/_components/CalendarWrapper/CalendarWrapper.tsx";
 import { MedicineEndDateModal } from "@/app/(medicine)/MedicineEndDateModal/MedicineEndDateModal";
 import { RedirectToCurrentMedicines, RedirectToDashboard } from "./components/Redirects/Redirects";
 import { MedicineDrugDoseModal } from "@/app/(medicine)/MedicineDrugDoseModal/MedicineDrugDoseModal";
+import { MedicineFormFirstStep } from "@/app/(medicine)/MedicineFormFirstStep/MedicineFormFirstStep";
 import { MedicineUsageTypeModal } from "@/app/(medicine)/MedicineUsageTypeModal/MedicineUsageTypeModal";
 import { MedicineStartDateModal } from "@/app/(medicine)/MedicineStartDateModal/MedicineStartDateModal";
+import { MedicineFormSecondStep } from "@/app/(medicine)/MedicineFormSecondStep/MedicineFormSecondStep";
 import { MedicineEndDayCountsModal } from "@/app/(medicine)/MedicineEndDayCountsModal/MedicineEndDayCountsModal";
 import { DeleteMedicineModal } from "@/app/(medicine)/Medicine/MedicineInfo/DeleteMedicineModal/DeleteMedicineModal";
 import { CompleteMedicineModal } from "@/app/(medicine)/Medicine/MedicineInfo/CompleteMedicineModal/CompleteMedicineModal";
+import { CalendarNotTakeDoseModal } from "@/app/Calendar/_components/CalendarNotTakeDoseModal/CalendarNotTakeDoseModal.tsx";
 import { DeleteEpilepsyEventModal } from "@/app/(epilepsy)/EpilepsyEventInfo/DeleteEpilepsyEventModal/DeleteEpilepsyEventModal";
-import { useAppRouter } from "@/routes/useAppRouter.ts";
-import { Calendar } from "@/app/Calendar/Calendar.tsx";
-import { CalendarEvents } from "@/app/Calendar/_components/CalendarEvents/CalendarEvents.tsx";
-import { CalendarWrapper } from "@/app/Calendar/_components/CalendarWrapper/CalendarWrapper.tsx";
-import {
-  CalendarNotTakeDoseModal
-} from "@/app/Calendar/_components/CalendarNotTakeDoseModal/CalendarNotTakeDoseModal.tsx";
 
 const AppRouter = () => {
   const { isLogin } = useAppRouter();
@@ -55,85 +57,112 @@ const AppRouter = () => {
   return (
     <PrimaryLayout>
       <BrowserRouter>
-        <Routes>
-          <Route path="" Component={RouterStateManager}>
-            <Route path={routes.login.path} Component={AppRouterUtils.withCondition(!isLogin, Login, RedirectToDashboard)} />
-            <Route path=":date?" Component={AppRouterUtils.withCondition(isLogin, AuthLayout)}>
-              <Route path="" Component={RedirectToDashboard} />
-              <Route path={routes.dashboard.path} Component={Dashboard}>
-                <Route path={routes.dashboard.modals.epilepsy.path} Component={EpilepsyModal} />
-                <Route path={routes.dashboard.modals.notTakeDoseModal.path} Component={NotTakeDoseModal} />
-              </Route>
-              <Route path={routes.addEpilepsyEvent.path} Component={AddEpilepsyEvent}>
-                <Route path={routes.addEpilepsyEvent.modals.occurrenceTimeModal.path} Component={OccurrenceTimeModal} />
-                <Route path={routes.addEpilepsyEvent.modals.durationTimeModal.path} Component={DurationTimeModal} />
-              </Route>
-              <Route path={routes.editEpilepsyEvent.path} Component={EditEpilepsyEvent}>
-                <Route path={routes.editEpilepsyEvent.modals.occurrenceTimeModal.path} Component={OccurrenceTimeModal} />
-                <Route path={routes.editEpilepsyEvent.modals.durationTimeModal.path} Component={DurationTimeModal} />
-              </Route>
-              <Route path={routes.epilepsyEventInfo.path} Component={EpilepsyEventInfo}>
-                <Route path={routes.epilepsyEventInfo.modals.deleteEpilepsyEvent.path} Component={DeleteEpilepsyEventModal} />
-              </Route>
-              <Route path={routes.medicine.path} Component={Medicine}>
-                <Route path="" Component={RedirectToCurrentMedicines} />
-                <Route path={routes.medicine.tabs.current.path} Component={Current} />
-                <Route path={routes.medicine.tabs.completed.path} Component={Completed} />
-              </Route>
-              <Route path={routes.medicineInfo.path} Component={MedicineInfo}>
-                <Route path={routes.medicineInfo.modals.delete.path} Component={DeleteMedicineModal} />
-                <Route path={routes.medicineInfo.modals.complete.path} Component={CompleteMedicineModal} />
-              </Route>
-              <Route path={routes.addMedicine.path} Component={AddMedicine}>
-                <Route path={routes.addMedicine.modals.startDate.path} Component={MedicineStartDateModal} />
-                <Route path={routes.addMedicine.modals.endDate.path} Component={MedicineEndDateModal} />
-                <Route path={routes.addMedicine.modals.dayCounts.path} Component={MedicineEndDayCountsModal} />
-                <Route path={routes.addMedicine.modals.drugs.path} Component={MedicineDrugsModal} />
-                <Route path={routes.addMedicine.modals.dose.path} Component={MedicineDoseModal} />
-                <Route path={routes.addMedicine.modals.usageType.path} Component={MedicineUsageTypeModal} />
-                <Route path={routes.addMedicine.modals.doseTime.path} Component={MedicineDrugDoseModal} />
-              </Route>
-              <Route path={routes.editMedicine.path} Component={EditMedicine}>
-                <Route path={routes.editMedicine.modals.startDate.path} Component={MedicineStartDateModal} />
-                <Route path={routes.editMedicine.modals.endDate.path} Component={MedicineEndDateModal} />
-                <Route path={routes.editMedicine.modals.dayCounts.path} Component={MedicineEndDayCountsModal} />
-                <Route path={routes.editMedicine.modals.drugs.path} Component={MedicineDrugsModal} />
-                <Route path={routes.editMedicine.modals.dose.path} Component={MedicineDoseModal} />
-                <Route path={routes.editMedicine.modals.usageType.path} Component={MedicineUsageTypeModal} />
-                <Route path={routes.editMedicine.modals.doseTime.path} Component={MedicineDrugDoseModal} />
-              </Route>
-              <Route path={routes.retakeMedicine.path} Component={RetakeMedicine}>
-                <Route path={routes.retakeMedicine.modals.startDate.path} Component={MedicineStartDateModal} />
-                <Route path={routes.retakeMedicine.modals.endDate.path} Component={MedicineEndDateModal} />
-                <Route path={routes.retakeMedicine.modals.dayCounts.path} Component={MedicineEndDayCountsModal} />
-                <Route path={routes.retakeMedicine.modals.drugs.path} Component={MedicineDrugsModal} />
-                <Route path={routes.retakeMedicine.modals.dose.path} Component={MedicineDoseModal} />
-                <Route path={routes.retakeMedicine.modals.usageType.path} Component={MedicineUsageTypeModal} />
-                <Route path={routes.retakeMedicine.modals.doseTime.path} Component={MedicineDrugDoseModal} />
-              </Route>
-              <Route path={routes.profile.path} Component={Profile}>
-                <Route path={routes.profile.modals.path} Component={LogoutModal} />
-              </Route>
-              <Route path={routes.profileInfo.path} Component={ProfileInfo}>
-                <Route path={routes.profileInfo.modals.genderModal.path} Component={GenderModal} />
-                <Route path={routes.profileInfo.modals.birthdateModal.path} Component={BirthdateModal} />
-                <Route path={routes.profileInfo.modals.stateModal.path} Component={StateModal} />
-                <Route path={routes.profileInfo.modals.cityModal.path} Component={CityModal} />
-              </Route>
-              <Route path={routes.support.path} Component={Support} />
-              <Route path={routes.reports.path} Component={ReportsLayout}>
-                <Route path={routes.reportsInfo.path} Component={Reports} />
-              </Route>
-              <Route path={routes.calendarWrapper.path} Component={CalendarWrapper}>
-                <Route path={routes.calendar.path} Component={Calendar}>
-                  <Route path={routes.calendar.modals.events.path} Component={CalendarEvents} >
-                    <Route path={routes.calendar.modals.events.modals.takeDose.path} Component={CalendarNotTakeDoseModal}/>
+        <ErrorBoundary>
+          <Routes>
+            <Route path="" Component={RouterStateManager}>
+              <Route path={routes.login.path} Component={AppRouterUtils.withCondition(!isLogin, Login, RedirectToDashboard)} />
+              <Route path=":date?" Component={AppRouterUtils.withCondition(isLogin, AuthLayout)}>
+                <Route path="" Component={RedirectToDashboard} />
+                <Route path={routes.dashboard.path} Component={Dashboard}>
+                  <Route path={routes.dashboard.modals.epilepsy.path} Component={EpilepsyModal} />
+                  <Route path={routes.dashboard.modals.notTakeDoseModal.path} Component={NotTakeDoseModal} />
+                </Route>
+                <Route path={routes.addEpilepsyEvent.path} Component={AddEpilepsyEvent}>
+                  <Route path={routes.addEpilepsyEvent.modals.occurrenceTimeModal.path} Component={OccurrenceTimeModal} />
+                  <Route path={routes.addEpilepsyEvent.modals.durationTimeModal.path} Component={DurationTimeModal} />
+                </Route>
+                <Route path={routes.editEpilepsyEvent.path} Component={EditEpilepsyEvent}>
+                  <Route path={routes.editEpilepsyEvent.modals.occurrenceTimeModal.path} Component={OccurrenceTimeModal} />
+                  <Route path={routes.editEpilepsyEvent.modals.durationTimeModal.path} Component={DurationTimeModal} />
+                </Route>
+                <Route path={routes.epilepsyEventInfo.path} Component={EpilepsyEventInfo}>
+                  <Route path={routes.epilepsyEventInfo.modals.deleteEpilepsyEvent.path} Component={DeleteEpilepsyEventModal} />
+                </Route>
+                <Route path={routes.medicine.path} Component={Medicine}>
+                  <Route path="" Component={RedirectToCurrentMedicines} />
+                  <Route path={routes.medicine.tabs.current.path} Component={Current} />
+                  <Route path={routes.medicine.tabs.completed.path} Component={Completed} />
+                </Route>
+                <Route path={routes.medicineInfo.path} Component={MedicineInfo}>
+                  <Route path={routes.medicineInfo.modals.delete.path} Component={DeleteMedicineModal} />
+                  <Route path={routes.medicineInfo.modals.complete.path} Component={CompleteMedicineModal} />
+                </Route>
+                <Route path={routes.addMedicine.path} Component={AddMedicine}>
+                  <Route path={routes.addMedicine.tabs.firstStep.path} Component={MedicineFormFirstStep}>
+                    <Route path={routes.addMedicine.tabs.firstStep.modals.drugs.path} Component={MedicineDrugsModal} />
+                    <Route path={routes.addMedicine.tabs.firstStep.modals.dose.path} Component={MedicineDoseModal} />
+                    <Route path={routes.addMedicine.tabs.firstStep.modals.usageType.path} Component={MedicineUsageTypeModal} />
+                  </Route>
+                  <Route path={routes.addMedicine.tabs.secondStep.path} Component={MedicineFormSecondStep}>
+                    <Route path={routes.addMedicine.tabs.secondStep.modals.startDate.path} Component={MedicineStartDateModal} />
+                    <Route path={routes.addMedicine.tabs.secondStep.modals.endDate.path} Component={MedicineEndDateModal} />
+                    <Route
+                      path={routes.addMedicine.tabs.secondStep.modals.dayCounts.path}
+                      Component={MedicineEndDayCountsModal}
+                    />
+                    <Route path={routes.addMedicine.tabs.secondStep.modals.doseTime.path} Component={MedicineDrugDoseModal} />
                   </Route>
                 </Route>
+                <Route path={routes.editMedicine.path} Component={EditMedicine}>
+                  <Route path={routes.editMedicine.tabs.firstStep.path} Component={MedicineFormFirstStep}>
+                    <Route path={routes.editMedicine.tabs.firstStep.modals.drugs.path} Component={MedicineDrugsModal} />
+                    <Route path={routes.editMedicine.tabs.firstStep.modals.dose.path} Component={MedicineDoseModal} />
+                    <Route path={routes.editMedicine.tabs.firstStep.modals.usageType.path} Component={MedicineUsageTypeModal} />
+                  </Route>
+                  <Route path={routes.editMedicine.tabs.secondStep.path} Component={MedicineFormSecondStep}>
+                    <Route path={routes.editMedicine.tabs.secondStep.modals.startDate.path} Component={MedicineStartDateModal} />
+                    <Route path={routes.editMedicine.tabs.secondStep.modals.endDate.path} Component={MedicineEndDateModal} />
+                    <Route
+                      path={routes.editMedicine.tabs.secondStep.modals.dayCounts.path}
+                      Component={MedicineEndDayCountsModal}
+                    />
+                    <Route path={routes.editMedicine.tabs.secondStep.modals.doseTime.path} Component={MedicineDrugDoseModal} />
+                  </Route>
+                </Route>
+                <Route path={routes.retakeMedicine.path} Component={RetakeMedicine}>
+                  <Route path={routes.retakeMedicine.tabs.firstStep.path} Component={MedicineFormFirstStep}>
+                    <Route path={routes.retakeMedicine.tabs.firstStep.modals.drugs.path} Component={MedicineDrugsModal} />
+                    <Route path={routes.retakeMedicine.tabs.firstStep.modals.dose.path} Component={MedicineDoseModal} />
+                    <Route path={routes.retakeMedicine.tabs.firstStep.modals.usageType.path} Component={MedicineUsageTypeModal} />
+                  </Route>
+                  <Route path={routes.retakeMedicine.tabs.secondStep.path} Component={MedicineFormSecondStep}>
+                    <Route
+                      path={routes.retakeMedicine.tabs.secondStep.modals.startDate.path}
+                      Component={MedicineStartDateModal}
+                    />
+                    <Route path={routes.retakeMedicine.tabs.secondStep.modals.endDate.path} Component={MedicineEndDateModal} />
+                    <Route
+                      path={routes.retakeMedicine.tabs.secondStep.modals.dayCounts.path}
+                      Component={MedicineEndDayCountsModal}
+                    />
+                    <Route path={routes.retakeMedicine.tabs.secondStep.modals.doseTime.path} Component={MedicineDrugDoseModal} />
+                  </Route>
+                </Route>
+                <Route path={routes.profile.path} Component={Profile}>
+                  <Route path={routes.profile.modals.path} Component={LogoutModal} />
+                </Route>
+                <Route path={routes.profileInfo.path} Component={ProfileInfo}>
+                  <Route path={routes.profileInfo.modals.genderModal.path} Component={GenderModal} />
+                  <Route path={routes.profileInfo.modals.birthdateModal.path} Component={BirthdateModal} />
+                  <Route path={routes.profileInfo.modals.stateModal.path} Component={StateModal} />
+                  <Route path={routes.profileInfo.modals.cityModal.path} Component={CityModal} />
+                </Route>
+                <Route path={routes.support.path} Component={Support} />
+                <Route path={routes.reports.path} Component={ReportsLayout}>
+                  <Route path={routes.reportsInfo.path} Component={Reports} />
+                </Route>
+                <Route path={routes.calendarWrapper.path} Component={CalendarWrapper}>
+                  <Route path={routes.calendar.path} Component={Calendar}>
+                    <Route path={routes.calendar.modals.events.path} Component={CalendarEvents}>
+                      <Route path={routes.calendar.modals.events.modals.takeDose.path} Component={CalendarNotTakeDoseModal} />
+                    </Route>
+                  </Route>
+                </Route>
+                <Route path="*" Component={NotFound} />
               </Route>
             </Route>
-          </Route>
-        </Routes>
+          </Routes>
+        </ErrorBoundary>
       </BrowserRouter>
     </PrimaryLayout>
   );

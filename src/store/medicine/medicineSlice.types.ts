@@ -23,7 +23,7 @@ export type TMedicineSlice = {
 };
 
 export type TMedicineForm = {
-  step: number;
+  is_first_step_submitted: boolean;
 
   drug: null | Drug;
 

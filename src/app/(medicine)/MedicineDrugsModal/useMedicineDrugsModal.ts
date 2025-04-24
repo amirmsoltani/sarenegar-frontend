@@ -6,8 +6,8 @@ import { useModalRef } from "@/common/Modal/useModalRef";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { TMedicineForm } from "@/store/medicine/medicineSlice.types";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { medicineBackwardNavigation } from "../_common/medicineNavigation";
 import { useStatusHandler } from "@/common/useStatusHandler/useStatusHandler";
+import { medicineFirstStepBackwardNavigation } from "../_common/medicineNavigation";
 import { getDrugsListAction } from "@/store/drug/actions/getDrugsList/getDrugsList.action";
 
 export const useMedicineDrugsModal = () => {
@@ -22,7 +22,7 @@ export const useMedicineDrugsModal = () => {
 
   const { setValue, formState } = useFormContext<TMedicineForm>();
 
-  const onClose = () => navigate(medicineBackwardNavigation(pathname, params));
+  const onClose = () => navigate(medicineFirstStepBackwardNavigation(pathname, params));
 
   const onSubmit = (drug: Drug) => {
     setValue("drug", drug, { shouldValidate: formState.isSubmitted });

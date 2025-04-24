@@ -1,10 +1,10 @@
 import { routes } from "@/routes/routes";
 import { useForm } from "react-hook-form";
 import { shallowEqual } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { medicineFormDefaultValues } from "../_common/medicineForm";
 import { TMedicineForm } from "@/store/medicine/medicineSlice.types";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { clearStateAction } from "@/store/_common/actions/clearState.action";
 import { useStatusHandler } from "@/common/useStatusHandler/useStatusHandler";
 import { editMedicineAction } from "@/store/medicine/actions/editMedicine/editMedicine.action";
@@ -13,6 +13,7 @@ import { getMedicineInfoAction } from "@/store/medicine/actions/getMedicineInfo/
 export const useEditMedicine = () => {
   const params = useParams();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const dispatch = useAppDispatch();
   const { editState, infoState } = useAppSelector(
@@ -22,13 +23,19 @@ export const useEditMedicine = () => {
 
   const methods = useForm({ defaultValues: medicineFormDefaultValues });
 
-  const step = methods.watch("step");
+  const step = pathname.includes(routes.editMedicine.tabs.firstStep.href())
+    ? 1
+    : pathname.includes(routes.editMedicine.tabs.secondStep.href())
+      ? 2
+      : null;
 
-  const changeStep = () => methods.setValue("step", 1);
+  const prevLink = step === 2 ? routes.editMedicine.tabs.firstStep.href() : routes.medicine.href();
 
   const submitHandler = async (form: TMedicineForm) => {
-    if (step === 1) methods.setValue("step", 2);
-    else await dispatch(editMedicineAction({ id: +params.id!, form }));
+    if (step === 1) {
+      methods.setValue("is_first_step_submitted", true);
+      navigate(routes.editMedicine.tabs.secondStep.href());
+    } else await dispatch(editMedicineAction({ id: +params.id!, form }));
   };
 
   const getInfo = () => dispatch(getMedicineInfoAction({ id: +params.id! }));
@@ -43,5 +50,5 @@ export const useEditMedicine = () => {
     },
   });
 
-  return { methods, step, submitHandler, changeStep, getInfo, status: infoState.status };
+  return { methods, step, submitHandler, prevLink, getInfo, status: infoState.status };
 };

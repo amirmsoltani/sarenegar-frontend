@@ -1,18 +1,41 @@
 import { routes } from "@/routes/routes";
 import { Params } from "react-router-dom";
 
-export const medicineBackwardNavigation = (pathname: string, params: Readonly<Params<string>>) => {
+export const medicineFirstStepForwardNavigation = (
+  pathname: string,
+  modal: keyof typeof routes.addMedicine.tabs.firstStep.modals,
+) => {
   return pathname.includes(routes.addMedicine.href())
-    ? routes.addMedicine.href()
-    : pathname.includes(routes.editMedicine.href(params.id!))
-      ? routes.editMedicine.href(params.id!)
-      : routes.retakeMedicine.href(params.id!);
+    ? routes.addMedicine.tabs.firstStep.modals[modal].href()
+    : pathname.includes(routes.editMedicine.href())
+      ? routes.editMedicine.tabs.firstStep.modals[modal].href()
+      : routes.retakeMedicine.tabs.firstStep.modals[modal].href();
 };
 
-export const medicineForwardNavigation = (pathname: string, modal: keyof typeof routes.addMedicine.modals, id?: number) => {
+export const medicineSecondStepForwardNavigation = (
+  pathname: string,
+  modal: keyof typeof routes.addMedicine.tabs.secondStep.modals,
+  id?: number,
+) => {
   return pathname.includes(routes.addMedicine.href())
-    ? routes.addMedicine.modals[modal].href(id!)
+    ? routes.addMedicine.tabs.secondStep.modals[modal].href(id!)
     : pathname.includes(routes.editMedicine.href())
-      ? routes.editMedicine.modals[modal].href(id!)
-      : routes.retakeMedicine.modals[modal].href(id!);
+      ? routes.editMedicine.tabs.secondStep.modals[modal].href(id!)
+      : routes.retakeMedicine.tabs.secondStep.modals[modal].href(id!);
+};
+
+export const medicineFirstStepBackwardNavigation = (pathname: string, params: Readonly<Params<string>>) => {
+  return pathname.includes(routes.addMedicine.href())
+    ? routes.addMedicine.tabs.firstStep.href()
+    : pathname.includes(routes.editMedicine.href(params.id!))
+      ? routes.editMedicine.tabs.firstStep.href()
+      : routes.retakeMedicine.tabs.firstStep.href(params.id!);
+};
+
+export const medicineSecondStepBackwardNavigation = (pathname: string, params: Readonly<Params<string>>) => {
+  return pathname.includes(routes.addMedicine.href())
+    ? routes.addMedicine.tabs.secondStep.href()
+    : pathname.includes(routes.editMedicine.href(params.id!))
+      ? routes.editMedicine.tabs.secondStep.href()
+      : routes.retakeMedicine.tabs.secondStep.href(params.id!);
 };

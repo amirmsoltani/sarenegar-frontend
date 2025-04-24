@@ -1,34 +1,25 @@
 import { routes } from "@/routes/routes";
 import { Form } from "@/common/Form/Form";
 import styles from "./AddMedicine.module.scss";
-import { Link, Outlet } from "react-router-dom";
 import { useAddMedicine } from "./useAddMedicine";
+import { Link, Navigate, Outlet } from "react-router-dom";
 import { ArrowRight } from "@wandersonalwes/iconsax-react";
-import { MedicineFormFirstStep } from "../_components/MedicineFormFirstStep/MedicineFormFirstStep";
-import { MedicineFormSecondStep } from "../_components/MedicineFormSecondStep/MedicineFormSecondStep";
 
 export const AddMedicine = () => {
-  const { methods, step, submitHandler, changeStep } = useAddMedicine();
+  const { methods, step, submitHandler, prevLink } = useAddMedicine();
 
   return (
     <Form {...methods} className={styles.container} onSubmit={submitHandler}>
       <header className={styles.header}>
         <div className={styles.headerWrapper}>
-          {step === 1 ? (
-            <Link to={routes.medicine.href()} className={styles.iconWrapper}>
-              <ArrowRight className={styles.icon} />
-            </Link>
-          ) : (
-            <button onClick={changeStep} className={styles.iconWrapper}>
-              <ArrowRight className={styles.icon} />
-            </button>
-          )}
+          <Link to={prevLink} className={styles.iconWrapper}>
+            <ArrowRight className={styles.icon} />
+          </Link>
           <div className={styles.title}>ثبت دارو</div>
         </div>
-        <div className={styles.step}>مرحله {step} از 2</div>
+        <div className={styles.step}>مرحله {step ?? 1} از 2</div>
       </header>
-      {step === 1 ? <MedicineFormFirstStep /> : <MedicineFormSecondStep type="ADD" />}
-      <Outlet />
+      {step ? <Outlet /> : <Navigate to={routes.addMedicine.tabs.firstStep.href()} replace />}
     </Form>
   );
 };

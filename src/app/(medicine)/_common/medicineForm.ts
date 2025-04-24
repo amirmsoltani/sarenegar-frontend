@@ -47,7 +47,7 @@ export const medicineUsageTypeTranslator = (value: string) => formOptionTranslat
 export const endDaysCountTranslator = (value: number) => formOptionTranslator(endDaysCounts, value)!;
 
 export const medicineFormDefaultValues: TMedicineForm = {
-  step: 1,
+  is_first_step_submitted: false,
 
   drug: null,
 

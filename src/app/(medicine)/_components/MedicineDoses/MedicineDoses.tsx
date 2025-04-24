@@ -23,13 +23,9 @@ export const MedicineDoses = ({ type }: TMedicineDoses) => {
                 </div>
                 <Link
                   className={styles.iconWrapper}
-                  to={
-                    type === "ADD"
-                      ? routes.addMedicine.modals.doseTime.href(index)
-                      : type === "EDIT"
-                        ? routes.editMedicine.modals.doseTime.href(index)
-                        : routes.retakeMedicine.modals.doseTime.href(index)
-                  }
+                  to={routes[
+                    type === "ADD" ? "addMedicine" : type === "EDIT" ? "editMedicine" : "retakeMedicine"
+                  ].tabs.secondStep.modals.doseTime.href(index)}
                 >
                   <ArrowLeft2 className={styles.icon} />
                 </Link>

@@ -22,7 +22,8 @@ export const getMedicineInfoAction = StoreUtils.createAsyncThunk(
     const dayCounts = data.end_by_day ? endDaysCountTranslator(data.end_by_day) : null;
 
     const _data: TMedicineInfo = {
-      step: 1,
+      is_first_step_submitted: false,
+
       drug: data.drug,
 
       dose: { unit, amount },
