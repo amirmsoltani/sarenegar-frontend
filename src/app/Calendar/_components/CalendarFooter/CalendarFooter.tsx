@@ -17,7 +17,7 @@ export const CalendarFooter = () => {
       </span>
       <img
         onClick={addClickHandler}
-        src={mode === "attack" ? "/add-attack.png" : "/add-reminder.png"}
+        src={mode === "attack" ? "/add-attack.png" : "/add-pill2.png"}
         alt={"not found"}
         className={classNames(styles.button, { [styles.reminder]: mode === "medicine" })}
       />
