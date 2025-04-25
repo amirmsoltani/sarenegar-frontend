@@ -66,6 +66,7 @@
         }
 
         .date {
+          white-space: nowrap;
           align-self: stretch;
           @include text-14-semibold;
         }

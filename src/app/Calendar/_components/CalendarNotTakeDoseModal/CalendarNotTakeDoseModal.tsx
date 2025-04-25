@@ -39,7 +39,7 @@ export const CalendarNotTakeDoseModal = () => {
             <div className={styles.cardBody}>
               <div>
                 {(infoState.drug_dosage_info.dose as any)?.amount}{" "}
-                {medicineUnitTranslator((infoState.drug_dosage_info.dose as any)?.unit).label} |
+                {medicineUnitTranslator((infoState.drug_dosage_info.dose as any)?.unit).label} |&nbsp;
                 {medicineUsageTypeTranslator(infoState.drug_dosage_info.type_of_usage!).label}
               </div>
               <div>{DateService.getTime(infoState.reminder_datetime)}</div>
