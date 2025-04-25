@@ -81,7 +81,7 @@ export const Profile = () => {
         <div className={styles.logoContainer}>
           <img className={styles.logo} src="/logo.png" />
         </div>
-        <div className={styles.version}>تسخه {VERSION_ID}</div>
+        <div className={styles.version}>نسخه {VERSION_ID}</div>
       </div>
       <Outlet />
     </main>
