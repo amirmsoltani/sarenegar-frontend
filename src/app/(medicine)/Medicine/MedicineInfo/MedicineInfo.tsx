@@ -12,7 +12,7 @@ import { StatusHandler } from "@/common/StatusHandler/StatusHandler";
 import { TMedicineSlice } from "@/store/medicine/medicineSlice.types";
 
 export const MedicineInfo = () => {
-  const { getData, status, data, id } = useMedicineInfo();
+  const { getData, status, data, canEdit, id } = useMedicineInfo();
 
   return (
     <main className={styles.container}>
@@ -30,9 +30,11 @@ export const MedicineInfo = () => {
           </Link>
           <h1 className={styles.title}>اطلاعات دارو</h1>
         </div>
-        <Link to={routes.editMedicine.href(id)} className={styles.link}>
-          ویرایش اطلاعات
-        </Link>
+        {canEdit && (
+          <Link to={routes.editMedicine.href(id)} className={styles.link}>
+            ویرایش اطلاعات
+          </Link>
+        )}
       </header>
       <StatusHandler status={status} onClick={getData} className={styles.status}>
         {data && (

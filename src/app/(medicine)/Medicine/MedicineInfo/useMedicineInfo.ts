@@ -13,7 +13,9 @@ export const useMedicineInfo = () => {
 
   const getData = () => dispatch(getMedicineInfoAction({ id }));
 
+  const canEdit = state.data && !state.data.is_expired && !state.data.is_completed;
+
   useStatusHandler({ state, onComponentDidMount: getData });
 
-  return { ...state, id, getData };
+  return { ...state, id, getData, canEdit };
 };
