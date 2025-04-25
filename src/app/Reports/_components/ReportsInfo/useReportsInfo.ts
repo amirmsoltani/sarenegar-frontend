@@ -88,7 +88,7 @@ export const useReportsInfo = () => {
     labels: severityOptions.map((option) => option.label),
     datasets: [
       {
-        backgroundColor: ["#674188", "#B3A0C4", "#E1D9E7"],
+        backgroundColor: ["#E1D9E7", "#B3A0C4", "#674188"],
         data: [
           state.data?.selected_period.severity_distribution.Severe.percentage,
           state.data?.selected_period.severity_distribution.Moderate.percentage,
