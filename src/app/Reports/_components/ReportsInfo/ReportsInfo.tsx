@@ -217,7 +217,7 @@ export const ReportsInfo = () => {
                         <div>12 شب</div>
                         <div>6 عصر</div>
                         <div>12 ظهر</div>
-                        <div>12 صبح</div>
+                        <div>6 صبح</div>
                         <div>12 شب</div>
                       </div>
                     </div>
