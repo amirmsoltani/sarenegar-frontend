@@ -50,7 +50,7 @@ export const NotTakeDoseModal = () => {
                   <div className={styles.cardBody}>
                     <div>
                       {(infoState.data.drug_dosage_info.dose as any)?.amount}{" "}
-                      {medicineUnitTranslator((infoState.data.drug_dosage_info.dose as any)?.unit).label} |
+                      {medicineUnitTranslator((infoState.data.drug_dosage_info.dose as any)?.unit).label} |&nbsp;
                       {medicineUsageTypeTranslator(infoState.data.drug_dosage_info.type_of_usage!).label}
                     </div>
                     <div>{infoState.data.reminder_name}</div>
