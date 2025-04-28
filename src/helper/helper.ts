@@ -21,8 +21,6 @@ export const secondToTime = (time: number) => {
   return `${withPadStart(hour)}:${withPadStart(minute)}:${withPadStart(Math.floor(second))}`;
 };
 
-export const isDateValid = (date: string) => !isNaN(Date.parse(date));
-
 const orderedNumbers = ["اولین", "دومین", "سومین", "چهارمین"];
 export const toOrderedNumber = (index: number) => orderedNumbers[index];
 

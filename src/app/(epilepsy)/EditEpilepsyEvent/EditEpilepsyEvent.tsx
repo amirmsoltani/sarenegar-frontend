@@ -1,6 +1,5 @@
-import { routes } from "@/routes/routes";
+import { Outlet } from "react-router-dom";
 import { Range } from "@/common/Range/Range";
-import { Link, Outlet } from "react-router-dom";
 import { Toggle } from "@/common/Toggle/Toggle";
 import styles from "./EditEpilepsyEvent.module.scss";
 import { Form, FormButton } from "@/common/Form/Form";
@@ -13,15 +12,15 @@ import { EpilepsyChartContainer } from "../_components/EpilepsyChartContainer/Ep
 import { DurationTimePlaceholder } from "../_components/DurationTimePlaceholder/DurationTimePlaceholder";
 
 export const EditEpilepsyEvent = () => {
-  const { id, methods, onSubmit, status, getData } = useEditEpilepsyEvent();
+  const { methods, onSubmit, status, getData, backwardHandler } = useEditEpilepsyEvent();
 
   return (
     <main className={styles.container}>
       <header className={styles.header}>
-        <Link to={routes.epilepsyEventInfo.href(id)} className={styles.iconWrapper}>
+        <button onClick={backwardHandler} className={styles.iconWrapper}>
           <ArrowRight className={styles.icon} />
-        </Link>
-        <h1 className={styles.title}>ویرایش رخداد صرع</h1>
+        </button>
+        <h1 className={styles.title}>ویرایش رخداد تشنج</h1>
       </header>
       <StatusHandler status={status} onClick={getData} className={styles.statusContainer}>
         <Form className={styles.form} onSubmit={onSubmit} {...methods}>

@@ -9,7 +9,7 @@ import { EpilepsyChart } from "@/common/EpilepsyChart/EpilepsyChart";
 import { StatusHandler } from "@/common/StatusHandler/StatusHandler";
 
 export const EpilepsyEventInfo = () => {
-  const { id, state, getInfo, navigateToDeleteModal } = useEpilepsyEventInfo();
+  const { id, state, getInfo, backwardHandler } = useEpilepsyEventInfo();
 
   const data = state.data;
 
@@ -17,10 +17,10 @@ export const EpilepsyEventInfo = () => {
     <main className={styles.container}>
       <header className={styles.header}>
         <div className={styles.headerWrapper}>
-          <Link to={routes.dashboard.modals.epilepsy.href()} className={styles.iconWrapper}>
+          <button onClick={backwardHandler} className={styles.iconWrapper}>
             <ArrowRight className={styles.icon} />
-          </Link>
-          <h1 className={styles.title}>اطلاعات رخداد صرع</h1>
+          </button>
+          <h1 className={styles.title}>اطلاعات رخداد تشنج</h1>
         </div>
         <Link to={routes.editEpilepsyEvent.href(id)} className={styles.navigateLink}>
           ویرایش اطلاعات
@@ -66,11 +66,9 @@ export const EpilepsyEventInfo = () => {
                 </div>
               </div>
             </div>
-            <div className={styles.buttonContainer}>
-              <Button variant="red" onClick={navigateToDeleteModal}>
-                حذف رخداد
-              </Button>
-            </div>
+            <Link to={routes.epilepsyEventInfo.modals.deleteEpilepsyEvent.href()} className={styles.buttonContainer} replace>
+              <Button variant="red">حذف رخداد</Button>
+            </Link>
           </>
         )}
       </StatusHandler>

@@ -5,7 +5,7 @@ export const useMedicineDoseInputPlaceholder = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const onClick = () => navigate(medicineFirstStepForwardNavigation(pathname, "dose"));
+  const onClick = () => navigate(medicineFirstStepForwardNavigation(pathname, "dose"), { replace: true });
 
   return { onClick };
 };

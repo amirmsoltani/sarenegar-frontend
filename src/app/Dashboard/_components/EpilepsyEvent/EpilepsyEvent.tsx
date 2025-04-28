@@ -9,14 +9,14 @@ export const EpilepsyEvent = () => {
 
   return (
     <section className={styles.container}>
-      <div className={styles.count}>
-        {state.status === "loading" ? <Spinner /> : state.status === "success" ? `${state.data?.count} مورد` : ""}
-      </div>
       <Link
         className={styles.link}
         data-loading={state.status === "loading"}
         to={state.data?.count ? routes.dashboard.modals.epilepsy.href() : routes.addEpilepsyEvent.href()}
       >
+        <div className={styles.count}>
+          {state.status === "loading" ? <Spinner /> : state.status === "success" ? `${state.data?.count} مورد` : ""}
+        </div>
         <img src="/add-event.png" className={styles.cover} />
       </Link>
     </section>

@@ -51,8 +51,8 @@ class DateInstant {
     return `${this.getDate(date)} ${this.getTime(date)}`;
   }
 
-  public customTranslate(date: string | number | Date, options?: Intl.DateTimeFormatOptions) {
-    return new Intl.DateTimeFormat("fa-IR", options).format(new Date(date));
+  public customTranslate(date?: string | number | Date, options?: Intl.DateTimeFormatOptions) {
+    return new Intl.DateTimeFormat("fa-IR", options).format(date ? new Date(date) : new Date());
   }
 
   public replaceSlashWithDash(date: string) {

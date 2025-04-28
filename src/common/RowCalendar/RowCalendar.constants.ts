@@ -1,12 +1,11 @@
 import { getNowDate } from "@/helper/helper";
 import { DateService } from "@/services/DateService";
-
-const RANGE_LENGTH = 14;
+import { CALENDAR_RANGE } from "@/constants/constants";
 
 export const today = getNowDate();
 
-export const genRowCalenderList = (currentDate: string) => {
-  const date = new Date(currentDate);
+export const genRowCalenderList = (currentDate?: string) => {
+  const date = currentDate ? new Date(currentDate) : new Date();
 
   const current = {
     date: DateService.setToGlobalFormat(date),
@@ -14,7 +13,7 @@ export const genRowCalenderList = (currentDate: string) => {
     weekday: DateService.customTranslate(date, { weekday: "short" }),
   };
 
-  const before = new Array(RANGE_LENGTH).fill("").map(() => {
+  const before = new Array(CALENDAR_RANGE).fill("").map(() => {
     date.setDate(date.getDate() - 1);
 
     return {
@@ -24,9 +23,9 @@ export const genRowCalenderList = (currentDate: string) => {
     };
   });
 
-  date.setDate(date.getDate() + RANGE_LENGTH);
+  date.setDate(date.getDate() + CALENDAR_RANGE);
 
-  const after = new Array(RANGE_LENGTH).fill("").map(() => {
+  const after = new Array(CALENDAR_RANGE).fill("").map(() => {
     date.setDate(date.getDate() + 1);
 
     return {

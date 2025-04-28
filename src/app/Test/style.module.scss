@@ -1,0 +1,56 @@
+.mainContainer {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+
+  .container {
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    overflow: auto;
+    position: relative;
+    padding-inline: 50%;
+
+    // @include scroll-off;
+
+    .date {
+      gap: 12px;
+      height: 80px;
+      display: flex;
+      min-width: 48px;
+      user-select: none;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8px 6px 12px 6px;
+      @include transition;
+
+      .day {
+        @include text-18-bold;
+      }
+
+      .weekday {
+        @include text-12-regular;
+      }
+
+      &[data-active="true"] {
+        color: var(--white);
+      }
+    }
+  }
+
+  .activeBar {
+    top: 0px;
+    left: 50%;
+    width: 60px;
+    height: 100%;
+    position: absolute;
+    @include radius-100;
+    transform: translateX(-50%);
+    background-color: var(--secondary);
+    -o-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+  }
+}

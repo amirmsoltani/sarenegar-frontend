@@ -18,10 +18,10 @@ export const useCompleteMedicineModal = () => {
   const onSubmit = () => dispatch(completeMedicineAction({ id: +id! }));
 
   const onClose = (context?: { close?: boolean }) => {
-    if (context?.close) navigate(routes.medicineInfo.href(id!));
+    if (context?.close) navigate(routes.medicineInfo.href(id!), { replace: true });
     else {
       dispatch(clearStateAction([{ reducerName: "medicine", stateName: "completeMedicine" }]));
-      navigate(routes.medicine.tabs.completed.href());
+      navigate(routes.medicine.tabs.completed.href(), { replace: true });
     }
   };
 

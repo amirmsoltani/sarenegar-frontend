@@ -6,8 +6,8 @@ class Router {
   public navigate!: NavigateFunction;
   public params!: Readonly<Partial<Record<string, string>>>;
 
-  public setDate = (_date?:string) => {
-    const date =_date || this.params.date;
+  public setDate = (_date?: string) => {
+    const date = _date || this.params.date;
     return date ? `/${date}` : `/${getNowDate()}`;
   };
 
@@ -15,6 +15,10 @@ class Router {
     const pathname = this.location.pathname.replace(`/${this.params.date!}`, "");
     return this.navigate(`/${date}${pathname}`, { replace: true });
   };
+
+  public backward(fallbackHref: string) {
+    return window.history.state && window.history.length > 1 ? this.navigate(-1) : this.navigate(fallbackHref);
+  }
 }
 
 export const RouterService = new Router();

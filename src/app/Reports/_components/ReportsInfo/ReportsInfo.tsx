@@ -135,8 +135,8 @@ export const ReportsInfo = () => {
                 <h2 className={styles.title}>زمان حملات در روز</h2>
                 <div>
                   <p className={styles.description}>
-                    آمارها نشان میدهد در این {type} بیشترین حملات در{" "}
-                    <span className={styles.descriptionStrong}>{maxDistributionLabel}</span> اتفاق افتاده است
+                    آمارها نشان میدهد در این {type} بیشترین حملات در
+                    <span className={styles.descriptionStrong}>&nbsp;{maxDistributionLabel}</span> اتفاق افتاده است
                   </p>
                 </div>
                 <div className={styles.box}>
@@ -148,14 +148,12 @@ export const ReportsInfo = () => {
                           {night < 25 && (
                             <div className={styles.valueContainer}>
                               <div>{night}%</div>
-                              <div className={styles.recordTitle}>شب</div>
                             </div>
                           )}
                           <div className={styles.record} style={{ width: `${night}%` }}>
                             {night >= 25 && (
                               <>
                                 <div>{night}%</div>
-                                <div className={styles.recordTitle}>شب</div>
                               </>
                             )}
                           </div>
@@ -165,14 +163,12 @@ export const ReportsInfo = () => {
                           {evening < 25 && (
                             <div className={styles.valueContainer}>
                               <div>{evening}%</div>
-                              <div className={styles.recordTitle}>عصر</div>
                             </div>
                           )}
                           <div className={styles.record} style={{ width: `${evening}%` }}>
                             {evening >= 25 && (
                               <>
                                 <div>{evening}%</div>
-                                <div className={styles.recordTitle}>عصر</div>
                               </>
                             )}
                           </div>
@@ -182,14 +178,12 @@ export const ReportsInfo = () => {
                           {noon < 25 && (
                             <div className={styles.valueContainer}>
                               <div>{noon}%</div>
-                              <div className={styles.recordTitle}>ظهر</div>
                             </div>
                           )}
                           <div className={styles.record} style={{ width: `${noon}%` }}>
                             {noon >= 25 && (
                               <>
                                 <div>{noon}%</div>
-                                <div className={styles.recordTitle}>ظهر</div>
                               </>
                             )}
                           </div>
@@ -199,14 +193,12 @@ export const ReportsInfo = () => {
                           {morning < 25 && (
                             <div className={styles.valueContainer}>
                               <div>{morning}%</div>
-                              <div className={styles.recordTitle}>صبح</div>
                             </div>
                           )}
                           <div className={styles.record} style={{ width: `${morning}%` }}>
                             {morning >= 25 && (
                               <>
                                 <div>{morning}%</div>
-                                <div className={styles.recordTitle}>صبح</div>
                               </>
                             )}
                           </div>

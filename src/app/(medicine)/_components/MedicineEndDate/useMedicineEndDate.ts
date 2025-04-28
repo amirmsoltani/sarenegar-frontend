@@ -10,9 +10,9 @@ export const useMedicineEndDate = () => {
   const { watch } = useFormContext<TMedicineForm>();
   const { value } = watch("end_time_type");
 
-  const openDateModalHandler = () => navigate(medicineSecondStepForwardNavigation(pathname, "endDate"));
+  const openDateModalHandler = () => navigate(medicineSecondStepForwardNavigation(pathname, "endDate"), { replace: true });
 
-  const openDayCountsModalHandler = () => navigate(medicineSecondStepForwardNavigation(pathname, "dayCounts"));
+  const openDayCountsModalHandler = () => navigate(medicineSecondStepForwardNavigation(pathname, "dayCounts"), { replace: true });
 
   return { value, openDateModalHandler, openDayCountsModalHandler };
 };

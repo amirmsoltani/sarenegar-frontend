@@ -9,7 +9,7 @@ export const Slider = () => {
   const { sliderRef, listState, completeHandler, completeState, navigateHandler } = useSlider();
 
   return (
-    <div className={styles.sliderContainer} ref={sliderRef}>
+    <div className={styles.sliderContainer} data-with-limit={(listState.data?.results.length ?? 0) > 1} ref={sliderRef}>
       <div className={styles.sliderWrapper}>
         {listState.data!.results.map(({ reminder_id, drug_dosage_info, reminder_time, taken }) => (
           <div key={reminder_id} className={styles.sliderSlide}>

@@ -22,6 +22,7 @@ export const MedicineDoses = ({ type }: TMedicineDoses) => {
                   {field.value.hour.value}:{field.value.minute.value}
                 </div>
                 <Link
+                  replace
                   className={styles.iconWrapper}
                   to={routes[
                     type === "ADD" ? "addMedicine" : type === "EDIT" ? "editMedicine" : "retakeMedicine"

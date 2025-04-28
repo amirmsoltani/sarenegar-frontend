@@ -19,7 +19,7 @@ export const useMedicineEndDateModal = () => {
     _ref.current?.close();
   };
 
-  const onClose = () => navigate(medicineSecondStepBackwardNavigation(pathname, params));
+  const onClose = () => navigate(medicineSecondStepBackwardNavigation(pathname, params), { replace: true });
 
   return { _ref, onSubmit, onClose };
 };

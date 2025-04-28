@@ -3,6 +3,7 @@
   display: flex;
   overflow: auto;
   position: relative;
+  padding-inline: 16px;
   @include scroll-off;
 
   .date {

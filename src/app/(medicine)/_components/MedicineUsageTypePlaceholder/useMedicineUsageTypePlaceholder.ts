@@ -5,7 +5,7 @@ export const useMedicineUsageTypePlaceholder = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const onClick = () => navigate(medicineFirstStepForwardNavigation(pathname, "usageType"));
+  const onClick = () => navigate(medicineFirstStepForwardNavigation(pathname, "usageType"), { replace: true });
 
   return { onClick };
 };

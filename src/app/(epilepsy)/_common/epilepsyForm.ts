@@ -51,7 +51,7 @@ export const epilepsyTimeValidator = ({ time_of_occurrence, duration }: TEpileps
   ).getTime();
 
   if (time >= Date.now()) {
-    toast.error("زمان رخداد صرع نباید بزرگ تر از زمان حال باشد");
+    toast.error("زمان رخداد تشنج نباید بزرگ تر از زمان حال باشد");
     return false;
   } else return true;
 };

@@ -5,7 +5,7 @@ export const useMedicineStartDatePlaceholder = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const onClick = () => navigate(medicineSecondStepForwardNavigation(pathname, "startDate"));
+  const onClick = () => navigate(medicineSecondStepForwardNavigation(pathname, "startDate"), { replace: true });
 
   return { onClick };
 };

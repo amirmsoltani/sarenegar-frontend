@@ -22,7 +22,7 @@ export const useMedicineDrugsModal = () => {
 
   const { setValue, formState } = useFormContext<TMedicineForm>();
 
-  const onClose = () => navigate(medicineFirstStepBackwardNavigation(pathname, params));
+  const onClose = () => navigate(medicineFirstStepBackwardNavigation(pathname, params), { replace: true });
 
   const onSubmit = (drug: Drug) => {
     setValue("drug", drug, { shouldValidate: formState.isSubmitted });

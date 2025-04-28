@@ -11,10 +11,10 @@ import { StatusHandler } from "@/common/StatusHandler/StatusHandler";
 import { severityOptionTranslator, severityTranslator } from "@/app/(epilepsy)/_common/epilepsyForm";
 
 export const EpilepsyModal = () => {
-  const { onClose, state, getData,date } = useEpilepsyModal();
+  const { onClose, state, getData, date } = useEpilepsyModal();
 
   return (
-    <Modal title={`رخدادهای صرع ${DateService.getDate(date)}`} onClose={onClose} wrapperClassName={styles.modal}>
+    <Modal title={`رخدادهای تشنج ${DateService.getDate(date)}`} onClose={onClose} wrapperClassName={styles.modal}>
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <StatusHandler status={state.status} onClick={getData}>
@@ -33,7 +33,7 @@ export const EpilepsyModal = () => {
                       <Flash className={styles.icon} />
                     </div>
                     <div>
-                      <span className={styles.durationTitle}>مدت صرع :</span>
+                      <span className={styles.durationTitle}>مدت تشنج :</span>
                       &nbsp;
                       <span className={styles.durationValue}>{item.duration}</span>
                     </div>
@@ -46,7 +46,7 @@ export const EpilepsyModal = () => {
           </StatusHandler>
         </div>
         <Link to={routes.addEpilepsyEvent.href()} className={styles.button}>
-          <Button>ایجاد رخداد صرع</Button>
+          <Button>ایجاد رخداد تشنج</Button>
         </Link>
       </div>
     </Modal>

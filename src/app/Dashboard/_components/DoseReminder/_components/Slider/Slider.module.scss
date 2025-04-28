@@ -3,6 +3,7 @@
   overflow: hidden;
   min-height: 105px;
   user-select: none;
+  padding-inline: 16px;
 
   .sliderWrapper {
     height: 100%;
@@ -15,14 +16,9 @@
     padding: 12px;
     display: flex;
     flex: 0 0 100%;
-    margin-left: 20px;
     flex-direction: column;
     background-color: rgba(from var(--black) r g b / 20%);
     @include radius-16;
-
-    &:first-child {
-      margin-left: 0px;
-    }
 
     .cardHeader {
       gap: 16px;
@@ -95,6 +91,17 @@
       margin-top: auto;
       @include text-14-semibold;
       @include flex-between-center;
+    }
+  }
+
+  &[data-with-limit="true"] {
+    .sliderSlide {
+      flex: 0 0 90%;
+      margin-left: 20px;
+
+      &:first-child {
+        margin-left: 0px;
+      }
     }
   }
 }

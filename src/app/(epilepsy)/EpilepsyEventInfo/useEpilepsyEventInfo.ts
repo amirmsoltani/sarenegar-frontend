@@ -1,12 +1,12 @@
 import { routes } from "@/routes/routes";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { RouterService } from "@/services/RouterService";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { useStatusHandler } from "@/common/useStatusHandler/useStatusHandler";
 import { getEpilepsyEventInfo } from "@/store/epilepsy/actions/getEpilepsyEventInfo/getEpilepsyEventInfo.action";
 
 export const useEpilepsyEventInfo = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
   const state = useAppSelector((store) => store.epilepsy.epilepsyEventInfo);
@@ -15,7 +15,7 @@ export const useEpilepsyEventInfo = () => {
 
   useStatusHandler({ state, onComponentDidMount: getInfo });
 
-  const navigateToDeleteModal = () => navigate(routes.epilepsyEventInfo.modals.deleteEpilepsyEvent.href());
+  const backwardHandler = () => RouterService.backward(routes.dashboard.modals.epilepsy.href());
 
-  return { id: id!, state, getInfo, navigateToDeleteModal };
+  return { id: id!, state, getInfo, backwardHandler };
 };

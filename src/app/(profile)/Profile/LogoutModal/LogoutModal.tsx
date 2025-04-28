@@ -16,7 +16,7 @@ export const LogoutModal = () => {
           <Button size="sm" variant="red" onClick={onSubmit} loading={state.status === "loading"}>
             خروج
           </Button>
-          <Button size="sm" variant="borderedPurple" onClick={closeHandler}>
+          <Button size="sm" variant="borderedRed" onClick={closeHandler}>
             انصراف
           </Button>
         </div>

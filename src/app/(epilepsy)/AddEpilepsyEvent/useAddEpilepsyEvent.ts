@@ -1,5 +1,6 @@
 import { routes } from "@/routes/routes";
 import { useForm } from "react-hook-form";
+import { RouterService } from "@/services/RouterService";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { TEpilepsyEventForm } from "@/store/epilepsy/epilepsySlice.types";
@@ -27,6 +28,8 @@ export const useAddEpilepsyEvent = () => {
     if (epilepsyTimeValidator(form)) await dispatch(addEpilepsyEventAction(form));
   };
 
+  const backwardHandler = () => RouterService.backward(routes.dashboard.href());
+
   useStatusHandler({
     state,
     onSuccess: () => {
@@ -35,5 +38,5 @@ export const useAddEpilepsyEvent = () => {
     },
   });
 
-  return { methods, onSubmit };
+  return { methods, onSubmit, backwardHandler };
 };

@@ -7,29 +7,34 @@ import { ChangeEvent, ClipboardEvent, KeyboardEvent } from "react";
 export const useOtp = ({ name, length }: TOtp) => {
   const { control, setValue, formState } = useFormContext();
 
-  const onChangeHandler = (index: number, e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = (index: number, e: ChangeEvent<HTMLInputElement>, fieldOnChange: Function) => {
     const value = p2e(e.target.value);
-
     if (int_regex.test(value)) {
-      if (value.length === 1) setValue(`${name}.${index}`, value, { shouldValidate: formState.isSubmitted });
-      else if (value.length === 2)
-        index + 1 < length && setValue(`${name}.${index + 1}`, value.slice(-1), { shouldValidate: formState.isSubmitted });
+      if (value.length === 1) fieldOnChange(value);
+      else {
+        value.split("").forEach((char, _index) => {
+          const active = index + _index;
+          active < length && setValue(`${name}.${active}`, char, { shouldValidate: formState.isSubmitted });
+        });
+      }
       const nextElement = e.target.nextElementSibling as HTMLInputElement;
       nextElement && nextElement.focus();
     }
   };
 
-  const clearHandler = (index: number, e: KeyboardEvent<HTMLInputElement>) => {
+  const clearHandler = (e: KeyboardEvent<HTMLInputElement>, fieldOnChange: Function) => {
     if (e.key === "Backspace") {
-      setValue(`${name}.${index}`, "", { shouldValidate: formState.isSubmitted });
+      fieldOnChange("");
       const prevElement = (e.target as HTMLInputElement).previousElementSibling as HTMLInputElement;
       if (prevElement) prevElement.focus();
     }
   };
 
   const onPasteHandler = (index: number, e: ClipboardEvent<HTMLInputElement>) => {
-    const value = p2e(e.clipboardData.getData("text/plain"));
-    if (value.length > 1 && /\d+/.test(value)) {
+    e.preventDefault();
+
+    const value = p2e(e.clipboardData.getData("text"));
+    if (value.length > 1 && int_regex.test(value)) {
       const splitted = value.split("");
       splitted.forEach((char, _index) => {
         const mainIndex = index + _index;

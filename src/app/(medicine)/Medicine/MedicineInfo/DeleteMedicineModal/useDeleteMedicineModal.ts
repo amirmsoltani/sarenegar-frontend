@@ -22,10 +22,12 @@ export const useDeleteMedicineModal = () => {
   const onSubmit = () => dispatch(deleteMedicineAction({ id: +id!, is_expired: infoState.data!.is_expired! }));
 
   const onClose = (context?: { close?: boolean }) => {
-    if (context?.close) navigate(routes.medicineInfo.href(id!));
+    if (context?.close) navigate(routes.medicineInfo.href(id!), { replace: true });
     else {
       dispatch(clearStateAction([{ reducerName: "medicine", stateName: "deleteMedicine" }]));
-      navigate(infoState.data!.is_expired ? routes.medicine.tabs.completed.href() : routes.medicine.tabs.current.href());
+      navigate(infoState.data!.is_expired ? routes.medicine.tabs.completed.href() : routes.medicine.tabs.current.href(), {
+        replace: true,
+      });
     }
   };
 

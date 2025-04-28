@@ -1,6 +1,7 @@
 import { routes } from "@/routes/routes";
 import { useForm } from "react-hook-form";
 import { shallowEqual } from "react-redux";
+import { RouterService } from "@/services/RouterService";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { TEpilepsyEventForm } from "@/store/epilepsy/epilepsySlice.types";
@@ -28,6 +29,8 @@ export const useEditEpilepsyEvent = () => {
 
   const getData = () => dispatch(getEpilepsyEventInfo({ id: +id! }));
 
+  const backwardHandler = () => RouterService.backward(routes.epilepsyEventInfo.href(id!));
+
   useStatusHandler({
     state: state.infoState,
     onComponentDidMount: getData,
@@ -37,9 +40,9 @@ export const useEditEpilepsyEvent = () => {
     state: state.editState,
     onSuccess: () => {
       dispatch(clearStateAction([{ reducerName: "epilepsy", stateName: "editEpilepsyEvent" }]));
-      navigate(routes.dashboard.href());
+      navigate(routes.epilepsyEventInfo.href(id!));
     },
   });
 
-  return { id: id!, methods, onSubmit, getData, status: state.infoState.status };
+  return { methods, onSubmit, getData, status: state.infoState.status, backwardHandler };
 };

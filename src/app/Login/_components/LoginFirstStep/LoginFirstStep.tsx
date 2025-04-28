@@ -6,17 +6,20 @@ import styles from "./LoginFirstStep.module.scss";
 export const LoginFirstStep = () => {
   return (
     <div className={styles.container}>
-      <div className={styles.title}>به صرع نگار خوش آمدید</div>
-      <div className={styles.description}>دستیار دلسوز بیماران صرع و پزشکان</div>
+      <div className={styles.title}>به تشنج نگار خوش آمدید</div>
+      <div className={styles.description}>دستیار دلسوز بیماران تشنج و پزشکان</div>
       <div className={styles.form}>
         <Input
           dir="ltr"
+          inputMode="numeric"
           name="phone_number"
           placeholder="شماره موبایل"
           label="شماره همراه خود را وارد نمایید"
           validate={Validate.gen().required().isPhoneNumber()}
         />
-        <FormButton radius="md" className={styles.button}>ارسال کد فعالسازی</FormButton>
+        <FormButton radius="md" className={styles.button}>
+          ارسال کد فعالسازی
+        </FormButton>
       </div>
     </div>
   );

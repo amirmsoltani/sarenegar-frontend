@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { routes } from "@/routes/routes";
 import { useReports } from "./useReports";
 import styles from "./Reports.module.scss";
 import { Spinner } from "@/common/Spinner/Spinner";
@@ -7,7 +9,7 @@ export const Reports = () => {
   const { state } = useReports();
 
   return (
-    <section className={styles.container}>
+    <Link to={routes.reportsInfo.href("monthly")} className={styles.container}>
       {state.status === "loading" ? (
         <div className={styles.status}>
           <Spinner />
@@ -33,7 +35,7 @@ export const Reports = () => {
           <NoData />
         </div>
       )}
-    </section>
+    </Link>
   );
 };
 
@@ -41,7 +43,7 @@ const NoData = () => {
   return (
     <>
       <div className={styles.title}>گزارشی وجود ندارد</div>
-      <div className={styles.description}>با ثبت اولین رخداد صرع قابل نمایش خواهد بود</div>
+      <div className={styles.description}>با ثبت اولین رخداد تشنج قابل نمایش خواهد بود</div>
     </>
   );
 };

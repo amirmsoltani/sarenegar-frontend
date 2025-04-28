@@ -19,7 +19,7 @@ export const useMedicineDoseModal = () => {
     _ref.current?.close();
   };
 
-  const onClose = () => navigate(medicineFirstStepBackwardNavigation(pathname, params));
+  const onClose = () => navigate(medicineFirstStepBackwardNavigation(pathname, params), { replace: true });
 
   return { _ref, onSubmit, onClose };
 };

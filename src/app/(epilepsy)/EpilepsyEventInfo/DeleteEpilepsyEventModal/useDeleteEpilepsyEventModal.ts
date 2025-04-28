@@ -18,10 +18,10 @@ export const useDeleteEpilepsyEventModal = () => {
   const onSubmit = () => dispatch(deleteEpilepsyEventAction({ id: +id! }));
 
   const onClose = (context?: { close?: boolean }) => {
-    if (context?.close) navigate(routes.epilepsyEventInfo.href(id!));
+    if (context?.close) navigate(routes.epilepsyEventInfo.href(id!), { replace: true });
     else {
       dispatch(clearStateAction([{ reducerName: "epilepsy", stateName: "deleteEpilepsyEvent" }]));
-      navigate(routes.dashboard.href());
+      navigate(routes.dashboard.href(), { replace: true });
     }
   };
 

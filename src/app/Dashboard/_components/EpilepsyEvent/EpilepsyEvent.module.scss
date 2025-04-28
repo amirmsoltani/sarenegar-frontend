@@ -7,13 +7,16 @@
   justify-content: space-between;
 
   .count {
+    width: 100%;
     height: 22px;
+    color: var(--white);
     @include text-14-semibold;
   }
 
   .link {
-    margin-inline: auto;
-    max-width: fit-content;
+    height: 100%;
+    flex-direction: column;
+    @include flex-between-center;
 
     &[data-disabled="true"] {
       pointer-events: none;

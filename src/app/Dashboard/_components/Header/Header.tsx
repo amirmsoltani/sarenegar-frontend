@@ -21,7 +21,7 @@ export const Header = () => {
               <span className={styles.message1}>کاربر عزیز</span>
               <span className={styles.message2}>خوش آمدید!</span>
             </div>
-            <div className={styles.date}>{DateService.getDate()}</div>
+            <div className={styles.date}>{DateService.customTranslate(date, { year: "numeric", month: "long" })}</div>
           </div>
         </Link>
         <Link to={routes.notification.href()} className={styles.notification}>

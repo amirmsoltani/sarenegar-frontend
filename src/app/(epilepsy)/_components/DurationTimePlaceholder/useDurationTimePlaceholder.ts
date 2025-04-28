@@ -10,6 +10,7 @@ export const useDurationTimePlaceholder = () => {
       pathname.includes(routes.addEpilepsyEvent.href())
         ? routes.addEpilepsyEvent.modals.durationTimeModal.href()
         : routes.editEpilepsyEvent.modals.durationTimeModal.href(),
+      { replace: true },
     );
 
   return { onClick };

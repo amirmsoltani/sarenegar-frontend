@@ -1,3 +1,5 @@
 export const TRANSITION_TIME = 200;
 
-export const VERSION_ID = "0.9.7";
+export const CALENDAR_RANGE = 7;
+
+export const VERSION_ID = "0.9.8";

@@ -18,6 +18,7 @@ export const useDurationTimeModal = () => {
       pathname.includes(routes.addEpilepsyEvent.href())
         ? routes.addEpilepsyEvent.href()
         : routes.editEpilepsyEvent.href(params.id!),
+      { replace: true },
     );
 
   const submitHandler = () => {

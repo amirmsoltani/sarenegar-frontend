@@ -150,11 +150,6 @@
         align-items: end;
         flex-direction: column;
       }
-
-      .recordTitle {
-        line-height: 100%;
-        @include text-12-regular;
-      }
     }
   }
 

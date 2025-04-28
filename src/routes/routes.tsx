@@ -261,8 +261,12 @@ export const routes = {
     path: ":type/:start/:end",
     activeIcon: ClipboardTextActive,
     href: (type?: string, _start?: string, _end?: string) => {
-      const { start, end } = DateService.getWeekRange();
-      return `${RouterService.setDate()}/reports/${type ?? reportTypes[0].value}/${_start ?? start}/${_end ?? end}`;
+      const _type = type ?? reportTypes[0].value;
+      const { start, end } =
+        DateService[
+          _type === reportTypes[0].value ? "getWeekRange" : _type === reportTypes[1].value ? "getMonthRange" : "getYearRange"
+        ]();
+      return `${RouterService.setDate()}/reports/${_type}/${_start ?? start}/${_end ?? end}`;
     },
   },
   profile: {
@@ -320,7 +324,7 @@ export const routes = {
         modals: {
           takeDose: {
             path: ":reminderID",
-            href: (reminderID: number,date?:string) => `${RouterService.setDate(date)}/calendar/medicine/events/${reminderID}`,
+            href: (reminderID: number, date?: string) => `${RouterService.setDate(date)}/calendar/medicine/events/${reminderID}`,
           },
         },
       },

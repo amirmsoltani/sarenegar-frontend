@@ -9,7 +9,7 @@ export const ReportsHeader = () => {
 
   return (
     <header className={styles.container}>
-      <h1 className={styles.title}>گزارشات رخداد صرع</h1>
+      <h1 className={styles.title}>گزارشات رخداد تشنج</h1>
       <div className={styles.links}>
         {reportTypes.map((link) => (
           <Link

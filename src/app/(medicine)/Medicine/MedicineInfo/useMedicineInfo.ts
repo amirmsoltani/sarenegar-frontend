@@ -1,4 +1,6 @@
+import { routes } from "@/routes/routes";
 import { useParams } from "react-router-dom";
+import { RouterService } from "@/services/RouterService";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { useStatusHandler } from "@/common/useStatusHandler/useStatusHandler";
 import { getMedicineInfoAction } from "@/store/medicine/actions/getMedicineInfo/getMedicineInfo.action";
@@ -15,7 +17,14 @@ export const useMedicineInfo = () => {
 
   const canEdit = state.data && !state.data.is_expired && !state.data.is_completed;
 
+  const backwardHandler = () =>
+    RouterService.backward(
+      state.data && (state.data.is_expired || state.data.is_completed)
+        ? routes.medicine.tabs.completed.href()
+        : routes.medicine.tabs.current.href(),
+    );
+
   useStatusHandler({ state, onComponentDidMount: getData });
 
-  return { ...state, id, getData, canEdit };
+  return { ...state, id, getData, canEdit, backwardHandler };
 };

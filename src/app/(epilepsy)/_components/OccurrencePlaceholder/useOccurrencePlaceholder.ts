@@ -10,6 +10,7 @@ export const useOccurrencePlaceholder = () => {
       pathname.includes(routes.addEpilepsyEvent.href())
         ? routes.addEpilepsyEvent.modals.occurrenceTimeModal.href()
         : routes.editEpilepsyEvent.modals.occurrenceTimeModal.href(),
+      { replace: true },
     );
 
   return { onClick };

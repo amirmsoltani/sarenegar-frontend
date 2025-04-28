@@ -1,4 +1,5 @@
 import { routes } from "./routes";
+// import { Page } from "@/app/Test/Page";
 import { Login } from "@/app/Login/Login";
 import { Reports } from "@/app/Reports/Reports";
 import { Dashboard } from "@/app/Dashboard/Dashboard";
@@ -11,6 +12,7 @@ import { AuthLayout } from "@/layout/AuthLayout/AuthLayout";
 import { AppRouterUtils } from "@/routes/AppRouter.utils.ts";
 import { Medicine } from "@/app/(medicine)/Medicine/Medicine";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Notification } from "@/app/Notification/Notification.tsx";
 import { Current } from "@/app/(medicine)/Medicine/Current/Current";
 import { PrimaryLayout } from "@/layout/PrimaryLayout/PrimaryLayout";
 import { ReportsLayout } from "@/layout/ReportsLayout/ReportsLayout";
@@ -50,7 +52,6 @@ import { DeleteMedicineModal } from "@/app/(medicine)/Medicine/MedicineInfo/Dele
 import { CompleteMedicineModal } from "@/app/(medicine)/Medicine/MedicineInfo/CompleteMedicineModal/CompleteMedicineModal";
 import { CalendarNotTakeDoseModal } from "@/app/Calendar/_components/CalendarNotTakeDoseModal/CalendarNotTakeDoseModal.tsx";
 import { DeleteEpilepsyEventModal } from "@/app/(epilepsy)/EpilepsyEventInfo/DeleteEpilepsyEventModal/DeleteEpilepsyEventModal";
-import { Notification } from "@/app/Notification/Notification.tsx";
 
 const AppRouter = () => {
   const { isLogin } = useAppRouter();
@@ -63,6 +64,7 @@ const AppRouter = () => {
             <Route path="" Component={RouterStateManager}>
               <Route path={routes.login.path} Component={AppRouterUtils.withCondition(!isLogin, Login, RedirectToDashboard)} />
               <Route path=":date?" Component={AppRouterUtils.withCondition(isLogin, AuthLayout)}>
+                {/* <Route path="test" Component={Page} /> */}
                 <Route path="" Component={RedirectToDashboard} />
                 <Route path={routes.dashboard.path} Component={Dashboard}>
                   <Route path={routes.dashboard.modals.epilepsy.path} Component={EpilepsyModal} />
@@ -162,7 +164,6 @@ const AppRouter = () => {
 
                 <Route path={routes.notification.path} Component={Notification} />
 
-                
                 <Route path="*" Component={NotFound} />
               </Route>
             </Route>

@@ -12,22 +12,15 @@ import { StatusHandler } from "@/common/StatusHandler/StatusHandler";
 import { TMedicineSlice } from "@/store/medicine/medicineSlice.types";
 
 export const MedicineInfo = () => {
-  const { getData, status, data, canEdit, id } = useMedicineInfo();
+  const { getData, status, data, canEdit, id, backwardHandler } = useMedicineInfo();
 
   return (
     <main className={styles.container}>
       <header className={styles.header}>
         <div className={styles.headerWrapper}>
-          <Link
-            className={styles.icon}
-            to={
-              data && (data.is_expired || data.is_completed)
-                ? routes.medicine.tabs.completed.href()
-                : routes.medicine.tabs.current.href()
-            }
-          >
+          <button onClick={backwardHandler} className={styles.icon}>
             <ArrowRight />
-          </Link>
+          </button>
           <h1 className={styles.title}>اطلاعات دارو</h1>
         </div>
         {canEdit && (
@@ -61,6 +54,7 @@ const Info = ({
   is_expired,
   total_doses,
   taken_doses,
+  is_completed,
   drug_timing_type,
 }: TInfo) => {
   const percent = ((taken_doses ?? 0) * 100) / (total_doses ?? 0);
@@ -137,16 +131,19 @@ const Info = ({
           </div>
         </div>
       </div>
-      <Link to={routes.medicineInfo.modals.delete.href()} className={styles.delete}>
+      <Link to={routes.medicineInfo.modals.delete.href()} replace className={styles.delete}>
         <Button variant="borderedRed">حذف دارو</Button>
       </Link>
       <footer className={styles.footer}>
-        <Link
-          className={styles.link}
-          to={is_expired ? routes.retakeMedicine.href(id) : routes.medicineInfo.modals.complete.href()}
-        >
-          <Button>{is_expired ? "باز مصرف دارو" : "تکمیل مصرف دارو"}</Button>
-        </Link>
+        {is_expired || is_completed ? (
+          <Link className={styles.link} to={routes.retakeMedicine.href(id)}>
+            <Button>باز مصرف دارو</Button>
+          </Link>
+        ) : (
+          <Link replace className={styles.link} to={routes.medicineInfo.modals.complete.href()}>
+            <Button>تکمیل مصرف دارو</Button>
+          </Link>
+        )}
       </footer>
     </>
   );

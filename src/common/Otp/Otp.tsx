@@ -19,13 +19,14 @@ export const Otp = ({ name, length }: TOtp) => {
           render={({ field, fieldState }) => (
             <input
               {...field}
-              type="number"
+              autoComplete="off"
+              inputMode="numeric"
               className={styles.input}
               onMouseUp={(e) => e.preventDefault()}
               data-error={!!fieldState.error?.message}
               onPaste={(e) => onPasteHandler(index, e)}
-              onKeyDown={(e) => clearHandler(index, e)}
-              onChange={(e) => onChangeHandler(index, e)}
+              onKeyDown={(e) => clearHandler(e, field.onChange)}
+              onChange={(e) => onChangeHandler(index, e, field.onChange)}
             />
           )}
         />

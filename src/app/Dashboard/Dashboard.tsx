@@ -18,7 +18,7 @@ export const Dashboard = () => {
       <Header />
       <div className={styles.wrapper}>
         <div className={styles.firstSection}>
-          <Box title="رخداد صرع" icon={FlashIcon} variant="red">
+          <Box title="رخداد تشنج" icon={FlashIcon} variant="red">
             <EpilepsyEvent />
           </Box>
           <Box title="گزارشات" icon={NoteIcon} variant="yellow">
@@ -26,7 +26,7 @@ export const Dashboard = () => {
           </Box>
         </div>
         <div className={styles.secondSection}>
-          <Box title="یادآور دارو" icon={PillIcon} variant="green">
+          <Box title="یادآور دارو" icon={PillIcon} variant="green" className={styles.doseReminderContainer}>
             <DoseReminder />
           </Box>
         </div>

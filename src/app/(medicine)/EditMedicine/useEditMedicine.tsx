@@ -1,6 +1,7 @@
 import { routes } from "@/routes/routes";
 import { useForm } from "react-hook-form";
 import { shallowEqual } from "react-redux";
+import { RouterService } from "@/services/RouterService";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { medicineFormDefaultValues } from "../_common/medicineForm";
 import { TMedicineForm } from "@/store/medicine/medicineSlice.types";
@@ -29,7 +30,7 @@ export const useEditMedicine = () => {
       ? 2
       : null;
 
-  const prevLink = step === 2 ? routes.editMedicine.tabs.firstStep.href() : routes.medicine.href();
+  const backwardHandler = () => RouterService.backward(routes.medicine.href());
 
   const submitHandler = async (form: TMedicineForm) => {
     if (step === 1) {
@@ -50,5 +51,5 @@ export const useEditMedicine = () => {
     },
   });
 
-  return { methods, step, submitHandler, prevLink, getInfo, status: infoState.status };
+  return { methods, step, submitHandler, backwardHandler, getInfo, status: infoState.status };
 };
