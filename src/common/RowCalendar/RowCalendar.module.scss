@@ -38,7 +38,6 @@
 
       .day {
         height: 34px;
-        @include transition;
         @include text-18-bold;
       }
 
