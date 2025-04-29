@@ -1,11 +1,14 @@
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
+import { shallowEqual } from "react-redux";
 import { DateService } from "@/services/DateService";
 import { getStateCities } from "@/helper/citiesList";
 import { TProfileForm } from "@/store/auth/authSlice.types";
 import { states, stateTranslator } from "@/helper/statesList";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { TWheelPickerOption } from "@/common/Form/FormUtils.types";
+import { useStatusHandler } from "@/common/useStatusHandler/useStatusHandler";
 import { updateProfileAction } from "@/store/auth/actions/updateProfile/updateProfile.action";
 
 export const genderOptions: TWheelPickerOption[] = [
@@ -37,9 +40,19 @@ export const useProfileInfo = () => {
   const { reset, ...method } = useForm({ defaultValues });
 
   const dispatch = useAppDispatch();
-  const user = useAppSelector((store) => store.auth.profile.data!);
+  const { user, updateState } = useAppSelector(
+    (store) => ({ user: store.auth.profile.data!, updateState: store.auth.updateProfile }),
+    shallowEqual,
+  );
 
   const submitHandler = async (form: TProfileForm) => await dispatch(updateProfileAction(form));
+
+  useStatusHandler({
+    state: updateState,
+    onSuccess: () => {
+      toast.success("پروفایل کاربری با موفقیت ویرایش شد");
+    },
+  });
 
   useEffect(() => {
     const name = user.full_name;

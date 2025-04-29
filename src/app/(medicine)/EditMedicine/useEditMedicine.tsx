@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { routes } from "@/routes/routes";
 import { useForm } from "react-hook-form";
 import { shallowEqual } from "react-redux";
@@ -46,6 +47,7 @@ export const useEditMedicine = () => {
   useStatusHandler({
     state: editState,
     onSuccess: () => {
+      toast.success("دارو با موفقیت ویرایش شد");
       dispatch(clearStateAction([{ reducerName: "medicine", stateName: "editMedicine" }]));
       navigate(editState.data?.is_expired ? routes.medicine.tabs.completed.href() : routes.medicine.tabs.current.href());
     },

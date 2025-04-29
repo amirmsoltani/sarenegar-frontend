@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { routes } from "@/routes/routes";
 import { useModalRef } from "@/common/Modal/useModalRef";
 import { useNavigate, useParams } from "react-router-dom";
@@ -21,6 +22,7 @@ export const useDeleteEpilepsyEventModal = () => {
     if (context?.close) navigate(routes.epilepsyEventInfo.href(id!), { replace: true });
     else {
       dispatch(clearStateAction([{ reducerName: "epilepsy", stateName: "deleteEpilepsyEvent" }]));
+      toast.success("رخداد تشنج با موفقیت حذف شد");
       navigate(routes.dashboard.href(), { replace: true });
     }
   };

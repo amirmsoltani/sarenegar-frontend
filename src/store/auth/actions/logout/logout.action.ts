@@ -8,7 +8,7 @@ import { apiAuthenticationAuthLogoutCreate } from "@/services/api";
 export const logoutAction = StoreUtils.createAsyncThunk("auth/logout", async (_, thunk) => {
   try {
     const access_token = CookieRepository.get("access_token");
-    access_token && (await apiAuthenticationAuthLogoutCreate());
+    access_token && (await apiAuthenticationAuthLogoutCreate({ disableErrorToast: true }));
   } catch (err) {
     //
   }

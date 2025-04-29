@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { routes } from "@/routes/routes";
 import { useForm } from "react-hook-form";
 import { RouterService } from "@/services/RouterService";
@@ -34,6 +35,7 @@ export const useAddEpilepsyEvent = () => {
     state,
     onSuccess: () => {
       dispatch(clearStateAction([{ reducerName: "epilepsy", stateName: "addEpilepsyEvent" }]));
+      toast.success("رخداد تشنج با موفقیت ثبت شد");
       navigate(routes.dashboard.href());
     },
   });

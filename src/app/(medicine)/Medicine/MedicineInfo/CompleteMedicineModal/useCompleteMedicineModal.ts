@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { routes } from "@/routes/routes";
 import { useModalRef } from "@/common/Modal/useModalRef";
 import { useNavigate, useParams } from "react-router-dom";
@@ -27,7 +28,13 @@ export const useCompleteMedicineModal = () => {
 
   const closeHandler = () => _ref.current?.close({ close: true });
 
-  useStatusHandler({ state, onSuccess: () => _ref.current?.close() });
+  useStatusHandler({
+    state,
+    onSuccess: () => {
+      _ref.current?.close();
+      toast.success("یادآوری ثبت شد: دارو رو مصرف کردی");
+    },
+  });
 
   return { _ref, state, onSubmit, onClose, closeHandler };
 };

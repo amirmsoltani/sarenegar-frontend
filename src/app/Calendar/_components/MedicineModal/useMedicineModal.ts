@@ -1,10 +1,11 @@
+import { toast } from "react-toastify";
+import { shallowEqual } from "react-redux";
+import { routes } from "@/routes/routes.tsx";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/store.ts";
 import { useStatusHandler } from "@/common/useStatusHandler/useStatusHandler.ts";
 import { getReminders } from "@/store/calendar/actions/getReminders/getReminders.ts";
-import { shallowEqual } from "react-redux";
 import { calendarTakeDoseAction } from "@/store/calendar/actions/calendarTakeDose/calendarTakeDose.ts";
-import { routes } from "@/routes/routes.tsx";
 
 export function useMedicineModal() {
   const navigate = useNavigate();
@@ -27,8 +28,12 @@ export function useMedicineModal() {
     };
   }
 
-  const { reminders, completed } = useAppSelector(
-    (store) => ({ reminders: store.calendar.reminders, completed: store.calendar.takeDose }),
+  const { reminders, completed, notCompleted } = useAppSelector(
+    (store) => ({
+      reminders: store.calendar.reminders,
+      completed: store.calendar.takeDose,
+      notCompleted: store.calendar.notTakeDose,
+    }),
     shallowEqual,
   );
 
@@ -37,10 +42,19 @@ export function useMedicineModal() {
     onComponentDidMount: getRemindersHandler,
   });
 
-
-  function closeHandler(){
-    navigate(routes.calendar.href(date,"medicine"))
+  function closeHandler() {
+    navigate(routes.calendar.href(date, "medicine"));
   }
 
-  return { date, reminders, getRemindersHandler, completeDoseHandler, openModalHandler,closeHandler, completed };
+  useStatusHandler({
+    state: completed,
+    onSuccess: () => toast.success("یادآوری ثبت شد: دارو رو مصرف کردی"),
+  });
+
+  useStatusHandler({
+    state: notCompleted,
+    onSuccess: () => toast.success("یادآوری اصلاح شد: این ئارو رو مصرف نکردی"),
+  });
+
+  return { date, reminders, getRemindersHandler, completeDoseHandler, openModalHandler, closeHandler, completed };
 }

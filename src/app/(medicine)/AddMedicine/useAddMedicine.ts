@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { routes } from "@/routes/routes";
 import { useForm } from "react-hook-form";
 import { DateService } from "@/services/DateService";
@@ -48,6 +49,7 @@ export const useAddMedicine = () => {
   useStatusHandler({
     state,
     onSuccess: () => {
+      toast.success("دارو با موفقیت اضافه شد");
       dispatch(clearStateAction([{ reducerName: "medicine", stateName: "addMedicine" }]));
       navigate(state.data?.is_expired ? routes.medicine.tabs.completed.href() : routes.medicine.tabs.current.href());
     },

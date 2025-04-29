@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { routes } from "@/routes/routes";
 import { shallowEqual } from "react-redux";
 import { useModalRef } from "@/common/Modal/useModalRef";
@@ -39,7 +40,13 @@ export const useDeleteMedicineModal = () => {
 
   const closeHandler = () => _ref.current?.close({ close: true });
 
-  useStatusHandler({ state: deleteState, onSuccess: () => _ref.current?.close() });
+  useStatusHandler({
+    state: deleteState,
+    onSuccess: () => {
+      _ref.current?.close();
+      toast.success("دارو با موفقیت حذف شد");
+    },
+  });
 
   return { _ref, state: deleteState, onSubmit, onClose, closeHandler };
 };

@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { routes } from "@/routes/routes";
 import { useForm } from "react-hook-form";
 import { shallowEqual } from "react-redux";
@@ -40,6 +41,7 @@ export const useEditEpilepsyEvent = () => {
     state: state.editState,
     onSuccess: () => {
       dispatch(clearStateAction([{ reducerName: "epilepsy", stateName: "editEpilepsyEvent" }]));
+      toast.success("رخداد تشنج با موفقیت ویرایش شد");
       navigate(routes.epilepsyEventInfo.href(id!));
     },
   });

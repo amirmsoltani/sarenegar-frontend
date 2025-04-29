@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { routes } from "@/routes/routes";
 import { shallowEqual } from "react-redux";
 import { useModalRef } from "@/common/Modal/useModalRef";
@@ -34,6 +35,7 @@ export const useNotTakeDoseModal = () => {
     state: notTakingDoseState,
     onSuccess: () => {
       _ref.current?.close();
+      toast.success("یادآوری اصلاح شد: این ئارو رو مصرف نکردی");
       dispatch(
         clearStateAction([
           { reducerName: "medicine", stateName: "doseInfo" },

@@ -7,7 +7,7 @@ type TCompleteMedicineAction = { id: number };
 export const completeMedicineAction = StoreUtils.createAsyncThunk(
   "medicine/completeMedicine",
   async ({ id }: TCompleteMedicineAction, thunk) => {
-    const response = await apiDrugDosageDosemanagerDrugDosageComplete(id);
+    const response = await apiDrugDosageDosemanagerDrugDosageComplete(id, { disableSuccessToast: true });
 
     thunk.dispatch(completeMedicine(response.data.drug_dosage));
 
