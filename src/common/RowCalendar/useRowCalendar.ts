@@ -7,6 +7,7 @@ import { FieldValues, useFormContext } from "react-hook-form";
 import { UIEvent, useLayoutEffect, useRef, useState } from "react";
 
 export const useRowCalendar = ({ current, active, onChange }: Pick<TRowCalendar, "current" | "active" | "onChange">) => {
+  const mounted = useRef(false);
   const selected = useRef<null | number>(null);
   const container = useRef<HTMLDivElement>(null);
 
@@ -24,23 +25,25 @@ export const useRowCalendar = ({ current, active, onChange }: Pick<TRowCalendar,
   };
 
   const debouncedScrollEndHandler = useDebouncedCallback((e: UIEvent<HTMLDivElement>) => {
-    if (!selected.current) {
-      const container = e.target as HTMLDivElement;
-      const children = [...container.childNodes] as HTMLButtonElement[];
+    if (mounted.current) {
+      if (!selected.current) {
+        const container = e.target as HTMLDivElement;
+        const children = [...container.childNodes] as HTMLButtonElement[];
 
-      const containerCenter = container.scrollLeft + container.clientWidth / 2;
+        const containerCenter = container.scrollLeft + container.clientWidth / 2;
 
-      const { index } = children.reduce<{ index: number | null; lowest: number }>(
-        (prev, current, index) => {
-          const diff = Math.abs(containerCenter - (current.offsetLeft + current.clientWidth / 2));
-          return diff < prev.lowest ? { index, lowest: diff } : prev;
-        },
-        { index: null, lowest: Infinity },
-      );
+        const { index } = children.reduce<{ index: number | null; lowest: number }>(
+          (prev, current, index) => {
+            const diff = Math.abs(containerCenter - (current.offsetLeft + current.clientWidth / 2));
+            return diff < prev.lowest ? { index, lowest: diff } : prev;
+          },
+          { index: null, lowest: Infinity },
+        );
 
-      typeof index === "number" && onChange && onChange(list[index].date);
-    }
-  }, 250);
+        typeof index === "number" && onChange && onChange(list[index].date);
+      }
+    } else setTimeout(() => (mounted.current = true), 300);
+  }, 220);
 
   useLayoutEffect(() => {
     const _container = container.current;
