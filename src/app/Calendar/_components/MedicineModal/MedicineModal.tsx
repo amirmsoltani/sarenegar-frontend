@@ -14,7 +14,7 @@ import { medicineUnitTranslator, medicineUsageTypeTranslator } from "@/app/(medi
 export const MedicineModal = () => {
   const medicineModal = useMedicineModal();
   return (
-    <Modal title={`دارو های ${DateService.getDate(medicineModal.date)}`} onClose={() => {}} wrapperClassName={styles.modal}>
+    <Modal title={`دارو های ${DateService.getDate(medicineModal.date)}`} onClose={medicineModal.closeHandler} wrapperClassName={styles.modal}>
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <StatusHandler status={medicineModal.reminders.status} onClick={medicineModal.getRemindersHandler}>

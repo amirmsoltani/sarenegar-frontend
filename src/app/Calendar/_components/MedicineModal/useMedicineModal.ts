@@ -37,5 +37,10 @@ export function useMedicineModal() {
     onComponentDidMount: getRemindersHandler,
   });
 
-  return { date, reminders, getRemindersHandler, completeDoseHandler, openModalHandler, completed };
+
+  function closeHandler(){
+    navigate(routes.calendar.href(date,"medicine"))
+  }
+
+  return { date, reminders, getRemindersHandler, completeDoseHandler, openModalHandler,closeHandler, completed };
 }
