@@ -76,10 +76,10 @@ export interface DrugDosageCreateUpdateRequest {
   is_daily?: boolean;
   /** Days of the week when the drug should be taken (e.g., MON, TUE). */
   usage_days?: UsageDaysEnum[];
-  /** Indicates if the medication has been manually marked as completed */
+  /** نشان می‌دهد که دارو به صورت دستی به‌عنوان تکمیل شده علامت‌گذاری شده است */
   is_completed?: boolean;
   /**
-   * The date when the medication was marked as completed
+   * تاریخی که دارو به‌عنوان تکمیل شده علامت‌گذاری شده است
    * @nullable
    */
   completion_date?: string | null;
@@ -127,10 +127,10 @@ export interface DrugDosageRetrieve {
   total_doses: number;
   /** Number of doses already taken */
   taken_doses: number;
-  /** Indicates if the medication has been manually marked as completed */
-  is_completed?: boolean;
+  /** Indicates if the drug dosage is completed. */
+  is_completed: boolean;
   /**
-   * The date when the medication was marked as completed
+   * تاریخی که دارو به‌عنوان تکمیل شده علامت‌گذاری شده است
    * @nullable
    */
   readonly completion_date?: string | null;

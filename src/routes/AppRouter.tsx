@@ -1,5 +1,4 @@
 import { routes } from "./routes";
-// import { Page } from "@/app/Test/Page";
 import { Login } from "@/app/Login/Login";
 import { Reports } from "@/app/Reports/Reports";
 import { Dashboard } from "@/app/Dashboard/Dashboard";
@@ -64,7 +63,6 @@ const AppRouter = () => {
             <Route path="" Component={RouterStateManager}>
               <Route path={routes.login.path} Component={AppRouterUtils.withCondition(!isLogin, Login, RedirectToDashboard)} />
               <Route path=":date?" Component={AppRouterUtils.withCondition(isLogin, AuthLayout)}>
-                {/* <Route path="test" Component={Page} /> */}
                 <Route path="" Component={RedirectToDashboard} />
                 <Route path={routes.dashboard.path} Component={Dashboard}>
                   <Route path={routes.dashboard.modals.epilepsy.path} Component={EpilepsyModal} />

@@ -19,15 +19,21 @@ export const useDeleteMedicineModal = () => {
     shallowEqual,
   );
 
-  const onSubmit = () => dispatch(deleteMedicineAction({ id: +id!, is_expired: infoState.data!.is_expired! }));
+  const onSubmit = () =>
+    dispatch(
+      deleteMedicineAction({ id: +id!, is_expired: infoState.data!.is_expired!, is_completed: infoState.data!.is_completed }),
+    );
 
   const onClose = (context?: { close?: boolean }) => {
     if (context?.close) navigate(routes.medicineInfo.href(id!), { replace: true });
     else {
       dispatch(clearStateAction([{ reducerName: "medicine", stateName: "deleteMedicine" }]));
-      navigate(infoState.data!.is_expired ? routes.medicine.tabs.completed.href() : routes.medicine.tabs.current.href(), {
-        replace: true,
-      });
+      navigate(
+        infoState.data!.is_expired || infoState.data!.is_completed
+          ? routes.medicine.tabs.completed.href()
+          : routes.medicine.tabs.current.href(),
+        { replace: true },
+      );
     }
   };
 

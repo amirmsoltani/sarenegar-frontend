@@ -43,8 +43,9 @@ const medicineSlice = createSlice({
       }
       state.dosesList = StoreUtils.normalActionInitState;
     },
-    deleteMedicine: (state, action: PayloadAction<{ id: number; is_expired: boolean }>) => {
-      const currentList = action.payload.is_expired ? "completedMedicinesList" : "currentMedicinesList";
+    deleteMedicine: (state, action: PayloadAction<{ id: number; is_expired: boolean; is_completed: boolean }>) => {
+      const currentList =
+        action.payload.is_expired || action.payload.is_completed ? "completedMedicinesList" : "currentMedicinesList";
       if (state[currentList].data) {
         state[currentList].data.results = state[currentList].data!.results.filter((item) => item.id !== action.payload.id);
         state[currentList].data.count--;
