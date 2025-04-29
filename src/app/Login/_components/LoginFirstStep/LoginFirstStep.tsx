@@ -6,7 +6,7 @@ import styles from "./LoginFirstStep.module.scss";
 export const LoginFirstStep = () => {
   return (
     <div className={styles.container}>
-      <div className={styles.title}>به تشنج نگار خوش آمدید</div>
+      <div className={styles.title}>به اپیکال خوش آمدید</div>
       <div className={styles.description}>دستیار دلسوز بیماران تشنج و پزشکان</div>
       <div className={styles.form}>
         <Input

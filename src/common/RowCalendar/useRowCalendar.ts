@@ -1,18 +1,46 @@
 import { useParams } from "react-router-dom";
 import { TRowCalendar } from "./RowCalendar.types";
+import { useDebouncedCallback } from "use-debounce";
 import { DateService } from "@/services/DateService";
-import { useLayoutEffect, useRef, useState } from "react";
 import { genRowCalenderList } from "./RowCalendar.constants";
 import { FieldValues, useFormContext } from "react-hook-form";
+import { UIEvent, useLayoutEffect, useRef, useState } from "react";
 
-export const useRowCalendar = ({ active }: Pick<TRowCalendar, "active">) => {
-  const { date } = useParams();
-
-  const [list] = useState(genRowCalenderList(date!));
-
+export const useRowCalendar = ({ current, active, onChange }: Pick<TRowCalendar, "current" | "active" | "onChange">) => {
+  const selected = useRef<null | number>(null);
   const container = useRef<HTMLDivElement>(null);
 
-  const _active = DateService.setToGlobalFormat(new Date(active));
+  const { date } = useParams();
+
+  const [list] = useState(genRowCalenderList(current!));
+
+  const _active = DateService.setToGlobalFormat(new Date(active ?? date!));
+
+  const onTransitionEnd = () => (selected.current = null);
+
+  const clickHandler = (date: string, index: number) => {
+    onChange && onChange(date);
+    selected.current = index;
+  };
+
+  const debouncedScrollEndHandler = useDebouncedCallback((e: UIEvent<HTMLDivElement>) => {
+    if (!selected.current) {
+      const container = e.target as HTMLDivElement;
+      const children = [...container.childNodes] as HTMLButtonElement[];
+
+      const containerCenter = container.scrollLeft + container.clientWidth / 2;
+
+      const { index } = children.reduce<{ index: number | null; lowest: number }>(
+        (prev, current, index) => {
+          const diff = Math.abs(containerCenter - (current.offsetLeft + current.clientWidth / 2));
+          return diff < prev.lowest ? { index, lowest: diff } : prev;
+        },
+        { index: null, lowest: Infinity },
+      );
+
+      typeof index === "number" && onChange && onChange(list[index].date);
+    }
+  }, 250);
 
   useLayoutEffect(() => {
     const _container = container.current;
@@ -26,7 +54,7 @@ export const useRowCalendar = ({ active }: Pick<TRowCalendar, "active">) => {
     }
   }, [list, _active]);
 
-  return { list, container, _active };
+  return { list, container, _active, debouncedScrollEndHandler, onTransitionEnd, clickHandler };
 };
 
 export const useFormRowCalendar = <T extends FieldValues>() => {

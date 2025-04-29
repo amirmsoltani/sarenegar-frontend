@@ -1,35 +1,73 @@
-.container {
-  gap: 2px;
-  display: flex;
-  overflow: auto;
+.mainContainer {
+  width: 100%;
+  overflow: hidden;
   position: relative;
-  padding-inline: 16px;
-  @include scroll-off;
 
-  .date {
-    gap: 12px;
-    height: 80px;
+  &[data-variant="DEFAULT"] {
+    --text: var(--white);
+    --bg: var(--secondary);
+  }
+
+  &[data-variant="LIGHT"] {
+    --text: var(--secondary);
+    --bg: var(--orange-background);
+  }
+
+  .container {
+    z-index: 1;
+    width: 100%;
     display: flex;
-    min-width: 48px;
-    user-select: none;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    padding: 8px 6px 12px 6px;
-    @include transition;
+    overflow: auto;
+    position: relative;
+    padding-inline: 50%;
+    scroll-snap-type: x mandatory;
+    @include scroll-off;
+
+    .date {
+      gap: 12px;
+      height: 80px;
+      display: flex;
+      min-width: 48px;
+      user-select: none;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      scroll-snap-align: center;
+      padding: 8px 6px 12px 6px;
+      @include transition;
+
+      .day {
+        height: 34px;
+        @include transition;
+        @include text-18-bold;
+      }
+
+      .weekday {
+        @include text-12-regular;
+      }
+
+      &[data-active="true"] {
+        color: var(--text);
+
+        .day {
+          @include text-24-bold;
+        }
+      }
+    }
+  }
+
+  .activeBar {
+    top: 0px;
+    left: 50%;
+    width: 60px;
+    height: 100%;
+    position: absolute;
     @include radius-100;
-
-    .day {
-      @include text-18-bold;
-    }
-
-    .weekday {
-      @include text-12-regular;
-    }
-
-    &[data-active="true"] {
-      color: var(--white);
-      background-color: var(--secondary);
-    }
+    transform: translateX(-50%);
+    background-color: var(--bg);
+    -o-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
   }
 }

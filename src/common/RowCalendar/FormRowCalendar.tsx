@@ -11,7 +11,9 @@ export const FormRowCalendar = <T extends FieldValues>({ name, rules = {}, valid
       name={name}
       control={control}
       rules={{ ...rules, validate: validate?.validate }}
-      render={({ field }) => <RowCalendar active={field.value} onChange={(value) => field.onChange(value)} />}
+      render={({ field }) => (
+        <RowCalendar current={field.value} active={field.value} onChange={(value) => field.onChange(value)} variant="LIGHT" />
+      )}
     />
   );
 };
