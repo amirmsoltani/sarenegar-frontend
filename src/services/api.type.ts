@@ -7,4 +7,4 @@ export type TOrvalOptions<T> = Pick<AxiosRequestConfig<T>, "url" | "headers" | "
   method: TMethod;
 };
 
-export type TOptions = AxiosRequestConfig<any>;
+export type TOptions = AxiosRequestConfig<any> & { disableSuccessToast?: boolean; disableErrorToast?: boolean };

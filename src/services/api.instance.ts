@@ -19,18 +19,22 @@ export const api = async <T>(
   { method, url, data, headers, params }: TOrvalOptions<T>,
   options?: TOptions,
 ): Promise<AxiosResponse<T, any>> => {
-  return apiInstance<T>({ url, method, data, headers, params, ...options })
+  const { disableErrorToast, disableSuccessToast, ..._options } = options ?? {};
+
+  return apiInstance<T>({ url, method, data, headers, params, ..._options })
     .catch(async (err) => {
       const response = err?.response?.data;
-      const message = response?.error ?? response?.message;
-      if (message && typeof message === "string") toast.error(message);
-      else if (isObject(response)) {
-        const errors = Object.values(response);
-        if (errors.length) {
-          errors.forEach(
-            (group) => Array.isArray(group) && (group as string[]).forEach((message: string) => toast.error(message)),
-          );
-          return;
+      if (!disableErrorToast) {
+        const message = response?.error ?? response?.message;
+        if (message && typeof message === "string") toast.error(message);
+        else if (isObject(response)) {
+          const errors = Object.values(response);
+          if (errors.length) {
+            errors.forEach(
+              (group) => Array.isArray(group) && (group as string[]).forEach((message: string) => toast.error(message)),
+            );
+            return;
+          }
         }
       }
 
@@ -40,8 +44,10 @@ export const api = async <T>(
       return Promise.reject(err);
     })
     .then((res: any) => {
-      const message = res.data?.detail ?? res.data?.message;
-      if (message && typeof message === "string") toast.success(message);
+      if (!disableSuccessToast) {
+        const message = res.data?.detail ?? res.data?.message;
+        if (message && typeof message === "string") toast.success(message);
+      }
 
       return res as AxiosResponse<T, any>;
     });
