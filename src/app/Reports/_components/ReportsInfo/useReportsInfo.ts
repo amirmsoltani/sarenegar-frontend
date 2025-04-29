@@ -85,14 +85,14 @@ export const useReportsInfo = () => {
   };
 
   const doughnutChartData = {
-    labels: severityOptions.reverse().map((option) => option.label),
+    labels: severityOptions.map((option) => option.label),
     datasets: [
       {
         backgroundColor: ["#674188", "#B3A0C4", "#E1D9E7"],
         data: [
-          state.data?.selected_period.severity_distribution.Mild.percentage,
-          state.data?.selected_period.severity_distribution.Moderate.percentage,
           state.data?.selected_period.severity_distribution.Severe.percentage,
+          state.data?.selected_period.severity_distribution.Moderate.percentage,
+          state.data?.selected_period.severity_distribution.Mild.percentage,
         ],
       },
     ],
