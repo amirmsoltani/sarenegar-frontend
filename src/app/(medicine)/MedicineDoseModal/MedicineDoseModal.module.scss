@@ -22,6 +22,7 @@
     color: var(--secondary);
     background-color: var(--orange-background);
     @include centering;
+    @include text-20-bold;
   }
 }
 

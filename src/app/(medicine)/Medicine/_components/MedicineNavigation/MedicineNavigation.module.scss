@@ -8,8 +8,8 @@
   gap: var(--gap);
   position: relative;
   padding: var(--padding);
-  background-color: var(--white);
   border: 0.5px solid var(--stroke);
+  background-color: var(--background);
   @include radius-100;
   @include flex-start-center;
 

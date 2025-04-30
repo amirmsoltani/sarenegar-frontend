@@ -137,7 +137,7 @@
       circle,
       var(--white) 58%,
       rgba(0, 0, 0, 10%) 58%,
-      var(--white) 64%,
+      rgba(from var(--white) r g b / 10%) 64%,
       rgba(0, 0, 0, 10%) 70%,
       var(--white) 70%
     );
@@ -152,7 +152,7 @@
         flex-direction: column;
         width: calc(100% - 22px);
         height: calc(100% - 22px);
-        background-color: var(--white);
+        background-color: var(--background);
         @include centering;
         @include radius-full;
 

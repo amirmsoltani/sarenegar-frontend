@@ -86,7 +86,7 @@
 .borderedRed {
   color: var(--red);
   background-color: transparent;
-  border: 0.5px solid var(--red);
+  border: 1px solid var(--red);
 
   &[data-disabled="true"] {
     background-color: transparent;
