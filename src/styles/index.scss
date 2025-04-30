@@ -32,6 +32,7 @@
   --blue: #25bff7;
   --white: #ffffff;
   --stroke: #d9dce0;
+  --stroke2: #dedeea;
   --purple-stroke: #9d79be;
   --purple: #723da1;
   --violet: #f1ecf6;
@@ -54,6 +55,10 @@ body {
   color: var(--dark-blue);
   background-color: var(--background);
   @include scroll-off;
+
+  &:has([data-modal-open="true"]) {
+    overflow: hidden;
+  }
 }
 
 button {
@@ -65,8 +70,19 @@ a {
   text-decoration: none;
 }
 
+.Toastify__toast-container {
+  padding: 16px;
+}
+
 .Toastify__toast {
+  margin-top: 16px;
+  box-shadow: 0px 4px 8px 0 px rgba(from var(--black) r g b / 10%);
+  @include radius-8;
   @include text-14-bold;
+
+  &:first-child {
+    margin-top: 0px;
+  }
 }
 
 .Toastify__toast--error {

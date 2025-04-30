@@ -109,7 +109,7 @@ const Info = ({
             </div>
           </div>
           <div className={styles.option}>
-            <div className={styles.title}>ناریخ شروع مصرف</div>
+            <div className={styles.title}>تاریخ شروع مصرف</div>
             <div>{DateService.getDate(DateService.jalaliToGregorian(start_date!))}</div>
           </div>
           <div className={styles.option}>

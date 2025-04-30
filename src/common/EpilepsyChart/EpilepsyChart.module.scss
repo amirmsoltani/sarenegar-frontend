@@ -26,11 +26,9 @@
   }
   .box:nth-child(2) {
     --n: 2;
-    opacity: 40%;
   }
   .box:nth-child(3) {
     --n: 3;
-    opacity: 20%;
   }
 
   .box {
@@ -40,7 +38,7 @@
     border-radius: 50%;
     width: calc(33% * var(--n));
     height: calc(33% * var(--n));
-    border: 1px solid var(--color);
+    border: 1px solid rgba(from var(--color) r g b / 20%);
     transform: translate(-50%, -50%);
     @include transition;
     -webkit-transform: translate(-50%, -50%);
@@ -52,8 +50,19 @@
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
 
-    &[data-active="true"] {
+    &[data-active="true"]:nth-child(1) {
       background-color: var(--color);
+      border: 1px solid transparent;
+    }
+
+    &[data-active="true"]:nth-child(2) {
+      background-color: rgba(from var(--color) r g b / 40%);
+      border: 1px solid transparent;
+    }
+
+    &[data-active="true"]:nth-child(3) {
+      background-color: rgba(from var(--color) r g b / 20%);
+      border: 1px solid transparent;
     }
   }
 }

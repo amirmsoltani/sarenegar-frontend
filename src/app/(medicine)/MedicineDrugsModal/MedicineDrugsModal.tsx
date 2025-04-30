@@ -10,9 +10,15 @@ export const MedicineDrugsModal = () => {
   const { _ref, onClose, onSubmit, status, getData, data, onChangeDebouncedHandler } = useMedicineDrugsModal();
 
   return (
-    <Modal _ref={_ref} onClose={onClose} title="داروی خود را انتخاب کنید" wrapperClassName={styles.container}>
+    <Modal
+      _ref={_ref}
+      onClose={onClose}
+      bodyClassName={styles.modalBody}
+      title="داروی خود را انتخاب کنید"
+      wrapperClassName={styles.container}
+    >
       <div className={styles.wrapper}>
-        <div>
+        <div className={styles.header}>
           <StateInput
             mode="STATE"
             variant="DARK"
@@ -20,8 +26,8 @@ export const MedicineDrugsModal = () => {
             onChange={onChangeDebouncedHandler}
             placeholder="خدمت مورد نظر خود را وارد نمایید ..."
           />
+          <h1 className={styles.title}>انتخاب برند دارو</h1>
         </div>
-        <h1 className={styles.title}>انتخاب برند دارو</h1>
         <StatusHandler status={status} className={styles.status} onClick={getData}>
           {data &&
             (data.results.length ? (

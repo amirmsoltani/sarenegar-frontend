@@ -1,7 +1,7 @@
 import styles from "./Calendar.module.scss";
 import classNames from "classnames";
 import { Navbar } from "@/app/_components/Navbar/Navbar.tsx";
-import ArrowIcon from "@/assets/svg/arrow-square.svg";
+import ArrowIcon from "@/assets/svg/arrow-left.svg";
 import { useCalendar, weekDays } from "@/app/Calendar/useCalendar.ts";
 import { e2p } from "@/helper/helper.ts";
 import { Flash } from "@wandersonalwes/iconsax-react";
@@ -26,29 +26,34 @@ export const Calendar = () => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.header}>
-        <h2 className={styles.title}>تقویم رویداد ها</h2>
-      </div>
-
-      <div className={styles.tabs}>
-        <div className={classNames(styles.tabItem, { [styles.active]: mode === "attack" })} onClick={changeModeHandler("attack")}>
-          حمله
+      <div className={styles.headerWrapper}>
+        <div className={styles.header}>
+          <h2 className={styles.title}>تقویم رویداد ها</h2>
         </div>
-        <div
-          className={classNames(styles.tabItem, { [styles.active]: mode === "medicine" })}
-          onClick={changeModeHandler("medicine")}
-        >
-          دارو
+
+        <div className={styles.tabs}>
+          <div
+            className={classNames(styles.tabItem, { [styles.active]: mode === "attack" })}
+            onClick={changeModeHandler("attack")}
+          >
+            حمله
+          </div>
+          <div
+            className={classNames(styles.tabItem, { [styles.active]: mode === "medicine" })}
+            onClick={changeModeHandler("medicine")}
+          >
+            دارو
+          </div>
         </div>
       </div>
 
       <div className={styles.calendar}>
         <div className={styles.header}>
-          <button className={styles.nextButton} onClick={nextMonthHandler}>
+          <button className={classNames(styles.button, styles.nextButton)} onClick={nextMonthHandler}>
             <ArrowIcon />
           </button>
           <h5 className={styles.monthTitle}>{title}</h5>
-          <button className={styles.prevButton} onClick={previousMonthHandler}>
+          <button className={styles.button} onClick={previousMonthHandler}>
             <ArrowIcon />
           </button>
         </div>
@@ -84,9 +89,9 @@ export const Calendar = () => {
             ))
           )}
         </div>
-        <CalendarFooter/>
+        <CalendarFooter />
+        <div className={styles.fakeWidth}></div>
       </div>
-
       <Navbar />
       <Outlet />
     </div>

@@ -11,7 +11,7 @@ export const MedicineDrugDoseModal = () => {
   return (
     <Modal _ref={_ref} title={`زمان مصرف ${toOrderedNumber(+doseId)} دوز دارو را انتخاب کنید`} onClose={onClose} fullWidth>
       <div className={styles.wheelPickerContainer}>
-        <TimePicker name={`doses.${doseId}.placeholder`} />
+        <TimePicker name={`doses.${doseId}.placeholder`} hour />
       </div>
       <div className={styles.submitButton}>
         <Button onClick={onSubmit}>تایید</Button>

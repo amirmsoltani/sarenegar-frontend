@@ -287,7 +287,7 @@ export const ReportsInfo = () => {
                         <div className={styles.chartLabel}>تکان و لرزش</div>
                         <div className={styles.recordContainer}>
                           <div className={styles.record} style={{ width: `${termor}%` }}>
-                            {termor >= 25 && `${termor}%`}
+                            <div>{termor >= 25 && `${termor}%`}</div>
                           </div>
                           {termor < 25 && <div>{termor}%</div>}
                         </div>
@@ -296,7 +296,7 @@ export const ReportsInfo = () => {
                         <div className={styles.chartLabel}>عدم هوشیاری</div>
                         <div className={styles.recordContainer}>
                           <div className={styles.record} style={{ width: `${consciousness}%` }}>
-                            {consciousness >= 25 && `${consciousness}%`}
+                            <div>{consciousness >= 25 && `${consciousness}%`}</div>
                           </div>
                           {consciousness < 25 && <div>{consciousness}%</div>}
                         </div>

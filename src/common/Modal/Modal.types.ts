@@ -6,6 +6,7 @@ export type TModal = {
   title?: string;
   children: ReactNode;
   fullWidth?: boolean;
+  bodyClassName?: string;
   wrapperClassName?: string;
   variant?: "FULL" | "SMALL";
   onClose: (context?: any) => void;

@@ -90,9 +90,22 @@
         top: 0px;
         right: 0px;
         height: 100%;
+        overflow: hidden;
         position: absolute;
-        background-color: var(--dark-blue);
+        background-image: repeating-linear-gradient(120deg, #333c55 0, #333c55 5px, #1d2742 5px, #1d2742 10px);
         @include radius-16;
+
+        &::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0) 22.12%,
+            rgba(255, 255, 255, 0.2) 63.94%,
+            rgba(255, 255, 255, 0) 100%
+          );
+        }
       }
     }
   }

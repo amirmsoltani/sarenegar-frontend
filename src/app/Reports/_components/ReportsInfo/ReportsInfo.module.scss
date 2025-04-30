@@ -68,7 +68,7 @@
 
 .secondSection {
   color: var(--secondary);
-  padding: 12px 4px 12px 12px;
+  padding: 5px 4px 5px 12px;
   @include flex-between-center;
 
   .maxTitle {
@@ -90,6 +90,7 @@
 
   .chartContainer {
     gap: 8px;
+    min-height: 213px;
     @include flex-start-center;
   }
 
@@ -136,13 +137,16 @@
       @include flex-end-center;
 
       .record {
-        width: 50%;
         height: 51px;
-        padding-inline: 8px;
+        overflow: hidden;
         flex-direction: column;
         background-color: var(--background-color);
         border-left: 4px solid var(--border-color);
         @include flex-center-end;
+
+        & > div {
+          padding-inline: 8px;
+        }
       }
 
       .valueContainer {
@@ -280,10 +284,13 @@
     .record {
       width: 50%;
       height: 51px;
-      padding-right: 8px;
       border-right: 4px solid var(--color);
       background-color: rgba(from var(--color) r g b / 20%);
       @include flex-start-center;
+
+      & > div {
+        padding-inline: 8px;
+      }
     }
   }
 }

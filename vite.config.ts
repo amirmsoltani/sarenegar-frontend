@@ -18,8 +18,8 @@ export default defineConfig({
       manifest: {
         name: "Seizure",
         short_name: "Seizure",
+        theme_color: "#1d2742",
         description: "Recording seizure events to present to the doctor",
-        theme_color: "#ffffff",
         icons: [
           { src: "icon-192.png", sizes: "192x192", type: "image/png" },
           { src: "icon-512.png", sizes: "512x512", type: "image/png" },

@@ -4,11 +4,20 @@ import { TModal } from "./Modal.types";
 import styles from "./Modal.module.scss";
 import CloseSvg from "@/assets/svg/close.svg";
 
-export const Modal = ({ _ref, title, onClose, fullWidth, wrapperClassName, children, variant = "FULL" }: TModal) => {
+export const Modal = ({
+  _ref,
+  title,
+  onClose,
+  children,
+  fullWidth,
+  bodyClassName,
+  wrapperClassName,
+  variant = "FULL",
+}: TModal) => {
   const { open, closeHandler } = useModal({ _ref, onClose });
 
   return (
-    <main className={styles.container} data-open={open} data-variant={variant}>
+    <main className={styles.container} data-open={open} data-variant={variant} data-modal-open={open}>
       <div className={classNames(styles.wrapper, wrapperClassName)}>
         {variant !== "SMALL" && (
           <div className={styles.header}>
@@ -18,7 +27,7 @@ export const Modal = ({ _ref, title, onClose, fullWidth, wrapperClassName, child
             </button>
           </div>
         )}
-        <section className={styles.body} data-full-width={fullWidth}>
+        <section className={classNames(styles.body, bodyClassName)} data-full-width={fullWidth}>
           {children}
         </section>
       </div>

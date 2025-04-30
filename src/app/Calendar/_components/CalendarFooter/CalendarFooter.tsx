@@ -4,10 +4,9 @@ import classNames from "classnames";
 import { useCalendarFooter } from "@/app/Calendar/_components/CalendarFooter/useCalendarFooter.ts";
 
 export const CalendarFooter = () => {
-  const { mode, date,isEmpty,addClickHandler } = useCalendarFooter();
+  const { mode, date, isEmpty, addClickHandler } = useCalendarFooter();
 
-  if(!isEmpty)
-    return null;
+  if (!isEmpty) return null;
 
   return (
     <div className={styles.footer}>
@@ -17,11 +16,10 @@ export const CalendarFooter = () => {
       </span>
       <img
         onClick={addClickHandler}
-        src={mode === "attack" ? "/add-attack.png" : "/add-pill2.png"}
+        src={mode === "attack" ? "/add-attack.png" : "/add-pill3.png"}
         alt={"not found"}
         className={classNames(styles.button, { [styles.reminder]: mode === "medicine" })}
       />
     </div>
   );
 };
-

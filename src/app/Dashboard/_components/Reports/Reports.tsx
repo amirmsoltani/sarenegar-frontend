@@ -3,10 +3,11 @@ import { routes } from "@/routes/routes";
 import { useReports } from "./useReports";
 import styles from "./Reports.module.scss";
 import { Spinner } from "@/common/Spinner/Spinner";
+import { DateService } from "@/services/DateService";
 import { ReportChart } from "./_components/ReportChart/ReportChart";
 
 export const Reports = () => {
-  const { state } = useReports();
+  const { state, date } = useReports();
 
   return (
     <Link to={routes.reportsInfo.href("monthly")} className={styles.container}>
@@ -18,7 +19,7 @@ export const Reports = () => {
         state.data?.total_events ? (
           <div className={styles.wrapper}>
             <div>
-              <span className={styles.countTitle}>ماهانه: </span>
+              <span className={styles.countTitle}>{DateService.customTranslate(date, { month: "long" })}: </span>
               <span className={styles.countValue}>{state.data?.total_events} مورد</span>
             </div>
             <div className={styles.chartContainer}>

@@ -23,5 +23,5 @@ export const useReports = () => {
     isValid && dispatch(getAnalyticsSummaryAction({ date: date as string }));
   }, [date, dispatch, state.data, state.status]);
 
-  return { state };
+  return { state, date: date! };
 };
