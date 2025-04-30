@@ -85,7 +85,7 @@ export const useReportsInfo = () => {
   };
 
   const doughnutChartData = {
-    labels: severityOptions.map((option) => option.label),
+    labels: severityOptions.reverse().map((option) => option.label),
     datasets: [
       {
         backgroundColor: ["#674188", "#B3A0C4", "#E1D9E7"],
