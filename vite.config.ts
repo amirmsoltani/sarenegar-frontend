@@ -12,12 +12,12 @@ export default defineConfig({
       svgrOptions: { exportType: "default", ref: true, svgo: false, titleProp: true },
     }),
     VitePWA({
-      strategies: "injectManifest",
       srcDir: "src",
       filename: "sw.js",
+      strategies: "injectManifest",
       manifest: {
-        name: "Seizure",
-        short_name: "Seizure",
+        name: "اپیکال",
+        short_name: "اپیکال",
         theme_color: "#1d2742",
         description: "Recording seizure events to present to the doctor",
         icons: [
@@ -25,11 +25,7 @@ export default defineConfig({
           { src: "icon-512.png", sizes: "512x512", type: "image/png" },
         ],
       },
-      devOptions: {
-        enabled: true, // Enable in development
-        type: "module", // Use module worker in dev
-        navigateFallback: "index.html",
-      },
+      devOptions: { enabled: true, type: "module", navigateFallback: "index.html" },
     }),
   ],
   resolve: {

@@ -14,15 +14,14 @@ export const MedicineDoses = ({ type }: TMedicineDoses) => {
       <label className={styles.label}>زمان مصرف دوز دارو در روز را انتخاب کنید</label>
       <div className={styles.list}>
         {fields.map((field, index) => (
-          <Link
-            replace
-            key={index}
-            className={styles.optionWrapper}
-            to={routes[
-              type === "ADD" ? "addMedicine" : type === "EDIT" ? "editMedicine" : "retakeMedicine"
-            ].tabs.secondStep.modals.doseTime.href(index)}
-          >
-            <div className={styles.option}>
+          <div key={index} className={styles.optionWrapper}>
+            <Link
+              replace
+              className={styles.option}
+              to={routes[
+                type === "ADD" ? "addMedicine" : type === "EDIT" ? "editMedicine" : "retakeMedicine"
+              ].tabs.secondStep.modals.doseTime.href(index)}
+            >
               <div className={styles.title}>{toOrderedNumber(index)} دوز مصرف</div>
               <div className={styles.actions}>
                 <div className={styles.time}>
@@ -32,11 +31,11 @@ export const MedicineDoses = ({ type }: TMedicineDoses) => {
                   <ArrowLeft2 className={styles.icon} />
                 </div>
               </div>
-            </div>
+            </Link>
             <button type="button" className={styles.delete} onClick={() => removeHandler(index)}>
               <Trash />
             </button>
-          </Link>
+          </div>
         ))}
       </div>
       {fields.length < 4 && (

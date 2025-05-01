@@ -55,6 +55,7 @@ const Info = ({
   total_doses,
   taken_doses,
   is_completed,
+  completion_date,
   drug_timing_type,
 }: TInfo) => {
   const percent = ((taken_doses ?? 0) * 100) / (total_doses ?? 0);
@@ -116,6 +117,12 @@ const Info = ({
             <div className={styles.title}>تاریخ اتمام مصرف</div>
             <div>{DateService.getDate(DateService.jalaliToGregorian(end_date!))}</div>
           </div>
+          {completion_date && (
+            <div className={styles.option}>
+              <div className={styles.title}>تاریخ اتمام مصرف</div>
+              <div>{DateService.getDate(completion_date)}</div>
+            </div>
+          )}
         </div>
         <div className={styles.chart}>
           <div

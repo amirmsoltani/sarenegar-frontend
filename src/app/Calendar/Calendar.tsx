@@ -1,13 +1,14 @@
-import styles from "./Calendar.module.scss";
 import classNames from "classnames";
-import { Navbar } from "@/app/_components/Navbar/Navbar.tsx";
-import ArrowIcon from "@/assets/svg/arrow-left.svg";
-import { useCalendar, weekDays } from "@/app/Calendar/useCalendar.ts";
 import { e2p } from "@/helper/helper.ts";
+import { Outlet } from "react-router-dom";
+import styles from "./Calendar.module.scss";
+import { Helmet } from "react-helmet-async";
+import PillIcon from "@/assets/svg/pill-icon.svg";
+import ArrowIcon from "@/assets/svg/arrow-left.svg";
 import { Flash } from "@wandersonalwes/iconsax-react";
 import { Spinner } from "@/common/Spinner/Spinner.tsx";
-import { Outlet } from "react-router-dom";
-import PillIcon from "@/assets/svg/pill-icon.svg";
+import { Navbar } from "@/app/_components/Navbar/Navbar.tsx";
+import { useCalendar, weekDays } from "@/app/Calendar/useCalendar.ts";
 import { CalendarFooter } from "@/app/Calendar/_components/CalendarFooter/CalendarFooter.tsx";
 
 export const Calendar = () => {
@@ -26,6 +27,9 @@ export const Calendar = () => {
 
   return (
     <div className={styles.wrapper}>
+      <Helmet>
+        <meta name="theme-color" content="#1d2742" />
+      </Helmet>
       <div className={styles.headerWrapper}>
         <div className={styles.header}>
           <h2 className={styles.title}>تقویم رویداد ها</h2>

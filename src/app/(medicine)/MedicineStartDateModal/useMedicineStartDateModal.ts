@@ -16,6 +16,8 @@ export const useMedicineStartDateModal = () => {
   const onSubmit = () => {
     const startDate = getValues("start_date_placeholder");
     setValue("start_date", startDate, { shouldValidate: formState.isSubmitted });
+    setValue("end_date", null, { shouldValidate: formState.isSubmitted });
+    setValue("end_date_placeholder", startDate, { shouldValidate: formState.isSubmitted });
     _ref.current?.close();
   };
 

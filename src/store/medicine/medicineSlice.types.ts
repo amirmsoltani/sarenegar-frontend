@@ -4,7 +4,7 @@ import { Drug, DrugDosageRetrieve, PaginatedDrugDosageRetrieve, ReminderDetail }
 import { TCheckboxOption, TDatePicker, TTimePicker, TWheelPickerOption } from "@/common/Form/FormUtils.types";
 
 export type TMedicineInfo = TMedicineForm &
-  Pick<DrugDosageRetrieve, "total_doses" | "taken_doses" | "is_expired" | "is_completed">;
+  Pick<DrugDosageRetrieve, "total_doses" | "taken_doses" | "is_expired" | "is_completed" | "completion_date">;
 
 export type TMedicineSlice = {
   dosesList: INormalState<PaginatedReminderDetailList & { date: string }>;
