@@ -35,9 +35,16 @@ export const useCalendarNotTakeDoseModal = () => {
     }
   }, [dispatch]);
 
-  const onSubmit = () => dispatch(calendarNotTakeDoseAction({ id: +reminderID! }));
+  const onSubmit = () => {
+    if(!infoState?.taken) {
+      _ref.current!.close();
+      return;
+    }
+    dispatch(calendarNotTakeDoseAction({ id: +reminderID! }));
+  }
 
   const onClose = () => {
+    if(infoState?.taken) return;
     navigate(routes.calendar.modals.events.href(date!, "medicine"));
   };
 
