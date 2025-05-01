@@ -144,7 +144,7 @@ export const ReportsInfo = () => {
                     <div className={styles.chartContainer}>
                       <div className={styles.chart}>
                         <div className={styles.divider}></div>
-                        <div className={styles.recordContainer} data-color="dark">
+                        <div className={styles.recordContainer} data-color="yellow">
                           {night < 25 && (
                             <div className={styles.valueContainer}>
                               <div>{night}%</div>
@@ -159,37 +159,7 @@ export const ReportsInfo = () => {
                           </div>
                         </div>
                         <div className={styles.divider}></div>
-                        <div className={styles.recordContainer} data-color="purple">
-                          {evening < 25 && (
-                            <div className={styles.valueContainer}>
-                              <div>{evening}%</div>
-                            </div>
-                          )}
-                          <div className={styles.record} style={{ width: `${evening}%` }}>
-                            {evening >= 25 && (
-                              <>
-                                <div>{evening}%</div>
-                              </>
-                            )}
-                          </div>
-                        </div>
-                        <div className={styles.divider}></div>
                         <div className={styles.recordContainer} data-color="orange">
-                          {noon < 25 && (
-                            <div className={styles.valueContainer}>
-                              <div>{noon}%</div>
-                            </div>
-                          )}
-                          <div className={styles.record} style={{ width: `${noon}%` }}>
-                            {noon >= 25 && (
-                              <>
-                                <div>{noon}%</div>
-                              </>
-                            )}
-                          </div>
-                        </div>
-                        <div className={styles.divider}></div>
-                        <div className={styles.recordContainer} data-color="yellow">
                           {morning < 25 && (
                             <div className={styles.valueContainer}>
                               <div>{morning}%</div>
@@ -204,12 +174,42 @@ export const ReportsInfo = () => {
                           </div>
                         </div>
                         <div className={styles.divider}></div>
+                        <div className={styles.recordContainer} data-color="purple">
+                          {noon < 25 && (
+                            <div className={styles.valueContainer}>
+                              <div>{noon}%</div>
+                            </div>
+                          )}
+                          <div className={styles.record} style={{ width: `${noon}%` }}>
+                            {noon >= 25 && (
+                              <>
+                                <div>{noon}%</div>
+                              </>
+                            )}
+                          </div>
+                        </div>
+                        <div className={styles.divider}></div>
+                        <div className={styles.recordContainer} data-color="dark">
+                          {evening < 25 && (
+                            <div className={styles.valueContainer}>
+                              <div>{evening}%</div>
+                            </div>
+                          )}
+                          <div className={styles.record} style={{ width: `${evening}%` }}>
+                            {evening >= 25 && (
+                              <>
+                                <div>{evening}%</div>
+                              </>
+                            )}
+                          </div>
+                        </div>
+                        <div className={styles.divider}></div>
                       </div>
                       <div className={styles.times}>
                         <div>12 شب</div>
-                        <div>6 عصر</div>
-                        <div>12 ظهر</div>
                         <div>6 صبح</div>
+                        <div>12 ظهر</div>
+                        <div>6 عصر</div>
                         <div>12 شب</div>
                       </div>
                     </div>
