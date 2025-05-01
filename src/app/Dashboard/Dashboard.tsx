@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Box } from "./_components/Box/Box";
 import styles from "./Dashboard.module.scss";
-import { Helmet } from "react-helmet-async";
 import NoteIcon from "@/assets/svg/note.svg";
 import PillIcon from "@/assets/svg/Pill.svg";
 import BookIcon from "@/assets/svg/book.svg";
@@ -16,9 +15,6 @@ import { TodaysKnowledge } from "./_components/TodaysKnowledge/TodaysKnowledge";
 export const Dashboard = () => {
   return (
     <main className={styles.container}>
-      <Helmet>
-        <meta name="theme-color" content="#1d2742" />
-      </Helmet>
       <Header />
       <div className={styles.wrapper}>
         <div className={styles.firstSection}>
