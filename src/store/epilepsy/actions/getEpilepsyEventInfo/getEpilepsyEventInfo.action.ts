@@ -1,8 +1,8 @@
 import { StoreUtils } from "@/store/Store.utils";
 import { DateService } from "@/services/DateService";
 import { toLabelValue, withPadStart } from "@/helper/helper";
-import { apiEpilepsyEpilepsyEventRetrieve } from "@/services/api";
 import { TEpilepsyEventForm } from "../../epilepsySlice.types";
+import { apiEpilepsyEpilepsyEventRetrieve } from "@/services/api";
 import { consciousnessTranslator, severityOptionTranslator, shakingTranslator } from "@/app/(epilepsy)/_common/epilepsyForm";
 
 type TGetEpilepsyEventInfo = { id: number };
@@ -13,10 +13,10 @@ export const getEpilepsyEventInfo = StoreUtils.createAsyncThunk(
     const { data } = await apiEpilepsyEpilepsyEventRetrieve(id);
 
     const [hour, minute, second] = data.duration.split(":");
-    const date = new Date();
 
     const duration = { hour: toLabelValue(hour), minute: toLabelValue(minute), second: toLabelValue(second) };
 
+    const date = new Date(data.time_of_occurrence);
     const time_of_occurrence = {
       date: DateService.setToGlobalFormat(date),
       time: { hour: toLabelValue(withPadStart(date.getHours())), minute: toLabelValue(withPadStart(date.getMinutes())) },
