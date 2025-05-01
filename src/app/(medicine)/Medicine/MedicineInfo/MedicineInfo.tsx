@@ -119,7 +119,7 @@ const Info = ({
           </div>
           {completion_date && (
             <div className={styles.option}>
-              <div className={styles.title}>تاریخ اتمام مصرف</div>
+              <div className={styles.title}>تاریخ تکمیل مصرف</div>
               <div>{DateService.getDate(completion_date)}</div>
             </div>
           )}

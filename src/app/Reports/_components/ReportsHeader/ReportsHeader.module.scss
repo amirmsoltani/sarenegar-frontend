@@ -4,7 +4,6 @@
   color: var(--white);
   flex-direction: column;
   @include centering;
-  @include box-effect2;
 
   .title {
     min-height: 56px;

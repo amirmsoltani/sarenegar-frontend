@@ -4,10 +4,11 @@ import { StatusHandler } from "@/common/StatusHandler/StatusHandler";
 import { barChartOptions, doughnutChartOptions, useReportsInfo } from "./useReportsInfo";
 
 import { Bar, Doughnut } from "react-chartjs-2";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Tooltip, ArcElement } from "chart.js";
 
 ChartJS.defaults.font.family = "Yekan Bakh";
-ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip);
+ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, ChartDataLabels);
 
 export const ReportsInfo = () => {
   const {
@@ -71,7 +72,8 @@ export const ReportsInfo = () => {
                   <div className={styles.firstChart}>
                     <div className={styles.boxTitle}>نمودار {type} جاری</div>
                     <div className={styles.chartContainer}>
-                      <Bar options={barChartOptions} data={barChartData} />
+                      {/* @ts-ignore */}
+                      <Bar options={barChartOptions} data={barChartData} plugins={[ChartDataLabels]} />
                     </div>
                   </div>
                 </div>

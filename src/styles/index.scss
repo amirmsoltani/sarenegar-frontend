@@ -77,6 +77,7 @@ a {
 
 .Toastify__toast {
   margin-top: 16px;
+  padding-left: 40px !important;
   box-shadow: 0px 4px 8px 0 px rgba(from var(--black) r g b / 10%);
   @include radius-8;
   @include text-14-bold;
@@ -103,4 +104,14 @@ a {
   border-bottom-right-radius: 0px;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
+}
+
+.Toastify__close-button {
+  top: 50%;
+  left: 16px !important;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
 }

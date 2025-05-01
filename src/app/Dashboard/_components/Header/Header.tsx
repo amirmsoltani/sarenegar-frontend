@@ -4,7 +4,6 @@ import { routes } from "@/routes/routes";
 import styles from "./Header.module.scss";
 import { getNowDate } from "@/helper/helper";
 import { Avatar } from "@/common/Avatar/Avatar";
-import { DateService } from "@/services/DateService";
 import { RouterService } from "@/services/RouterService";
 import { RowCalendar } from "@/common/RowCalendar/RowCalendar";
 import NotificationBing from "@/assets/svg/notification-bing.svg";
@@ -24,7 +23,7 @@ export const Header = () => {
               <span className={styles.message1}>کاربر عزیز</span>
               <span className={styles.message2}>خوش آمدید!</span>
             </div>
-            <div className={styles.date}>{DateService.customTranslate(date, { year: "numeric", month: "long" })}</div>
+            <div className={styles.date}>{date}</div>
           </div>
         </Link>
         <Link to={routes.notification.href()} className={styles.notification}>

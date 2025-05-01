@@ -10,7 +10,15 @@ export const barChartOptions = {
   plugins: {
     title: { display: false },
     legend: { display: false },
-    tooltip: { callbacks: { label: ({ raw }: any) => `${raw} مورد` } },
+    datalabels: { color: "transparent" },
+    tooltip: {
+      padding: 8,
+      cornerRadius: 12,
+      titleColor: "#fff",
+      displayColors: false,
+      backgroundColor: "rgba(from #1d2742 r g b / 60%)",
+      callbacks: { title: () => "", label: ({ raw }: any) => `${raw} مورد` },
+    },
   },
   scales: {
     x: { ticks: { color: "#ffffff" }, grid: { display: false }, border: { display: false } },

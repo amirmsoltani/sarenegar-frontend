@@ -17,6 +17,7 @@
     "@wandersonalwes/iconsax-react": "^0.0.10",
     "axios": "^1.8.4",
     "chart.js": "^4.4.9",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "classnames": "^2.5.1",
     "embla-carousel-react": "^8.6.0",
     "google-libphonenumber": "^3.2.40",

@@ -417,30 +417,6 @@
   }
 }
 
-@mixin box-effect2 {
-  &::after {
-    top: 50%;
-    left: 50%;
-    width: 60%;
-    content: "";
-    height: 93px;
-    position: absolute;
-    border-radius: 40%;
-    filter: blur(30px);
-    transform: translateX(-50%) translateY(-40%);
-    background-color: rgba(from #d9d9d9 r g b / 10%);
-    -o-border-radius: 40%;
-    -ms-border-radius: 40%;
-    -moz-border-radius: 40%;
-    -webkit-border-radius: 40%;
-    -webkit-filter: blur(30px);
-    -o-transform: translateX(-50%) translateY(-25%);
-    -ms-transform: translateX(-50%) translateY(-25%);
-    -moz-transform: translateX(-50%) translateY(-25%);
-    -webkit-transform: translateX(-50%) translateY(-25%);
-  }
-}
-
 @keyframes fade-in {
   from {
     opacity: 0%;

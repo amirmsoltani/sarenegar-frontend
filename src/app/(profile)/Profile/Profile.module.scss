@@ -36,7 +36,6 @@
       position: relative;
       padding-bottom: 24px;
       @include centering;
-      @include box-effect2;
 
       &::after {
         top: 0;

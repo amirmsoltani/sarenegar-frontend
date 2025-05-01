@@ -10,7 +10,7 @@ import { getAnalyticsAction } from "@/store/report/actions/getAnalytics/getAnaly
 const DEFAULT_MAX_BAR_CHART_VALUE = 4;
 
 const weekLabels = ["شنبه", "1شنبه", "2شنبه", "3شنبه", "4شنبه", "5شنبه", "جمعه"];
-const monthLabels = (items: any[]) => new Array(items.length).fill("").map((_, index) => String(index + 1));
+const monthLabels = (count: number) => new Array(count).fill("").map((_, index) => String(index + 1));
 const yearLabels = new Array(12).fill("").map((_, index) => String(index + 1));
 
 export const barChartOptions = {
@@ -20,10 +20,23 @@ export const barChartOptions = {
   plugins: {
     title: { display: false },
     legend: { display: false },
-    tooltip: { callbacks: { title: () => "", label: (props: any) => `${props.raw}` } },
+    tooltip: {
+      padding: 8,
+      cornerRadius: 12,
+      titleColor: "#fff",
+      displayColors: false,
+      backgroundColor: "rgba(from #1d2742 r g b / 60%)",
+      callbacks: { title: () => "", label: (props: any) => `${props.raw}` },
+    },
+    datalabels: { offset: 0, align: "end", color: "#000", anchor: "end", textAlign: "center", formatter: Math.floor },
   },
   scales: {
-    x: { reverse: true, grid: { display: false }, border: { display: false } },
+    x: {
+      reverse: true,
+      grid: { display: false },
+      border: { display: false },
+      ticks: { minRotation: 0, maxRotation: 0, autoSkip: false, callback: (_: number, __: number) => {} },
+    },
     y: { min: 0, max: DEFAULT_MAX_BAR_CHART_VALUE, ticks: { stepSize: 1, padding: 10 }, border: { display: false } },
   },
 };
@@ -35,7 +48,15 @@ export const doughnutChartOptions = {
   plugins: {
     title: { display: false },
     legend: { display: false },
-    tooltip: { callbacks: { label: ({ raw }: any) => `${raw}%` } },
+    datalabels: { color: "transparent" },
+    tooltip: {
+      padding: 8,
+      cornerRadius: 12,
+      titleColor: "#fff",
+      displayColors: false,
+      backgroundColor: "rgba(from #1d2742 r g b / 60%)",
+      callbacks: { title: () => "", label: (props: any) => `حمله ${props.label} ${props.raw}%` },
+    },
   },
 };
 
@@ -63,24 +84,34 @@ export const useReportsInfo = () => {
     },
     { data: [], max: DEFAULT_MAX_BAR_CHART_VALUE },
   );
+
+  const daysCount = (state.data?.selected_period.events_distribution ?? []).length;
+
+  const replacementValue = (1.5 * barChartDataset.max) / 100;
+  barChartDataset.data = barChartDataset.data.map((count) => (count === 0 ? replacementValue : count));
+
   const barChartData = {
-    labels:
-      type === reportTypes[0].value
-        ? weekLabels
-        : type === reportTypes[1].value
-          ? monthLabels(state.data?.selected_period.events_distribution ?? [])
-          : yearLabels,
-    datasets: [{ borderRadius: 4, backgroundColor: "#00c9af", data: barChartDataset.data }],
+    labels: type === reportTypes[0].value ? weekLabels : type === reportTypes[1].value ? monthLabels(daysCount) : yearLabels,
+    datasets: [{ borderRadius: 4, backgroundColor: "#00c9af", data: barChartDataset.data, padding: "50px" }],
+  };
+
+  barChartOptions.plugins.datalabels.color = type === reportTypes[1].value ? "transparent" : "#000";
+  barChartOptions.scales.x.ticks.callback = (_: number, index: number) => {
+    if (type === reportTypes[1].value) {
+      if (index === 0) return 1;
+      else if (index < 27) return (index + 1) % 5 ? "" : index + 1;
+      else return daysCount - 1 === index ? daysCount : "";
+    } else return barChartData.labels[index];
   };
 
   barChartOptions.scales.y.max = barChartDataset.max;
   barChartOptions.plugins.tooltip.callbacks.label = ({ dataIndex, raw }) => {
     if (type === reportTypes[2].value) {
-      return `${jalaliMonths[dataIndex].label} ماه ${raw} مورد`;
+      return `${jalaliMonths[dataIndex].label} ماه ${Math.floor(raw)} مورد`;
     } else {
       const date = new Date(start!);
       date.setDate(date.getDate() + dataIndex);
-      return `${DateService.customTranslate(date, { weekday: "long", day: "numeric", month: "long" })} ${raw} مورد`;
+      return `${DateService.customTranslate(date, { weekday: "long", day: "numeric", month: "long" })} ${Math.floor(raw)} مورد`;
     }
   };
 
