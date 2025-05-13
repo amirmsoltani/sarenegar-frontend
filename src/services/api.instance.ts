@@ -33,7 +33,6 @@ export const api = async <T>(
             errors.forEach(
               (group) => Array.isArray(group) && (group as string[]).forEach((message: string) => toast.error(message)),
             );
-            return;
           }
         }
       }
