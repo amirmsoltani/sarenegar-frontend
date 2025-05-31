@@ -7,6 +7,8 @@ import { useNotification } from "@/app/Notification/useNotification.ts";
 import { StatusHandler } from "@/common/StatusHandler/StatusHandler.tsx";
 import { routes } from "@/routes/routes.tsx";
 import { Spinner } from "@/common/Spinner/Spinner.tsx";
+import classNames from "classnames";
+import GoldBell from "@/assets/svg/goldBell.svg";
 
 export const Notification = () => {
   const notification = useNotification();
@@ -23,7 +25,10 @@ export const Notification = () => {
         {notification.markAllAsRead.status === "loading" ? (
           <Spinner variant={"black"} size={"md"} />
         ) : (
-          <div className={styles.sectionLeft} onClick={notification.markAllAsReadHandler}>
+          <div
+            className={classNames(styles.sectionLeft, { [styles.hidden]: !notification.notificationList.data?.length })}
+            onClick={notification.markAllAsReadHandler}
+          >
             <div className={styles.title}>خواندن همه</div>
             <DoubleTick className={styles.icon} />
           </div>
@@ -42,6 +47,15 @@ export const Notification = () => {
               onClick={notification.messageClickHandler(item)}
             />
           ))}
+          {notification.notificationList.data?.length === 0 ? (
+            <div className={styles.empty}>
+              <GoldBell />
+              <span className={styles.title}>اعلانی برای نمایش وجود ندارد</span>
+              <span className={styles.description}>
+                در حال حاضر اعلانی برای نمایش وجود ندارد میتوانید نسبت به ثبت دارو اقدام نمایید
+              </span>
+            </div>
+          ) : null}
         </div>
       </StatusHandler>
     </div>
