@@ -293,3 +293,32 @@
     }
   }
 }
+
+.empty{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  margin-top: 80px;
+
+  .emptyTitle{
+    color: var(--dark-blue);
+    @include text-16-bold;
+    margin-top: 24px;
+  }
+
+  .emptyDescription{
+    color: var(--dark-blue);
+    @include text-14-regular;
+    margin-top: 12px;
+  }
+
+  img{
+    height: 220px;
+    width: 130px;
+  }
+  .emptySmallImage{
+    height: 160px;
+    width: 96px;
+  }
+}

@@ -29,7 +29,7 @@ export const ReportsInfo = () => {
 
   return (
     <StatusHandler status={status} onClick={getData} className={styles.status}>
-      {data && (
+      {data && (!!data.selected_period.total_events || !!data.previous_period.total_events) ? (
         <>
           {/* first section */}
           <div>
@@ -117,13 +117,23 @@ export const ReportsInfo = () => {
                 </div>
               </div>
             </div>
+            {
+              !data.selected_period.total_events ?
+                <div className={styles.empty}>
+                  <img src={"/reportNotExist.png"} alt={"not found"} className={styles.emptySmallImage} />
+                  <span className={styles.emptyTitle}>گزارشی برای نمایش وجود ندارد</span>
+                  <span className={styles.emptyDescription}>در هفته جاری اطلاعات رخداد تشنجی ثبت نگردیده است</span>
+                </div>
+                : null
+            }
             {!!data.selected_period.total_events && (
               <>
                 <div className={styles.spacingSm}></div>
                 <div className={styles.box}>
                   <div className={styles.secondSection}>
                     <h3 className={styles.maxTitle}>بیشترین مدت زمان حمله این {type}</h3>
-                    <div className={styles.maxValue}>{secondToTime(data.selected_period.max_duration_seconds ?? 0)}</div>
+                    <div
+                      className={styles.maxValue}>{secondToTime(data.selected_period.max_duration_seconds ?? 0)}</div>
                   </div>
                 </div>
                 <div className={styles.spacingMd}></div>
@@ -243,7 +253,8 @@ export const ReportsInfo = () => {
                             style={{ background: doughnutChartData.datasets[0].backgroundColor[0] }}
                           ></div>
                           <div className={styles.colorTitle}>شدید:</div>
-                          <div className={styles.quantity}>{data.selected_period.severity_distribution.Severe.count}</div>
+                          <div
+                            className={styles.quantity}>{data.selected_period.severity_distribution.Severe.count}</div>
                         </div>
                         <div className={styles.color}>
                           <div
@@ -251,7 +262,8 @@ export const ReportsInfo = () => {
                             style={{ background: doughnutChartData.datasets[0].backgroundColor[1] }}
                           ></div>
                           <div className={styles.colorTitle}>متوسط:</div>
-                          <div className={styles.quantity}>{data.selected_period.severity_distribution.Moderate.count}</div>
+                          <div
+                            className={styles.quantity}>{data.selected_period.severity_distribution.Moderate.count}</div>
                         </div>
                         <div className={styles.color}>
                           <div
@@ -310,7 +322,11 @@ export const ReportsInfo = () => {
             </>
           )}
         </>
-      )}
+      ) : (<div className={styles.empty}>
+        <img src={"/reportNotExist.png"} alt={"not found"}  />
+        <span className={styles.emptyTitle}>گزارشی برای نمایش وجود ندارد</span>
+        <span className={styles.emptyDescription}>در این بازه از تاریخ رخداد تشنجی ثبت نگردیده است</span>
+      </div>)}
     </StatusHandler>
   );
 };

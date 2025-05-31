@@ -5,10 +5,9 @@ import PillActive from "@/assets/svg/pill-active.svg";
 import HomeActive from "@/assets/svg/home-active.svg";
 import { reportTypes } from "@/app/Reports/useReports";
 import { RouterService } from "@/services/RouterService";
-import CalendarTick from "@/assets/svg/calendar-tick.svg";
 import ClipboardText from "@/assets/svg/clipboard-text.svg";
-import CalendarTickActive from "@/assets/svg/calendar-tick-active.svg";
 import ClipboardTextActive from "@/assets/svg/clipboard-text-active.svg";
+import { Calendar } from "@wandersonalwes/iconsax-react";
 
 // ? route options documentation
 
@@ -310,8 +309,8 @@ export const routes = {
   calendarWrapper: {
     path: "calendar",
     href: (date?: string) => `${RouterService.setDate(date)}/calendar`,
-    icon: CalendarTick,
-    activeIcon: CalendarTickActive,
+    icon: Calendar,
+    activeIcon: (props: any) => <Calendar variant={"Bold"} {...props} />,
   },
   calendar: {
     path: ":mode",
