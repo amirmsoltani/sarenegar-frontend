@@ -10,7 +10,7 @@ export const OccurrenceTimeModal = () => {
 
   return (
     <Modal _ref={_ref} fullWidth onClose={onClose} title="حمله چه زمانی اتفاق افتاده است ؟">
-      <FormRowCalendar name="time_of_occurrence_placeholder.date" />
+      <FormRowCalendar name="time_of_occurrence_placeholder.date" disableFuture/>
       <div className={styles.wheelPickerContainer}>
         <TimePicker name="time_of_occurrence_placeholder.time" hour />
       </div>

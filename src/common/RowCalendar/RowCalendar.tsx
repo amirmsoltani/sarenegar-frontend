@@ -3,8 +3,8 @@ import { today } from "./RowCalendar.constants";
 import { useRowCalendar } from "./useRowCalendar";
 import { TRowCalendar } from "./RowCalendar.types";
 
-export const RowCalendar = ({ current, active, onChange, variant }: TRowCalendar) => {
-  const { list, _active, container, debouncedScrollEndHandler, onTransitionEnd, clickHandler } = useRowCalendar({
+export const RowCalendar = ({ current, active, onChange, variant, disableFuture }: TRowCalendar) => {
+  const { list, _active, container, debouncedScrollEndHandler, onTransitionEnd, clickHandler, isDisabled } = useRowCalendar({
     current,
     active,
     onChange,
@@ -22,6 +22,7 @@ export const RowCalendar = ({ current, active, onChange, variant }: TRowCalendar
               data-active={date === _active}
               onTransitionEnd={onTransitionEnd}
               onClick={() => clickHandler(date, index)}
+              disabled={isDisabled(date) && disableFuture}
             >
               <div className={styles.day}>{day}</div>
               <div className={styles.weekday}>{date === today ? "امروز" : weekday}</div>

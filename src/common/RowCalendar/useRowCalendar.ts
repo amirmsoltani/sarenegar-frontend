@@ -57,7 +57,11 @@ export const useRowCalendar = ({ current, active, onChange }: Pick<TRowCalendar,
     }
   }, [list, _active]);
 
-  return { list, container, _active, debouncedScrollEndHandler, onTransitionEnd, clickHandler };
+  function isDisabled(date:string){
+    return DateService.isBiggerThanToday(date);
+  }
+
+  return { list, container, _active, debouncedScrollEndHandler, onTransitionEnd, clickHandler,isDisabled };
 };
 
 export const useFormRowCalendar = <T extends FieldValues>() => {

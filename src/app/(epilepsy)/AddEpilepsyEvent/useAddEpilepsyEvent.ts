@@ -9,6 +9,7 @@ import { clearStateAction } from "@/store/_common/actions/clearState.action";
 import { useStatusHandler } from "@/common/useStatusHandler/useStatusHandler";
 import { epilepsyEventFormDefaultValues, epilepsyTimeValidator } from "../_common/epilepsyForm";
 import { addEpilepsyEventAction } from "@/store/epilepsy/actions/addEpilepsyEvent/addEpilepsyEvent.action";
+import { DateService } from "@/services/DateService.ts";
 
 export const useAddEpilepsyEvent = () => {
   const { date } = useParams();
@@ -32,6 +33,14 @@ export const useAddEpilepsyEvent = () => {
   const backwardHandler = () => RouterService.backward(routes.dashboard.href());
 
   useStatusHandler({
+    onComponentDidMount(){
+      if(DateService.isBiggerThanToday(date!)){
+        const date = DateService.setToGlobalFormat(new Date());
+        navigate(routes.addEpilepsyEvent.href(date),{replace: true});
+        methods.setValue("time_of_occurrence.date",date);
+        methods.setValue("time_of_occurrence_placeholder.date",date);
+      }
+    },
     state,
     onSuccess: () => {
       dispatch(clearStateAction([{ reducerName: "epilepsy", stateName: "addEpilepsyEvent" }]));

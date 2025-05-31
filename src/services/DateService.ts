@@ -200,6 +200,10 @@ class DateInstant {
       title: this.monthYearFormatter.format(start).split(" ").reverse().join(" "),
     };
   };
+
+  public isBiggerThanToday(date:string){
+    return new Date().getTime() < new Date(date).getTime();
+  }
 }
 
 export const DateService = new DateInstant();
