@@ -8,6 +8,7 @@ export const RowCalendar = ({ current, active, onChange, variant, disableFuture 
     current,
     active,
     onChange,
+    disableFuture
   });
 
   return (
