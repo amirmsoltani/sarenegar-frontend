@@ -8,7 +8,7 @@ export const MedicineTiming = () => {
   const { value } = useMedicineTiming();
   return (
     <div className={styles.container}>
-      <CheckboxGroup name="drug_timing_type" options={drugTimingTypes} label="زمانبندی داروی شما در هفته چگونه است ؟" />
+      <CheckboxGroup name="drug_timing_type" options={drugTimingTypes} label="زمانبندی داروی شما در هفته" />
       {value === "CUSTOM" && <WeekdayPicker name="days" />}
     </div>
   );

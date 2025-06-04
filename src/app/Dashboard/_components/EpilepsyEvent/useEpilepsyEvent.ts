@@ -1,11 +1,12 @@
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect,MouseEvent } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { getEpilepsyEventListAction } from "@/store/epilepsy/actions/getEpilepsyEventList/getEpilepsyEventList.action";
+import { routes } from "@/routes/routes.tsx";
 
 export const useEpilepsyEvent = () => {
   const { date } = useParams();
-
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const state = useAppSelector((store) => store.epilepsy.epilepsyEventList);
 
@@ -15,5 +16,9 @@ export const useEpilepsyEvent = () => {
     }
   }, [date, dispatch, state.data, state.status]);
 
-  return { state };
+  const clickAddEpilepsyEventHandler  = (e:MouseEvent) => {
+    e.preventDefault();
+    navigate(routes.addEpilepsyEvent.href())
+  }
+  return { state,clickAddEpilepsyEventHandler };
 };

@@ -6,6 +6,7 @@ import { apiDrugDosageDosemanagerDrugDosageRetrieve } from "@/services/api";
 import { medicineUsageTypeTranslator } from "@/app/(medicine)/_common/medicineForm";
 import { medicineAmountTranslator, medicineUnitTranslator } from "@/app/(medicine)/_common/medicineForm";
 import { drugTimingTypes, endDaysCounts, endDaysCountTranslator, endTimeTypes } from "@/app/(medicine)/_common/medicineForm";
+import { TTimePicker } from "@/common/Form/FormUtils.types.ts";
 
 type TGetMedicineInfoAction = { id: number };
 
@@ -20,6 +21,9 @@ export const getMedicineInfoAction = StoreUtils.createAsyncThunk(
     const startDate = DateService.gregorianToJalali(data.start_date);
     const endDate = DateService.gregorianToJalali(data.end_date!);
     const dayCounts = data.end_by_day ? endDaysCountTranslator(data.end_by_day) : null;
+
+    const time = data.reminder_times[0].time.split(":");
+    const timeObject :TTimePicker= {hour:{label:time[0],value:time[0]},minute: {label:time[1],value:time[1]}};
 
     const _data: TMedicineInfo = {
       is_first_step_submitted: false,
@@ -57,6 +61,12 @@ export const getMedicineInfoAction = StoreUtils.createAsyncThunk(
       total_doses: data.total_doses,
       is_completed: data.is_completed,
       completion_date: data.completion_date,
+      drug_counts:amount,
+      drug_counts_placeholder:amount,
+      medicine_usage_counts:{value:data.reminder_times.length!.toString(),label:data.reminder_times.length!.toString()},
+      medicine_usage_counts_placeholder:{value:data.reminder_times.length!.toString(),label:data.reminder_times.length!.toString()},
+      start_time:{value:timeObject,placeholder:timeObject},
+      description:data.description!
     };
 
     return _data;

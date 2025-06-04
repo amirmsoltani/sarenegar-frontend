@@ -11,7 +11,7 @@ export const MedicineDoseInputPlaceholder = () => {
       name="dose"
       onClick={onClick}
       Placeholder={Placeholder}
-      label="مقدار و واحد مصرف هر دوز دارو را انتخاب کنید"
+      label="مقدار شربت در هر بار مصرف دارو"
       validate={Validate.gen().custom((value: TMedicineForm["dose"]) =>
         value.unit && value.amount ? false : "این فیلد اجباری می باشد",
       )}
@@ -22,6 +22,6 @@ export const MedicineDoseInputPlaceholder = () => {
 type TPlaceholder = { value: TMedicineForm["dose"] };
 const Placeholder = ({ value }: TPlaceholder) => {
   return (
-    <div>{value.unit && value.amount ? `${value.unit.label} - ${value.amount.label}` : "مقدار و واحد مصرف هر دوز دارو"}</div>
+    <div>{value.unit && value.amount ? `${value.amount.value} ${value.unit.value}` : "انتخاب کنید"}</div>
   );
 };

@@ -33,17 +33,14 @@ export const useAddMedicine = () => {
 
   const step = pathname.includes(routes.addMedicine.tabs.firstStep.href())
     ? 1
-    : pathname.includes(routes.addMedicine.tabs.secondStep.href())
+    : pathname.includes(routes.addMedicine.tabs.firstStep.href())
       ? 2
       : null;
 
   const backwardHandler = () => RouterService.backward(routes.medicine.href());
 
   const submitHandler = async (form: TMedicineForm) => {
-    if (step === 1) {
-      methods.setValue("is_first_step_submitted", true);
-      navigate(routes.addMedicine.tabs.secondStep.href());
-    } else await dispatch(addMedicineAction(form));
+    await dispatch(addMedicineAction(form));
   };
 
   useStatusHandler({

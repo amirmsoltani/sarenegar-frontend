@@ -49,4 +49,15 @@ export type TMedicineForm = {
   day_counts_placeholder: TWheelPickerOption;
 
   doses: { value: TTimePicker; placeholder: TTimePicker }[];
+
+
+  drug_counts:null|TWheelPickerOption;
+  drug_counts_placeholder: TWheelPickerOption;
+
+  medicine_usage_counts:null|TWheelPickerOption;
+  medicine_usage_counts_placeholder: TWheelPickerOption;
+
+  start_time:{ value: TTimePicker|null; placeholder: TTimePicker };
+
+  description:null|string;
 };

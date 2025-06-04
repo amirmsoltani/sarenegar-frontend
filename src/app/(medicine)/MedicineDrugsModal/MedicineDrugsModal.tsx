@@ -40,9 +40,11 @@ export const MedicineDrugsModal = () => {
                     <div className={styles.optionWrapper}>
                       <div className={styles.titleContainer}>
                         <TextOverflow className={styles.faTitle}>{item.fa_name}</TextOverflow>
+
+                      </div>
+                      <div className={styles.titleContainer}>
                         <TextOverflow className={styles.enTitle}>{item.en_name}</TextOverflow>
                       </div>
-                      <div className={styles.company}>{item.producer ? item.producer : "-"}</div>
                     </div>
                   </button>
                 ))}

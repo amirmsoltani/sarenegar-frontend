@@ -41,15 +41,15 @@
     }
 
     .coverContainer {
-      width: 48px;
-      height: 48px;
+      width: 88px;
+      height: 88px;
       object-fit: cover;
       @include centering;
     }
 
     .cover {
-      width: 40px;
-      height: 40px;
+      width: 80px;
+      height: 80px;
       object-fit: cover;
     }
 
@@ -58,7 +58,7 @@
       display: flex;
       align-self: stretch;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: space-evenly;
 
       .titleContainer {
         gap: 16px;

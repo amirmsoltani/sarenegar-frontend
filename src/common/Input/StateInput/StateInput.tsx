@@ -1,11 +1,11 @@
 import { InputUi } from "../Input";
 import { TStateInput } from "../Input.types";
-import { forwardRef, LegacyRef } from "react";
+import { forwardRef, Ref } from "react";
 import { useStateInput } from "./useStateInput";
 
 export const StateInput = forwardRef(function StateInput(
   { setValue, value, name, onChange, ...props }: TStateInput,
-  ref: LegacyRef<HTMLInputElement>,
+  ref: Ref<HTMLInputElement | HTMLTextAreaElement>,
 ) {
   const { onChangeHandler } = useStateInput({ setValue, onChange, name });
 

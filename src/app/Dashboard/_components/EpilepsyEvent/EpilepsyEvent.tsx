@@ -7,7 +7,7 @@ import { Fragment } from "react";
 import PlusIcon from "@/assets/svg/plus.svg";
 
 export const EpilepsyEvent = () => {
-  const { state } = useEpilepsyEvent();
+  const { state,clickAddEpilepsyEventHandler } = useEpilepsyEvent();
 
   return (
     <section className={styles.container}>
@@ -23,7 +23,7 @@ export const EpilepsyEvent = () => {
                 <span className={styles.reportedTitle}>تشنج ثبت شده</span>
                 <span className={styles.reportedCount}>{state.data?.count} مورد</span>
               </div>
-              <div className={styles.footer}>
+              <div className={styles.footer} onClick={clickAddEpilepsyEventHandler}>
                 <div className={styles.border} />
                 <PlusIcon />
                 <span className={styles.addEventText}>افزودن رخداد</span>

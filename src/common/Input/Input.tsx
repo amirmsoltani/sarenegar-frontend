@@ -2,9 +2,10 @@ import styles from "./Input.module.scss";
 import { TInput, TInputUi } from "./Input.types";
 import { FormInput } from "./FormInput/FormInput";
 import { StateInput } from "./StateInput/StateInput";
-import { forwardRef, LegacyRef, useId } from "react";
+import { forwardRef, Ref, useId } from "react";
+import classNames from "classnames";
 
-export const Input = forwardRef(function Input(props: TInput, ref: LegacyRef<HTMLInputElement>) {
+export const Input = forwardRef(function Input(props: TInput, ref: Ref<HTMLInputElement|HTMLTextAreaElement>) {
   return props.mode === "STATE" ? <StateInput ref={ref} {...props} /> : <FormInput {...props} />;
 });
 
@@ -22,9 +23,10 @@ export const InputUi = forwardRef(function InputUi(
     endContentHandler,
     startContentHandler,
     variant = "DEFAULT",
+    multiline,
     ...rest
   }: TInputUi,
-  ref: LegacyRef<HTMLInputElement>,
+  ref: Ref<HTMLInputElement | HTMLTextAreaElement>,
 ) {
   const id = useId();
 
@@ -35,22 +37,37 @@ export const InputUi = forwardRef(function InputUi(
           {label}
         </label>
       )}
-      <div className={styles.inputContainer}>
+      <div className={classNames(styles.inputContainer,{[styles.multiline]:multiline})}>
         {startContent && (
           <div className={styles.content} onClick={startContentHandler} data-place="start">
             {startContent}
           </div>
         )}
-        <input
-          id={id}
-          {...rest}
-          value={value}
-          autoComplete="off"
-          disabled={disabled}
-          dir={value ? dir : undefined}
-          className={`${styles.input} ${className}`}
-          ref={ref}
-        />
+        {multiline ? (
+          <textarea
+            placeholder={rest.placeholder}
+            id={id}
+            autoComplete="off"
+            disabled={disabled}
+            dir={value ? dir : undefined}
+            className={classNames(styles.input,className)}
+            name={rest.name}
+            ref={ref as Ref<HTMLTextAreaElement>}
+          >
+            {value}
+          </textarea>
+        ) : (
+          <input
+            id={id}
+            {...rest}
+            value={value}
+            autoComplete="off"
+            disabled={disabled}
+            dir={value ? dir : undefined}
+            className={`${styles.input} ${className}`}
+            ref={ref as Ref<HTMLInputElement>}
+          />
+        )}
         {endContent && (
           <div className={styles.content} onClick={endContentHandler} data-place="end">
             {endContent}

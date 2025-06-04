@@ -27,17 +27,14 @@ export const useEditMedicine = () => {
 
   const step = pathname.includes(routes.editMedicine.tabs.firstStep.href())
     ? 1
-    : pathname.includes(routes.editMedicine.tabs.secondStep.href())
+    : pathname.includes(routes.editMedicine.tabs.firstStep.href())
       ? 2
       : null;
 
   const backwardHandler = () => RouterService.backward(routes.medicine.href());
 
   const submitHandler = async (form: TMedicineForm) => {
-    if (step === 1) {
-      methods.setValue("is_first_step_submitted", true);
-      navigate(routes.editMedicine.tabs.secondStep.href());
-    } else await dispatch(editMedicineAction({ id: +params.id!, form }));
+   await dispatch(editMedicineAction({ id: +params.id!, form }));
   };
 
   const getInfo = () => dispatch(getMedicineInfoAction({ id: +params.id! }));

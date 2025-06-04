@@ -17,7 +17,11 @@ type TExtraProps = {
 // ? form based
 export type TFormInput<T extends FieldValues = FieldValues> = Omit<THtmlInput, "name" | "onChange" | "type" | "value"> &
   TExtraProps &
-  TFormOptions<T> & { onChange?: (e: ChangeEvent<HTMLInputElement>) => TOnChangeReturn<string>; mode?: "FORM" };
+  TFormOptions<T> & {
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => TOnChangeReturn<string>;
+    mode?: "FORM";
+    multiline?: boolean;
+  };
 export type TUseFormInput<T extends FieldValues> = Pick<TFormInput<T>, "onChange">;
 
 // ? state based
@@ -31,4 +35,4 @@ export type TStateInput = Omit<THtmlInput, "type"> &
 export type TUseStateInput = Pick<TStateInput, "onChange" | "setValue" | "name">;
 
 export type TInput = TFormInput | TStateInput;
-export type TInputUi = THtmlInput & TExtraProps & { error?: string };
+export type TInputUi = THtmlInput & TExtraProps & { error?: string,multiline?: boolean };

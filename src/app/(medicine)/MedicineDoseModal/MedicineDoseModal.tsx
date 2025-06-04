@@ -9,12 +9,12 @@ export const MedicineDoseModal = () => {
   const { _ref, onClose, onSubmit } = useMedicineDoseModal();
 
   return (
-    <Modal _ref={_ref} onClose={onClose} fullWidth title="مقدار و واحد مصرف هر دوز دارو را انتخاب کنید">
+    <Modal _ref={_ref} onClose={onClose} fullWidth title="مقدار شربت در هر بار مصرف دارو را اتنخاب کنید">
       <div className={styles.wheelPickerContainer}>
         <div className={styles.sideBox}></div>
         <WheelPicker options={medicineUnits} name="dose_placeholder.unit" label="واحد" />
         <div className={styles.centerBox}>:</div>
-        <WheelPicker options={medicineAmounts} name="dose_placeholder.amount" label="مقدار هر دوز" />
+        <WheelPicker options={medicineAmounts} name="dose_placeholder.amount" label="مقدار" />
         <div className={styles.sideBox}></div>
       </div>
       <div className={styles.submitButton}>

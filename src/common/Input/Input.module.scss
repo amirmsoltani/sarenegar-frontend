@@ -37,6 +37,21 @@
     @include text-14-regular;
     @include flex-start-center;
 
+    &.multiline{
+      max-height: 103px;
+      min-height: 103px;
+
+      .input{
+        height: 103px;
+        min-height: 103px;
+        padding-top: 12px;
+        resize: none;
+        &::-webkit-scrollbar{
+          display: none;
+        }
+      }
+    }
+
     .input {
       width: 100%;
       flex: 1 1 0%;

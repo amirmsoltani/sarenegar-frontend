@@ -1,11 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { medicineSecondStepForwardNavigation } from "../../_common/medicineNavigation";
+import { medicineFirstStepForwardNavigation } from "../../_common/medicineNavigation";
 
 export const useMedicineStartDatePlaceholder = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const onClick = () => navigate(medicineSecondStepForwardNavigation(pathname, "startDate"), { replace: true });
+  const onClick = () => navigate(medicineFirstStepForwardNavigation(pathname, "startDate"), { replace: true });
 
   return { onClick };
 };

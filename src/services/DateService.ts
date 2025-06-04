@@ -1,6 +1,7 @@
 import jalaali from "jalaali-js";
-import { toLabelValue } from "@/helper/helper";
+import { p2e, toLabelValue } from "@/helper/helper";
 import { TDatePicker } from "@/common/Form/FormUtils.types";
+import { ReminderTimeRequest } from "@/services/api.ts";
 
 class DateInstant {
   protected static readonly dateOptions: Intl.DateTimeFormatOptions = {
@@ -203,6 +204,22 @@ class DateInstant {
 
   public isBiggerThanToday(date:string){
     return new Date().getTime() < new Date(date).getTime();
+  }
+
+  public createReminders(startTime:string,times:number){
+    const date = new Date();
+    const splitTime = startTime.split(":");
+    date.setHours(+splitTime[0],+splitTime[1]);
+    const remindersTime :ReminderTimeRequest[] = []
+
+    const step =24/times * 60 *60*1000;
+    for (let i = 0; i < times; i++) {
+      remindersTime.push({time:p2e(DateService.getTime(date)),name:i.toString()})
+      date.setTime(date.getTime()+step);
+    }
+
+    return remindersTime.sort((a, b) => +a.time.split(":")[0]- +b.time.split(":")[0]);
+
   }
 }
 

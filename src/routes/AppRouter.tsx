@@ -41,16 +41,17 @@ import { OccurrenceTimeModal } from "@/app/(epilepsy)/OccurrenceTimeModal/Occurr
 import { CalendarWrapper } from "@/app/Calendar/_components/CalendarWrapper/CalendarWrapper.tsx";
 import { MedicineEndDateModal } from "@/app/(medicine)/MedicineEndDateModal/MedicineEndDateModal";
 import { RedirectToCurrentMedicines, RedirectToDashboard } from "./components/Redirects/Redirects";
-import { MedicineDrugDoseModal } from "@/app/(medicine)/MedicineDrugDoseModal/MedicineDrugDoseModal";
-import { MedicineFormFirstStep } from "@/app/(medicine)/MedicineFormFirstStep/MedicineFormFirstStep";
+import { MedicineFirstUsageTimeModal } from "@/app/(medicine)/MedicineFirstUsageTimeModal/MedicineFirstUsageTimeModal.tsx";
 import { MedicineUsageTypeModal } from "@/app/(medicine)/MedicineUsageTypeModal/MedicineUsageTypeModal";
 import { MedicineStartDateModal } from "@/app/(medicine)/MedicineStartDateModal/MedicineStartDateModal";
-import { MedicineFormSecondStep } from "@/app/(medicine)/MedicineFormSecondStep/MedicineFormSecondStep";
+import { MedicineFormFirstStep } from "@/app/(medicine)/MedicineFormFirstStep/MedicineFormFirstStep";
 import { MedicineEndDayCountsModal } from "@/app/(medicine)/MedicineEndDayCountsModal/MedicineEndDayCountsModal";
 import { DeleteMedicineModal } from "@/app/(medicine)/Medicine/MedicineInfo/DeleteMedicineModal/DeleteMedicineModal";
 import { CompleteMedicineModal } from "@/app/(medicine)/Medicine/MedicineInfo/CompleteMedicineModal/CompleteMedicineModal";
 import { CalendarNotTakeDoseModal } from "@/app/Calendar/_components/CalendarNotTakeDoseModal/CalendarNotTakeDoseModal.tsx";
 import { DeleteEpilepsyEventModal } from "@/app/(epilepsy)/EpilepsyEventInfo/DeleteEpilepsyEventModal/DeleteEpilepsyEventModal";
+import { MedicineCountsModal } from "@/app/(medicine)/MedicineCountsModal/MedicineCountsModal.tsx";
+import { MedicineUsageCountsModal } from "@/app/(medicine)/MedicineUsageCountsModal/MedicineUsageCountsModal.tsx";
 
 const AppRouter = () => {
   const { isLogin } = useAppRouter();
@@ -93,50 +94,69 @@ const AppRouter = () => {
                     <Route path={routes.addMedicine.tabs.firstStep.modals.drugs.path} Component={MedicineDrugsModal} />
                     <Route path={routes.addMedicine.tabs.firstStep.modals.dose.path} Component={MedicineDoseModal} />
                     <Route path={routes.addMedicine.tabs.firstStep.modals.usageType.path} Component={MedicineUsageTypeModal} />
-                  </Route>
-                  <Route path={routes.addMedicine.tabs.secondStep.path} Component={MedicineFormSecondStep}>
-                    <Route path={routes.addMedicine.tabs.secondStep.modals.startDate.path} Component={MedicineStartDateModal} />
-                    <Route path={routes.addMedicine.tabs.secondStep.modals.endDate.path} Component={MedicineEndDateModal} />
+                    <Route path={routes.addMedicine.tabs.firstStep.modals.startDate.path} Component={MedicineStartDateModal} />
+                    <Route path={routes.addMedicine.tabs.firstStep.modals.endDate.path} Component={MedicineEndDateModal} />
                     <Route
-                      path={routes.addMedicine.tabs.secondStep.modals.dayCounts.path}
+                      path={routes.addMedicine.tabs.firstStep.modals.dayCounts.path}
                       Component={MedicineEndDayCountsModal}
                     />
-                    <Route path={routes.addMedicine.tabs.secondStep.modals.doseTime.path} Component={MedicineDrugDoseModal} />
+                    <Route
+                      path={routes.addMedicine.tabs.firstStep.modals.medicineCounts.path}
+                      Component={MedicineCountsModal}
+                    />
+                    <Route
+                      path={routes.addMedicine.tabs.firstStep.modals.medicineUsageCounts.path}
+                      Component={MedicineUsageCountsModal}
+                    />
+                    <Route path={routes.addMedicine.tabs.firstStep.modals.firstUsageTime.path} Component={MedicineFirstUsageTimeModal} />
                   </Route>
+
                 </Route>
                 <Route path={routes.editMedicine.path} Component={EditMedicine}>
                   <Route path={routes.editMedicine.tabs.firstStep.path} Component={MedicineFormFirstStep}>
                     <Route path={routes.editMedicine.tabs.firstStep.modals.drugs.path} Component={MedicineDrugsModal} />
                     <Route path={routes.editMedicine.tabs.firstStep.modals.dose.path} Component={MedicineDoseModal} />
-                    <Route path={routes.editMedicine.tabs.firstStep.modals.usageType.path} Component={MedicineUsageTypeModal} />
-                  </Route>
-                  <Route path={routes.editMedicine.tabs.secondStep.path} Component={MedicineFormSecondStep}>
-                    <Route path={routes.editMedicine.tabs.secondStep.modals.startDate.path} Component={MedicineStartDateModal} />
-                    <Route path={routes.editMedicine.tabs.secondStep.modals.endDate.path} Component={MedicineEndDateModal} />
+                    <Route path={routes.editMedicine.tabs.firstStep.modals.usageType.path} Component={MedicineUsageTypeModal} /> <Route path={routes.editMedicine.tabs.firstStep.modals.startDate.path} Component={MedicineStartDateModal} />
+                    <Route path={routes.editMedicine.tabs.firstStep.modals.endDate.path} Component={MedicineEndDateModal} />
                     <Route
-                      path={routes.editMedicine.tabs.secondStep.modals.dayCounts.path}
+                      path={routes.editMedicine.tabs.firstStep.modals.dayCounts.path}
                       Component={MedicineEndDayCountsModal}
                     />
-                    <Route path={routes.editMedicine.tabs.secondStep.modals.doseTime.path} Component={MedicineDrugDoseModal} />
+                    <Route
+                      path={routes.editMedicine.tabs.firstStep.modals.medicineCounts.path}
+                      Component={MedicineCountsModal}
+                    />
+                    <Route
+                      path={routes.editMedicine.tabs.firstStep.modals.medicineUsageCounts.path}
+                      Component={MedicineUsageCountsModal}
+                    />
+                    <Route path={routes.editMedicine.tabs.firstStep.modals.firstUsageTime.path} Component={MedicineFirstUsageTimeModal} />
                   </Route>
+
                 </Route>
                 <Route path={routes.retakeMedicine.path} Component={RetakeMedicine}>
                   <Route path={routes.retakeMedicine.tabs.firstStep.path} Component={MedicineFormFirstStep}>
                     <Route path={routes.retakeMedicine.tabs.firstStep.modals.drugs.path} Component={MedicineDrugsModal} />
                     <Route path={routes.retakeMedicine.tabs.firstStep.modals.dose.path} Component={MedicineDoseModal} />
                     <Route path={routes.retakeMedicine.tabs.firstStep.modals.usageType.path} Component={MedicineUsageTypeModal} />
-                  </Route>
-                  <Route path={routes.retakeMedicine.tabs.secondStep.path} Component={MedicineFormSecondStep}>
                     <Route
-                      path={routes.retakeMedicine.tabs.secondStep.modals.startDate.path}
+                      path={routes.retakeMedicine.tabs.firstStep.modals.startDate.path}
                       Component={MedicineStartDateModal}
                     />
-                    <Route path={routes.retakeMedicine.tabs.secondStep.modals.endDate.path} Component={MedicineEndDateModal} />
+                    <Route path={routes.retakeMedicine.tabs.firstStep.modals.endDate.path} Component={MedicineEndDateModal} />
                     <Route
-                      path={routes.retakeMedicine.tabs.secondStep.modals.dayCounts.path}
+                      path={routes.retakeMedicine.tabs.firstStep.modals.dayCounts.path}
                       Component={MedicineEndDayCountsModal}
                     />
-                    <Route path={routes.retakeMedicine.tabs.secondStep.modals.doseTime.path} Component={MedicineDrugDoseModal} />
+                    <Route
+                      path={routes.retakeMedicine.tabs.firstStep.modals.medicineCounts.path}
+                      Component={MedicineCountsModal}
+                    />
+                    <Route
+                      path={routes.retakeMedicine.tabs.firstStep.modals.medicineUsageCounts.path}
+                      Component={MedicineUsageCountsModal}
+                    />
+                    <Route path={routes.retakeMedicine.tabs.firstStep.modals.firstUsageTime.path} Component={MedicineFirstUsageTimeModal} />
                   </Route>
                 </Route>
                 <Route path={routes.profile.path} Component={Profile}>

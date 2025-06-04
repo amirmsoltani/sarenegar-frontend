@@ -40,13 +40,18 @@ export interface Drug {
   en_name: string;
   /** @maxLength 256 */
   fa_name: string;
-  /** @maxLength 256 */
-  producer: string;
   /**
-   * آپلود تصویر دارو (فقط JPG، JPEG، PNG)
-   * @pattern (?:jpg|jpeg|png)$
+   * @maxLength 256
+   * @nullable
    */
-  image: string;
+  producer?: string | null;
+  /**
+   * Upload drug image (JPG, JPEG, PNG and webp only)
+   * @nullable
+   * @pattern (?:jpg|jpeg|png|webp)$
+   */
+  image?: string | null;
+  form: DrugForm;
 }
 
 export interface DrugDosageCompleteResponse {
@@ -55,13 +60,24 @@ export interface DrugDosageCompleteResponse {
 }
 
 /**
- * Serializer for creating and updating DrugDosage instances
+ * Serializer for creating and updating DrugDosage instances.
+
+This serializer handles the creation and updating of drug dosage records,
+including validation for all fields including the optional description.
  */
 export interface DrugDosageCreateUpdateRequest {
+  /** The ID of the drug for this dosage. */
   drug: number;
   /** Structured dose information including amount and unit. */
-  dose: unknown;
-  /** List of reminders with time and labels. */
+  dose: any;
+  /** Type of drug dose */
+  dose_type: number;
+  /**
+   * Value of the drug dose
+   * @pattern ^-?\d{0,8}(?:\.\d{0,2})?$
+   */
+  dose_value: string;
+  /** List of reminders with time and labels. Each reminder should include 'time' (HH:MM) and 'name'. */
   reminder_times: ReminderTimeRequest[];
   type_of_usage?: TypeOfUsageEnum;
   start_date: string;
@@ -83,6 +99,12 @@ export interface DrugDosageCreateUpdateRequest {
    * @nullable
    */
   completion_date?: string | null;
+  /**
+   * Optional description for this drug dosage. Maximum 1000 characters.
+   * @maxLength 1000
+   * @nullable
+   */
+  description?: string | null;
 }
 
 /**
@@ -100,13 +122,25 @@ export interface DrugDosageReminderDetail {
 }
 
 /**
- * Serializer for retrieving DrugDosage instances with expanded drug information
+ * Serializer for retrieving DrugDosage instances with expanded drug information.
+
+This serializer provides detailed information about a drug dosage, including
+the associated drug details, reminder times, and completion status.
  */
 export interface DrugDosageRetrieve {
   readonly id?: number;
+  /** Detailed information about the prescribed drug */
   drug: Drug;
+  /** Dose information kept for backward compatibility */
   dose?: unknown;
-  /** List of reminders with time and labels. */
+  /** Type of drug dose */
+  dose_type: number;
+  /**
+   * Value of the drug dose
+   * @pattern ^-?\d{0,8}(?:\.\d{0,2})?$
+   */
+  dose_value: string;
+  /** List of reminders with time and labels. Each reminder includes 'id', 'time' (HH:MM), and 'name'. */
   reminder_times: ReminderTime[];
   type_of_usage?: TypeOfUsageEnum;
   start_date: string;
@@ -121,19 +155,35 @@ export interface DrugDosageRetrieve {
   is_daily?: boolean;
   /** Days of the week when the drug should be taken (e.g., MON, TUE). */
   usage_days?: UsageDaysEnum[];
-  /** Indicates if the dosage is expired based on end date */
+  /** Indicates if the dosage is expired based on end date or completion status */
   is_expired: boolean;
-  /** Total number of doses based on reminders */
+  /** Total number of doses scheduled based on reminders */
   total_doses: number;
-  /** Number of doses already taken */
+  /** Number of doses that have been marked as taken */
   taken_doses: number;
-  /** Indicates if the drug dosage is completed. */
+  /** Indicates if the drug dosage has been marked as completed. When true, the completion_date will be set. */
   is_completed: boolean;
   /**
    * تاریخی که دارو به‌عنوان تکمیل شده علامت‌گذاری شده است
    * @nullable
    */
   readonly completion_date?: string | null;
+  /**
+   * Optional description or notes about this drug dosage. Maximum 1000 characters.
+   * @nullable
+   */
+  description?: string | null;
+}
+
+/**
+ * Serializer for the DrugForm model.
+ */
+export interface DrugForm {
+  readonly id?: number;
+  /** @maxLength 256 */
+  name: string;
+  /** @nullable */
+  description?: string | null;
 }
 
 /**
@@ -403,12 +453,19 @@ export interface ReminderDetail {
 
 /**
  * Serializer for essential DrugDosage info within a Reminder context.
+
+This serializer provides a subset of drug dosage information that's most relevant
+when displaying reminder details, including the optional description.
  */
 export interface ReminderDrugDosageInfo {
   readonly id?: number;
+  /** English name of the drug */
   readonly drug_name?: string;
+  /** Farsi name of the drug */
   readonly drug_fa_name?: string;
+  /** Image of the drug if available */
   readonly drug_image?: string;
+  /** Dose information kept for backward compatibility */
   readonly dose?: unknown;
   readonly type_of_usage?: TypeOfUsageEnum;
   readonly start_date?: string;
@@ -419,6 +476,11 @@ export interface ReminderDrugDosageInfo {
   readonly is_daily?: boolean;
   /** روزهایی را که دارو باید مصرف شود انتخاب کنید */
   readonly usage_days?: readonly UsageDaysEnum[];
+  /**
+   * Optional description for this drug dosage
+   * @nullable
+   */
+  readonly description?: string | null;
 }
 
 export interface ReminderTime {
@@ -1173,6 +1235,15 @@ export const apiDrugsDosemanagerDrugsRetrieve = (
       options);
     }
   
+export const apiDosemanagerDosemanagerHealthCheckRetrieve = (
+    
+ options?: SecondParameter<typeof api>,) => {
+      return api<void>(
+      {url: `/dosemanager/health-check/`, method: 'GET'
+    },
+      options);
+    }
+  
 /**
  * Get all epilepsy events for the authenticated user
  */
@@ -1395,6 +1466,7 @@ export type ApiDrugDosageRemindersDosemanagerRemindersListResult = NonNullable<A
 export type ApiDrugDosageRemindersDosemanagerReminderDetailResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageRemindersDosemanagerReminderDetail>>>
 export type ApiDrugDosageRemindersDosemanagerReminderToggleTakenResult = NonNullable<Awaited<ReturnType<typeof apiDrugDosageRemindersDosemanagerReminderToggleTaken>>>
 export type ApiDrugsDosemanagerDrugsRetrieveResult = NonNullable<Awaited<ReturnType<typeof apiDrugsDosemanagerDrugsRetrieve>>>
+export type ApiDosemanagerDosemanagerHealthCheckRetrieveResult = NonNullable<Awaited<ReturnType<typeof apiDosemanagerDosemanagerHealthCheckRetrieve>>>
 export type ApiEpilepsyEpilepsyEventListResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyEventList>>>
 export type ApiEpilepsyEpilepsyEventCreateResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyEventCreate>>>
 export type ApiEpilepsyEpilepsyEventRetrieveResult = NonNullable<Awaited<ReturnType<typeof apiEpilepsyEpilepsyEventRetrieve>>>

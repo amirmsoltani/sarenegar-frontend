@@ -18,7 +18,6 @@ export const EditMedicine = () => {
           </button>
           <div className={styles.title}>ویرایش دارو</div>
         </div>
-        <div className={styles.step}>مرحله {step ?? 1} از 2</div>
       </header>
       <StatusHandler status={status} onClick={getInfo} className={styles.status}>
         {step ? <Outlet /> : <Navigate to={routes.editMedicine.tabs.firstStep.href()} replace />}

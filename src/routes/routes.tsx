@@ -130,27 +130,29 @@ export const routes = {
             path: "usage-type",
             href: () => `${RouterService.setDate()}/add-medicine/first-step/usage-type`,
           },
-        },
-      },
-      secondStep: {
-        path: "second-step",
-        href: (date?: string) => `${RouterService.setDate(date)}/add-medicine/second-step`,
-        modals: {
           startDate: {
             path: "start-date",
-            href: () => `${RouterService.setDate()}/add-medicine/second-step/start-date`,
+            href: () => `${RouterService.setDate()}/add-medicine/first-step/start-date`,
           },
           endDate: {
             path: "end-date",
-            href: () => `${RouterService.setDate()}/add-medicine/second-step/end-date`,
+            href: () => `${RouterService.setDate()}/add-medicine/first-step/end-date`,
+          },
+          medicineCounts:{
+            path: "medicine-counts",
+            href: () => `${RouterService.setDate()}/add-medicine/first-step/medicine-counts`,
+          },
+          medicineUsageCounts:{
+            path: "medicine-usage-counts",
+            href: () => `${RouterService.setDate()}/add-medicine/first-step/medicine-usage-counts`,
           },
           dayCounts: {
             path: "day-counts",
-            href: () => `${RouterService.setDate()}/add-medicine/second-step/day-counts`,
+            href: () => `${RouterService.setDate()}/add-medicine/first-step/day-counts`,
           },
-          doseTime: {
-            path: "dose-time/:dose",
-            href: (id: TId) => `${RouterService.setDate()}/add-medicine/second-step/dose-time/${id}`,
+          firstUsageTime: {
+            path: "first-usage-time",
+            href: () => `${RouterService.setDate()}/add-medicine/first-step/first-usage-time`,
           },
         },
       },
@@ -176,27 +178,29 @@ export const routes = {
             path: "usage-type",
             href: () => `${RouterService.setDate()}/edit-medicine/${RouterService.params.id}/first-step/usage-type`,
           },
-        },
-      },
-      secondStep: {
-        path: "second-step",
-        href: (date?: string) => `${RouterService.setDate(date)}/edit-medicine/${RouterService.params.id}/second-step`,
-        modals: {
           startDate: {
             path: "start-date",
-            href: () => `${RouterService.setDate()}/edit-medicine/${RouterService.params.id}/second-step/start-date`,
+            href: () => `${RouterService.setDate()}/edit-medicine/${RouterService.params.id}/first-step/start-date`,
           },
           endDate: {
             path: "end-date",
-            href: () => `${RouterService.setDate()}/edit-medicine/${RouterService.params.id}/second-step/end-date`,
+            href: () => `${RouterService.setDate()}/edit-medicine/${RouterService.params.id}/first-step/end-date`,
           },
           dayCounts: {
             path: "day-counts",
-            href: () => `${RouterService.setDate()}/edit-medicine/${RouterService.params.id}/second-step/day-counts`,
+            href: () => `${RouterService.setDate()}/edit-medicine/${RouterService.params.id}/first-step/day-counts`,
           },
-          doseTime: {
-            path: "dose-time/:dose",
-            href: (id: TId) => `${RouterService.setDate()}/edit-medicine/${RouterService.params.id}/second-step/dose-time/${id}`,
+          medicineCounts:{
+            path: "medicine-counts",
+            href: () => `${RouterService.setDate()}/edit-medicine/${RouterService.params.id}/first-step/medicine-counts`,
+          },
+          medicineUsageCounts:{
+            path: "medicine-usage-counts",
+            href: () => `${RouterService.setDate()}/edit-medicine/${RouterService.params.id}/first-step/medicine-usage-counts`,
+          },
+          firstUsageTime: {
+            path: "first-usage-time",
+            href: () => `${RouterService.setDate()}/edit-medicine/${RouterService.params.id}/first-step/first-usage-time`,
           },
         },
       },
@@ -222,28 +226,29 @@ export const routes = {
             path: "usage-type",
             href: () => `${RouterService.setDate()}/retake-medicine/${RouterService.params.id}/first-step/usage-type`,
           },
-        },
-      },
-      secondStep: {
-        path: "second-step",
-        href: (date?: string) => `${RouterService.setDate(date)}/retake-medicine/${RouterService.params.id}/second-step`,
-        modals: {
           startDate: {
             path: "start-date",
-            href: () => `${RouterService.setDate()}/retake-medicine/${RouterService.params.id}/second-step/start-date`,
+            href: () => `${RouterService.setDate()}/retake-medicine/${RouterService.params.id}/first-step/start-date`,
           },
           endDate: {
             path: "end-date",
-            href: () => `${RouterService.setDate()}/retake-medicine/${RouterService.params.id}/second-step/end-date`,
+            href: () => `${RouterService.setDate()}/retake-medicine/${RouterService.params.id}/first-step/end-date`,
+          },
+          medicineCounts:{
+            path: "medicine-counts",
+            href: () => `${RouterService.setDate()}/retake-medicine/${RouterService.params.id}/first-step/medicine-counts`,
+          },
+          medicineUsageCounts:{
+            path: "medicine-usage-counts",
+            href: () => `${RouterService.setDate()}/retake-medicine/${RouterService.params.id}/first-step/medicine-usage-counts`,
           },
           dayCounts: {
             path: "day-counts",
-            href: () => `${RouterService.setDate()}/retake-medicine/${RouterService.params.id}/second-step/day-counts`,
+            href: () => `${RouterService.setDate()}/retake-medicine/${RouterService.params.id}/first-step/day-counts`,
           },
-          doseTime: {
-            path: "dose-time/:dose",
-            href: (id: TId) =>
-              `${RouterService.setDate()}/retake-medicine/${RouterService.params.id}/second-step/dose-time/${id}`,
+          firstUsageTime: {
+            path: "first-usage-time",
+            href: () => `${RouterService.setDate()}/retake-medicine/${RouterService.params.id}/first-step/first-usage-time`,
           },
         },
       },

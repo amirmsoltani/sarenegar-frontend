@@ -57,6 +57,7 @@ const Info = ({
   is_completed,
   completion_date,
   drug_timing_type,
+  description
 }: TInfo) => {
   const percent = ((taken_doses ?? 0) * 100) / (total_doses ?? 0);
 
@@ -123,6 +124,10 @@ const Info = ({
               <div>{DateService.getDate(completion_date)}</div>
             </div>
           )}
+          <div className={styles.option}>
+            <div className={styles.title}>توضیحات</div>
+            <div>{description ?? "-"}</div>
+          </div>
         </div>
         <div className={styles.chart}>
           <div

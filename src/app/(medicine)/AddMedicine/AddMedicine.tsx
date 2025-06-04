@@ -17,7 +17,6 @@ export const AddMedicine = () => {
           </button>
           <div className={styles.title}>ثبت دارو</div>
         </div>
-        <div className={styles.step}>مرحله {step ?? 1} از 2</div>
       </header>
       {step ? <Outlet /> : <Navigate to={routes.addMedicine.tabs.firstStep.href()} replace />}
     </Form>

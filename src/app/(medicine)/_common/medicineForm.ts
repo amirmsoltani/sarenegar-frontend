@@ -5,20 +5,14 @@ import { formOptionTranslator, toLabelValue, withPadStart } from "@/helper/helpe
 import { TCheckboxOption, TWheelPickerOption } from "@/common/Form/FormUtils.types";
 
 export const medicineUnits: TWheelPickerOption[] = [
-  { label: "میلی گرم ( mg )", value: "MG" },
-  { label: "قرص ( pill )", value: "PILL" },
-  { label: "گرم ( g )", value: "G" },
+  { label: "قاشق چایی خوری (۲۵ml)", value: "قاشق چایی خوری" },
+  { label: "قاشق غذا خوری (100cc)", value: "قاشق غذا خوری" },
 ];
 
-export const medicineAmounts: TWheelPickerOption[] = [
-  { label: "2", value: "2" },
-  { label: "1/8", value: "1.8" },
-  { label: "1/6", value: "1/6" },
-  { label: "1/4", value: "1/4" },
-  { label: "1/3", value: "1/3" },
-  { label: "1/2", value: "1/2" },
-  { label: "1", value: "1" },
-];
+export const medicineAmounts: TWheelPickerOption[] = new Array(25).fill("").map((_, index) => {
+  const value = (index + 1).toString();
+  return { value, label: value };
+});
 
 export const medicineUsageType: TWheelPickerOption<TypeOfUsageEnum>[] = [
   { label: "قبل غذا", value: "BEFORE_MEAL" },
@@ -36,7 +30,17 @@ export const endTimeTypes: TCheckboxOption[] = [
   { label: "به روز", value: "DAYS" },
 ];
 
-export const endDaysCounts: TWheelPickerOption[] = new Array(60).fill("").map((_, index) => {
+export const endDaysCounts: TWheelPickerOption[] = new Array(365).fill("").map((_, index) => {
+  const value = (index + 1).toString();
+  return { value, label: value };
+});
+
+export const drugCounts: TWheelPickerOption[] = new Array(25).fill("").map((_, index) => {
+  const value = (index + 1).toString();
+  return { value, label: value };
+});
+
+export const medicineUsageCounts: TWheelPickerOption[] = new Array(8).fill("").map((_, index) => {
   const value = (index + 1).toString();
   return { value, label: value };
 });
@@ -71,10 +75,23 @@ export const medicineFormDefaultValues: TMedicineForm = {
   day_counts: null,
   day_counts_placeholder: endDaysCounts[0],
 
+  drug_counts: null,
+  drug_counts_placeholder: drugCounts[0],
+
+  medicine_usage_counts: null,
+  medicine_usage_counts_placeholder: medicineUsageCounts[0],
+
+  start_time: {
+    value: null,
+    placeholder: { hour: toLabelValue(withPadStart(8)), minute: toLabelValue(withPadStart(0)) },
+  },
+
   doses: [
     {
       value: { hour: toLabelValue(withPadStart(8)), minute: toLabelValue(withPadStart(0)) },
       placeholder: { hour: toLabelValue(withPadStart(8)), minute: toLabelValue(withPadStart(0)) },
     },
   ],
+
+  description:null,
 };

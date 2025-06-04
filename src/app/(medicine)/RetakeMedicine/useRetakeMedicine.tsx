@@ -28,7 +28,7 @@ export const useRetakeMedicine = () => {
 
   const step = pathname.includes(routes.retakeMedicine.tabs.firstStep.href())
     ? 1
-    : pathname.includes(routes.retakeMedicine.tabs.secondStep.href())
+    : pathname.includes(routes.retakeMedicine.tabs.firstStep.href())
       ? 2
       : null;
 
@@ -37,7 +37,7 @@ export const useRetakeMedicine = () => {
   const submitHandler = async (form: TMedicineForm) => {
     if (step === 1) {
       methods.setValue("is_first_step_submitted", true);
-      navigate(routes.retakeMedicine.tabs.secondStep.href());
+      navigate(routes.retakeMedicine.tabs.firstStep.href());
     } else await dispatch(addMedicineAction(form));
   };
 

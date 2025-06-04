@@ -10,19 +10,23 @@ export const editMedicineAction = StoreUtils.createAsyncThunk(
   async ({ id, form }: TDditMedicineAction, thunk) => {
     const data: DrugDosageCreateUpdateRequest = {
       drug: form.drug!.id!,
-      dose: { unit: form.dose.unit!.value, amount: form.dose.amount!.value },
-      type_of_usage: form.usage_type!.value,
+      end_by_day: +form.day_counts!.value!,
       start_date: DateService.setToGlobalFormat(DateService.jalaliToGregorian(form.start_date!)),
-      reminder_times: form.doses.map((dose) => {
-        const value = `${dose.value.hour.value}:${dose.value.minute.value}`;
-        return { name: value, time: value };
-      }),
+      description: form.description,
+      dose_type: form.drug!.form!.id!,
+      type_of_usage: form.usage_type!.value,
+      dose_value: form.medicine_usage_counts!.value.toString(),
+      reminder_times: DateService.createReminders(
+        `${form.start_time.value!.hour!.value}:${form.start_time.value!.minute!.value}`,
+        +form.medicine_usage_counts!.value,
+      ),
+      dose:
+        form.drug?.form.name === "Syrup"
+          ? { unit: form.dose.unit!.value, amount: form.dose.amount!.value }
+          : ({ unit: "قرص", amount: form.drug_counts?.value } as unknown),
       ...(form.drug_timing_type.value === "ALL_DAY"
         ? { is_daily: true, usage_days: [] }
         : { is_daily: false, usage_days: form.days }),
-      ...(form.end_time_type.value === "DATE"
-        ? { end_date: DateService.setToGlobalFormat(DateService.jalaliToGregorian(form.end_date!)), end_by_day: null }
-        : { end_date: null, end_by_day: +form.day_counts!.value }),
     };
 
     const response = await apiDrugDosageDosemanagerDrugDosageUpdate(id, data);
