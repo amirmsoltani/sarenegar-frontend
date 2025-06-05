@@ -53,6 +53,7 @@ export const InputUi = forwardRef(function InputUi(
             className={classNames(styles.input,className)}
             name={rest.name}
             ref={ref as Ref<HTMLTextAreaElement>}
+            {...rest as any}
           >
             {value}
           </textarea>

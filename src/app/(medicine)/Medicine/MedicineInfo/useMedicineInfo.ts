@@ -26,5 +26,15 @@ export const useMedicineInfo = () => {
 
   useStatusHandler({ state, onComponentDidMount: getData });
 
-  return { ...state, id, getData, canEdit, backwardHandler };
+  let useText = " - ";
+
+  const drug = state.data?.drug;
+  const dose = state.data?.dose;
+  if (drug && drug.form.name === "Syrup" && dose && dose.amount && dose.unit) {
+    useText = `${dose.amount.value} ${dose.unit.value}`;
+  } else if (drug && drug.form.name === "Pill" && dose &&  dose.amount) {
+    useText = `${dose.amount.value} قرص`;
+  }
+
+  return { ...state, id, getData, canEdit, backwardHandler, useText };
 };

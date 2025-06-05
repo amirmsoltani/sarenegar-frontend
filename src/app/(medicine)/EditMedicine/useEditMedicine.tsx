@@ -34,6 +34,7 @@ export const useEditMedicine = () => {
   const backwardHandler = () => RouterService.backward(routes.medicine.href());
 
   const submitHandler = async (form: TMedicineForm) => {
+
    await dispatch(editMedicineAction({ id: +params.id!, form }));
   };
 

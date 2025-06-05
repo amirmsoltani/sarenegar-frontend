@@ -17,6 +17,7 @@ export const addMedicineAction = StoreUtils.createAsyncThunk("medicine/addMedici
       `${form.start_time.value!.hour!.value}:${form.start_time.value!.minute!.value}`,
       +form.medicine_usage_counts!.value,
     ),
+    first_dose_start_time:`${form.start_time.value!.hour!.value}:${form.start_time.value!.minute!.value}`,
     dose:
       form.drug?.form.name === "Syrup"
         ? { unit: form.dose.unit!.value, amount: form.dose.amount!.value }

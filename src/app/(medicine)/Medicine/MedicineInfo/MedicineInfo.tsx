@@ -7,12 +7,12 @@ import { Button } from "@/common/Button/Button";
 import { useMedicineInfo } from "./useMedicineInfo";
 import { DateService } from "@/services/DateService";
 import { ArrowRight } from "@wandersonalwes/iconsax-react";
-import { TextOverflow } from "@/common/TextOverflow/TextOverflow";
 import { StatusHandler } from "@/common/StatusHandler/StatusHandler";
 import { TMedicineSlice } from "@/store/medicine/medicineSlice.types";
+import { weekdays } from "@/helper/helper.ts";
 
 export const MedicineInfo = () => {
-  const { getData, status, data, canEdit, id, backwardHandler } = useMedicineInfo();
+  const { getData, status, data, canEdit, id, backwardHandler,useText } = useMedicineInfo();
 
   return (
     <main className={styles.container}>
@@ -32,7 +32,7 @@ export const MedicineInfo = () => {
       <StatusHandler status={status} onClick={getData} className={styles.status}>
         {data && (
           <>
-            <Info {...data} id={id} />
+            <Info {...data} id={id} useText={useText} />
             <Outlet />
           </>
         )}
@@ -46,7 +46,6 @@ const Info = ({
   id,
   drug,
   days,
-  dose,
   doses,
   end_date,
   usage_type,
@@ -57,8 +56,10 @@ const Info = ({
   is_completed,
   completion_date,
   drug_timing_type,
-  description
-}: TInfo) => {
+  description,
+  day_counts,
+  useText
+}: TInfo&{useText:string}) => {
   const percent = ((taken_doses ?? 0) * 100) / (total_doses ?? 0);
 
   return (
@@ -69,11 +70,11 @@ const Info = ({
             <img src={drug?.image ? drug.image : "/drug-placeholder.png"} className={styles.cover} />
           </div>
           <div className={styles.textsContainer}>
-            <TextOverflow className={styles.faTitle}>{drug?.fa_name ?? "-"}</TextOverflow>
-            <TextOverflow className={styles.enTitle}>{drug?.en_name ?? "-"}</TextOverflow>
-            <div className={styles.detail}>
-              <TextOverflow>{drug?.producer ? drug.producer : "-"}</TextOverflow>
-            </div>
+            <span className={styles.faTitle}>{drug?.fa_name ?? "-"}</span>
+            <span className={styles.enTitle}>{drug?.en_name ?? "-"}</span>
+            {/*<div className={styles.detail}>*/}
+            {/*  <TextOverflow>{drug?.producer ? drug.producer : "-"}</TextOverflow>*/}
+            {/*</div>*/}
           </div>
         </div>
         <div className={styles.iconWrapper}>
@@ -83,31 +84,39 @@ const Info = ({
       <div className={styles.body}>
         <div className={styles.list}>
           <div className={styles.option}>
-            <div className={styles.title}>مقدار هر دوز</div>
+            <div className={styles.title}>مقدار در هر بار مصرف</div>
             <div>
-              {dose.amount?.label} {dose.unit?.label}
+              {useText}
             </div>
           </div>
           <div className={styles.option}>
-            <div className={styles.title}>نوع مصرف</div>
+            <div className={styles.title}>نوع مصرف دارو</div>
             <div>{usage_type?.label}</div>
           </div>
           <div className={styles.option}>
-            <div className={styles.title}>زمانبندی</div>
+            <div className={styles.title}>روز های مصرف دارو</div>
             <div>{drug_timing_type.value === "ALL_DAY" ? "هر روز" : `${days.length} روز در هفته`}</div>
+            <div className={styles.warp}>
+              {days
+                ?.map((day) => weekdays.find((wd)=>wd.value === day)?.label).join(" - ")
+              }
+            </div>
           </div>
           <div className={styles.option}>
-            <div className={styles.title}>ساعات مصرف</div>
-            <div>
-              {doses?.map(({ value }) => {
-                const time = `${value.hour.label}:${value.minute.label}`;
-                return (
-                  <Fragment key={time}>
-                    <span>{time}</span>
-                    <span className={styles.divider}>-</span>
-                  </Fragment>
-                );
-              })}
+            <div className={styles.title}>دفعات مصرف در روز</div>
+            <div>{doses.length} بار در روز</div>
+            <div className={styles.warp}>
+              {doses
+                ?.map(({ value }) => {
+                  const time = `${value.hour.label}:${value.minute.label}`;
+                  return (
+                    <Fragment key={time}>
+                      <span>{time}</span>
+                      <span className={styles.divider}>-</span>
+                    </Fragment>
+                  );
+                })
+                .reverse()}
             </div>
           </div>
           <div className={styles.option}>
@@ -116,7 +125,7 @@ const Info = ({
           </div>
           <div className={styles.option}>
             <div className={styles.title}>تاریخ اتمام مصرف</div>
-            <div>{DateService.getDate(DateService.jalaliToGregorian(end_date!))}</div>
+            <div>({day_counts?.value} روز) {DateService.getDate(DateService.jalaliToGregorian(end_date!))} </div>
           </div>
           {completion_date && (
             <div className={styles.option}>

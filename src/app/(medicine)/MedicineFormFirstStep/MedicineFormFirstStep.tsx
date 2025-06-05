@@ -38,7 +38,7 @@ export const MedicineFormFirstStep = () => {
         </div>
       </section>
       <footer className={styles.footer}>
-        <FormButton>ثبت دارو</FormButton>
+        <FormButton disabled={!drug}>ثبت دارو</FormButton>
       </footer>
     </>
   );

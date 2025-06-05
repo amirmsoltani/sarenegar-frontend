@@ -69,7 +69,7 @@ export interface DrugDosageCreateUpdateRequest {
   /** The ID of the drug for this dosage. */
   drug: number;
   /** Structured dose information including amount and unit. */
-  dose: any;
+  dose: unknown;
   /** Type of drug dose */
   dose_type: number;
   /**
@@ -105,6 +105,7 @@ export interface DrugDosageCreateUpdateRequest {
    * @nullable
    */
   description?: string | null;
+  first_dose_start_time: string;
 }
 
 /**
@@ -173,6 +174,7 @@ export interface DrugDosageRetrieve {
    * @nullable
    */
   description?: string | null;
+  first_dose_start_time: string;
 }
 
 /**

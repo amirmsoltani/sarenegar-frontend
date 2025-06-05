@@ -15,10 +15,10 @@ export const Slider = () => {
             <div className={styles.cardHeader}>
               <div className={styles.detail}>
                 <div className={styles.coverWrapper}>
-                  <img src={drug_dosage_info?.drug_image ?? "/drug-placeholder.png"} className={styles.cover} />
+                  <img alt={"not found"} src={drug_dosage_info?.drug_image ?? "/drug-placeholder.png"} className={styles.cover} />
                 </div>
                 <div className={styles.info}>
-                  <span  className={styles.faTiqtle}>{drug_dosage_info?.drug_fa_name}</span>
+                  <span  className={styles.faTitle}>{drug_dosage_info?.drug_fa_name}</span>
                   {/*<TextOverflow className={styles.enTitle}>{drug_dosage_info?.drug_name}</TextOverflow>*/}
                 </div>
               </div>

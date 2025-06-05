@@ -53,9 +53,10 @@
     @include flex-start-center;
 
     .coverContainer {
-      width: 96px;
-      height: 96px;
+      min-width: 96px;
+      min-height: 96px;
       background-color: var(--white);
+      @include radius-6;
       @include centering;
 
       .cover {
@@ -71,12 +72,12 @@
       flex-direction: column;
 
       .faTitle {
-        @include text-20-bold;
+        @include text-16-semibold;
       }
 
       .enTitle {
         margin-top: 4px;
-        @include text-16-semibold;
+        @include text-14-semibold;
       }
 
       .detail {
@@ -110,7 +111,7 @@
     .option {
       @include text-14-regular;
       @include flex-between-center;
-
+      flex-wrap: wrap;
       .title {
         color: var(--gray);
       }
@@ -123,6 +124,12 @@
         &:last-child {
           display: none;
         }
+      }
+
+      .warp{
+        margin-top: 16px;
+        width: 100%;
+        @include text-12-regular;
       }
     }
   }
