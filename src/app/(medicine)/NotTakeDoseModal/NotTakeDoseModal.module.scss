@@ -41,27 +41,27 @@
           @include flex-start-center;
 
           .coverContainer {
-            width: 56px;
-            height: 56px;
+            width: 66px;
+            height: 66px;
             background-color: var(--white);
             @include radius-6;
             @include centering;
 
             .cover {
-              width: 48px;
-              height: 48px;
+              width: 56px;
+              height: 56px;
               object-fit: cover;
             }
           }
 
           .infoContainer {
             .faTitle {
-              @include text-20-bold;
+              @include text-14-semibold;
             }
 
             .enTitle {
               margin-top: 12px;
-              @include text-20-bold;
+              @include text-14-semibold;
             }
           }
         }

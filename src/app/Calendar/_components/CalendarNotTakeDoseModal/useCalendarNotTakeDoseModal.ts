@@ -44,7 +44,7 @@ export const useCalendarNotTakeDoseModal = () => {
   }
 
   const onClose = () => {
-    if(infoState?.taken) return;
+    // if(infoState?.taken) return;
     navigate(routes.calendar.modals.events.href(date!, "medicine"));
   };
 

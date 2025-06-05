@@ -4,7 +4,7 @@ import styles from "./CalendarNotTakeDoseModal.module.scss";
 import { DateService } from "@/services/DateService";
 import { useCalendarNotTakeDoseModal } from "./useCalendarNotTakeDoseModal.ts";
 import { TextOverflow } from "@/common/TextOverflow/TextOverflow";
-import { medicineUnitTranslator, medicineUsageTypeTranslator } from "@/app/(medicine)/_common/medicineForm";
+import { medicineUsageTypeTranslator } from "@/app/(medicine)/_common/medicineForm";
 
 export const CalendarNotTakeDoseModal = () => {
   const { _ref, actionState, takeDose, infoState, closeHandler, onClose, onSubmit } = useCalendarNotTakeDoseModal();
@@ -21,6 +21,7 @@ export const CalendarNotTakeDoseModal = () => {
               <div className={styles.info}>
                 <div className={styles.coverContainer}>
                   <img
+                    alt={"not found"}
                     className={styles.cover}
                     src={infoState?.drug_dosage_info.drug_image ? infoState.drug_dosage_info.drug_image : "/drug-placeholder.png"}
                   />
@@ -32,15 +33,18 @@ export const CalendarNotTakeDoseModal = () => {
                   <div>
                     <TextOverflow className={styles.enTitle}>{infoState.drug_dosage_info.drug_name ?? "-"}</TextOverflow>
                   </div>
+                  <div className={styles.date}>{DateService.getDate(infoState.drug_dosage_info.start_date)}</div>
                 </div>
               </div>
-              <div className={styles.date}>{DateService.getDate(infoState.drug_dosage_info.start_date)}</div>
             </div>
             <div className={styles.cardBody}>
               <div>
-                {(infoState.drug_dosage_info.dose as any)?.amount}{" "}
-                {medicineUnitTranslator((infoState.drug_dosage_info.dose as any)?.unit).label} |&nbsp;
-                {medicineUsageTypeTranslator(infoState.drug_dosage_info.type_of_usage!).label}
+                {[
+                  (infoState.drug_dosage_info.dose as any).amount!,
+                  (infoState.drug_dosage_info.dose as any).unit!,
+                  "|",
+                  medicineUsageTypeTranslator(infoState.drug_dosage_info!.type_of_usage!)?.label,
+                ].join(" ")}
               </div>
               <div>{DateService.getTime(infoState.reminder_datetime)}</div>
             </div>

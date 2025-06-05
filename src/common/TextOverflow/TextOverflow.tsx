@@ -1,13 +1,11 @@
-import { createElement } from "react";
-// styles
 import styles from "./TextOverflow.module.scss";
-// types
 import { TTextOverflow } from "./TextOverFlow.types";
+import classNames from "classnames";
 
 export const TextOverflow = ({ className, children, ...props }: TTextOverflow) => {
   return (
     <div className={styles.container}>
-      {createElement("span", { ...props, className: `${styles.child} ${className ?? ""}` }, children)}
+      <span {...props} className={classNames(styles.child,className)}>{children}</span>
     </div>
   );
 };

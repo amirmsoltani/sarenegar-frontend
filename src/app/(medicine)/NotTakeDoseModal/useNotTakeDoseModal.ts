@@ -45,5 +45,13 @@ export const useNotTakeDoseModal = () => {
     },
   });
 
-  return { actionState: notTakingDoseState, infoState, _ref, onSubmit, onClose, closeHandler, getData };
+  let imagePath = "/drug-placeholder.png";
+  if(infoState.data?.drug_dosage_info.drug_image)
+  {
+    const baseUrl = import.meta.env.VITE_API_BASE_URL as string;
+    const image = infoState.data?.drug_dosage_info.drug_image;
+    imagePath = (image.startsWith(baseUrl)) ? image : baseUrl.slice(0,-1)+image;
+  }
+
+  return { actionState: notTakingDoseState, infoState, _ref, onSubmit, onClose, closeHandler, getData,imagePath };
 };

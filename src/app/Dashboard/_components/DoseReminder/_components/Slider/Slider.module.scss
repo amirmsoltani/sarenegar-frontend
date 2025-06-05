@@ -48,7 +48,7 @@
           flex-direction: column;
 
           .faTitle {
-            @include text-16-semibold;
+            @include text-14-semibold;
           }
 
           .enTitle {
@@ -60,6 +60,9 @@
 
     .action {
       align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
       .button {
         width: 28px;
@@ -77,18 +80,35 @@
           @include transition;
         }
 
-        &[data-active="true"] {
-          background-color: var(--secondary);
 
-          .icon {
-            @include fade-in;
-          }
+      }
+
+      &[data-active="true"] {
+        .button {
+          background-color: var(--secondary);
         }
+
+        .icon {
+          @include fade-in;
+        }
+
+        .used {
+          display: block;
+        }
+      }
+
+      .used {
+        margin-top: 8px;
+        display: none;
+        font-size: 10px;
+        text-align: center;
+        color: var(--white);
+        line-height: 150%;
       }
     }
 
     .body {
-      margin-top: auto;
+      margin-top: 20px;
       @include text-14-semibold;
       @include flex-between-center;
     }

@@ -5,10 +5,10 @@ import { DateService } from "@/services/DateService";
 import { useNotTakeDoseModal } from "./useNotTakeDoseModal";
 import { TextOverflow } from "@/common/TextOverflow/TextOverflow";
 import { StatusHandler } from "@/common/StatusHandler/StatusHandler";
-import { medicineUnitTranslator, medicineUsageTypeTranslator } from "../_common/medicineForm";
+import {  medicineUsageTypeTranslator } from "../_common/medicineForm";
 
 export const NotTakeDoseModal = () => {
-  const { _ref, actionState, infoState, closeHandler, getData, onClose, onSubmit } = useNotTakeDoseModal();
+  const { _ref, actionState, infoState, closeHandler, getData, onClose, onSubmit, imagePath } = useNotTakeDoseModal();
 
   return (
     <Modal _ref={_ref} variant="SMALL" onClose={onClose}>
@@ -23,14 +23,7 @@ export const NotTakeDoseModal = () => {
                   <div className={styles.topHeader}>
                     <div className={styles.info}>
                       <div className={styles.coverContainer}>
-                        <img
-                          className={styles.cover}
-                          src={
-                            infoState.data.drug_dosage_info?.drug_image
-                              ? infoState.data.drug_dosage_info?.drug_image
-                              : "/drug-placeholder.png"
-                          }
-                        />
+                        <img alt={"not found"} className={styles.cover} src={imagePath} />
                       </div>
                       <div>
                         <div>
@@ -43,17 +36,20 @@ export const NotTakeDoseModal = () => {
                             {infoState.data.drug_dosage_info.drug_name ?? "-"}
                           </TextOverflow>
                         </div>
+                        <div className={styles.date}>{DateService.getDate(infoState.data.drug_dosage_info.start_date)}</div>
                       </div>
                     </div>
-                    <div className={styles.date}>{DateService.getDate(infoState.data.drug_dosage_info.start_date)}</div>
                   </div>
                   <div className={styles.cardBody}>
                     <div>
-                      {(infoState.data.drug_dosage_info.dose as any)?.amount}{" "}
-                      {medicineUnitTranslator((infoState.data.drug_dosage_info.dose as any)?.unit).label} |&nbsp;
-                      {medicineUsageTypeTranslator(infoState.data.drug_dosage_info.type_of_usage!).label}
+                      {[
+                        (infoState.data.drug_dosage_info.dose as any).amount!,
+                        (infoState.data.drug_dosage_info.dose as any).unit!,
+                        "|",
+                        medicineUsageTypeTranslator(infoState.data.drug_dosage_info!.type_of_usage!)?.label,
+                      ].join(" ")}
                     </div>
-                    <div>{infoState.data.reminder_name}</div>
+                    <div>{DateService.getTime(infoState.data.reminder_time)}</div>
                   </div>
                 </div>
                 <div className={styles.actions}>

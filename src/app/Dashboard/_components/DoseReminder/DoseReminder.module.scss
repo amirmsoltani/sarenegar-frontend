@@ -13,4 +13,29 @@
     min-height: 105px;
     @include centering;
   }
+
+  .body{
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+  }
+
+  .line {
+    width: 100%;
+    height: 1px;
+    border-radius: 100%;
+    background: radial-gradient(circle,#FFFFFFA0 0%,#FFFFFF00 100%);
+  }
+
+  .footer{
+    display: flex;
+    flex-direction: row;
+    column-gap: 12px;
+    align-items: center;
+    padding: 0 16px;
+
+    .addButtonText{
+      @include text-16-semibold;
+    }
+  }
 }
