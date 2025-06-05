@@ -2,8 +2,9 @@ import styles from "./WheelPicker.module.scss";
 import { useWheelPicker } from "./useWheelPicker";
 import { TWheelPicker } from "./WheelPicker.types";
 import { Controller, FieldValues } from "react-hook-form";
+import classNames from "classnames";
 
-export const WheelPicker = <T extends FieldValues>({ name, label, options }: TWheelPicker<T>) => {
+export const WheelPicker = <T extends FieldValues>({ name, label, options,optionClassname }: TWheelPicker<T>) => {
   const { control, ref, loop } = useWheelPicker<T>({ name, options });
 
   return (
@@ -22,7 +23,7 @@ export const WheelPicker = <T extends FieldValues>({ name, label, options }: TWh
             >
               <div className={styles.carouselWrapper}>
                 {options.map(({ value, label }) => (
-                  <div key={value} className={styles.option} data-active={field.value && field.value.value === value}>
+                  <div key={value} className={classNames(styles.option,optionClassname)} data-active={field.value && field.value.value === value}>
                     {label}
                   </div>
                 ))}

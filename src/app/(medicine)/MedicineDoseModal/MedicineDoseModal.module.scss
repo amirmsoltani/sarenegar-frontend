@@ -24,10 +24,19 @@
     @include centering;
     @include text-20-bold;
   }
+
 }
 
 .submitButton {
   display: flex;
   padding-inline: 16px;
   flex-direction: column;
+}
+
+.option{
+  font-size: 12px!important;
+
+  &[data-active="true"] {
+    font-size: 14px!important;
+  }
 }

@@ -25,7 +25,7 @@ export const useMedicineDrugPlaceholder = () => {
     const reminders =DateService.createReminders(`${startTime!.value!.hour.value}:${startTime!.value!.minute.value}`,+medicineUsageCounts!.value!)
 
     reminders.reverse();
-    times = reminders.map((time)=>time.time).join("  |  ");
+    times = reminders.map((time)=>time.time).reverse().join("  |  ");
   }
   let useText =  " - ";
   if(drug && drug.form.name === "Syrup" && dose.amount && dose.unit)

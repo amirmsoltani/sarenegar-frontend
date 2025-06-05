@@ -62,6 +62,7 @@ const Info = ({
 }: TInfo&{useText:string}) => {
   const percent = ((taken_doses ?? 0) * 100) / (total_doses ?? 0);
 
+
   return (
     <>
       <div className={styles.info}>
