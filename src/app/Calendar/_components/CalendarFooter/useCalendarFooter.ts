@@ -29,5 +29,22 @@ export function useCalendarFooter() {
     if(mode === "medicine") navigate(routes.addMedicine.href(date!));
 
   }
-  return { date, mode, isEmpty: state.isEmpty,addClickHandler };
+
+  const isDisable = DateService.isBiggerThanToday(date!) && mode === "attack";
+
+  let descriptionText = "";
+  let addImage = "";
+
+  if(mode === "medicine") {
+    descriptionText = "هیچ دارویی در این تاریخ ثبت نگردیده است";
+    addImage = "/add-pill3.png"
+  }
+  else{
+    descriptionText = isDisable?"ثبت رویداد در آینده امکان پذیر نیست":"هیچ رویدادی در این تاریخ ثبت نگردیده است";
+    addImage =  isDisable?"/add-attack-disable.svg":"/add-attack.png";
+  }
+
+
+
+  return { date, mode, isEmpty: state.isEmpty,descriptionText,addImage,isDisable,addClickHandler };
 }

@@ -26,7 +26,9 @@
 
   .addEventText{
     color: var(--white);
-    @include text-16-bold;
+    @include text-14-semibold;
+    text-align: center;
+
   }
 
   .reportedHeader{
@@ -65,4 +67,17 @@
     }
 
   }
+
 }
+
+.disabled{
+  pointer-events: none;
+  background-color: var(--disable) !important;
+
+  .cover{
+    width: 56px;
+    height: 48px;
+  }
+}
+
+

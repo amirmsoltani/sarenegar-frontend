@@ -12,7 +12,6 @@ import { useMedicineFormFirstStep } from "@/app/(medicine)/MedicineFormFirstStep
 import { MedicineUsageCountsPlaceholder } from "@/app/(medicine)/_components/MedicineUsageCountsPlaceholder/MedicineUsageCountsPlaceholder.tsx";
 import { MedicineFirstUsageTimePlaceholder } from "@/app/(medicine)/_components/MedicineFirstUsageTimePlaceholder/MedicineFirstUsageTimePlaceholder.tsx";
 import { Input } from "@/common/Input/Input.tsx";
-import { Fragment } from "react";
 
 export const MedicineFormFirstStep = () => {
   const { drug } = useMedicineFormFirstStep();
@@ -23,7 +22,7 @@ export const MedicineFormFirstStep = () => {
         <div className={styles.wrapper}>
           <MedicineDrugPlaceholder />
           {drug ? (
-            <Fragment>
+            <div className={styles.scroll}>
               {drug?.form.name === "Syrup" ? <MedicineDoseInputPlaceholder /> : <MedicineCounts />}
               <MedicineUsageTypePlaceholder />
               <MedicineStartDatePlaceholder />
@@ -32,7 +31,7 @@ export const MedicineFormFirstStep = () => {
               <MedicineUsageCountsPlaceholder />
               <MedicineFirstUsageTimePlaceholder />
               <Input name={"description"} label={"توضیحات"} placeholder={"در صورت لزوم توضیحات وارد نمایید"} multiline />
-            </Fragment>
+            </div>
           ) : null}
           <Outlet />
         </div>

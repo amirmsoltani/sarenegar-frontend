@@ -21,5 +21,11 @@
       width: 79px;
       height: 81px;
     }
+
+    &.disable{
+      pointer-events: none;
+      width: 59px;
+      height: 48px;
+    }
   }
 }

@@ -4,21 +4,19 @@ import classNames from "classnames";
 import { useCalendarFooter } from "@/app/Calendar/_components/CalendarFooter/useCalendarFooter.ts";
 
 export const CalendarFooter = () => {
-  const { mode, date, isEmpty, addClickHandler } = useCalendarFooter();
+  const { mode, date, isEmpty, descriptionText,addImage,isDisable, addClickHandler } = useCalendarFooter();
 
   if (!isEmpty) return null;
 
   return (
     <div className={styles.footer}>
       <h4 className={styles.title}>{DateService.getDate(date)}</h4>
-      <span className={styles.message}>
-        {mode === "attack" ? "هیچ رویدادی در این تاریخ ثبت نگردیده است" : "هیچ دارویی در این تاریخ ثبت نگردیده است"}
-      </span>
+      <span className={styles.message}>{descriptionText}</span>
       <img
         onClick={addClickHandler}
-        src={mode === "attack" ? "/add-attack.png" : "/add-pill3.png"}
+        src={addImage}
         alt={"not found"}
-        className={classNames(styles.button, { [styles.reminder]: mode === "medicine" })}
+        className={classNames(styles.button, { [styles.reminder]: mode === "medicine",[styles.disable]:isDisable })}
       />
     </div>
   );

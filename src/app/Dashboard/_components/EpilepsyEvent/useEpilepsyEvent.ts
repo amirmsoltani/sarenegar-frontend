@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { getEpilepsyEventListAction } from "@/store/epilepsy/actions/getEpilepsyEventList/getEpilepsyEventList.action";
 import { routes } from "@/routes/routes.tsx";
+import { DateService } from "@/services/DateService.ts";
 
 export const useEpilepsyEvent = () => {
   const { date } = useParams();
@@ -20,5 +21,8 @@ export const useEpilepsyEvent = () => {
     e.preventDefault();
     navigate(routes.addEpilepsyEvent.href())
   }
-  return { state,clickAddEpilepsyEventHandler };
+
+  const isDisable = DateService.isBiggerThanToday(date!);
+
+  return { state,clickAddEpilepsyEventHandler,isDisable };
 };

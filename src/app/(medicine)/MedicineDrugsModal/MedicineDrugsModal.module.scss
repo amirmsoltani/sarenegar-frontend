@@ -28,54 +28,60 @@
       @include text-14-bold;
     }
   }
+  .list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+    .option {
+      gap: 8px;
+      width: 100%;
+      padding-block: 8px;
+      border: 1px solid var(--stroke);
+      @include shadow-bottom;
+      @include radius-8;
+      @include flex-start-center;
 
-  .option {
-    gap: 8px;
-    width: 100%;
-    padding-block: 8px;
-    border-top: 0.5px solid var(--stroke);
-    @include flex-start-center;
-
-    &:last-child {
-      border-bottom: 0.5px solid var(--stroke);
-    }
-
-    .coverContainer {
-      width: 88px;
-      height: 88px;
-      object-fit: cover;
-      @include centering;
-    }
-
-    .cover {
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
-    }
-
-    .optionWrapper {
-      flex: 1 1 0%;
-      display: flex;
-      align-self: stretch;
-      flex-direction: column;
-      justify-content: space-evenly;
-
-      .titleContainer {
-        gap: 16px;
-        @include flex-between-center;
-
-        .faTitle {
-          @include text-14-regular;
-        }
-
-        .enTitle {
-          @include text-12-regular;
-        }
+      &:last-child {
+        border-bottom: 0.5px solid var(--stroke);
       }
 
-      .company {
-        color: var(--gray);
-        @include text-12-light;
+      .coverContainer {
+        width: 88px;
+        height: 88px;
+        object-fit: cover;
+        @include centering;
+      }
+
+      .cover {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+      }
+
+      .optionWrapper {
+        flex: 1 1 0%;
+        display: flex;
+        align-self: stretch;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        .titleContainer {
+          gap: 16px;
+          @include flex-between-center;
+
+          .faTitle {
+            @include text-14-regular;
+          }
+
+          .enTitle {
+            @include text-12-regular;
+          }
+        }
+
+        .company {
+          color: var(--gray);
+          @include text-12-light;
+        }
       }
     }
   }

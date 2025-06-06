@@ -4,10 +4,10 @@
   display: flex;
   padding: 24px 16px;
   flex-direction: column;
+  max-height: calc(100svh - 136px);
 
   .title {
     width: fit-content;
-    position: relative;
     @include text-16-bold;
 
     &::before {
@@ -26,9 +26,24 @@
     gap: 32px;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    overflow-y: hidden;
   }
 }
 
 .footer {
   @include form-footer;
+}
+
+
+.scroll{
+  gap: 32px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
