@@ -6,7 +6,7 @@ import { DrugDosageRetrieve } from "@/services/api";
 import { DateService } from "@/services/DateService";
 import { TextOverflow } from "@/common/TextOverflow/TextOverflow";
 import { calcMedicineTimeData } from "@/app/(medicine)/_common/medicineTime";
-import { medicineUsageTypeTranslator, medicineUnitTranslator } from "@/app/(medicine)/_common/medicineForm";
+import { medicineUsageTypeTranslator } from "@/app/(medicine)/_common/medicineForm";
 
 type TMedicineCard = DrugDosageRetrieve & { timeline?: boolean };
 export const MedicineCard = ({
@@ -21,7 +21,6 @@ export const MedicineCard = ({
   total_doses,
   type_of_usage,
 }: TMedicineCard) => {
-  const unit = medicineUnitTranslator((dose as any).unit);
   const usageType = medicineUsageTypeTranslator(type_of_usage!);
 
   const { start, end } = calcMedicineTimeData({ end_by_day, start_date, end_date });
@@ -38,9 +37,7 @@ export const MedicineCard = ({
           <div className={styles.textsContainer}>
             <TextOverflow className={styles.faTitle}>{drug?.fa_name}</TextOverflow>
             <TextOverflow className={styles.enTitle}>{drug?.en_name}</TextOverflow>
-            <div className={styles.detail}>
-              {(dose as any).amount} {unit?.label} - {usageType.label}
-            </div>
+            <div className={styles.detail}>{[(dose as any).amount, (dose as any).unit!, "|", usageType.label].join(" ")}</div>
           </div>
         </div>
         <div className={styles.iconWrapper}>
