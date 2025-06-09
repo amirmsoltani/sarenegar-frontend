@@ -19,6 +19,6 @@ export const medicineFirstStepBackwardNavigation = (pathname: string, params: Re
     ? routes.addMedicine.tabs.firstStep.href()
     : pathname.includes(routes.editMedicine.href(params.id!))
       ? routes.editMedicine.tabs.firstStep.href()
-      : routes.retakeMedicine.tabs.firstStep.href(params.id!);
+      : routes.retakeMedicine.tabs.firstStep.href();
 };
 
