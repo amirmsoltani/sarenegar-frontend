@@ -35,10 +35,7 @@ export const useRetakeMedicine = () => {
   const backwardHandler = () => RouterService.backward(routes.medicine.href());
 
   const submitHandler = async (form: TMedicineForm) => {
-    if (step === 1) {
-      methods.setValue("is_first_step_submitted", true);
-      navigate(routes.retakeMedicine.tabs.firstStep.href());
-    } else await dispatch(addMedicineAction(form));
+    dispatch(addMedicineAction(form));
   };
 
   const getInfo = () => dispatch(getMedicineInfoAction({ id }));
@@ -46,7 +43,23 @@ export const useRetakeMedicine = () => {
   useStatusHandler({
     state: infoState,
     onComponentDidMount: getInfo,
-    onSuccess: () => methods.reset({ ...medicineFormDefaultValues, drug: infoState.data?.drug }),
+    onSuccess: () => {
+      if (infoState.data) {
+        const { drug_counts, usage_type, drug, description, medicine_usage_counts, start_time, drug_timing_type, days } =
+          infoState.data;
+        methods.reset({
+          ...medicineFormDefaultValues,
+          drug,
+          usage_type,
+          days,
+          drug_counts,
+          drug_timing_type,
+          description,
+          medicine_usage_counts,
+          start_time,
+        });
+      }
+    },
   });
 
   useStatusHandler({

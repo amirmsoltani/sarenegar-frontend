@@ -18,7 +18,6 @@ export const RetakeMedicine = () => {
           </button>
           <div className={styles.title}>باز مصرف دارو</div>
         </div>
-        <div className={styles.step}>مرحله {step ?? 1} از 2</div>
       </header>
       <StatusHandler status={status} onClick={getInfo} className={styles.status}>
         {step ? <Outlet /> : <Navigate to={routes.retakeMedicine.tabs.firstStep.href()} replace />}
