@@ -17,7 +17,6 @@ import { PrimaryLayout } from "@/layout/PrimaryLayout/PrimaryLayout";
 import { ReportsLayout } from "@/layout/ReportsLayout/ReportsLayout";
 import { ProfileInfo } from "@/app/(profile)/ProfileInfo/ProfileInfo";
 import { AddMedicine } from "@/app/(medicine)/AddMedicine/AddMedicine";
-import { ErrorBoundary } from "./components/ErrorBoundary/ErrorBoundary";
 import { Completed } from "@/app/(medicine)/Medicine/Completed/Completed";
 import { EditMedicine } from "@/app/(medicine)/EditMedicine/EditMedicine";
 import { EpilepsyModal } from "@/app/Dashboard/EpilepsyModal/EpilepsyModal";
@@ -59,7 +58,6 @@ const AppRouter = () => {
   return (
     <PrimaryLayout>
       <BrowserRouter>
-        <ErrorBoundary>
           <Routes>
             <Route path="" Component={RouterStateManager}>
               <Route path={routes.login.path} Component={AppRouterUtils.withCondition(!isLogin, Login, RedirectToDashboard)} />
@@ -186,7 +184,6 @@ const AppRouter = () => {
               </Route>
             </Route>
           </Routes>
-        </ErrorBoundary>
       </BrowserRouter>
     </PrimaryLayout>
   );
