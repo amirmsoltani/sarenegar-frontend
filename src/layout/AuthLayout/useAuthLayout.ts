@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { profileAction } from "@/store/auth/actions/profile/profile.action";
+import { DateService } from "@/services/DateService.ts";
 
 export const useAuthLayout = () => {
   const { date } = useParams();
@@ -14,13 +15,13 @@ export const useAuthLayout = () => {
       const today = new Date();
       const now = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
 
-      const activeDate = new Date(date!);
+      const activeDate = new Date(DateService.GD(date!));
 
       return (
         activeDate.setDate(activeDate.getDate() + CALENDAR_RANGE) >= now &&
         now >= activeDate.setDate(activeDate.getDate() - CALENDAR_RANGE * 2)
       );
-    } else return !isNaN(Date.parse(date!));
+    } else return !isNaN(Date.parse(DateService.GD(date!)));
   }, [date, pathname]);
 
   const dispatch = useAppDispatch();

@@ -3,6 +3,7 @@ import { jalaliMonths } from "@/helper/helper";
 import { StoreUtils } from "@/store/Store.utils";
 import { reportTypes } from "@/app/Reports/useReports";
 import { apiEpilepsyEpilepsyEventAnalytics, EventDistribution } from "@/services/api";
+import { DateService } from "@/services/DateService.ts";
 
 type TGetAnalyticsAction = { type: string; start: string; end: string };
 
@@ -12,7 +13,7 @@ export const getAnalyticsAction = StoreUtils.createAsyncThunk("report/analytics"
   if (props.type === reportTypes[2].value) {
     const cloned: EventDistribution[] = JSON.parse(JSON.stringify(data.selected_period.events_distribution));
 
-    const { jy } = jalaali.toJalaali(new Date(props.start));
+    const { jy } = jalaali.toJalaali(new Date(DateService.GD(props.start)));
 
     const result = jalaliMonths.reduce<{ passed: number; data: EventDistribution[] }>(
       (prev, current) => {

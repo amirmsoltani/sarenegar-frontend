@@ -31,13 +31,13 @@ export function useCalendar() {
   }, [mode, dispatch]);
 
   const { setState, state } = useCustomState<IState>(() => {
-    const data = DateService.createMonth(new Date(date!)) as unknown as IState;
+    const data = DateService.createMonth(new Date(DateService.GD(date!))) as unknown as IState;
     dispatch(getCalendarEventsAction({ startDate: data.monthStart, endDate: data.monthEnd, mode: mode! }));
     return data;
   });
 
   function nextMonthHandler() {
-    const endDate = new Date(state.monthEnd);
+    const endDate = new Date(DateService.GD(state.monthEnd));
     endDate.setMonth(endDate.getMonth() + 1);
     const data = DateService.createMonth(endDate) as unknown as IState;
     dispatch(getCalendarEventsAction({ startDate: data.monthStart, endDate: data.monthEnd, mode: mode! }));
@@ -45,7 +45,7 @@ export function useCalendar() {
   }
 
   function previousMonthHandler() {
-    const startDate = new Date(state.monthStart);
+    const startDate = new Date(DateService.GD(state.monthStart));
     startDate.setMonth(startDate.getMonth() - 1);
     const data = DateService.createMonth(startDate) as unknown as IState;
     dispatch(getCalendarEventsAction({ startDate: data.monthStart, endDate: data.monthEnd, mode: mode! }));
@@ -62,7 +62,7 @@ export function useCalendar() {
   function dayClickHandler(day: Day) {
     return () => {
       if (day.type === "empty") return;
-      const globalFormat = DateService.setToGlobalFormat(new Date(day.date));
+      const globalFormat = DateService.setToGlobalFormat(new Date(DateService.GD(day.date)));
       if (mode === "attack") {
         if (events.data![day.date]) {
           dispatch(getEpilepsyEventListAction({ date: globalFormat }));

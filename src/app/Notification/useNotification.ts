@@ -28,7 +28,7 @@ export function useNotification() {
   function messageClickHandler(data: INotification) {
     return () => {
       navigate(
-        routes.calendar.modals.events.modals.takeDose.href(data.reminderID, DateService.setToGlobalFormat(new Date(data.dateTime))) +
+        routes.calendar.modals.events.modals.takeDose.href(data.reminderID, DateService.setToGlobalFormat(new Date(DateService.GD(data.dateTime)))) +
           `?notificationID=${data.notificationID}`,
       );
     };

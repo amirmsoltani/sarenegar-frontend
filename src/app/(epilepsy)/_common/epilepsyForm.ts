@@ -3,6 +3,7 @@ import { SeverityEnum } from "@/services/api";
 import { getNowDate, getNowTime, toLabelValue } from "@/helper/helper";
 import { TEpilepsyEventForm } from "@/store/epilepsy/epilepsySlice.types";
 import { TRangeOption, TToggleOption } from "@/common/Form/FormUtils.types";
+import { DateService } from "@/services/DateService.ts";
 
 export const consciousnessOptions: TToggleOption<boolean>[] = [
   { label: "بله", value: true },
@@ -39,7 +40,7 @@ export const epilepsyEventFormDefaultValues: TEpilepsyEventForm = {
 };
 
 export const epilepsyTimeValidator = ({ time_of_occurrence, duration }: TEpilepsyEventForm) => {
-  const date = new Date(time_of_occurrence.date);
+  const date = new Date(DateService.GD(time_of_occurrence.date));
 
   const time = new Date(
     date.getFullYear(),

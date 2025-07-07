@@ -109,7 +109,7 @@ export const useReportsInfo = () => {
     if (type === reportTypes[2].value) {
       return `${jalaliMonths[dataIndex].label} ماه ${Math.floor(raw)} مورد`;
     } else {
-      const date = new Date(start!);
+      const date = new Date(DateService.GD(start!));
       date.setDate(date.getDate() + dataIndex);
       return `${DateService.customTranslate(date, { weekday: "long", day: "numeric", month: "long" })} ${Math.floor(raw)} مورد`;
     }

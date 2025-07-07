@@ -8,7 +8,7 @@ import {
 export const getDosesList = StoreUtils.createAsyncThunk(
   "medicine/dosesList",
   async (params: ApiDrugDosageRemindersDosemanagerRemindersListParams) => {
-    const _date = DateService.setToGlobalFormat(new Date(params.date!));
+    const _date = DateService.setToGlobalFormat(new Date(DateService.GD(params.date!)));
 
     const response = await apiDrugDosageRemindersDosemanagerRemindersList({ ...params, date: _date, page_size: 100 });
 

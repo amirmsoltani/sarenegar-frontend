@@ -15,7 +15,7 @@ export const useRowCalendar = ({ current, active, onChange,disableFuture }: Pick
 
   const [list] = useState(genRowCalenderList(current!));
 
-  const _active = DateService.setToGlobalFormat(new Date(active ?? date!));
+  const _active = DateService.setToGlobalFormat(new Date(DateService.GD(active ?? date!)));
 
   const onTransitionEnd = () => (selected.current = null);
 

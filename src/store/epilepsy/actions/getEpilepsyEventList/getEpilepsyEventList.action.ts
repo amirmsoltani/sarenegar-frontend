@@ -7,7 +7,7 @@ type TGetEpilepsyEventListAction = { date: string };
 export const getEpilepsyEventListAction = StoreUtils.createAsyncThunk(
   "epilepsy/getEpilepsyEventList",
   async ({ date }: TGetEpilepsyEventListAction) => {
-    const _date = DateService.setToGlobalFormat(new Date(date));
+    const _date = DateService.setToGlobalFormat(new Date(DateService.GD(date)));
 
     const response = await apiEpilepsyEpilepsyEventList({ time_of_occurrence: _date });
 

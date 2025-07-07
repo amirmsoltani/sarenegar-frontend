@@ -37,23 +37,23 @@ class DateInstant {
   }
 
   public getDate(date?: string | number | Date) {
-    return this.dateFormatter.format(date ? new Date(date) : new Date());
+    return this.dateFormatter.format(date ? new Date(this.GD(date)) : new Date());
   }
 
   public getGregorianDate(date?: string | number | Date) {
-    return this.gregorianDateFormatter.format(date ? new Date(date) : new Date());
+    return this.gregorianDateFormatter.format(date ? new Date(this.GD(date)) : new Date());
   }
 
   public getTime(date?: string | number | Date) {
-    return this.timeFormatter.format(date ? new Date(date) : new Date());
+    return this.timeFormatter.format(date ? new Date(this.GD(date)) : new Date());
   }
 
   public getDateTime(date?: string | number | Date) {
-    return `${this.getDate(date)} ${this.getTime(date)}`;
+    return `${this.getDate(this.GD(date))} ${this.getTime(this.GD(date))}`;
   }
 
   public customTranslate(date?: string | number | Date, options?: Intl.DateTimeFormatOptions) {
-    return new Intl.DateTimeFormat("fa-IR", options).format(date ? new Date(date) : new Date());
+    return new Intl.DateTimeFormat("fa-IR", options).format(date ? new Date(this.GD(date)) : new Date());
   }
 
   public replaceSlashWithDash(date: string) {
@@ -66,7 +66,7 @@ class DateInstant {
   }
 
   public gregorianToJalali(date?: string | Date): TDatePicker {
-    const _date = date ? new Date(date) : new Date();
+    const _date = date ? new Date(this.GD(date)) : new Date();
     const { jy, jm, jd } = jalaali.toJalaali(_date);
     return { year: toLabelValue(jy.toString()), month: toLabelValue(jm.toString()), day: toLabelValue(jd.toString()) };
   }
@@ -79,7 +79,7 @@ class DateInstant {
   }
 
   public getWeekRange(_date?: Date | string) {
-    const date = _date ? new Date(_date) : new Date();
+    const date = _date ? new Date(this.GD(_date)) : new Date();
     const weekday = date.getDay();
 
     const diff = weekday === 6 ? 0 : weekday + 1;
@@ -107,7 +107,7 @@ class DateInstant {
   }
 
   public getMonthRange(_date?: Date | string) {
-    const date = _date ? new Date(_date) : new Date();
+    const date = _date ? new Date(this.GD(_date)) : new Date();
     const { jy, jm } = jalaali.toJalaali(date);
 
     const { gy, gm, gd } = jalaali.toGregorian(jy, jm, 1);
@@ -126,19 +126,19 @@ class DateInstant {
   }
 
   public forwardMonth(endMonth: string | Date) {
-    const date = new Date(endMonth);
+    const date = new Date(this.GD(endMonth));
     date.setDate(date.getDate() + 1);
     return this.getMonthRange(date);
   }
 
   public backwardMonth(startMonth: string | Date) {
-    const date = new Date(startMonth);
+    const date = new Date(this.GD(startMonth));
     date.setDate(date.getDate() - 1);
     return this.getMonthRange(date);
   }
 
   public getYearRange(_date?: Date | string) {
-    const date = _date ? new Date(_date) : new Date();
+    const date = _date ? new Date(this.GD(_date)) : new Date();
 
     const { jy } = jalaali.toJalaali(date);
 
@@ -158,26 +158,26 @@ class DateInstant {
   }
 
   public forwardYear(endYear: string | Date) {
-    const date = new Date(endYear);
+    const date = new Date(this.GD(endYear));
     date.setDate(date.getDate() + 1);
     return this.getYearRange(date);
   }
 
   public backwardYear(startYear: string | Date) {
-    const date = new Date(startYear);
+    const date = new Date(this.GD(startYear));
     date.setDate(date.getDate() - 1);
     return this.getYearRange(date);
   }
 
   public createMonth = (date: Date = new Date()) => {
-    const jDate = jalaali.toJalaali(date);
+    const jDate = jalaali.toJalaali(this.GD(date));
     const jMonthLength = jalaali.jalaaliMonthLength(jDate.jy, jDate.jm);
 
-    const start = new Date(date);
+    const start = new Date(this.GD(date));
     start.setDate(start.getDate() - (jDate.jd - 1));
     const weekStartDay = 7 - (start.getDay() + 1);
 
-    const end = new Date(date);
+    const end = new Date(this.GD(date));
     end.setDate(end.getDate() + (jMonthLength - jDate.jd));
     const weekEndDay = 7 - (end.getDay() + 1);
 
@@ -203,7 +203,7 @@ class DateInstant {
   };
 
   public isBiggerThanToday(date:string){
-    return new Date().getTime() < new Date(date).getTime();
+    return new Date().getTime() < new Date(this.GD(date)).getTime();
   }
 
   public createReminders(startTime:string,times:number){
@@ -219,6 +219,11 @@ class DateInstant {
     }
 
     return remindersTime.sort((a, b) => +a.time.split(":")[0]- +b.time.split(":")[0]);
+
+  }
+
+  public GD<T>(date:T):T{
+    return typeof date === "string"?date.replace(/-/g,"/") as T:date
 
   }
 }

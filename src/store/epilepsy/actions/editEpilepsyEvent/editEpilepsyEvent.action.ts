@@ -3,6 +3,7 @@ import { StoreUtils } from "@/store/Store.utils";
 import { TEpilepsyEventForm } from "../../epilepsySlice.types";
 import { resetSummaryReport } from "@/store/report/reportSlice";
 import { apiEpilepsyEpilepsyEventUpdate, EpilepsyCreateRequest } from "@/services/api";
+import { DateService } from "@/services/DateService.ts";
 
 type TEditEpilepsyEventAction = { id: number; form: TEpilepsyEventForm };
 
@@ -11,7 +12,7 @@ export const editEpilepsyEventAction = StoreUtils.createAsyncThunk(
   async ({ id, form }: TEditEpilepsyEventAction, thunk) => {
     const { duration, severity, state_of_consciousness, time_of_occurrence, tremor_and_shaking } = form;
 
-    const _date = new Date(time_of_occurrence.date);
+    const _date = new Date(DateService.GD(time_of_occurrence.date));
 
     const date = new Date(
       _date.getFullYear(),

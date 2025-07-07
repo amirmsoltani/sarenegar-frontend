@@ -5,7 +5,7 @@ import { CALENDAR_RANGE } from "@/constants/constants";
 export const today = getNowDate();
 
 export const genRowCalenderList = (currentDate?: string) => {
-  const date = currentDate ? new Date(currentDate) : new Date();
+  const date = currentDate ? new Date(DateService.GD(currentDate)) : new Date();
 
   const current = {
     date: DateService.setToGlobalFormat(date),

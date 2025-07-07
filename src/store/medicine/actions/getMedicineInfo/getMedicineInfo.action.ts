@@ -19,7 +19,7 @@ export const getMedicineInfoAction = StoreUtils.createAsyncThunk(
     const amount = medicineAmountTranslator((data.dose as any).amount);
     const usageType = medicineUsageTypeTranslator(data.type_of_usage!);
     const startDate = DateService.gregorianToJalali(data.start_date);
-    const endDate = DateService.gregorianToJalali(new Date(new Date(data.start_date!).getTime() + (86400000*data.end_by_day!)));
+    const endDate = DateService.gregorianToJalali(new Date(new Date(DateService.GD(data.start_date!)).getTime() + (86400000*data.end_by_day!)));
     const dayCounts = data.end_by_day ? endDaysCountTranslator(data.end_by_day) : null;
 
     const time = data.first_dose_start_time.split(":");
