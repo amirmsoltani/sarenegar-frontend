@@ -223,7 +223,10 @@ class DateInstant {
   }
 
   public GD<T>(date:T):T{
-    return typeof date === "string"?date.replace(/-/g,"/") as T:date
+    if(typeof date === "string" && !date.includes("T")){
+      return date.replace(/-/g,"/") as T
+    }
+    return date
 
   }
 }
