@@ -51,10 +51,10 @@ export const CalendarNotTakeDoseModal = () => {
           </div>
           <div className={styles.actions}>
             <Button size="sm" variant="purple" onClick={closeHandler} loading={takeDose.status === "loading"}>
-              مصرف کرده ام
+              بله
             </Button>
             <Button size="sm" variant="borderedPurple" onClick={onSubmit} loading={actionState.status === "loading"}>
-              مصرف نکرده ام
+              خیر
             </Button>
           </div>
         </div>

@@ -4,6 +4,7 @@ import { RouterService } from "@/services/RouterService";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { useStatusHandler } from "@/common/useStatusHandler/useStatusHandler";
 import { getMedicineInfoAction } from "@/store/medicine/actions/getMedicineInfo/getMedicineInfo.action";
+import { mapForm2Name } from "@/app/(medicine)/_common/medicineForm.ts";
 
 export const useMedicineInfo = () => {
   const params = useParams();
@@ -32,8 +33,8 @@ export const useMedicineInfo = () => {
   const dose = state.data?.dose;
   if (drug && drug.form.name === "Syrup" && dose && dose.amount && dose.unit) {
     useText = `${dose.amount.value} ${dose.unit.value}`;
-  } else if (drug && drug.form.name === "Pill" && dose &&  dose.amount) {
-    useText = `${dose.amount.value} قرص`;
+  } else if (drug && dose && dose.amount) {
+    useText = `${dose.amount.value} ${mapForm2Name(drug.form.name)}`;
   }
 
   return { ...state, id, getData, canEdit, backwardHandler, useText };

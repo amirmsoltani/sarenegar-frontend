@@ -35,7 +35,7 @@ export const useNotTakeDoseModal = () => {
     state: notTakingDoseState,
     onSuccess: () => {
       _ref.current?.close();
-      toast.success("یادآوری اصلاح شد: این ئارو رو مصرف نکردی");
+      toast.success("یادآوری اصلاح شد: این دارو رو مصرف نکردی");
       dispatch(
         clearStateAction([
           { reducerName: "medicine", stateName: "doseInfo" },

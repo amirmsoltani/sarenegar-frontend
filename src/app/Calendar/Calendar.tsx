@@ -49,11 +49,11 @@ export const Calendar = () => {
 
       <div className={styles.calendar}>
         <div className={styles.header}>
-          <button className={classNames(styles.button, styles.nextButton)} onClick={nextMonthHandler}>
+          <button className={classNames(styles.button, styles.nextButton)} onClick={previousMonthHandler}>
             <ArrowIcon />
           </button>
           <h5 className={styles.monthTitle}>{title}</h5>
-          <button className={styles.button} onClick={previousMonthHandler}>
+          <button className={styles.button} onClick={nextMonthHandler}>
             <ArrowIcon />
           </button>
         </div>

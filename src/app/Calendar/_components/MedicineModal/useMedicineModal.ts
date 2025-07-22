@@ -53,7 +53,7 @@ export function useMedicineModal() {
 
   useStatusHandler({
     state: notCompleted,
-    onSuccess: () => toast.success("یادآوری اصلاح شد: این ئارو رو مصرف نکردی"),
+    onSuccess: () => toast.success("یادآوری اصلاح شد: این دارو رو مصرف نکردی"),
   });
 
   return { date, reminders, getRemindersHandler, completeDoseHandler, openModalHandler, closeHandler, completed };

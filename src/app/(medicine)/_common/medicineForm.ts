@@ -5,8 +5,8 @@ import { formOptionTranslator, toLabelValue, withPadStart } from "@/helper/helpe
 import { TCheckboxOption, TWheelPickerOption } from "@/common/Form/FormUtils.types";
 
 export const medicineUnits: TWheelPickerOption[] = [
-  { label: "قاشق چایی خوری (۲۵ml)", value: "قاشق چایی خوری" },
-  { label: "قاشق غذا خوری (100cc)", value: "قاشق غذا خوری" },
+  { label: "قاشق چایی خوری (۲.۵ml)", value: "قاشق چایی خوری" },
+  { label: "قاشق غذا خوری (۱۰cc)", value: "قاشق غذا خوری" },
 ];
 
 export const medicineAmounts: TWheelPickerOption[] = new Array(25).fill("").map((_, index) => {
@@ -35,7 +35,7 @@ export const endDaysCounts: TWheelPickerOption[] = new Array(365).fill("").map((
   return { value, label: value };
 });
 
-export const drugCounts: TWheelPickerOption[] = new Array(25).fill("").map((_, index) => {
+export const drugCounts: TWheelPickerOption[] = new Array(5).fill("").map((_, index) => {
   const value = (index + 1).toString();
   return { value, label: value };
 });
@@ -95,3 +95,17 @@ export const medicineFormDefaultValues: TMedicineForm = {
 
   description:null,
 };
+
+const formMap = {
+  Pill:"قرص",
+  Drops:"قطره",
+  Tablet:"قرص",
+  Syrup:"شربت",
+  Injection:"آمپول",
+  Capsule:"کپسول",
+}
+
+export function mapForm2Name(form:string){
+  if(form in formMap) return formMap[form as keyof typeof formMap];
+  return  "";
+}
