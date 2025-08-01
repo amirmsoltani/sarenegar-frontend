@@ -3,9 +3,9 @@ import User from "@/assets/svg/user.svg";
 import styles from "./Profile.module.scss";
 import { useAppSelector } from "@/store/store";
 import { Link, Outlet } from "react-router-dom";
-import SupportIcon from "@/assets/svg/support.svg";
+// import SupportIcon from "@/assets/svg/support.svg";
 import { VERSION_ID } from "@/constants/constants";
-import AboutUsIcon from "@/assets/svg/about-us.svg";
+// import AboutUsIcon from "@/assets/svg/about-us.svg";
 import { ArrowLeft2, ArrowRight, Logout, NotificationBing, Profile as ProfileIcon } from "@wandersonalwes/iconsax-react";
 
 export const Profile = () => {
@@ -52,22 +52,22 @@ export const Profile = () => {
               <ArrowLeft2 className={styles.icon} />
             </Link>
           </div>
-          <div className={styles.box}>
-            <Link to={routes.support.href()} className={styles.row}>
-              <div className={styles.rowWrapper}>
-                <SupportIcon className={styles.icon} />
-                <div className={styles.title}>پشتیبانی</div>
-              </div>
-              <ArrowLeft2 className={styles.icon} />
-            </Link>
-            <Link to="" className={styles.row}>
-              <div className={styles.rowWrapper}>
-                <AboutUsIcon className={styles.icon} />
-                <div className={styles.title}>درباره ما</div>
-              </div>
-              <ArrowLeft2 className={styles.icon} />
-            </Link>
-          </div>
+          {/*<div className={styles.box}>*/}
+          {/*  <Link to={routes.support.href()} className={styles.row}>*/}
+          {/*    <div className={styles.rowWrapper}>*/}
+          {/*      <SupportIcon className={styles.icon} />*/}
+          {/*      <div className={styles.title}>پشتیبانی</div>*/}
+          {/*    </div>*/}
+          {/*    <ArrowLeft2 className={styles.icon} />*/}
+          {/*  </Link>*/}
+          {/*  <Link to="" className={styles.row}>*/}
+          {/*    <div className={styles.rowWrapper}>*/}
+          {/*      <AboutUsIcon className={styles.icon} />*/}
+          {/*      <div className={styles.title}>درباره ما</div>*/}
+          {/*    </div>*/}
+          {/*    <ArrowLeft2 className={styles.icon} />*/}
+          {/*  </Link>*/}
+          {/*</div>*/}
           <div className={styles.box}>
             <Link to={routes.profile.modals.href()} className={styles.row}>
               <div className={styles.rowWrapper}>

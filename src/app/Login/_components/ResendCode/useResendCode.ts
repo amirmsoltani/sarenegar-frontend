@@ -5,7 +5,7 @@ import { TLoginDefaultValues } from "../../useLogin";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { requestOtpAction } from "@/store/auth/actions/requestOtp/requestOtp.action";
 
-const defaultTime = 60;
+const defaultTime = 120;
 
 export const useResendCode = () => {
   const [time, setTime] = useState(defaultTime);
